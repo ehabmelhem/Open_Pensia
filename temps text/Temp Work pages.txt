@@ -1,0 +1,38 @@
+First Flow :
+
+page 1-2-3 : FirstPages 
+page 4 : QuestionsBeforeRegister
+page 5-11: VoteAccept
+page 6 : CompaniesListSelect 
+page 31 : VoteDirectors 
+page 15-19-32 : InfoDirector
+page 33 : UploadInformation
+page 12-13 : SignUp
+____________
+dashboard:
+
+page 17-27: AfterRegistrationVoting
+page 18: CompaniesList
+page 21-23-24: CompanyInfo
+page 29-28:  VotesList
+page 20: Like page 31 (VoteDirectors)
+page 14-16-26 : Like Page 15-19-32(InfoDirector)
+
+
+
+FirstPages
+QuestionsBeforeRegister
+VoteAccept
+CompaniesListSelect
+VoteDirectors
+InfoDirector
+UploadInformation
+SignUpRequest
+SignUp
+AfterRegistrationVoting
+CompaniesList
+CompanyInfo
+VotesList
+/////VoteDirectors/////
+/////InfoDirector//////
+ 
