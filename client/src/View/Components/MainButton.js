@@ -1,0 +1,1 @@
+let stam =1
