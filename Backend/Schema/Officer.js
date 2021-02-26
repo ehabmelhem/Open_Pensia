@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 //mongodb+srv://openpensia:Jq4kPbpZ2dKh0X65@cluster0.ny9vy.mongodb.net/openpensia
 
-const officerModel = mongoose.Model("officerCollection", {
+const officerModel = mongoose.model("officerCollection", {
   officerId: String,
   officeName: String,
   officerImg: String,
