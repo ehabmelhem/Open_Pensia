@@ -1,0 +1,8 @@
+.round{
+    border-radius: 50%;
+    object-fit: cover;
+    width: 150px ;
+    height: 150px;
+    border: solid  rgb(167, 172, 188);
+
+}
