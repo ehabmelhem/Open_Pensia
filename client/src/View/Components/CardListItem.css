@@ -1,0 +1,88 @@
+.liBar {
+    position: relative;
+    margin: 0 9.85%;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 80.5%;
+    max-width: 80.5%;
+    max-height: -moz-fit-content;
+    max-height: fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    text-align: right;
+    list-style-type: none;
+    min-width: 240px;
+}
+#companyImg {
+    width: 15%;
+    height: auto;
+    max-width: 45px;
+    /* max-height: 40px; */
+    min-width: 25px;
+    border-radius: 50%;
+    margin: 2.984% 4.984% 2.984% 0%;
+}
+
+#companyName {
+    position: absolute;
+    color: #324483;
+    max-width: 100%;
+    top: 0px;
+    min-width: 100%;
+    right: 0px;
+    font-size: 16px;
+    margin: 3% 21.5% 2% 47%;
+}
+
+#companyType {
+    max-width: 100%;
+    min-width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 9% 21.66666% 3% 51%;
+    font-size: 12px;
+    opacity: 60%;
+}
+
+#Arrow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 6.5% 6.5%;
+    max-width: 25px;
+    min-width: 18px;
+    /* max-height: 31%; */
+    /* min-height: 27%; */
+    width: 14px;
+    height: 13px;
+}
+
+#questionTitle {
+    min-width: 245px;
+    font-size: 16px;
+    margin: 3% 5% 0% 0%;
+}
+
+#questionStatus {
+    min-width: 200px;
+    font-size: 12px;
+    opacity: 60%;
+    margin: 0% 5% 2% 0%;
+}
+#arrowQuestion {
+width: 14px;
+    height: 13px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 3.5% 3.5%;
+    /* width: 6%; */
+    max-width: 120px;
+    min-width: 20px;
+    /* height: 31%; */
+    max-height: 120px;
+    /* min-height: 27%; */
+}
