@@ -82,11 +82,12 @@ db.once("open", () => {
      },
    ]
    });
-   const user = await userModel.findOne({newUser});
+   const user = await userModel.findOne({email:newUser.email});
 
-
+  console.log(user); 
    if (user !== null) {
-       res.send({ ok: false, message: 'user with such user name already exists' })
+   //    res.send({ ok: false, message: 'user with such user name already exists' })
+         console.log("user with such user name already exists")
    } else {
 
     //   const newUser = new User({ username, password });
