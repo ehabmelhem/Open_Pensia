@@ -6,12 +6,13 @@ const proxy = require("./Routers/Proxy");
 const user = require("./Routers/user");
 
 const officerSchema = require("./Schema/Officer");
-const userSchema = require("./Schema/user");
+
 
 
 
 const app = express();
 const mongoose = require("mongoose");
+const userModel = require("./Schema/User");
 app.use(bodyParser.json());
 
 app.use("/officer", officer);
@@ -27,6 +28,7 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
   console.log("we are connected to DB");
+  addNewUser();
 });
 
 // var add = new officerSchema({
@@ -52,52 +54,51 @@ db.once("open", () => {
 
 
 
-// async function addNewUser (req, res, next)  { //middleware
-//   console.log('in fun addNewUser')
+ async function addNewUser (req, res, next)  { //middleware
+  console.log('in fun addNewUser')
 
-//  // const { username, password } = req.body;
-//  // console.log(username, password)
+ //const { username, password } = req.body;
+ //console.log(username, password)
 
-//  var datetime = new Date();
+  var datetime = new Date();
 
-//   //check if user exists
-//   const newUser=new userSchema({
-//     firstName: 'John',
-//   lastName: 'Smith',
-//   email: 'john.smith@gmail.com',
-//   phone: '0503212345',
-//   password: 'password111',
-//   status: 'Approved', //{Waiting/Approved}
-//   fundName: 'הראל',
-//   chanel: 'גמל/פנסיה',
-//   registerDate: datetime,
-//   votes: [
-//     {
-//       proxyCode: '11111',
-//       officerId: '22222',
-//       voted: 1,
-//       voteDate: datetime,
-//     },
-//   ]
-//   });
-//   const user = await User.findOne({email});
-
-
-//   if (user !== null) {
-//       res.send({ ok: false, message: 'user with such user name already exists' })
-//   } else {
-
-//    //   const newUser = new User({ username, password });
-//      const newMyUser =newUser;
-//       const user = await newMyUser.save().then(() => { console.log('user saved') })
-//       res.send({ ok: true });
-
-//   }
+//check if user exists
+   const newUser=new userModel({
+     firstName: 'John',
+   lastName: 'Smith',
+   email: 'john.smith@gmail.com',
+   phone: '0503212345',
+   password: 'password111',
+   status: 'Approved', //{Waiting/Approved}
+   fundName: 'הראל',
+   chanel: 'גמל/פנסיה',
+   registerDate: datetime,
+   votes: [
+     {
+       proxyCode: '11111',
+       officerId: '22222',
+       voted: 1,
+       voteDate: datetime,
+     },
+   ]
+   });
+   const user = await userModel.findOne({newUser});
 
 
-//   next();
-//   return
-// }
+   if (user !== null) {
+       res.send({ ok: false, message: 'user with such user name already exists' })
+   } else {
+
+    //   const newUser = new User({ username, password });
+      
+       await newUser.save().then(() => { console.log('user saved') })
+      // res.send({ ok: true });
+   }
+
+console.log("done")
+   //next();
+  // return
+ }
 
 const port = process.env.PORT || 3002;
 
