@@ -1,0 +1,14 @@
+         in card List Item there 2 TYPES
+         1 - companyBar (company show bar ):
+        props:
+        companyImgSrc="logo src photo"
+          companyName="name of company"
+          companyType="company type"
+          type="companyBar" this must add to show company bar
+
+        
+        2- questionBar (question show bar):
+        props:
+        questionTitle="tittle of question"
+          questionStatus="status of question"
+          type="questionBar" this ,ust add to show question bar
