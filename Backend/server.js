@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const officer = require("./Routers/officer");
 const proxy = require("./Routers/Proxy");
 const user = require("./Routers/user");
+
 const officerSchema = require("./Schema/Officer");
 
 const app = express();
@@ -25,24 +26,25 @@ db.once("open", () => {
   console.log("we are connected to DB");
 });
 
-var add = new officerSchema({
-  officerId: "123",
-  officeName: "ehab",
-  officerImg: "///",
-  officerArticles: [],
-  votes: [
-    {
-      proxyCode: "first",
-      allvotes: [],
-      likesCounter: 0,
-      absentCounter: 0,
-      disLikesCounter: 0,
-    },
-  ],
-});
-add.save().then(() => {
-  console.log("add new officer to db");
-});
+// var add = new officerSchema({
+//   officerId: "123",
+//   officeName: "ehab",
+//   officerImg: "///",
+//   officerArticles: [],
+//   votes: [
+//     {
+//       proxyCode: "first",
+//       allvotes: [],
+//       likesCounter: 0,
+//       absentCounter: 0,
+//       disLikesCounter: 0,
+//     },
+//   ],
+// });
+// add.save().then(() => {
+//   console.log("add new officer to db");
+// });
+
 const port = process.env.PORT || 3002;
 
 app.listen(port, () => {
