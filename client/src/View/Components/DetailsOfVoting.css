@@ -1,0 +1,41 @@
+.grid-container {
+    direction: rtl;
+    display: grid;
+    grid-template-columns: auto auto auto ;
+    grid-gap: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+
+  }
+  
+  .grid-container > div {
+    text-align: center;
+    font-size: 30px;
+  }
+
+  .divlike{
+    width: 100%;
+    height: 100px;
+    background-color: #FAFAFA;
+}
+.mainDiv {
+    text-align: center;
+    direction: rtl;
+    font-family:   Arial,Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    color: #464545;
+    background-color:#FFFFFF;
+   
+}
+.linebetween{
+  width: 80px;
+  border: #B7BCCC solid 1px;
+
+}
+
+.divlike{
+  width: 100%;
+  height: 100px;
+  background-color: #FAFAFA;
+}
