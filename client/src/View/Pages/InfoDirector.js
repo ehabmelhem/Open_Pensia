@@ -1,5 +1,7 @@
 import React from "react";
 import MainNavBar from "../Components/MainNavBar";
+// import DetailsOfVoting from "../Components/DetailsOfVoting";
+
 
 export default function InfoDirector() {
   let infoDirectorTabs = [
@@ -19,9 +21,15 @@ export default function InfoDirector() {
       content: "סיכום פרטים",
     },
   ];
+
+  // let votingPer = [{disApprovePer: '20%' ,ApprovePer: '80%' }]
+
   return (
     <div>
       <MainNavBar navTabs={infoDirectorTabs} />
+
+      {/* <DetailsOfVoting voting={votingPer} /> */}
     </div>
+
   );
 }
