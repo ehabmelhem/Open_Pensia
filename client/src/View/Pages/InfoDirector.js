@@ -6,7 +6,7 @@ export default function InfoDirector() {
     {
       className: "non-active-nav",
       href: "#",
-      content: "סיכום פרטים",
+      content: "נתוני הצבעה",
     },
     {
       className: "active-nav",
@@ -16,7 +16,7 @@ export default function InfoDirector() {
     {
       className: "non-active-nav",
       href: "#",
-      content: "נתוני הצבעה",
+      content: "סיכום פרטים",
     },
   ];
   return (
