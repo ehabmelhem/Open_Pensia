@@ -1,23 +1,28 @@
 import React from "react";
 import MainNavBar from "../Components/MainNavBar";
-// import DetailsOfVoting from "../Components/DetailsOfVoting";
 
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink,
+  Switch,
+} from "react-router-dom";
 
 export default function InfoDirector() {
   let infoDirectorTabs = [
     {
       className: "non-active-nav",
-      href: "#",
+      href: "",
       content: "נתוני הצבעה",
     },
     {
       className: "active-nav",
-      href: "#",
+      href: "users",
       content: "עוד מידע",
     },
     {
       className: "non-active-nav",
-      href: "#",
+      href: "about",
       content: "סיכום פרטים",
     },
   ];
@@ -30,6 +35,5 @@ export default function InfoDirector() {
 
       {/* <DetailsOfVoting voting={votingPer} /> */}
     </div>
-
   );
 }
