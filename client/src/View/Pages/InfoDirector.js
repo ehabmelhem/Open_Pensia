@@ -12,12 +12,12 @@ export default function InfoDirector() {
   let infoDirectorTabs = [
     {
       className: "non-active-nav",
-      href: "",
+      href: "VotingDetails",
       content: "נתוני הצבעה",
     },
     {
       className: "active-nav",
-      href: "users",
+      href: "moreInfo",
       content: "עוד מידע",
     },
     {
@@ -26,8 +26,6 @@ export default function InfoDirector() {
       content: "סיכום פרטים",
     },
   ];
-
-  // let votingPer = [{disApprovePer: '20%' ,ApprovePer: '80%' }]
 
   return (
     <div>
