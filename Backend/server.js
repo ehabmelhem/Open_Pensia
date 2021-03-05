@@ -31,25 +31,26 @@ db.once("open", () => {
   addNewUser();
 });
 
-// var add = new officerSchema({
-//   officerId: "123",
-//   officeName: "ehab",
-//   officerImg: "///",
-//   officerArticles: [],
-//   votes: [
-//     {
-//       proxyCode: "first",
-//       allvotes: [],
-//       likesCounter: 0,
-//       absentCounter: 0,
-//       disLikesCounter: 0,
-//     },
-//   ],
-// });
-// add.save().then(() => {
-//   console.log("add new officer to db");
-// });
-
+/** 
+ var add = new officerSchema({
+   officerId: "123",
+   officeName: "ehab",
+   officerImg: "///",
+   officerArticles: [],
+   votes: [
+     {
+       proxyCode: "first",
+       allvotes: [],
+       likesCounter: 0,
+       absentCounter: 0,
+       disLikesCounter: 0,
+     },
+   ],
+ });
+ add.save().then(() => {
+   console.log("add new officer to db");
+ });
+*/
 //app.use(addNewUser);
 
 
