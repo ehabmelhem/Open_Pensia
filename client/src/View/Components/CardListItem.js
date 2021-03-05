@@ -1,31 +1,29 @@
-import React from 'react'
-import './CardListItem.css'
+import React from "react";
+import "./CardListItem.css";
 
 export default function CompanyBar(props) {
-    const Arrow = "<"
-        switch (props.type) {
-            case "companyBar":
-                return (
-                    <li className="liBar">
-            <img id="companyImg" src={props.companyImgSrc} />
-            <p id="companyName">{props.companyName}</p>
-            <p id="companyType">{props.companyType}</p>
-            <img id="Arrow" src="https://i.ibb.co/j3xJsLZ/ezgif-3-95b9420870fb-removebg-preview.png"/>
-        </li>
-                    )
-                break;
-                case "questionBar":
-                    return (
-                        <li className="liBar">
-                        <p id="questionTitle">{props.questionTitle}</p>
-                        <p id="questionStatus">{props.questionStatus}</p>
-                        <img id="arrowQuestion" src="https://i.ibb.co/j3xJsLZ/ezgif-3-95b9420870fb-removebg-preview.png"/>
-                    </li>
-                        )
-                    break;
-
-            default:
-                break;
-        }
-    
+  return (
+    <div dir="rtl" className="background">
+      <div className="companyitem">
+        <div className="Column" id={this.props.hideImg ? "hideImg" : "withImg"}>
+          <img id="companyimage" src={props.logo} alt="companyimage" />
+        </div>
+        <div className="Column">
+          <div id="companyname">
+            <ol>
+              <p>{props.name}</p>
+              <p id="companytype">{props.par}</p>
+            </ol>
+          </div>
+        </div>
+        <div className="Column" id="nexticon">
+          <img
+            className="img1"
+            src="https://image.flaticon.com/icons/png/512/130/130884.png"
+            alt="nexticon"
+          />
+        </div>
+      </div>
+    </div>
+  );
 }
