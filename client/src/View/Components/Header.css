@@ -5,6 +5,9 @@
     align-items: center;
     text-align: center;
     object-fit:contain;
+    max-width: 600px;
+    min-width: 350px;
+    margin: auto;
 }
 .page_above{  
     display: flex;
