@@ -6,9 +6,11 @@ function DetailsOfVoting({ voting }) {
     return (
 
         <div className="mainDiv" >
+            
+            <br></br><br></br>
+
             <div className="grid-container" >
                 <div className="percent-div" >
-
 
 
                     {
@@ -43,6 +45,7 @@ function DetailsOfVoting({ voting }) {
 
                 </div>
 
+           <br></br>           <br></br>
 
             </div>
 
@@ -51,7 +54,6 @@ function DetailsOfVoting({ voting }) {
 
             { /* question */}
 
-            {/* <br > </br> */}
             <p className="bold-font" >
 
                 מה הבחירה שלך ?
