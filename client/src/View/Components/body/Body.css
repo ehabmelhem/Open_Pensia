@@ -1,0 +1,12 @@
+#buttonsBar {
+  width: 100%;
+  display: flex;
+  min-width: 275px;
+  flex-direction: row-reverse;
+}
+
+#button1,
+#button2,
+#button3 {
+  width: 33.33333333%;
+}
