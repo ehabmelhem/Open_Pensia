@@ -5,7 +5,7 @@ export default function CompanyBar(props) {
   return (
     <div dir="rtl" className="background">
       <div className="companyitem">
-        <div className="Column" id={this.props.hideImg ? "hideImg" : "withImg"}>
+        <div className="Column" id={props.hideImg ? "hideImg" : "withImg"}>
           <img id="companyimage" src={props.logo} alt="companyimage" />
         </div>
         <div className="Column">
