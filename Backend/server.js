@@ -9,6 +9,7 @@ const officerSchema = require("./Schema/Officer");
 
 const app = express();
 const mongoose = require("mongoose");
+const userModel = require("./Schema/User");
 app.use(bodyParser.json());
 
 app.use("/officer", officer);
@@ -45,8 +46,12 @@ db.once("open", () => {
 //   console.log("add new officer to db");
 // });
 
+//app.use(addNewUser);
+
 const port = process.env.PORT || 3002;
 
 app.listen(port, () => {
   console.log("listen on port: ", port);
 });
+
+// test
