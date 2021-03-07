@@ -1,0 +1,31 @@
+fun: add-user
+
+path :  http://localhost:3002/user/add-user
+
+
+Json Request:
+
+{
+      "firstName": "Rami",
+      "lastName": "Mohammed",
+      "email": "rami.mohammed@gmail.com",
+      "phone": "0502134551",
+      "password": "pass123",
+      "fundName": "הראל",
+      "chanel": "גמל/פנסיה",
+      "vote": 
+        {
+          "proxyCode": "12345678",
+          "officerId": "87654321",
+          "voted": 1
+        },
+        "newArticle":{
+      "officerId":"123",
+      "articleId":"77777",
+      "articleTitle": "My Article",
+      "articleText": "this is an article",
+      "articleUrl": "url"
+    }
+
+
+    }
