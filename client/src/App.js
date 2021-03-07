@@ -14,10 +14,6 @@ import CompaniesList from "./View/Pages/CompaniesList";
 import CompanyInfo from "./View/Pages/CompanyInfo";
 import VotesList from "./View/Pages/VotesList";
 import VoteAccept from "./View/Pages/VoteAccept";
-import CardListItem from "./View/Components/CardListItem";
-import ListQuestions from "./View/Components/body/ListQuestions";
-import Body from "./View/Components/body/Body";
-import Header from "./View/Components/Header";
 
 function App() {
   return (
@@ -122,15 +118,6 @@ function App() {
         </ul>
       </nav>
       <Switch>
-      <Route path="/TestDashBoardIbraheem">
-        <Header company='בנק הפועלים' perception='18.3'/>
-        </Route>
-        <Route path="/TestDashBoardMosaab">
-      
-          
-        <Body />
-
-        </Route>
         <Route path="/FirstPages_1">
           <FirstPages />
         </Route>

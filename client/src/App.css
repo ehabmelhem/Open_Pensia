@@ -36,12 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-.container1{
-  background-color: #3d4257;
-  color: white;
-  direction: rtl;
-  align-items: center;
-  text-align: center;
-  object-fit:contain;
-}

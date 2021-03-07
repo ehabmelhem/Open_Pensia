@@ -35,6 +35,4 @@ CompanyInfo
 VotesList
 /////VoteDirectors/////
 /////InfoDirector//////
-
-
  
