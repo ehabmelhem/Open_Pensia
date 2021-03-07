@@ -41,6 +41,7 @@ return: {ok: false,message:'could not add user'}
  */
 exports.addUser = async (req, res) => {
   try {
+    const flag = true;
     const {
       firstName,
       lastName,
@@ -49,7 +50,7 @@ exports.addUser = async (req, res) => {
       password,
       fundName,
       chanel,
-      vote,
+      votes,
       newArticle,
     } = req.body;
     //middleware
@@ -70,14 +71,14 @@ exports.addUser = async (req, res) => {
       fundName: fundName,
       chanel: chanel,
       registerDate: datetime,
-      votes: [
-        {
-          proxyCode: vote.proxyCode,
-          officerId: vote.officerId,
-          voted: vote.voted,
-          voteDate: datetime,
-        },
-      ],
+      // // votes: [
+      // //   {
+      // //     proxyCode: vote.proxyCode,
+      // //     officerId: vote.officerId,
+      // //     voted: vote.voted,
+      // //     voteDate: datetime,
+      // //   },
+      // ],
     });
 
     const user = await User.findOne({ email: newUser.email });
@@ -107,30 +108,42 @@ exports.addUser = async (req, res) => {
     }
       */
       if (newArticle !== null) {
-        Officer.find({ officerId: newArticle.officerId }).then((data) => {
-          if (data.length !== 0) {
-            const allArticle = data[0].officerArticles;
-            const Articletoupdate = {
-              articleId: uuidv4(),
-              articleTitle: newArticle.articleTitle,
-              articleText: newArticle.articleText,
-              articleUrl: newArticle.articleUrl,
-            };
-            allArticle.push(Articletoupdate);
-            Officer.update(
-              { officerId: data[0].officerId },
-              { officerArticles: allArticle }
-            ).then(() => {
-              console.log("update new article");
-            });
+        await Officer.find({ officerId: newArticle.officerId }).then(
+          async (data) => {
+            if (data.length !== 0) {
+              const allArticle = data[0].officerArticles;
+              const Articletoupdate = {
+                articleId: uuidv4(),
+                articleTitle: newArticle.articleTitle,
+                articleText: newArticle.articleText,
+                articleUrl: newArticle.articleUrl,
+              };
+              allArticle.push(Articletoupdate);
+              await Officer.update(
+                { officerId: data[0].officerId },
+                { officerArticles: allArticle }
+              )
+                .then(() => {
+                  console.log("update new article");
+                })
+                .catch((e) => {
+                  console.log("we cant update the Article");
+                  flag = false;
+                  res.send({
+                    Ok: false,
+                    messege: "error to update article",
+                  });
+                });
+            }
           }
+        );
+      }
+      if (flag) {
+        res.send({
+          Ok: true,
+          doc: newUser,
         });
       }
-
-      res.send({
-        Ok: true,
-        doc: newUser,
-      });
     }
   } catch (e) {
     console.log("could not run addUser in User");
