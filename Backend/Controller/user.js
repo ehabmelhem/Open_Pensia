@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 
 const User = require("../Schema/User");
+const Officer = require("../Schema/Officer");
 
 /* 
 dis: add a new user
@@ -20,6 +21,7 @@ exports.addUser = async (req, res) => {
       fundName,
       chanel,
       vote,
+      newArticle
     } = req.body;
     //middleware
     console.log("in fun addNewUser");
@@ -48,11 +50,14 @@ exports.addUser = async (req, res) => {
         },
       ],
     });
+
+    
     const user = await User.findOne({ email: newUser.email });
 
     if (user !== null) {
       //    res.send({ ok: false, message: 'user with such user name already exists' })
       console.log("user with such user name already exists");
+      res.send({ Ok: false,message:"user with such user name already exists" });
     } else {
       //   const newUser = new User({ username, password });
 
@@ -60,11 +65,12 @@ exports.addUser = async (req, res) => {
         console.log("user saved");
       });
       // res.send({ ok: true });
+      res.send({
+        Ok: true,doc:newUser
+      });
     }
 
-    res.send({
-      Ok: true,
-    });
+   
   } catch (e) {
     console.log("could not run addUser in User");
     res.send({ Ok: false });

@@ -8,7 +8,7 @@ const officerModel = mongoose.model("officerCollection", {
   officerImg: String,
   officerArticles: [
     {
-      articleId: Number,
+      articleId: String,
       articleTitle: String,
       articleText: String,
       articleUrl: String,
