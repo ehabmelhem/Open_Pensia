@@ -30,7 +30,6 @@ export default function InfoDirector() {
   return (
     <div>
       <MainNavBar navTabs={infoDirectorTabs} />
-
       {/* <DetailsOfVoting voting={votingPer} /> */}
     </div>
   );
