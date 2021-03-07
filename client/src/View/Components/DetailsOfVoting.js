@@ -5,81 +5,76 @@ import { AiFillLike } from "react-icons/ai";
 function DetailsOfVoting({ voting }) {
     return (
 
-        <div className="mainDiv">
-            <div className="grid-container">
-                <div style={{ fontSize: "40px" }}>
+        <div className="mainDiv" >
+            <div className="grid-container" >
+                <div className="percent-div" >
 
 
 
-                    {voting.map(({ disApprovePer }, index) => {
-                        return (
-                            <h1 key={index}>
-                                {disApprovePer}
-                            </h1>
-                        );
-                    })
+                    {
+                        voting.map(({ disApprovePer }, index) => {
+                            return (
+                                <h1 key={index} > { disApprovePer} </h1>
+                            );
+                        })
                     }
 
-                    <p>נגד</p>
+                    <p> נגד </p>
 
                 </div>
-                <div style={{ fontSize: "100px" }}>
-                <br></br>
+                <div>
 
-                    <br></br><br></br><br></br>
-                    <span className="linebetween"></span>
-                </div>
+                    <br></br>
+                    <span className="linebetween" > </span>
+                </div >
 
-                <div style={{ fontSize: "40px" }}>
-
-
-                    {voting.map(({ ApprovePer }, index) => {
-                        return (
-                            <h1 key={index}>
-                                {ApprovePer}
-                            </h1>
-                        );
-                    })}
+                <div className="percent-div" >
 
 
-                    <p>בעד</p>
+                    {
+                        voting.map(({ ApprovePer }, index) => {
+                            return (<h1 key={index} > { ApprovePer} </h1>
+                            );
+                        })
+                    }
+
+
+                    <p> בעד </p>
 
                 </div>
 
 
             </div>
 
-            {/* end content */}
+            { /* end content */}
 
 
-            {/* question */}
+            { /* question */}
 
-            <br></br>
-            <h3 style={{ color: "#324483" }}>
+            {/* <br > </br> */}
+            <p className="bold-font" >
 
-                מה הבחירה שלך?
+                מה הבחירה שלך ?
 
-                   </h3>
+        </p>
 
-            {/* end question */}
-
-
-
-            {/* icons view */}
-
-            <div className="grid-container">
-                <div>
+            { /* end question */}
 
 
-                    <AiFillDislike className="divlike" style={{ color: "#324483" }} />
-                    <h2>אני נגד</h2>
 
-                </div>
-                <div ></div>
-                <div >
+            { /* icons view */}
+            <div className="grid-container" >
+                <div className="body-div">
 
-                    <AiFillLike className="divlike" style={{ color: "#324483" }} />
-                    <h2>אני בעד</h2>
+
+                    <AiFillDislike className="body-like" />
+                    <p > אני נגד </p>
+
+                </div> <div > </div> 
+                <div className="body-div">
+
+                    <AiFillLike className="body-dislike" />
+                    <p > אני בעד </p>
 
                 </div>
 
