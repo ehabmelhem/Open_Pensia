@@ -124,7 +124,7 @@ function App() {
       </nav>
       <Switch>
       <Route path="/TestDashBoardIbraheem">
-        {/*<Header company='בנק הפועלים' perception='18.3'/>*/}
+        <Header company='בנק הפועלים' perception='18.3'/>
         </Route>
         <Route path="/TestDashBoardMosaab">
       <Body />
