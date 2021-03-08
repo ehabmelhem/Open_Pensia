@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const officer = require("./Routers/officer");
 const proxy = require("./Routers/Proxy");
 const user = require("./Routers/user");
+const waitingUser = require("./Routers/waitingUser");
 
 const officerSchema = require("./Schema/Officer");
 
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 app.use("/officer", officer);
 app.use("/proxy", proxy);
 app.use("/user", user);
+app.use("/new-user", waitingUser);
 
 mongoose.connect(
   "mongodb+srv://openpensia:Jq4kPbpZ2dKh0X65@cluster0.ny9vy.mongodb.net/openpensia",

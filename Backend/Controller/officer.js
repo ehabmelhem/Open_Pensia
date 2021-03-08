@@ -41,3 +41,7 @@ exports.addArticle = async (req, res) => {
     res.send({ Ok: false, messege: "could not run addArticle in Officer" });
   }
 };
+
+function addNewArticle(){
+  
+}

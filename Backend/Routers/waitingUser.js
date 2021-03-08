@@ -1,9 +1,9 @@
 const router = require("express").Router();
-const userController = require("../Controller/user");
+const waitingUserController = require("../Controller/waitingUser");
 
 router
-  .route("/add-approved-user")
-  .post(userController.addUser);
+  .route("/add-user")
+  .post(waitingUserController.addWaitingUser);
 
 // router
 //   .route("/add-user")
