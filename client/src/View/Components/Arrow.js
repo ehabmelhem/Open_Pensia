@@ -1,6 +1,6 @@
 import React from 'react'
 import './Arrow.css'
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+//import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { Switch, Route, Link, NavLink } from "react-router-dom";
 
