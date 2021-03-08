@@ -8,10 +8,10 @@ export default function CompanyBar(props) {
         <div className="Column" id={props.hideImg ? "hideImg" : "withImg"}>
           <img id="companyimage" src={props.logo} alt="companyimage" />
         </div>
-        <div className="Column">
+        <div className="Column" id="formoreres1">
           <div id="companyname">
             <ol>
-              <p>{props.name}</p>
+              <p id="companyName">{props.name}</p>
               <p id="companytype">{props.par}</p>
             </ol>
           </div>

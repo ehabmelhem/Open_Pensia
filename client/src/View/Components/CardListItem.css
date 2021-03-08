@@ -1,75 +1,79 @@
-.background{
-    background-color: white;
-    min-width: 375px;
-    max-width: 1000px;
-    /* width: 500px;
-    height: 1000px; */
-    /* margin-left: 5px; */
-     /* padding-right: 5px; */
+.background {
+  background-color: white;
+  min-width: 375px;
+  max-width: 1000px;
 }
 
 .companyitem {
-    display: table;
-    width: 95%; /*Optional*/
-    /* margin-left: 50px; */
-    table-layout: fixed; /*Optional*/
-    border-spacing: 5px; /*Optional*/
-    border-bottom: 2px solid lightgray;
-    max-width: 1000px;
-    min-width: 375px;
-
-    
+  display: table;
+  width: 92%;
+  table-layout: fixed;
+  border-bottom: 2px solid lightgray;
+  max-width: 600px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+#companyName {
+  color: #324483;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 0;
 }
 
 .Column {
-    display: table-cell;
-    vertical-align: top ;
-    vertical-align: middle ;
-    text-align: right ;
-    min-width: 375px;
-    /* background-color: blueviolet; */
+  display: table-cell;
+  vertical-align: top;
+  vertical-align: middle;
+  text-align: right;
+  min-width: 375px;
+  /* background-color: blueviolet; */
 }
 
-#companyimage{
-    margin-right: 5px; 
-    height: 50px;
-    width: 50px;
-    padding: 10px;
-    border-radius: 40px;
+#companyimage {
+  margin-right: 5px;
+  height: 50px;
+  width: 50px;
+  padding: 10px;
+  border-radius: 40px;
 }
 
-#withImg{
-    width: 50px;
-    padding: 10px;
-    padding-right: 20px;
+#withImg {
+  width: 50px;
+  padding: 10px;
+  padding-right: 20px;
 }
 
-#hideImg{
-    display:none;
+#hideImg {
+  display: none;
 }
 
-#nexticon{
-    /* width: 100px;
+#nexticon {
+  /* width: 100px;
     height: 3px; */
-    /* vertical-align:middle; */
-    /* padding: 25px; */
-    
-    transform: rotate(180deg);
-
+  /* vertical-align:middle; */
+  /* padding: 25px; */
+  width:45%;
+  transform: rotate(180deg);
 }
 
-.ol{
-    padding: 2px;
+.ol {
+  padding: 2px;
 }
- .img1{
-    width: 15px;
-    height: 15px;
+.img1 {
+  width: 15px;
+  height: 15px;
 }
-#companyname{
-    color: black;
-    vertical-align:middle;
+#companyname {
+  color: black;
+  vertical-align: middle;
 }
 
-#companytype{
-    color: lightgray;
+#companytype {
+  margin-top: 0;
+  font-size: 12px;
+  font-weight: bold;
+  opacity: 60%;
+}
+#formoreres1{
+    width:45%;
 }

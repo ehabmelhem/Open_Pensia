@@ -17,6 +17,8 @@ import VoteAccept from "./View/Pages/VoteAccept";
 import CardListItem from "./View/Components/CardListItem";
 import ListQuestions from "./View/Components/body/ListQuestions";
 import Body from "./View/Components/body/Body";
+import Header from './View/Components/Header';
+import NavBarLists from "./View/Components/NavBarLists";
 
 function App() {
   return (
@@ -125,9 +127,8 @@ function App() {
         {/*<Header company='בנק הפועלים' perception='18.3'/>*/}
         </Route>
         <Route path="/TestDashBoardMosaab">
-      
-          
-        <Body />
+      <Body />
+        <NavBarLists />
 
         </Route>
         <Route path="/FirstPages_1">
@@ -187,15 +188,15 @@ function App() {
         </Route>
 
         <Route path="/VotesHistory">
-          <VotesList />
+          <VotesList title="היסטורית הצבעות" sort={0}/>
         </Route>
 
         <Route path="/VoteBending">
-          <VotesList />
+          <VotesList title="הצבעות ממתינות לתשובה" sort={1}/>
         </Route>
 
         <Route path="/OpenVotes">
-          <VotesList />
+          <VotesList title="הצבעות פתוחות" sort={2}/>
         </Route>
 
         <Route path="/VoteDirectorsAfterLogin">

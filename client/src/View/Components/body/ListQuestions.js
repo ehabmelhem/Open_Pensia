@@ -5,7 +5,7 @@ import './Body.css'
 export default function ListQuestions(props) {
     return (
         <div id="allList">
-            {props.companies.map((item)=>{
+            {props.questionsList.map((item)=>{
                 if(item.sort == props.sort)
              return  <CardListItem  hideImg="hideImg" name={item.name} par={item.par} />
             })}
