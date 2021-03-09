@@ -1,6 +1,8 @@
-.all-tabs{
+  .all-tabs{
+    max-width: 600px;
     background-color: white;
     width: 100%;
+    margin: auto;
     text-align: center;
     padding: 0%;
     border-bottom: solid rgb(167, 172, 188);

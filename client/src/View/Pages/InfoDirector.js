@@ -1,6 +1,6 @@
 import React from "react";
 import MainNavBar from "../Components/MainNavBar";
-
+import CandidateMoreInfo from '../Components/CandidateMoreInfo';
 import {
   BrowserRouter as Router,
   Route,
@@ -31,6 +31,7 @@ export default function InfoDirector() {
     <div>
       <MainNavBar navTabs={infoDirectorTabs} />
       {/* <DetailsOfVoting voting={votingPer} /> */}
+      <CandidateMoreInfo/>
     </div>
   );
 }
