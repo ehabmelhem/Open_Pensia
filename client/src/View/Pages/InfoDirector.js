@@ -1,6 +1,7 @@
 import React from "react";
 import MainNavBar from "../Components/MainNavBar";
 import CandidateMoreInfo from '../Components/CandidateMoreInfo';
+import Header from '../Components/VotingHeader';
 import {
   BrowserRouter as Router,
   Route,
@@ -29,6 +30,7 @@ export default function InfoDirector() {
 
   return (
     <div>
+      <Header directorName="עיסאווי פריג'" company="בנק הפועלים"/>
       <MainNavBar navTabs={infoDirectorTabs} />
       {/* <DetailsOfVoting voting={votingPer} /> */}
       <CandidateMoreInfo/>

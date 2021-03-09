@@ -1,0 +1,22 @@
+
+.voting-header {
+    position:  sticky;
+    font-size: calc(10px + 2vmin);
+    color: black;
+    background-color: rgb(61, 66, 87);
+    display: block;
+    top:0;
+}
+
+.company-name{
+    color: rgb(167, 172, 188);
+    font-size: 20px;
+    margin-bottom: 5%;
+    padding-top:3%;
+}
+  
+.candidate-name{
+    color: rgb(253, 253, 253);
+    font-size: 24px;
+    padding: 2%;
+}
