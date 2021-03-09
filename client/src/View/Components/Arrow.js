@@ -10,7 +10,6 @@ export default function Arrow(props) { // height width tolink text
             <Link to={props.arrowToLink}>
             <ChevronRightIcon  style={{color:`${props.color}`}} id="ChevronRightIcon"/>
             </Link>
-
         </div>
     )
 }
