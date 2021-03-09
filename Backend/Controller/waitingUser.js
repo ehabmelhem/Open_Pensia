@@ -56,12 +56,12 @@ exports.addWaitingUser = async (req, res) => {
     //middleware
     console.log("in fun addNewUser");
 
-    //console.log(username, password)
+    
 
     var datetime = new Date();
 
-    const myVotes=[];
-    
+ 
+
 
     //check if user exists
     const newUser = new WaitingUser({
@@ -74,13 +74,13 @@ exports.addWaitingUser = async (req, res) => {
       fundName: fundName,
       chanel: chanel,
       registerDate: datetime,
-      votes: myVotes,
+      votes: votes,
         article:{
-            officerId:officerId,
-            articleId: articleId,
-            articleTitle: articleTitle,
-            articleText: articleText,
-            articleUrl: articleUrl,
+            officerId:newArticle.officerId,
+            articleId: newArticle.articleId,
+            articleTitle: newArticle.articleTitle,
+            articleText: newArticle.articleText,
+            articleUrl: newArticle.articleUrl,
           }
 
       
@@ -89,14 +89,12 @@ exports.addWaitingUser = async (req, res) => {
     const user = await WaitingUser.findOne({ email: newUser.email });
 
     if (user !== null) {
-      //    res.send({ ok: false, message: 'user with such user name already exists' })
       console.log("user with such user name already exists");
       res.send({
         Ok: false,
         message: "user with such user name already exists",
       });
     } else {
-      //   const newUser = new User({ username, password });
 
       await newUser.save().then(() => {
         console.log("user saved");

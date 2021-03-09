@@ -3,6 +3,7 @@ const app = express();
 
 const User = require("../Schema/User");
 const Officer = require("../Schema/Officer");
+const WaitingUser = require("../Schema/WaitingUser");
 const { v4: uuidv4 } = require("uuid");
 
 /* 
