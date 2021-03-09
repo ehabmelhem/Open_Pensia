@@ -8,14 +8,8 @@ router
 router
   .route("/all-Questions-of-corporate")
   .get(proxyController.getAllQuestions);
-
-
-
-
-
-
-
-
-
+router
+  .route("/get-Question-bu-secur-Id")
+  .get(proxyController.getQuestionBySecurId);
 
 module.exports = router;

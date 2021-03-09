@@ -21,7 +21,7 @@ const proxyModel = mongoose.model("proxyCollection", {
     },
   ],
   status: String, // {Open/Pending/Results}
-  result: Boolean //result by default false
+  result: Boolean, //result by default false
 });
 
 module.exports = proxyModel;
