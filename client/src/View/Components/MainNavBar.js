@@ -2,6 +2,8 @@ import "./MainNavBar.css";
 import { Link, Switch } from "react-router-dom";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import DetailsOfVoting from "../Components/DetailsOfVoting";
+import CandidateMoreInfo from '../Components/CandidateMoreInfo';
+
 let votingPer = [{ disApprovePer: "20%", ApprovePer: "80%" }];
 
 function MainNavBar({ navTabs }) {
@@ -24,7 +26,7 @@ function MainNavBar({ navTabs }) {
 
         <Switch>
           <Route path="/moreInfo">
-            <div>hi1</div>
+          <CandidateMoreInfo/>
           </Route>
           <Route path="/VotingDetails">
             <DetailsOfVoting voting={votingPer} />
