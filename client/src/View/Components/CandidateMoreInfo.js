@@ -7,14 +7,7 @@ function CandidateMoreInfo(props) {
 
     return (
         <div>
-            {/* <div className='company-name'>
-                {candidateInfo.companyName}
-            </div>
-            <img className='candidate-img' alt='candidate' src={candidateInfo.imgSrc} />
-            <div className='candidate-name'>
-                {candidateInfo.name}
-            </div> */}
-            <MainButton tolink='/' width='' height='' text='יש לך מידע? לחצ/י כאן' />
+            <MainButton className='add-info-btn' tolink='/UploadInformation' text='יש לך מידע? לחצ/י כאן' />
             <Articles articles={articles} />
         </div>
     );
