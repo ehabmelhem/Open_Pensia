@@ -31,7 +31,6 @@ export default function InfoDirector() {
     <div>
       <Header directorName="עיסאווי פריג'" company="בנק הפועלים"/>
       <MainNavBar navTabs={infoDirectorTabs} />
-      {/* <DetailsOfVoting voting={votingPer} /> */}
     </div>
   );
 }

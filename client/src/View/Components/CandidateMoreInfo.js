@@ -7,7 +7,7 @@ function CandidateMoreInfo(props) {
 
     return (
         <div>
-            <MainButton className='add-info-btn' tolink='/UploadInformation' text='יש לך מידע? לחצ/י כאן' />
+            <MainButton myClass='add-info-btn' tolink='/UploadInformation' text='יש לך מידע? לחצ/י כאן' />
             <Articles articles={articles} />
         </div>
     );
