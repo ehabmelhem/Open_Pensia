@@ -69,13 +69,13 @@ function DetailsOfVoting({ voting }) {
                 <div className="body-div">
 
 
-                    <AiFillDislike className="body-like" />
+                    <AiFillDislike className="body-dislike" />
                     <p > אני נגד </p>
 
                 </div> <div > </div> 
                 <div className="body-div">
 
-                    <AiFillLike className="body-dislike" />
+                    <AiFillLike className="body-like" />
                     <p > אני בעד </p>
 
                 </div>
