@@ -1,45 +1,91 @@
+.App1 {
+  text-align: center;
+  top       : 0px;
+  left      : 0px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  opacity   : 1;
+}
+
+.App-header1 {
+
+  font-size: calc(10px + 2vmin);
+  color    : black;
+  display  : block;
+  top      : 0;
+
+}
+
+a.login {
+  top            : 11px;
+  left           : 60px;
+  width          : 38px;
+  height         : 18px;
+  text-align     : center;
+  text-decoration: underline;
+  font           : normal normal 600 14px/16px Assistant;
+  letter-spacing : 1.25px;
+  color          : #324483;
+  text-transform : uppercase;
+  opacity        : 1;
+
+}
+.question {
+  top           : 80px;
+  left          : 71px;
+  width         : 1280px;
+  height        : 26px;
+  text-align    : center;
+  font          : normal normal 600 20px/16px Assistant;
+  letter-spacing: 0px;
+  color         : #324483;
+  text-transform: uppercase;
+  opacity       : 1;
+}
+
+
 .background {
   background-color: white;
-  min-width: 375px;
-  max-width: 1000px;
+  min-width       : 375px;
+  max-width       : 1000px;
 }
 
 .companyitem {
-  display: table;
-  width: 92%;
-  table-layout: fixed;
+  display      : table;
+  width        : 92%;
+  table-layout : fixed;
   border-bottom: 2px solid lightgray;
-  max-width: 600px;
-  margin-left: 5%;
-  margin-right: 5%;
+  max-width    : 600px;
+  margin-left  : 5%;
+  margin-right : 5%;
 }
+
 #companyName {
-  color: #324483;
-  font-size: 16px;
-  font-weight: bold;
+  color        : #324483;
+  font-size    : 16px;
+  font-weight  : bold;
   margin-bottom: 0;
 }
 
 .Column {
-  display: table-cell;
-  vertical-align: top;
-  vertical-align: middle;
-  text-align: right;
-  min-width: 375px;
+  display            : table-cell;
+  vertical-align     : top;
+  vertical-align     : middle;
+  text-align         : right;
+  min-width          : 375px;
   /* background-color: blueviolet; */
 }
 
 #companyimage {
-  margin-right: 5px;
-  height: 50px;
-  width: 50px;
-  padding: 10px;
+  margin-right : 5px;
+  height       : 50px;
+  width        : 50px;
+  padding      : 10px;
   border-radius: 40px;
 }
 
 #withImg {
-  width: 50px;
-  padding: 10px;
+  width        : 50px;
+  padding      : 10px;
   padding-right: 20px;
 }
 
@@ -52,28 +98,31 @@
     height: 3px; */
   /* vertical-align:middle; */
   /* padding: 25px; */
-  width:45%;
+  width    : 45%;
   transform: rotate(180deg);
 }
 
 .ol {
   padding: 2px;
 }
+
 .img1 {
-  width: 15px;
+  width : 15px;
   height: 15px;
 }
+
 #companyname {
-  color: black;
+  color         : black;
   vertical-align: middle;
 }
 
 #companytype {
-  margin-top: 0;
-  font-size: 12px;
+  margin-top : 0;
+  font-size  : 12px;
   font-weight: bold;
-  opacity: 60%;
+  opacity    : 60%;
 }
-#formoreres1{
-    width:45%;
+
+#formoreres1 {
+  width: 45%;
 }

@@ -3,6 +3,8 @@ import "./CardListItem.css";
 
 export default function CompanyBar(props) {
   return (
+    
+
     <div dir="rtl" className="background">
       <div className="companyitem">
         <div className="Column" id={props.hideImg ? "hideImg" : "withImg"}>
