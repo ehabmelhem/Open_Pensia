@@ -7,7 +7,6 @@ function DetailsOfVoting({ voting }) {
 
         <div className="mainDiv" >
             
-            <br></br><br></br>
 
             <div className="grid-container" >
                 <div className="percent-div" >
@@ -26,7 +25,6 @@ function DetailsOfVoting({ voting }) {
                 </div>
                 <div>
 
-                    <br></br>
                     <span className="linebetween" > </span>
                 </div >
 
@@ -45,7 +43,6 @@ function DetailsOfVoting({ voting }) {
 
                 </div>
 
-           <br></br>           <br></br>
 
             </div>
 
