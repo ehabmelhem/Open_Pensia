@@ -10,14 +10,14 @@ const proxyModel = mongoose.model("proxyCollection", {
     {
       officerId: String,
       officerName: String,
-      officerImg: String,
+      officerImg: String
     },
   ],
   votes: [
     {
       userId: String,
       officerId: String,
-      voted: Number,
+      voted: Number
     },
   ],
   status: String, // {Open/Pending/Results}

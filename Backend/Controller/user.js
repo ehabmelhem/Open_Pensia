@@ -3,6 +3,7 @@ const app = express();
 
 const User = require("../Schema/User");
 const Officer = require("../Schema/Officer");
+const Proxy = require("../Schema/Proxy");
 const WaitingUser = require("../Schema/WaitingUser");
 const { v4: uuidv4 } = require("uuid");
 
@@ -170,7 +171,7 @@ exports.addApprovedUser = async (req, res) => {
     const user = await WaitingUser.findOne({ email: email });
 
     if (user !== null) {
-console.log('in if');
+      console.log('in if');
       const newUser = new User({
         firstName: user.firstName,
         lastName: user.lastName,
@@ -182,31 +183,117 @@ console.log('in if');
         chanel: user.chanel,
         registerDate: user.datetime,
         votes:user.votes
-        // // votes: [
-        // //   {
-        // //     proxyCode: vote.proxyCode,
-        // //     officerId: vote.officerId,
-        // //     voted: vote.voted,
-        // //     voteDate: datetime,
-        // //   },
-        // ],
       });
 
       await newUser.save().then(() => {
         console.log("new Approved user saved to User Schema");
       });
 
-      // res.send({ ok: true });
 
-      /*
-       "newArticle":{
-      "officerId":"123",
-      "articleId":"77777",
-      "articleTitle": "My Article",
-      "articleText": "this is an article",
-      "articleUrl": "url"
+  // add votes to proxy and officer
+ 
+  const savedUser = await User.findOne({ email: email });
+   newUser.votes.forEach(async(e) => {
+    console.log(e);
+    // add to proxy
+    const proxyOfVote = await Proxy.findOne({ Proxy_code: e.proxyCode });
+    console.log(proxyOfVote);
+    const proxyOfVoteDetailes= {userId: savedUser._id,
+      officerId: e.officerId,
+      voted: e.voted}
+    if (proxyOfVote.votes !== null){
+      console.log('proxy of votes :'+proxyOfVote.votes);
+      await Proxy.findOneAndUpdate(
+        { Proxy_code: e.proxyCode } ,
+        {$push: {"votes": proxyOfVoteDetailes} }
+      );
+      proxyOfVote.votes.push(proxyOfVoteDetailes);
+      console.log('proxy votes is not null');
     }
-      */
+    else{
+      const newArray=[proxyOfVoteDetailes];
+      await Proxy.findOneAndUpdate({ Proxy_code: e.proxyCode }, {votes:newArray})
+      console.log(newArray);
+    }
+
+    // add to officer
+    let like=0;
+    let absent=0;
+    let dislike=0;
+    console.log('counter 0');
+    if(e.voted ===1){like++;}
+    if(e.voted ===0){absent++;}
+    if(e.voted ===-1){dislike++;}
+    console.log('counter set');
+    const officerOfVote = await Officer.findOne({ officerId: e.officerId });
+    // const officerOfVoteDetailes= {userId: savedUser._id,
+    //   officerId: e.officerId,
+    //   voted: e.voted}
+
+    //if officer votes null
+    if (officerOfVote.votes === null){
+      const newVotes=[
+        {
+          proxyCode: e.proxyCode,
+          allvotes: [
+            {
+              proxyCode: e.proxyCode,
+              Security_ID: proxyOfVote.Security_ID,
+              userId: savedUser._id,
+              voted: e.voted,
+            },
+          ],
+          likesCounter: like,
+          absentCounter: absent,
+          disLikesCounter: dislike,
+        },
+      ];
+      await Officer.findOneAndUpdate({ Proxy_code: e.proxyCode }, {votes:newVotes})
+
+    }else{ 
+      // if officer votes has an array
+
+     // const officerOfVote = await Officer.findOne({ officerId: e.officerId });
+     const officerProxy = await Officer.findOne({ proxyCode: e.proxyCode },
+                 { votes: { $elemMatch: { proxyCode: e.proxyCode } } } )
+                 console.log(officerProxy);
+    //  const officerProxy = await officerProxy.votes.findOne({ proxyCode: e.proxyCode });
+      if(officerProxy === null){
+        const newProxyVotes=
+          {
+            proxyCode: e.proxyCode,
+            allvotes: [
+              {
+                proxyCode: e.proxyCode,
+                Security_ID: proxyOfVote.Security_ID,
+                userId: savedUser._id,
+                voted: e.voted,
+              },
+            ],
+            likesCounter: like,
+            absentCounter: absent,
+            disLikesCounter: dislike,
+          };
+       //   await Officer.findOneAndUpdate({ Proxy_code: e.proxyCode }, {votes:newVotes})
+    //   db.inventory.find( { $and: [ { price: { $ne: 1.99 } }, { price: { $exists: true } } ] } )
+   //    { $inc: { no_of_likes: 1 }, "$push": { "users": userInfo } }
+       await Officer.findOneAndUpdate(
+          { officerId: e.officerId } ,
+          {$push: {"votes": newProxyVotes} }
+        );
+   //    proxyOfVote.votes.push(newProxyVotes);
+      }
+
+    }
+    // else{
+
+    //   officerOfVote.votes..push(proxyOfVoteDetailes);
+    // }
+
+    ////////////////////
+
+  });
+
 // add new article to officer
     console.log('in if2');
       if (user.article !== null) {
