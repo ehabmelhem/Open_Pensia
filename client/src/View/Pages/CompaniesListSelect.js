@@ -1,6 +1,6 @@
 import React from 'react'
 import CardListItem from "../Components/CardListItem";
-import '..//Components/CardListItem.css'
+import './CompaniesListSelect.css';
 
 export default function CompaniesListSelect() {
 
@@ -42,32 +42,25 @@ export default function CompaniesListSelect() {
     return (
 
         <div className='App1'>
-        <header className='App-header1'>
-            
-                <a className='login' href='#' target='_blank' > כניסה </a>
-    
-            <br></br>            <br></br>
-
-    
-            <div className='question'>
-                ?על איזו חברה תרצה/י להשפיע
-                            </div>
-        </header>
-        <br></br>            
-        {
-                companies.map((list, index) => {
-                    return (
-                        <CardListItem key={index}
-                            hideImg=""
-                            logo={list.link}
-                            name={list.title}
-                            par={list.subTitle}
-                        />
-                    );
-                })
+            <header className='App-header1'>
+                <div>
+                    <a className='login' href='#' target='_blank' > כניסה </a>
+                </div>
+                <div className='question'>
+                    ?על איזו חברה תרצה/י להשפיע
+            </div>
+            </header>
+            {companies.map((list, index) => {
+                return (
+                    <CardListItem key={index}
+                        hideImg=""
+                        logo={list.link}
+                        name={list.title}
+                        par={list.subTitle}
+                    />
+                );
+            })
             }
         </div>
-
-
     )
 }
