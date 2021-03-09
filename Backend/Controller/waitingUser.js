@@ -60,8 +60,18 @@ exports.addWaitingUser = async (req, res) => {
 
     var datetime = new Date();
 
- 
+    const newVotes=[];
+    votes.forEach(e => {
+      let oneVote={
+        proxyCode: e.proxyCode,
+      officerId: e.officerId,
+      voted: e.voted,
+      voteDate: datetime,
+      }
+      newVotes.push(oneVote);
+    });
 
+   
 
     //check if user exists
     const newUser = new WaitingUser({
@@ -74,13 +84,14 @@ exports.addWaitingUser = async (req, res) => {
       fundName: fundName,
       chanel: chanel,
       registerDate: datetime,
-      votes: votes,
+      votes: newVotes,
         article:{
             officerId:newArticle.officerId,
             articleId: newArticle.articleId,
             articleTitle: newArticle.articleTitle,
             articleText: newArticle.articleText,
             articleUrl: newArticle.articleUrl,
+            articleStatus:"Approved"           //{"Waiting","Approved","declined"}
           }
 
       

@@ -151,3 +151,120 @@ exports.addUser = async (req, res) => {
     res.send({ Ok: false });
   }
 };
+//////////////////////////////////////////////////////////
+exports.addApprovedUser = async (req, res) => {
+  try {
+    const flag = true;
+    const {
+      email
+    } = req.body;
+    //middleware
+    console.log("in fun addApprovedUser");
+
+
+    var datetime = new Date();
+
+    //check if user exists
+    
+
+    const user = await WaitingUser.findOne({ email: email });
+
+    if (user !== null) {
+console.log('in if');
+      const newUser = new User({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phone: user.phone,
+        password: user.password,
+        status: "Approved", //{Waiting/Approved}
+        fundName: user.fundName,
+        chanel: user.chanel,
+        registerDate: user.datetime,
+        votes:user.votes
+        // // votes: [
+        // //   {
+        // //     proxyCode: vote.proxyCode,
+        // //     officerId: vote.officerId,
+        // //     voted: vote.voted,
+        // //     voteDate: datetime,
+        // //   },
+        // ],
+      });
+
+      await newUser.save().then(() => {
+        console.log("new Approved user saved to User Schema");
+      });
+
+      // res.send({ ok: true });
+
+      /*
+       "newArticle":{
+      "officerId":"123",
+      "articleId":"77777",
+      "articleTitle": "My Article",
+      "articleText": "this is an article",
+      "articleUrl": "url"
+    }
+      */
+// add new article to officer
+    console.log('in if2');
+      if (user.article !== null) {
+        await Officer.find({ officerId: user.article.officerId }).then(
+          async (data) => {
+            if (data.length !== 0) {
+              if (user.article.articleStatus ==='Approved') {
+              const allArticle = data[0].officerArticles;
+              const Articletoupdate = {
+                articleId: uuidv4(),
+                articleTitle: user.article.articleTitle,
+                articleText: user.article.articleText,
+                articleUrl: user.article.articleUrl,
+                articleStatus:user.article.articleStatus
+              };
+              console.log('in if4');
+              allArticle.push(Articletoupdate);
+              console.log('in if5');
+              await Officer.update(
+                { officerId: data[0].officerId },
+                { officerArticles: allArticle }
+              )
+                .then(() => {
+                  console.log("update new article");
+                })
+                .catch((e) => {
+                  console.log("we cant update the Article");
+                  flag = false;
+                  res.send({
+                    Ok: false,
+                    messege: "error to update article",
+                  });
+                });
+            }
+          }
+          }
+        );
+      }
+      console.log('in if3');
+      if (flag) {
+        const updateStaus = await WaitingUser.findOneAndUpdate({email:email}, {status:"Transferred"});
+        res.send({
+          Ok: true,
+          doc: newUser,
+        });
+      }
+    }else {
+      //    res.send({ ok: false, message: 'user with such user name already exists' })
+      console.log("user with such user name already exists");
+      res.send({
+        Ok: false,
+        message: "user with such user name already exists",
+      });
+    }
+  } catch (e) {
+    console.log("could not run addApprovedUser in User");
+    res.send({ Ok: false });
+  }
+};
+
+

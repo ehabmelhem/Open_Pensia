@@ -25,6 +25,7 @@ const waitingUserModel = mongoose.model("waitingUserCollection", {
     articleTitle: String,
     articleText: String,
     articleUrl: String,
+    articleStatus: String              //{"Waiting","Approved","declined"}
   }
 });
 

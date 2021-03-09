@@ -12,6 +12,7 @@ const officerModel = mongoose.model("officerCollection", {
       articleTitle: String,
       articleText: String,
       articleUrl: String,
+      articleStatus: String              //{"Waiting","Approved"}
     },
   ],
   votes: [
