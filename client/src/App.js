@@ -19,6 +19,7 @@ import ListQuestions from "./View/Components/body/ListQuestions";
 import Body from "./View/Components/body/Body";
 import Header from './View/Components/Header';
 import NavBarLists from "./View/Components/NavBarLists";
+import MainButton from "./View/Components/MainButton";
 
 function App() {
   return (
@@ -125,6 +126,7 @@ function App() {
       <Switch>
       <Route path="/TestDashBoardIbraheem">
         <Header company='בנק הפועלים' perception='18.3'/>
+        <MainButton myClass='main-button' text='הצבעת הרווחת' tolink='InfoDirectorAfterLogin'/>
         </Route>
         <Route path="/TestDashBoardMosaab">
       <Body />
