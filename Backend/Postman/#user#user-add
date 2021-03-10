@@ -13,12 +13,12 @@ Json Request:
       "password": "pass123",
       "fundName": "הראל",
       "chanel": "גמל/פנסיה",
-      "vote": 
-        {
+      "votes": 
+        [{
           "proxyCode": "12345678",
           "officerId": "87654321",
           "voted": 1
-        },
+        }],
         "newArticle":{
       "officerId":"123",
       "articleId":"77777",

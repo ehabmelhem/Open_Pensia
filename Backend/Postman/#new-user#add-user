@@ -1,0 +1,38 @@
+fun: add-waitingUserr
+
+path : http://localhost:3002/new-user/add-user 
+
+
+Json Request:
+
+{
+      "firstName": "Rema",
+      "lastName": "Khateb",
+      "email": "rema.khateb@gmail.com",
+      "phone": "0502134551",
+      "password": "pass123",
+      "fundName": "הראל",
+      "chanel": "גמל/פנסיה",
+      "votes": 
+        [
+             {
+          "proxyCode": "12345678",
+          "officerId": "34343434",
+          "voted": 1
+        },
+        {
+          "proxyCode": "12345678",
+          "officerId": "98989898",
+          "voted": -1
+        }],
+        "newArticle":{
+      "officerId":"123",
+      "articleId":"909090",
+      "articleTitle": "My Article",
+      "articleText": "this is an article_______________",
+      "articleUrl": "url"
+    }
+
+
+    }
+    }

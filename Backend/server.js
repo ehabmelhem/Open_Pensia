@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const officer = require("./Routers/officer");
 const proxy = require("./Routers/Proxy");
 const user = require("./Routers/user");
+const waitingUser = require("./Routers/waitingUser");
 
 const officerSchema = require("./Schema/Officer");
 
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 app.use("/officer", officer);
 app.use("/proxy", proxy);
 app.use("/user", user);
+app.use("/new-user", waitingUser);
 
 mongoose.connect(
   "mongodb+srv://openpensia:Jq4kPbpZ2dKh0X65@cluster0.ny9vy.mongodb.net/openpensia",
@@ -27,26 +29,34 @@ db.once("open", () => {
   console.log("we are connected to DB");
 });
 
-/** 
- var add = new officerSchema({
-   officerId: "123",
-   officeName: "ehab",
-   officerImg: "///",
-   officerArticles: [],
-   votes: [
-     {
-       proxyCode: "first",
-       allvotes: [],
-       likesCounter: 0,
-       absentCounter: 0,
-       disLikesCounter: 0,
-     },
-   ],
- });
- add.save().then(() => {
-   console.log("add new officer to db");
- });
-*/
+let article={
+  officerId:"64516271",
+  articleId:"00000000006",
+  articleTitle: "My Article my article works",
+  articleText: "this is an article____my article___________",
+  articleUrl: "url"
+}
+
+
+// var add = new officerSchema({
+//   officerId: "123",
+//   officeName: "ehab",
+//   officerImg: "///",
+//   officerArticles: [],
+//   votes: [
+//     {
+//       proxyCode: "first",
+//       allvotes: [],
+//       likesCounter: 0,
+//       absentCounter: 0,
+//       disLikesCounter: 0,
+//     },
+//   ],
+// });
+// add.save().then(() => {
+//   console.log("add new officer to db");
+// });
+
 //app.use(addNewUser);
 
 const port = process.env.PORT || 3002;
