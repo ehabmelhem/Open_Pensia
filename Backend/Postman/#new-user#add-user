@@ -1,0 +1,42 @@
+fun: add-waitingUserr
+
+path : http://localhost:3002/new-user/add-user 
+
+
+fetch('/new-user/add-user '){
+
+  ....
+  bo
+}
+
+Json Request:
+{
+      "firstName": "ClientSideNewUser",
+      "lastName": "Raja",
+      "email": "client.sidee@gmail.com",
+      "phone": "05021399551",
+      "password": "pass12345",
+      "fundName": "הראל",
+      "chanel": "גמל/פנסיה",
+      "votes": 
+        [
+             {
+          "proxyCode": "12345678",
+          "officerId": "34343434",
+          "voted": 1
+        },
+        {
+          "proxyCode": "12345678",
+          "officerId": "98989898",
+          "voted": -1
+        }],
+        "newArticle":{
+      "officerId":"123",
+      "articleId":"122222222",
+      "articleTitle": "My Article 16666",
+      "articleText": "this is an article______16666 client side_________",
+      "articleUrl": "url"
+    }
+
+
+    }
