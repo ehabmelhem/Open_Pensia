@@ -4,13 +4,12 @@ path : http://localhost:3002/new-user/add-user
 
 
 Json Request:
-
 {
-      "firstName": "Rema",
-      "lastName": "Khateb",
-      "email": "rema.khateb@gmail.com",
-      "phone": "0502134551",
-      "password": "pass123",
+      "firstName": "Demama",
+      "lastName": "Raja",
+      "email": "demama.raja@gmail.com",
+      "phone": "05021399551",
+      "password": "pass12345",
       "fundName": "הראל",
       "chanel": "גמל/פנסיה",
       "votes": 
@@ -27,12 +26,11 @@ Json Request:
         }],
         "newArticle":{
       "officerId":"123",
-      "articleId":"909090",
-      "articleTitle": "My Article",
+      "articleId":"90956090",
+      "articleTitle": "My Article 010",
       "articleText": "this is an article_______________",
       "articleUrl": "url"
     }
 
 
-    }
     }
