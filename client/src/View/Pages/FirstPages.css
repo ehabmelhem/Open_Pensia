@@ -1,0 +1,155 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+.description{
+
+  position: relative;
+  top: 102px;
+  direction: rtl;
+  text-align: center;
+  height: 237px;
+  
+font: normal normal normal 18px/22px Assistant;
+letter-spacing: 0px;
+color: #343434;
+opacity: 0.6;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+#id{
+  display: none;
+}
+.first{
+  position: relative;
+}
+.button{
+  background: #3D4257 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 1px #00000024;
+  opacity: 1;
+  width: 343px;
+  height: 38px;
+  position: relative;
+  top: 117px;
+  left: 15px;
+}
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media only screen and (max-width: 667px ) {
+  body {
+    height: 667px;
+    
+  }
+  .icon{
+position: relative;
+right: 96px;
+left: 117px;
+top: 19px;
+align-items: center;
+max-width: 164px;
+max-height: 164px;
+background: #EAEAEA 0% 0% no-repeat padding-box;
+opacity: 1;
+border-radius: 50%;
+
+  }
+  
+ .nextBut{
+  background: #3D4257 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 1px #00000024;
+  opacity: 1;
+  width: 100px;
+ }
+ 
+.nextpage{
+  position: relative;
+  top: -6px;
+  font: normal normal 600 14px/16px Assistant;
+  letter-spacing: 1.25px;
+ background-color: #3D4257;
+  text-transform: uppercase;
+  color: white;
+  opacity: 1;
+  width: 375px;
+  right: 156px;
+  height: 38px;
+}
+
+.spanbut{
+  position: relative;
+  /* text-align: center; */
+  left: 161px;
+  top: 7px;
+  height: 28px;
+  font: normal normal 600 14px/16px Assistant;
+letter-spacing: 1.25px;
+color: #FFFFFF;
+text-transform: uppercase;
+opacity: 1;
+}
+.yellow{
+  position: relative;
+  top: 236px;
+  background-color: #3D4257;
+  height: 38px;
+}
+.title1{
+  position: relative;
+  right: -55px;
+  top: 76px;
+    font-size: x-large;
+    text-align: center;
+    font-weight: bold;
+    
+letter-spacing: 0px;
+color: #324483;
+text-transform: uppercase;
+opacity: 1;
+
+}
+.signin{
+  position: relative;
+  top: 124px;
+    left: 147px;
+  font-size: 10px;
+
+  text-align: center;
+text-decoration: underline;
+font: normal normal 600 14px/16px Assistant;
+letter-spacing: 1.25px;
+color: #324483;
+text-transform: uppercase;
+opacity: 1;
+}
+
+
+
+}
