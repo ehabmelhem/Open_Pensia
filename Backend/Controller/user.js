@@ -93,22 +93,10 @@ exports.addUser = async (req, res) => {
         message: "user with such user name already exists",
       });
     } else {
-      //   const newUser = new User({ username, password });
-
       await newUser.save().then(() => {
         console.log("user saved");
       });
-      // res.send({ ok: true });
 
-      /*
-       "newArticle":{
-      "officerId":"123",
-      "articleId":"77777",
-      "articleTitle": "My Article",
-      "articleText": "this is an article",
-      "articleUrl": "url"
-    }
-      */
       if (newArticle !== null) {
         await Officer.find({ officerId: newArticle.officerId }).then(
           async (data) => {
@@ -159,15 +147,12 @@ exports.addApprovedUser = async (req, res) => {
     const {
       email
     } = req.body;
-    //middleware
     console.log("in fun addApprovedUser");
 
 
     var datetime = new Date();
 
     //check if user exists
-    
-
     const user = await WaitingUser.findOne({ email: email });
 
     if (user !== null) {
@@ -281,7 +266,6 @@ exports.addApprovedUser = async (req, res) => {
           { officerId: e.officerId } ,
           {$push: {"votes": newProxyVotes} }
         );
-   //    proxyOfVote.votes.push(newProxyVotes);
       }
 
     }
@@ -293,45 +277,12 @@ exports.addApprovedUser = async (req, res) => {
     ////////////////////
 
   });
-
+///////////////////////////////////////////////
 // add new article to officer
     console.log('in if2');
-      if (user.article !== null) {
-        await Officer.find({ officerId: user.article.officerId }).then(
-          async (data) => {
-            if (data.length !== 0) {
-              if (user.article.articleStatus ==='Approved') {
-              const allArticle = data[0].officerArticles;
-              const Articletoupdate = {
-                articleId: uuidv4(),
-                articleTitle: user.article.articleTitle,
-                articleText: user.article.articleText,
-                articleUrl: user.article.articleUrl,
-                articleStatus:user.article.articleStatus
-              };
-              console.log('in if4');
-              allArticle.push(Articletoupdate);
-              console.log('in if5');
-              await Officer.update(
-                { officerId: data[0].officerId },
-                { officerArticles: allArticle }
-              )
-                .then(() => {
-                  console.log("update new article");
-                })
-                .catch((e) => {
-                  console.log("we cant update the Article");
-                  flag = false;
-                  res.send({
-                    Ok: false,
-                    messege: "error to update article",
-                  });
-                });
-            }
-          }
-          }
-        );
-      }
+    addNewArticle(user.article);
+     
+      /////////////////////////////////////////////////////////////////////////////////
       console.log('in if3');
       if (flag) {
         const updateStaus = await WaitingUser.findOneAndUpdate({email:email}, {status:"Transferred"});
@@ -354,4 +305,46 @@ exports.addApprovedUser = async (req, res) => {
   }
 };
 
-
+async function addNewArticle(article){
+  console.log(article);
+try{
+  if (article !== null) {
+    await Officer.find({ officerId: article.officerId }).then(
+      async (data) => {
+        if (data.length !== 0) {
+          if (article.articleStatus ==='Approved') {
+          const allArticle = data[0].officerArticles;
+          const Articletoupdate = {
+            articleId: uuidv4(),
+            articleTitle: article.articleTitle,
+            articleText: article.articleText,
+            articleUrl: article.articleUrl,
+            articleStatus:article.articleStatus
+          };
+          console.log('in if4');
+          allArticle.push(Articletoupdate);
+          console.log('in if5');
+          await Officer.update(
+            { officerId: data[0].officerId },
+            { officerArticles: allArticle }
+          )
+            .then(() => {
+              console.log("update new article");
+            })
+            .catch((e) => {
+              console.log("we cant update the Article");
+              flag = false;
+              res.send({
+                Ok: false,
+                messege: "error to update article",
+              });
+            });
+        }
+      }
+      }
+    );
+  }
+}catch(e){
+  console.log('add article fun bug');
+}
+};
