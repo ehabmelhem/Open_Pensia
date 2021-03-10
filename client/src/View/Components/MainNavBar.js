@@ -2,20 +2,46 @@ import "./MainNavBar.css";
 import { Link, Switch } from "react-router-dom";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import DetailsOfVoting from "../Components/DetailsOfVoting";
-import CandidateMoreInfo from '../Components/CandidateMoreInfo';
+import CandidateMoreInfo from "../Components/CandidateMoreInfo";
+import CandidateInfo from "./CandidateInfo";
+import React, { useState } from "react";
 
 let votingPer = [{ disApprovePer: "20%", ApprovePer: "80%" }];
 
 function MainNavBar({ navTabs }) {
+  const [currentPage, setcurrentPage] = useState(0);
+
+  function setNavActive(page) {
+    if (page === 0) {
+      navTabs.find((x) => x.id === 0).className = "active-nav";
+      navTabs.find((x) => x.id === 1).className = "non-active-nav";
+      navTabs.find((x) => x.id === 2).className = "non-active-nav";
+    }
+
+    if (page === 1) {
+      navTabs.find((x) => x.id === 1).className = "active-nav";
+      navTabs.find((x) => x.id === 0).className = "non-active-nav";
+      navTabs.find((x) => x.id === 2).className = "non-active-nav";
+    }
+
+    if (page === 2) {
+      navTabs.find((x) => x.id === 2).className = "active-nav";
+      navTabs.find((x) => x.id === 1).className = "non-active-nav";
+      navTabs.find((x) => x.id === 0).className = "non-active-nav";
+    }
+  }
+
   return (
     <Router>
       <div>
         <nav className="all-tabs">
           <ul>
-            {navTabs.map(({ className, href, content }, index) => {
+            {navTabs.map(({ id, className, href, content }, index) => {
               return (
                 <li key={index} className={className}>
-                  <Link to={`/${href}`}>{content}</Link>
+                  <Link to={`/${href}`} onClick={setNavActive(id)}>
+                    {content}
+                  </Link>
 
                   {/* <a href={href}> </a> {content} */}
                 </li>
@@ -26,13 +52,14 @@ function MainNavBar({ navTabs }) {
 
         <Switch>
           <Route path="/moreInfo">
-          <CandidateMoreInfo/>
+            <CandidateMoreInfo />
           </Route>
           <Route path="/VotingDetails">
             <DetailsOfVoting voting={votingPer} />
           </Route>
+
           <Route path="/">
-            <div>hi2</div>
+            <CandidateInfo />
           </Route>
         </Switch>
       </div>

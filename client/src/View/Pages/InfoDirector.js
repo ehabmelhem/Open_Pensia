@@ -1,6 +1,6 @@
 import React from "react";
 import MainNavBar from "../Components/MainNavBar";
-import Header from '../Components/VotingHeader';
+import Header from "../Components/VotingHeader";
 import {
   BrowserRouter as Router,
   Route,
@@ -11,17 +11,20 @@ import {
 export default function InfoDirector() {
   let infoDirectorTabs = [
     {
-      className: "non-active-nav",
+      id: 2,
+      className: "active-nav",
       href: "VotingDetails",
       content: "נתוני הצבעה",
     },
     {
+      id: 1,
       className: "active-nav",
       href: "moreInfo",
       content: "עוד מידע",
     },
     {
-      className: "non-active-nav",
+      id: 0,
+      className: "active-nav",
       href: "about",
       content: "סיכום פרטים",
     },
@@ -29,7 +32,7 @@ export default function InfoDirector() {
 
   return (
     <div>
-      <Header directorName="עיסאווי פריג'" company="בנק הפועלים"/>
+      <Header directorName="עיסאווי פריג'" company="בנק הפועלים" />
       <MainNavBar navTabs={infoDirectorTabs} />
     </div>
   );
