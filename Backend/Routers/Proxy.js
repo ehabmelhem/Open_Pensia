@@ -9,7 +9,7 @@ router
   .route("/all-Questions-of-corporate")
   .get(proxyController.getAllQuestions);
 router
-  .route("/get-Question-bu-secur-Id")
+  .route("/get-Question-by-secur-Id")
   .get(proxyController.getQuestionBySecurId);
 
 module.exports = router;

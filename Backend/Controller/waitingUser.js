@@ -56,22 +56,18 @@ exports.addWaitingUser = async (req, res) => {
     //middleware
     console.log("in fun addNewUser");
 
-    
-
     var datetime = new Date();
 
-    const newVotes=[];
-    votes.forEach(e => {
-      let oneVote={
+    const newVotes = [];
+    votes.forEach((e) => {
+      let oneVote = {
         proxyCode: e.proxyCode,
-      officerId: e.officerId,
-      voted: e.voted,
-      voteDate: datetime,
-      }
+        officerId: e.officerId,
+        voted: e.voted,
+        voteDate: datetime,
+      };
       newVotes.push(oneVote);
     });
-
-   
 
     //check if user exists
     const newUser = new WaitingUser({
@@ -85,16 +81,14 @@ exports.addWaitingUser = async (req, res) => {
       chanel: chanel,
       registerDate: datetime,
       votes: newVotes,
-        article:{
-            officerId:newArticle.officerId,
-            articleId: newArticle.articleId,
-            articleTitle: newArticle.articleTitle,
-            articleText: newArticle.articleText,
-            articleUrl: newArticle.articleUrl,
-            articleStatus:"Approved"           //{"Waiting","Approved","declined"}
-          }
-
-      
+      article: {
+        officerId: newArticle.officerId,
+        articleId: newArticle.articleId,
+        articleTitle: newArticle.articleTitle,
+        articleText: newArticle.articleText,
+        articleUrl: newArticle.articleUrl,
+        articleStatus: "Approved", //{"Waiting","Approved","declined"}
+      },
     });
 
     const user = await WaitingUser.findOne({ email: newUser.email });
@@ -106,7 +100,6 @@ exports.addWaitingUser = async (req, res) => {
         message: "user with such user name already exists",
       });
     } else {
-
       await newUser.save().then(() => {
         console.log("user saved");
       });
@@ -121,7 +114,8 @@ exports.addWaitingUser = async (req, res) => {
       "articleUrl": "url"
     }
       */
-      if (flag) { //to be removed
+      if (flag) {
+        //to be removed
         res.send({
           Ok: true,
           doc: newUser,
@@ -129,7 +123,7 @@ exports.addWaitingUser = async (req, res) => {
       }
     }
   } catch (e) {
-      console.log(e);
+    console.log(e);
     console.log("could not run addUser in waiting User");
     res.send({ Ok: false });
   }
