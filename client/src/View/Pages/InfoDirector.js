@@ -31,7 +31,7 @@ export default function InfoDirector() {
   ];
 
   return (
-    <div>
+    <div style={{maxWidth:"600px",margin:"auto"}}>
       <Header directorName="עיסאווי פריג'" company="בנק הפועלים" />
       <MainNavBar navTabs={infoDirectorTabs} />
     </div>
