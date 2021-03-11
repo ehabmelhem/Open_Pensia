@@ -3,11 +3,17 @@ fun: add-waitingUserr
 path : http://localhost:3002/new-user/add-user 
 
 
+fetch('/new-user/add-user '){
+.....
+  ....
+  bo
+}
+
 Json Request:
 {
-      "firstName": "Demama",
+      "firstName": "ClientSideNewUser",
       "lastName": "Raja",
-      "email": "demama.raja@gmail.com",
+      "email": "client.sidee@gmail.com",
       "phone": "05021399551",
       "password": "pass12345",
       "fundName": "הראל",
@@ -26,9 +32,9 @@ Json Request:
         }],
         "newArticle":{
       "officerId":"123",
-      "articleId":"90956090",
-      "articleTitle": "My Article 010",
-      "articleText": "this is an article_______________",
+      "articleId":"122222222",
+      "articleTitle": "My Article 16666",
+      "articleText": "this is an article______16666 client side_________",
       "articleUrl": "url"
     }
 
