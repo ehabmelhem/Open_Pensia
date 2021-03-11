@@ -12,4 +12,8 @@ router
   .route("/get-Question-by-secur-Id")
   .get(proxyController.getQuestionBySecurId);
 
+router.route("/get-all-fund").get(proxyController.getAllFundNames); // {FundName:[]} Set
+router.route("/get-all-chanell").get(proxyController.getChanellNames); // request param= {fundname:String0} {chanell:[]} Set
+router.route("/get-all-Corporates").get(proxyController.getAllCorporate); // return {Coeporate:[]}
+
 module.exports = router;

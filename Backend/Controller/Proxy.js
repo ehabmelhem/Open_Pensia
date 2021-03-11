@@ -62,3 +62,26 @@ exports.getAllQuestions = async (req, res) => {
     console.log("could not run addArticle in Officer");
   }
 };
+
+exports.getAllFundNames = async (req, res) => {
+  try {
+  } catch (e) {
+    console.log("could not run getAllFundNames in Proxy");
+  }
+};
+
+exports.getChanellNames = async (req, res) => {
+  const { fundname } = req.body;
+  try {
+  } catch (e) {
+    console.log("could not run getAllFundNames in Proxy");
+  }
+};
+
+exports.getAllCorporate = async (req, res) => {
+  const { fundname, chanell } = req.body;
+  try {
+  } catch (e) {
+    console.log("could not run getAllFundNames in Proxy");
+  }
+};
