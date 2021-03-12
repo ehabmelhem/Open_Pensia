@@ -8,4 +8,8 @@ fetch(url, settings)
     .then(res => res.json())
     .then((json) => {
         // do something with JSON
+
+
+
+        
     });

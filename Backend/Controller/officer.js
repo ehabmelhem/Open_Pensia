@@ -52,7 +52,7 @@ exports.officerData = async (req, res) => {
     const {officerId} = req.body;
     console.log(officerId)
 
-
+   // http://open-pension-tsofen.herokuapp.com/api/proxies?filter[Officers_ID]=64516271
     let url = "http://open-pension-tsofen.herokuapp.com/api/proxies?filter[Officers_ID]="+officerId;
 
     let settings = { method: "Get" };
@@ -64,25 +64,6 @@ exports.officerData = async (req, res) => {
         // do something with JSON
       });
 
-
-
-    // const {officerId} = req.body;
-    // console.log(officerId)
-
-    // const user = await User.findOne({ email });
-    // console.log('current user:', user)
-
-    // if (user === null) {
-    //   res.send({ ok: false, message: 'couldnt find such a user or user is not approved yet ' })
-    // } else {
-
-    //   if (user.password === password) {
-    //     res.send({ login: true,doc:user })
-    //   } else {
-    //     res.send({ login: false, message: 'Password is incorrect' })
-    //   }
-
-    // }
   } catch (e) {
     console.log('officerData fun bug');
   }
