@@ -88,7 +88,7 @@ exports.getChanellNames = async (req, res) => {
               .then((r) => r.json())
               .then((data) => {
                 for (var key in data.data) {
-                  chaneles.add(data.data[key]["Chanel"]);
+                  chaneles.add(data.data[key]["Chanel"]); //1
                 }
               });
           }
