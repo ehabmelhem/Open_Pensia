@@ -1,5 +1,7 @@
+//import { Link } from "@material-ui/core";
 import React from "react";
 import "./CardListItem.css";
+import { Switch, Route, Link, NavLink } from "react-router-dom";
 
 export default function CompanyBar(props) {
   return (
@@ -17,11 +19,13 @@ export default function CompanyBar(props) {
           </div>
         </div>
         <div className="Column" id="nexticon">
+          <Link to={props.toLink}>
           <img
             className="img1"
             src="https://image.flaticon.com/icons/png/512/130/130884.png"
             alt="nexticon"
           />
+          </Link>
         </div>
       </div>
     </div>
