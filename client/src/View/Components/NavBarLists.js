@@ -1,6 +1,7 @@
 import React from "react";
 import Arrow from "./Arrow";
 import './NavBarLists.css'
+import {Link} from 'react-router-dom';
 export default function NavBarLists(props) {
   return (
    <div id="navBarTable">
@@ -10,9 +11,10 @@ export default function NavBarLists(props) {
         <th id="thText">
           <p>{props.title}</p>
         </th>
-        <th id="thArrow">
+       <Link to="/AfterRegistrationVoting"> <th id="thArrow">
           <Arrow arrowToLink=" " color="#B7BCCC" />
         </th>
+        </Link>
       </tr>
     </table>
    </div>
