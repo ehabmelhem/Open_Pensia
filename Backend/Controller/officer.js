@@ -53,9 +53,8 @@ exports.officerData = async (req, res) => {
     console.log(officerId)
 
    // http://open-pension-tsofen.herokuapp.com/api/proxies?filter[Officers_ID]=64516271
-  //  let url = "http://open-pension-tsofen.herokuapp.com/api/proxies?filter[Officers_ID]="+officerId;
-  //  let url = "http://open-pension-tsofen.herokuapp.com/api/proxies?filter[Officers_ID]="+officerId;
-    let url="http://open-pension-tsofen.herokuapp.com/api/interests"
+    let url = "http://open-pension-tsofen.herokuapp.com/api/proxies?filter[Officers_ID]="+officerId;
+  //  let url="http://open-pension-tsofen.herokuapp.com/api/interests"
 
     let settings = { method: "Get" };
 
