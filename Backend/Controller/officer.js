@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const fetch = require('node-fetch');
 
 const Officer = require("../Schema/Officer");
+//const lib = require("./lib");
 
 /* 
 dis: add a new article
@@ -13,39 +14,56 @@ return: {ok:false}
 */
 exports.addArticle = async (req, res) => {
   try {
-    const { officerId, articleTitle, articleText, articleURL } = req.body;
-    await Officer.find({ officerId: officerId }).then(async (data) => {
-      if (data.length !== 0) {
-        const allArticle = data[0].officerArticles;
-        const Articletoupdate = {
-          articleId: uuidv4(),
-          articleTitle: articleTitle,
-          articleText: articleText,
-          articleUrl: articleURL,
-        };
-        allArticle.push(Articletoupdate);
-        await Officer.update(
-          { officerId: data[0].officerId },
-          { officerArticles: allArticle }
-        )
-          .then(() => {
-            console.log("update new article");
-            res.send({ Ok: true, doc, Articletoupdate });
-          })
-          .catch((e) => {
-            res.send({ Ok: false, messege: e });
-          });
-      }
-    });
+    const { officerId, articleTitle, articleText, articleUrl } = req.body;
+    let articleStatus='Approved'
+    let article={officerId, articleTitle, articleText, articleUrl,articleStatus}
+   // let resArticle=addNewArticle(article);
+   // console.log(article);
+
+    if (article !== null) {
+      await Officer.find({ officerId: article.officerId }).then(
+        async (data) => {
+          if (data.length !== 0) {
+            if (article.articleStatus === 'Approved') {
+              const allArticle = data[0].officerArticles;
+              const Articletoupdate = {
+                articleId: uuidv4(),
+                articleTitle: article.articleTitle,
+                articleText: article.articleText,
+                articleUrl: article.articleUrl,
+                articleStatus: article.articleStatus
+              };
+              allArticle.push(Articletoupdate);
+              await Officer.update(
+                { officerId: data[0].officerId },
+                { officerArticles: allArticle }
+              )
+                .then(() => {
+                  console.log("update new article");
+                  res.send({ Ok: true, doc: Articletoupdate });
+                })
+                .catch((e) => {
+                  console.log("we cant update the Article");
+                  flag = false;
+                  res.send({
+                    Ok: false,
+                    messege: "error to update article",
+                  });
+                });
+            }
+          }
+        }
+      );
+    }
   } catch (e) {
     console.log("could not run addArticle in Officer");
     res.send({ Ok: false, messege: "could not run addArticle in Officer" });
   }
 };
 
-function addNewArticle() {
-
-}
+async function addNewArticle(article) {
+};
+// module.exports = { addNewArticle };
 ////////////////////////////////////////////////////////
 exports.officerData = async (req, res) => {
   try {
@@ -63,11 +81,6 @@ exports.officerData = async (req, res) => {
       .then((json) => {
         res.send({ok: true,doc:json.data })
         // do something with JSON
-
-
-
-
-
       });
 
   } catch (e) {

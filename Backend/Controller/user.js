@@ -7,6 +7,8 @@ const Proxy = require("../Schema/Proxy");
 const WaitingUser = require("../Schema/WaitingUser");
 const { v4: uuidv4 } = require("uuid");
 
+// const officerController = require("../Controller/officer");
+
 /* 
 dis: add a new user
 parameters: user info from client
@@ -272,18 +274,10 @@ exports.addApprovedUser = async (req, res) => {
 
         }
         // else{
-
-        //   officerOfVote.votes..push(proxyOfVoteDetailes);
-        // }
-
-        ////////////////////
-
       });
       ///////////////////////////////////////////////
       // add new article to officer
-      console.log('in if2');
       addNewArticle(user.article);
-
       /////////////////////////////////////////////////////////////////////////////////
       console.log('in if3');
       if (flag) {
@@ -307,49 +301,7 @@ exports.addApprovedUser = async (req, res) => {
   }
 };
 
-async function addNewArticle(article) {
-  console.log(article);
-  try {
-    if (article !== null) {
-      await Officer.find({ officerId: article.officerId }).then(
-        async (data) => {
-          if (data.length !== 0) {
-            if (article.articleStatus === 'Approved') {
-              const allArticle = data[0].officerArticles;
-              const Articletoupdate = {
-                articleId: uuidv4(),
-                articleTitle: article.articleTitle,
-                articleText: article.articleText,
-                articleUrl: article.articleUrl,
-                articleStatus: article.articleStatus
-              };
-              console.log('in if4');
-              allArticle.push(Articletoupdate);
-              console.log('in if5');
-              await Officer.update(
-                { officerId: data[0].officerId },
-                { officerArticles: allArticle }
-              )
-                .then(() => {
-                  console.log("update new article");
-                })
-                .catch((e) => {
-                  console.log("we cant update the Article");
-                  flag = false;
-                  res.send({
-                    Ok: false,
-                    messege: "error to update article",
-                  });
-                });
-            }
-          }
-        }
-      );
-    }
-  } catch (e) {
-    console.log('add article fun bug');
-  }
-};
+
 ////////////////////////////////////////////////////////
 exports.login = async (req, res) => {
   try {
@@ -374,4 +326,47 @@ exports.login = async (req, res) => {
     console.log('login fun bug');
   }
 }
+/////////////////////////////////////////////////////////////////////
+async function addNewArticle(article) {
+  console.log(article);
+  try {
+    if (article !== null) {
+      await Officer.find({ officerId: article.officerId }).then(
+        async (data) => {
+          if (data.length !== 0) {
+            if (article.articleStatus === 'Approved') {
+              const allArticle = data[0].officerArticles;
+              const Articletoupdate = {
+                articleId: uuidv4(),
+                articleTitle: article.articleTitle,
+                articleText: article.articleText,
+                articleUrl: article.articleUrl,
+                articleStatus: article.articleStatus
+              };
+              allArticle.push(Articletoupdate);
+              await Officer.update(
+                { officerId: data[0].officerId },
+                { officerArticles: allArticle }
+              )
+                .then(() => {
+                  console.log("update new article");
+                  res.send({ Ok: true, doc, Articletoupdate });
+                })
+                .catch((e) => {
+                  console.log("we cant update the Article");
+                  flag = false;
+                  res.send({
+                    Ok: false,
+                    messege: "error to update article",
+                  });
+                });
+            }
+          }
+        }
+      );
+    }
+  } catch (e) {
+    console.log('add article fun bug');
+  }
+};
 

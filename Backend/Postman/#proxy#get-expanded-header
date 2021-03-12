@@ -1,0 +1,11 @@
+
+
+path: /proxy/get-expanded-header
+
+Json req:
+{"userId":"String", "Security_ID":"String"}
+
+
+respo:
+// get 5 parm dashboard p.23
+{}
