@@ -2,9 +2,8 @@ const express = require("express");
 const app = express();
 const { v4: uuidv4 } = require("uuid");
 const fetch = require('node-fetch');
-
 const Officer = require("../Schema/Officer");
-//const lib = require("./lib");
+
 
 /* 
 dis: add a new article
@@ -85,5 +84,28 @@ exports.officerData = async (req, res) => {
 
   } catch (e) {
     console.log('officerData fun bug');
+  }
+}
+////////////////////////////////////////////////////////
+exports.officerArticles = async (req, res) => {
+  try {
+    const {officerId} = req.body;
+
+    const officer = await Officer.findOne({officerId});
+
+    if (officer.officerArticles !== null) {
+      res.send({
+        Ok: true,
+        doc: officer.officerArticles,
+      });
+    } else {
+      res.send({
+        Ok: false,
+        messege:'articles not found for this officer'
+      });
+      }
+
+  } catch (e) {
+    console.log('officerArticles fun bug');
   }
 }
