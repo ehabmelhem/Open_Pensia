@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const { v4: uuidv4 } = require("uuid");
+const fetch = require('node-fetch');
 
 const Officer = require("../Schema/Officer");
 
@@ -42,6 +43,47 @@ exports.addArticle = async (req, res) => {
   }
 };
 
-function addNewArticle(){
-  
+function addNewArticle() {
+
+}
+////////////////////////////////////////////////////////
+exports.officerData = async (req, res) => {
+  try {
+    const {officerId} = req.body;
+    console.log(officerId)
+
+
+    let url = "http://open-pension-tsofen.herokuapp.com/api/proxies?filter[Officers_ID]="+officerId;
+
+    let settings = { method: "Get" };
+
+    fetch(url, settings)
+      .then(res => res.json())
+      .then((json) => {
+        res.send({ok: true,doc:json })
+        // do something with JSON
+      });
+
+
+
+    // const {officerId} = req.body;
+    // console.log(officerId)
+
+    // const user = await User.findOne({ email });
+    // console.log('current user:', user)
+
+    // if (user === null) {
+    //   res.send({ ok: false, message: 'couldnt find such a user or user is not approved yet ' })
+    // } else {
+
+    //   if (user.password === password) {
+    //     res.send({ login: true,doc:user })
+    //   } else {
+    //     res.send({ login: false, message: 'Password is incorrect' })
+    //   }
+
+    // }
+  } catch (e) {
+    console.log('officerData fun bug');
+  }
 }

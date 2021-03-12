@@ -167,7 +167,7 @@ exports.addApprovedUser = async (req, res) => {
         fundName: user.fundName,
         chanel: user.chanel,
         registerDate: user.datetime,
-        votes:user.votes
+        votes: user.votes
       });
 
       await newUser.save().then(() => {
@@ -175,123 +175,125 @@ exports.addApprovedUser = async (req, res) => {
       });
 
 
-  // add votes to proxy and officer
- 
-  const savedUser = await User.findOne({ email: email });
-   newUser.votes.forEach(async(e) => {
-    console.log(e);
-    // add to proxy
-    const proxyOfVote = await Proxy.findOne({ Proxy_code: e.proxyCode });
-    console.log(proxyOfVote);
-    const proxyOfVoteDetailes= {userId: savedUser._id,
-      officerId: e.officerId,
-      voted: e.voted}
-    if (proxyOfVote.votes !== null){
-      console.log('proxy of votes :'+proxyOfVote.votes);
-      await Proxy.findOneAndUpdate(
-        { Proxy_code: e.proxyCode } ,
-        {$push: {"votes": proxyOfVoteDetailes} }
-      );
-      proxyOfVote.votes.push(proxyOfVoteDetailes);
-      console.log('proxy votes is not null');
-    }
-    else{
-      const newArray=[proxyOfVoteDetailes];
-      await Proxy.findOneAndUpdate({ Proxy_code: e.proxyCode }, {votes:newArray})
-      console.log(newArray);
-    }
+      // add votes to proxy and officer
 
-    // add to officer
-    let like=0;
-    let absent=0;
-    let dislike=0;
-    console.log('counter 0');
-    if(e.voted ===1){like++;}
-    if(e.voted ===0){absent++;}
-    if(e.voted ===-1){dislike++;}
-    console.log('counter set');
-    const officerOfVote = await Officer.findOne({ officerId: e.officerId });
-    // const officerOfVoteDetailes= {userId: savedUser._id,
-    //   officerId: e.officerId,
-    //   voted: e.voted}
+      const savedUser = await User.findOne({ email: email });
+      newUser.votes.forEach(async (e) => {
+        console.log(e);
+        // add to proxy
+        const proxyOfVote = await Proxy.findOne({ Proxy_code: e.proxyCode });
+        console.log(proxyOfVote);
+        const proxyOfVoteDetailes = {
+          userId: savedUser._id,
+          officerId: e.officerId,
+          voted: e.voted
+        }
+        if (proxyOfVote.votes !== null) {
+          console.log('proxy of votes :' + proxyOfVote.votes);
+          await Proxy.findOneAndUpdate(
+            { Proxy_code: e.proxyCode },
+            { $push: { "votes": proxyOfVoteDetailes } }
+          );
+          proxyOfVote.votes.push(proxyOfVoteDetailes);
+          console.log('proxy votes is not null');
+        }
+        else {
+          const newArray = [proxyOfVoteDetailes];
+          await Proxy.findOneAndUpdate({ Proxy_code: e.proxyCode }, { votes: newArray })
+          console.log(newArray);
+        }
 
-    //if officer votes null
-    if (officerOfVote.votes === null){
-      const newVotes=[
-        {
-          proxyCode: e.proxyCode,
-          allvotes: [
+        // add to officer
+        let like = 0;
+        let absent = 0;
+        let dislike = 0;
+        console.log('counter 0');
+        if (e.voted === 1) { like++; }
+        if (e.voted === 0) { absent++; }
+        if (e.voted === -1) { dislike++; }
+        console.log('counter set');
+        const officerOfVote = await Officer.findOne({ officerId: e.officerId });
+        // const officerOfVoteDetailes= {userId: savedUser._id,
+        //   officerId: e.officerId,
+        //   voted: e.voted}
+
+        //if officer votes null
+        if (officerOfVote.votes === null) {
+          const newVotes = [
             {
               proxyCode: e.proxyCode,
-              Security_ID: proxyOfVote.Security_ID,
-              userId: savedUser._id,
-              voted: e.voted,
+              allvotes: [
+                {
+                  proxyCode: e.proxyCode,
+                  Security_ID: proxyOfVote.Security_ID,
+                  userId: savedUser._id,
+                  voted: e.voted,
+                },
+              ],
+              likesCounter: like,
+              absentCounter: absent,
+              disLikesCounter: dislike,
             },
-          ],
-          likesCounter: like,
-          absentCounter: absent,
-          disLikesCounter: dislike,
-        },
-      ];
-      await Officer.findOneAndUpdate({ Proxy_code: e.proxyCode }, {votes:newVotes})
+          ];
+          await Officer.findOneAndUpdate({ Proxy_code: e.proxyCode }, { votes: newVotes })
 
-    }else{ 
-      // if officer votes has an array
+        } else {
+          // if officer votes has an array
 
-     // const officerOfVote = await Officer.findOne({ officerId: e.officerId });
-     const officerProxy = await Officer.findOne({ proxyCode: e.proxyCode },
-                 { votes: { $elemMatch: { proxyCode: e.proxyCode } } } )
-                 console.log(officerProxy);
-    //  const officerProxy = await officerProxy.votes.findOne({ proxyCode: e.proxyCode });
-      if(officerProxy === null){
-        const newProxyVotes=
-          {
-            proxyCode: e.proxyCode,
-            allvotes: [
-              {
-                proxyCode: e.proxyCode,
-                Security_ID: proxyOfVote.Security_ID,
-                userId: savedUser._id,
-                voted: e.voted,
-              },
-            ],
-            likesCounter: like,
-            absentCounter: absent,
-            disLikesCounter: dislike,
-          };
-       //   await Officer.findOneAndUpdate({ Proxy_code: e.proxyCode }, {votes:newVotes})
-    //   db.inventory.find( { $and: [ { price: { $ne: 1.99 } }, { price: { $exists: true } } ] } )
-   //    { $inc: { no_of_likes: 1 }, "$push": { "users": userInfo } }
-       await Officer.findOneAndUpdate(
-          { officerId: e.officerId } ,
-          {$push: {"votes": newProxyVotes} }
-        );
-      }
+          // const officerOfVote = await Officer.findOne({ officerId: e.officerId });
+          const officerProxy = await Officer.findOne({ proxyCode: e.proxyCode },
+            { votes: { $elemMatch: { proxyCode: e.proxyCode } } })
+          console.log(officerProxy);
+          //  const officerProxy = await officerProxy.votes.findOne({ proxyCode: e.proxyCode });
+          if (officerProxy === null) {
+            const newProxyVotes =
+            {
+              proxyCode: e.proxyCode,
+              allvotes: [
+                {
+                  proxyCode: e.proxyCode,
+                  Security_ID: proxyOfVote.Security_ID,
+                  userId: savedUser._id,
+                  voted: e.voted,
+                },
+              ],
+              likesCounter: like,
+              absentCounter: absent,
+              disLikesCounter: dislike,
+            };
+            //   await Officer.findOneAndUpdate({ Proxy_code: e.proxyCode }, {votes:newVotes})
+            //   db.inventory.find( { $and: [ { price: { $ne: 1.99 } }, { price: { $exists: true } } ] } )
+            //    { $inc: { no_of_likes: 1 }, "$push": { "users": userInfo } }
+            await Officer.findOneAndUpdate(
+              { officerId: e.officerId },
+              { $push: { "votes": newProxyVotes } }
+            );
+          }
 
-    }
-    // else{
+        }
+        // else{
 
-    //   officerOfVote.votes..push(proxyOfVoteDetailes);
-    // }
+        //   officerOfVote.votes..push(proxyOfVoteDetailes);
+        // }
 
-    ////////////////////
+        ////////////////////
 
-  });
-///////////////////////////////////////////////
-// add new article to officer
-    console.log('in if2');
-    addNewArticle(user.article);
-     
+      });
+      ///////////////////////////////////////////////
+      // add new article to officer
+      console.log('in if2');
+      addNewArticle(user.article);
+
       /////////////////////////////////////////////////////////////////////////////////
       console.log('in if3');
       if (flag) {
-        const updateStaus = await WaitingUser.findOneAndUpdate({email:email}, {status:"Transferred"});
+        const updateStaus = await WaitingUser.findOneAndUpdate({ email: email }, { status: "Transferred" });
         res.send({
           Ok: true,
           doc: newUser,
         });
       }
-    }else {
+    } else {
       //    res.send({ ok: false, message: 'user with such user name already exists' })
       console.log("user with such user name already exists");
       res.send({
@@ -305,46 +307,74 @@ exports.addApprovedUser = async (req, res) => {
   }
 };
 
-async function addNewArticle(article){
+async function addNewArticle(article) {
   console.log(article);
-try{
-  if (article !== null) {
-    await Officer.find({ officerId: article.officerId }).then(
-      async (data) => {
-        if (data.length !== 0) {
-          if (article.articleStatus ==='Approved') {
-          const allArticle = data[0].officerArticles;
-          const Articletoupdate = {
-            articleId: uuidv4(),
-            articleTitle: article.articleTitle,
-            articleText: article.articleText,
-            articleUrl: article.articleUrl,
-            articleStatus:article.articleStatus
-          };
-          console.log('in if4');
-          allArticle.push(Articletoupdate);
-          console.log('in if5');
-          await Officer.update(
-            { officerId: data[0].officerId },
-            { officerArticles: allArticle }
-          )
-            .then(() => {
-              console.log("update new article");
-            })
-            .catch((e) => {
-              console.log("we cant update the Article");
-              flag = false;
-              res.send({
-                Ok: false,
-                messege: "error to update article",
-              });
-            });
+  try {
+    if (article !== null) {
+      await Officer.find({ officerId: article.officerId }).then(
+        async (data) => {
+          if (data.length !== 0) {
+            if (article.articleStatus === 'Approved') {
+              const allArticle = data[0].officerArticles;
+              const Articletoupdate = {
+                articleId: uuidv4(),
+                articleTitle: article.articleTitle,
+                articleText: article.articleText,
+                articleUrl: article.articleUrl,
+                articleStatus: article.articleStatus
+              };
+              console.log('in if4');
+              allArticle.push(Articletoupdate);
+              console.log('in if5');
+              await Officer.update(
+                { officerId: data[0].officerId },
+                { officerArticles: allArticle }
+              )
+                .then(() => {
+                  console.log("update new article");
+                })
+                .catch((e) => {
+                  console.log("we cant update the Article");
+                  flag = false;
+                  res.send({
+                    Ok: false,
+                    messege: "error to update article",
+                  });
+                });
+            }
+          }
         }
-      }
-      }
-    );
+      );
+    }
+  } catch (e) {
+    console.log('add article fun bug');
   }
-}catch(e){
-  console.log('add article fun bug');
-}
 };
+////////////////////////////////////////////////////////
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    console.log(email, password)
+
+    // const newUser = new User({username, password});
+    // newUser.save().then(()=>{console.log('user saved')})
+
+    const user = await User.findOne({ email });
+    console.log('current user:', user)
+
+    if (user === null) {
+      res.send({ ok: false, message: 'couldnt find such a user or user is not approved yet ' })
+    } else {
+
+      if (user.password === password) {
+        res.send({ login: true,doc:user })
+      } else {
+        res.send({ login: false, message: 'Password is incorrect' })
+      }
+
+    }
+  } catch (e) {
+    console.log('login fun bug');
+  }
+}
+

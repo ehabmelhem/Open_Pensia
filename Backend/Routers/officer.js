@@ -5,9 +5,9 @@ router
   .route("/add-article")
   .post(officerController.addArticle);
 
-// router
-//   .route("/add-user")
-//   .post(userController.addUser);
+router
+  .route("/get-officer-data")
+  .get(officerController.officerData);
 
 
 
