@@ -95,13 +95,23 @@ exports.getAllCorporate = async (req, res) => {
           await fetch(encodedd, settings)
             .then((r) => r.json())
             .then((data) => {
-              allResult.push(data);
+              for (var key in data.data) {
+                if (data.data[key]["A AVE Vote"] > 0.05) {
+                  allResult.push(data.data[key]);
+                }
+              }
             });
         }
       } else {
-        allResult.push(json);
+        for (var key in json.data) {
+          console.log(json.data[key]);
+          if (json.data[key]["A AVE Vote"] > 0.05) {
+            allResult.push(json.data[key]);
+          }
+        }
       }
     });
+
   res.send({ OK: true, allResult });
   try {
   } catch (e) {
