@@ -4,7 +4,10 @@ const app = express();
 const WaitingUser = require("../Schema/WaitingUser");
 const Officer = require("../Schema/Officer");
 const { v4: uuidv4 } = require("uuid");
+const bcrypt = require('bcrypt');
 
+
+// var salt =10 //any random value
 /* 
 dis: add a new user
 parameters: user info from client
@@ -58,6 +61,13 @@ exports.addWaitingUser = async (req, res) => {
 
     var datetime = new Date();
 
+    // bcrypt.hash(password, salt, (err, encrypted) => {
+    //   password = encrypted
+    //   next()
+    //   })
+    console.log(password);
+    let hash_password =await  hashPassword(password);
+    console.log(hash_password);
     const newVotes = [];
     votes.forEach((e) => {
       let oneVote = {
@@ -75,7 +85,7 @@ exports.addWaitingUser = async (req, res) => {
       lastName: lastName,
       email: email,
       phone: phone,
-      password: password,
+      password: hash_password,
       status: "Waiting", //{Waiting/Approved}
       fundName: fundName,
       chanel: chanel,
@@ -128,3 +138,10 @@ exports.addWaitingUser = async (req, res) => {
     res.send({ Ok: false });
   }
 };
+
+async function hashPassword(password) {
+  const salt = await bcrypt.genSalt(10)
+  const hash = await bcrypt.hash(password, salt)
+  console.log(hash)
+  return hash;
+}
