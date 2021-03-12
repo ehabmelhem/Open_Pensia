@@ -80,8 +80,32 @@ exports.getChanellNames = async (req, res) => {
 
 exports.getAllCorporate = async (req, res) => {
   const { fundname, chanell } = req.body;
+  let url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundname}&filter[Chanel]=${chanell}&page=0`;
+  // let url = `https://open-pension-tsofen.herokuapp.com/api/interests`;
+  const encodedURI = encodeURI(url);
+  const allResult = [];
+  let settings = { method: "Get" };
+  await fetch(encodedURI, settings)
+    .then((res) => res.json())
+    .then(async (json) => {
+      if (json.info.pages > 1) {
+        for (let i = 1; i <= json.info.pages; i++) {
+          url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundname}}&filter[Chanel]=${chanell}&page=${i}`;
+          let encodedd = encodeURI(url);
+          await fetch(encodedd, settings)
+            .then((r) => r.json())
+            .then((data) => {
+              allResult.push(data);
+            });
+        }
+      } else {
+        allResult.push(json);
+      }
+    });
+  res.send({ OK: true, allResult });
   try {
   } catch (e) {
     console.log("could not run getAllFundNames in Proxy");
+    res.send({ OK: false, messege: "error" });
   }
 };
