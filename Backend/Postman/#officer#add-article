@@ -1,0 +1,24 @@
+fun: addArticle
+
+path :  http://localhost:3002/officer/add-article
+
+
+Json Request:
+{
+      "officerId":"64516271",
+      "articleId":"0000000000333333",
+      "articleTitle": "My Article 33333",
+      "articleText": "this is an article____3333___________",
+      "articleUrl": "url"
+    }
+
+Json res:
+{
+    "Ok": true,
+    "doc": {
+        "officerId": "64516271",
+        "articleTitle": "My Article 33333",
+        "articleText": "this is an article____3333___________",
+        "articleStatus": "Approved"
+    }
+}
