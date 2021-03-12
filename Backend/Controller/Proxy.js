@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-
+const fetch = require("node-fetch");
 const Proxy = require("../Schema/Proxy");
 
 /* 
