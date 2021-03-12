@@ -62,11 +62,42 @@ exports.getAllQuestions = async (req, res) => {
     console.log("could not run addArticle in Officer");
   }
 };
-
+// {FundName:[]} Set
 exports.getAllFundNames = async (req, res) => {
   try {
+    //const { fundname } = req.body;
+    let url = `https://open-pension-tsofen.herokuapp.com/api/interests?page=0`;
+    const encodedURI = encodeURI(url);
+    let settings = { method: "Get" };
+    const fundnames = new Set();
+    await fetch(encodedURI, settings)
+      .then((res) => res.json())
+      .then(async (json) => {
+        if (json.info.pages > 1) {
+          for (let i = 1; i <= json.info.pages; i++) {
+            url = `https://open-pension-tsofen.herokuapp.com/api/interests?page=${i}`;
+            let encodedd = encodeURI(url);
+            await fetch(encodedd, settings)
+              .then((r) => r.json())
+              .then((data) => {
+                for (var key in data.data) {
+                  fundnames.add(data.data[key]["fund_name"]);
+                }
+              });
+          }
+        } else {
+          for (var key in json.data) {
+            fundnames.add(json.data[key]["fund_name"]);
+          }
+        }
+      });
+    const allResult = Array.from(fundnames);
+    res.send({ OK: true, fund_name: allResult });
+  
   } catch (e) {
     console.log("could not run getAllFundNames in Proxy");
+    console.log(e)
+    res.send({ OK: false, messege: "error" });
   }
 };
 
@@ -105,7 +136,7 @@ exports.getChanellNames = async (req, res) => {
     res.send({ OK: false, messege: "error" });
   }
 };
-
+// return {Coeporate:[]}
 exports.getAllCorporate = async (req, res) => {
   try {
     const { fundname, chanell } = req.body;
