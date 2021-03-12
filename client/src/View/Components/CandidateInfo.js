@@ -40,7 +40,7 @@ function CandidateInfo(props) {
               <h4 className="title"> {data.title} </h4>
 
               {data.details.map((d, index) => {
-                return <p> {d} </p>;
+                return <p key={index}> {d} </p>;
               })}
             </div>
           );

@@ -11,24 +11,16 @@ let votingPer = [{ disApprovePer: "20%", ApprovePer: "80%" }];
 function MainNavBar({ navTabs }) {
   const [currentPage, setcurrentPage] = useState(0);
 
+  const [navTabs1, setnavTabs1] = useState(navTabs);
+
   function setNavActive(page) {
-    if (page === 0) {
-      navTabs.find((x) => x.id === 0).className = "active-nav";
-      navTabs.find((x) => x.id === 1).className = "non-active-nav";
-      navTabs.find((x) => x.id === 2).className = "non-active-nav";
-    }
-
-    if (page === 1) {
-      navTabs.find((x) => x.id === 1).className = "active-nav";
-      navTabs.find((x) => x.id === 0).className = "non-active-nav";
-      navTabs.find((x) => x.id === 2).className = "non-active-nav";
-    }
-
-    if (page === 2) {
-      navTabs.find((x) => x.id === 2).className = "active-nav";
-      navTabs.find((x) => x.id === 1).className = "non-active-nav";
-      navTabs.find((x) => x.id === 0).className = "non-active-nav";
-    }
+    const closestLi = !!page.target && page.target.closest("li");
+    console.log(closestLi);
+    var tabs = document.querySelectorAll(".all-tabs ul li");
+    tabs.forEach((element) => {
+      element.classList.remove("active-nav");
+    });
+    closestLi.classList.add("active-nav");
   }
 
   return (
@@ -36,14 +28,17 @@ function MainNavBar({ navTabs }) {
       <div>
         <nav className="all-tabs">
           <ul>
-            {navTabs.map(({ id, className, href, content }, index) => {
+            {navTabs1.map(({ id, className, href, content }, index) => {
               return (
                 <li key={index} className={className}>
-                  <Link to={`/${href}`} onClick={setNavActive(id)}>
+                  <Link
+                    to={`/${href}`}
+                    onClick={(id) => {
+                      setNavActive(id);
+                    }}
+                  >
                     {content}
                   </Link>
-
-                  {/* <a href={href}> </a> {content} */}
                 </li>
               );
             })}

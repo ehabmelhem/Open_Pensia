@@ -12,26 +12,26 @@ export default function InfoDirector() {
   let infoDirectorTabs = [
     {
       id: 2,
-      className: "active-nav",
+      className: "non-active-nav",
       href: "VotingDetails",
       content: "נתוני הצבעה",
     },
     {
       id: 1,
-      className: "active-nav",
+      className: "non-active-nav",
       href: "moreInfo",
       content: "עוד מידע",
     },
     {
       id: 0,
-      className: "active-nav",
+      className: "non-active-nav",
       href: "about",
       content: "סיכום פרטים",
     },
   ];
 
   return (
-    <div style={{maxWidth:"600px",margin:"auto"}}>
+    <div style={{ maxWidth: "600px", margin: "auto" }}>
       <Header directorName="עיסאווי פריג'" company="בנק הפועלים" />
       <MainNavBar navTabs={infoDirectorTabs} />
     </div>
