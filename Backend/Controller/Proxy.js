@@ -71,49 +71,76 @@ exports.getAllFundNames = async (req, res) => {
 };
 
 exports.getChanellNames = async (req, res) => {
-  const { fundname } = req.body;
   try {
+    const { fundname } = req.body;
+    let url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundname}&page=0`;
+    const encodedURI = encodeURI(url);
+    let settings = { method: "Get" };
+    const chaneles = new Set();
+    await fetch(encodedURI, settings)
+      .then((res) => res.json())
+      .then(async (json) => {
+        if (json.info.pages > 1) {
+          for (let i = 1; i <= json.info.pages; i++) {
+            url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundname}&page=${i}`;
+            let encodedd = encodeURI(url);
+            await fetch(encodedd, settings)
+              .then((r) => r.json())
+              .then((data) => {
+                for (var key in data.data) {
+                  chaneles.add(data.data[key]["Chanel"]);
+                }
+              });
+          }
+        } else {
+          for (var key in json.data) {
+            chaneles.add(json.data[key]["Chanel"]);
+          }
+        }
+      });
+    const allResult = Array.from(chaneles);
+    res.send({ OK: true, chaneles: allResult });
   } catch (e) {
     console.log("could not run getAllFundNames in Proxy");
+    res.send({ OK: false, messege: "error" });
   }
 };
 
 exports.getAllCorporate = async (req, res) => {
-  const { fundname, chanell } = req.body;
-  let url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundname}&filter[Chanel]=${chanell}&page=0`;
-  // let url = `https://open-pension-tsofen.herokuapp.com/api/interests`;
-  const encodedURI = encodeURI(url);
-  const allResult = [];
-  let settings = { method: "Get" };
-  await fetch(encodedURI, settings)
-    .then((res) => res.json())
-    .then(async (json) => {
-      if (json.info.pages > 1) {
-        for (let i = 1; i <= json.info.pages; i++) {
-          url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundname}}&filter[Chanel]=${chanell}&page=${i}`;
-          let encodedd = encodeURI(url);
-          await fetch(encodedd, settings)
-            .then((r) => r.json())
-            .then((data) => {
-              for (var key in data.data) {
-                if (data.data[key]["A AVE Vote"] > 0.05) {
-                  allResult.push(data.data[key]);
+  try {
+    const { fundname, chanell } = req.body;
+    let url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundname}&filter[Chanel]=${chanell}&page=0`;
+    // let url = `https://open-pension-tsofen.herokuapp.com/api/interests`;
+    const encodedURI = encodeURI(url);
+    const allResult = [];
+    let settings = { method: "Get" };
+    await fetch(encodedURI, settings)
+      .then((res) => res.json())
+      .then(async (json) => {
+        if (json.info.pages > 1) {
+          for (let i = 1; i <= json.info.pages; i++) {
+            url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundname}}&filter[Chanel]=${chanell}&page=${i}`;
+            let encodedd = encodeURI(url);
+            await fetch(encodedd, settings)
+              .then((r) => r.json())
+              .then((data) => {
+                for (var key in data.data) {
+                  if (data.data[key]["A AVE Vote"] > 0.05) {
+                    allResult.push(data.data[key]);
+                  }
                 }
-              }
-            });
-        }
-      } else {
-        for (var key in json.data) {
-          console.log(json.data[key]);
-          if (json.data[key]["A AVE Vote"] > 0.05) {
-            allResult.push(json.data[key]);
+              });
+          }
+        } else {
+          for (var key in json.data) {
+            if (json.data[key]["A AVE Vote"] > 0.05) {
+              allResult.push(json.data[key]);
+            }
           }
         }
-      }
-    });
+      });
 
-  res.send({ OK: true, allResult });
-  try {
+    res.send({ OK: true, allResult });
   } catch (e) {
     console.log("could not run getAllFundNames in Proxy");
     res.send({ OK: false, messege: "error" });
