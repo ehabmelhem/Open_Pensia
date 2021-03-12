@@ -356,9 +356,6 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
     console.log(email, password)
 
-    // const newUser = new User({username, password});
-    // newUser.save().then(()=>{console.log('user saved')})
-
     const user = await User.findOne({ email });
     console.log('current user:', user)
 
