@@ -8,4 +8,4 @@ Json req:
 
 respo:
 // get 5 parm dashboard p.23
-{}
+{company_name: String,AVE:Number,userOpen:Number,userPending:Number,userResults:Number}
