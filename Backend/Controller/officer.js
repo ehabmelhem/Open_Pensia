@@ -3,6 +3,7 @@ const app = express();
 const { v4: uuidv4 } = require("uuid");
 const fetch = require('node-fetch');
 const Officer = require("../Schema/Officer");
+const User = require("../Schema/User");
 
 
 /* 
@@ -109,3 +110,31 @@ exports.officerArticles = async (req, res) => {
     console.log('officerArticles fun bug');
   }
 }
+// question votes belong to officer? // userid same like schema of waiting-user? oe email // 
+exports.bigVote = async (req, res) => {
+  try {
+    const {email, officerid, Proxy_code, voted } = req.body;
+    var datetime = new Date();
+    await User.find({ email: email}).then(   /// use email or id??
+      async (data) => {
+        if (data.length !== 0) {
+          const UserVotes = data[0].votes;
+          const Uservotesupdate = 
+               {
+                 proxyCode: Proxy_code,
+                 officerId: officerid,
+                 voted: voted,
+                 voteDate: datetime,
+               }
+           
+           UserVotes.push(Uservotesupdate);  // push?
+          }})
+  }
+  catch (e) {
+    console.log("could not run ????");
+    res.send({ Ok: false, messege: "could not run ?????? " });
+  }
+};
+
+
+//check if user exists

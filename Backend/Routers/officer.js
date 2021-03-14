@@ -13,6 +13,10 @@ router
   .route("/get-articles")
   .post(officerController.officerArticles);
 
+  router
+  .route("/big-vote")
+  .post(officerController.bigVote);
+
 
 
 
