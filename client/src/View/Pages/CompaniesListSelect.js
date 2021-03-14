@@ -40,8 +40,27 @@ export default function CompaniesListSelect() {
         }
     ];
     return (
-        <div>
-            
+
+        <div className='App1'>
+            <header className='App-header1'>
+                <div>
+                    <a className='login' href='#' target='_blank' > כניסה </a>
+                </div>
+                <div className='question'>
+                    ?על איזו חברה תרצה/י להשפיע
+            </div>
+            </header>
+            {companies.map((list, index) => {
+                return (
+                    <CardListItem key={index}
+                        hideImg=""
+                        logo={list.link}
+                        name={list.title}
+                        par={list.subTitle}
+                    />
+                );
+            })
+            }
         </div>
     )
 }
