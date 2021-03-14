@@ -125,18 +125,19 @@ exports.bigVote = async (req, res) => {
       async (data) => {
         if (data.length !== 0) {
           const UserVotes = data[0].votes;
-          const Uservotesupdate = {
-            proxyCode: Proxy_code,
-            officerId: officerid,
-            voted: voted,
-            voteDate: datetime,
-          };
-
-          UserVotes.push(Uservotesupdate); // push?
-        }
-      }
-    );
-  } catch (e) {
+          
+          const Uservotesupdate = 
+               {
+                 proxyCode: Proxy_code,
+                 officerId: officerid,
+                 voted: voted,
+                 voteDate: datetime,
+               }
+           
+           UserVotes.update(Uservotesupdate);  // push?
+          }})
+  }
+  catch (e) {
     console.log("could not run ????");
     res.send({ Ok: false, messege: "could not run ?????? " });
   }

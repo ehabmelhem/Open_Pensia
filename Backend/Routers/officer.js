@@ -14,7 +14,7 @@ router
   .post(officerController.officerArticles);
 
   router
-  .route("/big-vote")
+  .route("/add-vote")
   .post(officerController.bigVote);
 
 
