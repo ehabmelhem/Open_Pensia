@@ -125,21 +125,51 @@ exports.bigVote = async (req, res) => {
       async (data) => {
         if (data.length !== 0) {
           const UserVotes = data[0].votes;
-          const Uservotesupdate = {
-            proxyCode: Proxy_code,
-            officerId: officerid,
-            voted: voted,
-            voteDate: datetime,
-          };
-
-          UserVotes.push(Uservotesupdate); // push?
-        }
-      }
-    );
-  } catch (e) {
+          
+          const Uservotesupdate = 
+               {
+                 proxyCode: Proxy_code,
+                 officerId: officerid,
+                 voted: voted,
+                 voteDate: datetime,
+               }
+           
+           UserVotes.update(Uservotesupdate);  // push?
+          }})
+  }
+  catch (e) {
     console.log("could not run ????");
     res.send({ Ok: false, messege: "could not run ?????? " });
   }
 };
 
 //check if user exists
+////////////////////////////////////////////////////////
+exports.officerPercentages = async (req, res) => {
+  try {
+     const { officerId,proxyCode } = req.body;
+
+     const officer = await Officer.findOne({ officerId });
+
+     const likes= await Officer.find( { a: 5, b: 5, c: 5 } ).count()
+
+     const officerProxy = await Officer.find(
+      { officerId: officerId },
+      { votes: { $elemMatch: { proxyCode: proxyCode } } }
+    );
+
+    // if (officer.officerArticles !== null) {
+    //   res.send({
+    //     Ok: true,
+    //     doc: officer.officerArticles,
+    //   });
+    // } else {
+    //   res.send({
+    //     Ok: false,
+    //     messege: "articles not found for this officer",
+    //   });
+    // }
+  } catch (e) {
+    console.log("officerPercentages fun bug");
+  }
+};
