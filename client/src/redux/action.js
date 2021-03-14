@@ -7,10 +7,10 @@ import {
     USER_SIGNUP_REQUEST,
     USER_SIGNUP_SUCCESS,
     USER_SIGNUP_FAILURE,
-    //COMPANIES LIST
-    FETCH_COMPANIES_REQUEST,
-    FETCH_COMPANIES_SUCCESS,
-    FETCH_COMPANIES_FAILURE,
+    // //COMPANIES LIST
+    // FETCH_COMPANIES_REQUEST,
+    // FETCH_COMPANIES_SUCCESS,
+    // FETCH_COMPANIES_FAILURE,
     //COMPANY
     FETCH_QUESTIONS_REQUEST,
     FETCH_QUESTIONS_SUCCESS,
@@ -68,25 +68,6 @@ export const userSignupFailure = (error) => ({
     }
 });
 
-//  LIST OF COMPANIES Actions
-
-export const fetchCompaniesRequest = () => ({
-    type: FETCH_COMPANIES_REQUEST
-});
-
-export const fetchCompaniesSuccess = (content) => ({
-    type: FETCH_COMPANIES_SUCCESS,
-    payload: {
-        content
-    }
-});
-
-export const fetchCompaniesFailure = (error) => ({
-    type: FETCH_COMPANIES_FAILURE,
-    payload: {
-        error
-    }
-});
 
 // COMPANY Actions
 
