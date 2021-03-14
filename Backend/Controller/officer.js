@@ -143,3 +143,32 @@ exports.bigVote = async (req, res) => {
 };
 
 //check if user exists
+////////////////////////////////////////////////////////
+exports.officerPercentages = async (req, res) => {
+  try {
+     const { officerId,proxyCode } = req.body;
+
+     const officer = await Officer.findOne({ officerId });
+
+     const likes= await Officer.find( { a: 5, b: 5, c: 5 } ).count()
+
+     const officerProxy = await Officer.find(
+      { officerId: officerId },
+      { votes: { $elemMatch: { proxyCode: proxyCode } } }
+    );
+
+    // if (officer.officerArticles !== null) {
+    //   res.send({
+    //     Ok: true,
+    //     doc: officer.officerArticles,
+    //   });
+    // } else {
+    //   res.send({
+    //     Ok: false,
+    //     messege: "articles not found for this officer",
+    //   });
+    // }
+  } catch (e) {
+    console.log("officerPercentages fun bug");
+  }
+};
