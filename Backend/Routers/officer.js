@@ -15,11 +15,11 @@ router
 
   router
   .route("/add-vote")
-  .post(officerController.bigVote);
+ .post(officerController.bigVote);
 
-  router
-  .route("/officer-percentages")
-  .post(officerController.officerPercentages);
+//  router
+//  .route("/officer-percentages")
+ // .post(officerController.officerPercentages);
 
 
 

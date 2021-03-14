@@ -118,58 +118,25 @@ exports.officerArticles = async (req, res) => {
 // question votes belong to officer? // userid same like schema of waiting-user? oe email //
 exports.bigVote = async (req, res) => {
   try {
-    const { email, officerid, Proxy_code, voted, votes } = req.body; //votes:[{officerId,,voted}]
+    const {votes, email} = req.body; //votes:[{officerId,,voted}]
     var datetime = new Date();
-    await User.find({ _id: ObjectId(email) }).then(
-      /// use email or id??
+    votes.forEach(async currentVote=>
+     await  User.find({ email: email }).then(
       async (data) => {
         if (data.length !== 0) {
-          const UserVotes = data[0].votes;
-          
-          const Uservotesupdate = 
-               {
-                 proxyCode: Proxy_code,
-                 officerId: officerid,
-                 voted: voted,
-                 voteDate: datetime,
-               }
-           
-           UserVotes.update(Uservotesupdate);  // push?
-          }})
+          const UserVoteItem = await User.findOne(
+            { email: email },
+            { votes: { $elemMatch: { proxyCode: currentVote.proxyCode, officerid: currentVote.officerId } } }
+            ).then() }}))
+            console.log(UserVoteItem);
   }
-  catch (e) {
+   catch (e) {
+    console.log(e);
     console.log("could not run ????");
     res.send({ Ok: false, messege: "could not run ?????? " });
   }
 };
 
 //check if user exists
-////////////////////////////////////////////////////////
-exports.officerPercentages = async (req, res) => {
-  try {
-     const { officerId,proxyCode } = req.body;
 
-     const officer = await Officer.findOne({ officerId });
 
-     const likes= await Officer.find( { a: 5, b: 5, c: 5 } ).count()
-
-     const officerProxy = await Officer.find(
-      { officerId: officerId },
-      { votes: { $elemMatch: { proxyCode: proxyCode } } }
-    );
-
-    // if (officer.officerArticles !== null) {
-    //   res.send({
-    //     Ok: true,
-    //     doc: officer.officerArticles,
-    //   });
-    // } else {
-    //   res.send({
-    //     Ok: false,
-    //     messege: "articles not found for this officer",
-    //   });
-    // }
-  } catch (e) {
-    console.log("officerPercentages fun bug");
-  }
-};
