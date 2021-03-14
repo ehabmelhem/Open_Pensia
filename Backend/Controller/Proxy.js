@@ -139,6 +139,7 @@ exports.getChanellNames = async (req, res) => {
 // return {Coeporate:[]}
 exports.getAllCorporate = async (req, res) => {
   try {
+    console.log('getAllCorporate')
     const { fundname, chanell } = req.body;
     let url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundname}&filter[Chanel]=${chanell}&page=0`;
     // let url = `https://open-pension-tsofen.herokuapp.com/api/interests`;

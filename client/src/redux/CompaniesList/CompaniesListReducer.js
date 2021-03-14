@@ -4,7 +4,7 @@ import {
     FETCH_COMPANIES_SUCCESS,
     FETCH_COMPANIES_FAILURE,
 
-} from './actionTypes';
+} from '../actionTypes';
 
 const initialCompaniesListState = {
     companies: [],

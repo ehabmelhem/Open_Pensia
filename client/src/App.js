@@ -22,6 +22,29 @@ import NavBarLists from "./View/Components/NavBarLists";
 import MainButton from "./View/Components/MainButton";
 
 function App() {
+
+  // useEffect(()=>{
+  //   fetch('/proxy/get-all-Corporates', {
+  //     headers: {
+  //         'Accept': 'application/json',
+  //         'Content-Type': 'application/json'
+  //     },
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //         fundname: 'מור',
+  //         chanell: 'גמל/פנסיה'
+  //     })
+
+  // })
+  //     .then(r => r.json())
+  //     .then(res => {
+  //         console.log(res);
+  //         // const companiesList = res.data;
+  //         // dispatch(fetchCompaniesSuccess(companiesList));
+
+  //     })
+  // },[])
+
   return (
     <div>
       <nav className="navBar">

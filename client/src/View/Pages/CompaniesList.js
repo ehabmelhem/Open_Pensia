@@ -4,7 +4,8 @@ import { fetchCompanies } from '../../redux';
 
 function CompaniesList(props) {
     useEffect(()=> {
-        fetchCompanies()
+        console.log('get')
+        fetchCompanies();
     },[]);
     
 

@@ -1,5 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+var cors = require('cors');
+
 
 const officer = require("./Routers/officer");
 const proxy = require("./Routers/Proxy");
@@ -9,6 +11,10 @@ const waitingUser = require("./Routers/waitingUser");
 const officerSchema = require("./Schema/Officer");
 
 const app = express();
+
+app.use(cors())
+
+
 const mongoose = require("mongoose");
 const userModel = require("./Schema/User");
 app.use(bodyParser.json());

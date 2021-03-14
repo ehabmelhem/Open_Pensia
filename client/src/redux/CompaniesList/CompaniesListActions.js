@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import {
     //COMPANIES LIST
     FETCH_COMPANIES_REQUEST,
@@ -28,33 +30,45 @@ export const fetchCompaniesFailure = (error) => ({
 
 
 export const fetchCompanies = () => {
-    return function(dispatch) {
-        dispatch(fetchCompaniesRequest());
-        axios.post('/proxy/get-all-Corporates',{
-            fundname: 'מור',
-            chanell: 'גמל/פנסיה'
-          })
-        .then(res => {
-            console.log(res);
-            const companiesList = res.data;
-            dispatch(fetchCompaniesSuccess(companiesList));
+    console.log('fetchCompanies')
+    return dispatch => {
+        
+        fetch('/proxy/get-all-Corporates', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify({
+                fundname: 'מור',
+                chanell: 'גמל/פנסיה'
+            })
 
         })
-        .catch(error => {
-            dispatch(fetchCompaniesFailure(error.message));
-        }); 
+            .then(r => r.json())
+            .then(res => {
+                console.log(res);
+                const companiesList = res.data;
+                dispatch(fetchCompaniesSuccess(companiesList));
+                // dispatch(fetchCompaniesRequest());
+
+            })
+            .catch(error => {
+                console.error(error)
+                dispatch(fetchCompaniesFailure(error.message));
+            });
 
     }
 
     // "fundname":"מור",
     // "chanell":"גמל/פנסיה"
 
-//     "Security_ID": 1094986,
-// "company_name": "אופל בלאנס",
-// "Sector Nisha": "אשראי חוץ בנקאי",
-// "fund_name": "אלטשולר",
-// "Chanel": "גמל/פנסיה",
-// "A AVE Vote": 0.085
+    //     "Security_ID": 1094986,
+    // "company_name": "אופל בלאנס",
+    // "Sector Nisha": "אשראי חוץ בנקאי",
+    // "fund_name": "אלטשולר",
+    // "Chanel": "גמל/פנסיה",
+    // "A AVE Vote": 0.085
 
 
 }
