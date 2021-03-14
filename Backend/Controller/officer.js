@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
 const { v4: uuidv4 } = require("uuid");
-const fetch = require('node-fetch');
+const fetch = require("node-fetch");
 const Officer = require("../Schema/Officer");
 const User = require("../Schema/User");
-
+const ObjectId = require("mongoose").Types.ObjectId;
 
 /* 
 dis: add a new article
@@ -15,23 +15,29 @@ return: {ok:false}
 exports.addArticle = async (req, res) => {
   try {
     const { officerId, articleTitle, articleText, articleUrl } = req.body;
-    let articleStatus='Approved'
-    let article={officerId, articleTitle, articleText, articleUrl,articleStatus}
-   // let resArticle=addNewArticle(article);
-   // console.log(article);
+    let articleStatus = "Approved";
+    let article = {
+      officerId,
+      articleTitle,
+      articleText,
+      articleUrl,
+      articleStatus,
+    };
+    // let resArticle=addNewArticle(article);
+    // console.log(article);
 
     if (article !== null) {
       await Officer.find({ officerId: article.officerId }).then(
         async (data) => {
           if (data.length !== 0) {
-            if (article.articleStatus === 'Approved') {
+            if (article.articleStatus === "Approved") {
               const allArticle = data[0].officerArticles;
               const Articletoupdate = {
                 articleId: uuidv4(),
                 articleTitle: article.articleTitle,
                 articleText: article.articleText,
                 articleUrl: article.articleUrl,
-                articleStatus: article.articleStatus
+                articleStatus: article.articleStatus,
               };
               allArticle.push(Articletoupdate);
               await Officer.update(
@@ -61,38 +67,38 @@ exports.addArticle = async (req, res) => {
   }
 };
 
-async function addNewArticle(article) {
-};
+async function addNewArticle(article) {}
 // module.exports = { addNewArticle };
 ////////////////////////////////////////////////////////
 exports.officerData = async (req, res) => {
   try {
-    const {officerId} = req.body;
-    console.log(officerId)
+    const { officerId } = req.body;
+    console.log(officerId);
 
-   // http://open-pension-tsofen.herokuapp.com/api/proxies?filter[Officers_ID]=64516271
-    let url = "http://open-pension-tsofen.herokuapp.com/api/proxies?filter[Officers_ID]="+officerId;
-  //  let url="http://open-pension-tsofen.herokuapp.com/api/interests"
+    // http://open-pension-tsofen.herokuapp.com/api/proxies?filter[Officers_ID]=64516271
+    let url =
+      "http://open-pension-tsofen.herokuapp.com/api/proxies?filter[Officers_ID]=" +
+      officerId;
+    //  let url="http://open-pension-tsofen.herokuapp.com/api/interests"
 
     let settings = { method: "Get" };
 
     fetch(url, settings)
-      .then(res => res.json())
+      .then((res) => res.json())
       .then((json) => {
-        res.send({ok: true,doc:json.data })
+        res.send({ ok: true, doc: json.data });
         // do something with JSON
       });
-
   } catch (e) {
-    console.log('officerData fun bug');
+    console.log("officerData fun bug");
   }
-}
+};
 ////////////////////////////////////////////////////////
 exports.officerArticles = async (req, res) => {
   try {
-    const {officerId} = req.body;
+    const { officerId } = req.body;
 
-    const officer = await Officer.findOne({officerId});
+    const officer = await Officer.findOne({ officerId });
 
     if (officer.officerArticles !== null) {
       res.send({
@@ -102,39 +108,38 @@ exports.officerArticles = async (req, res) => {
     } else {
       res.send({
         Ok: false,
-        messege:'articles not found for this officer'
+        messege: "articles not found for this officer",
       });
-      }
-
+    }
   } catch (e) {
-    console.log('officerArticles fun bug');
+    console.log("officerArticles fun bug");
   }
-}
-// question votes belong to officer? // userid same like schema of waiting-user? oe email // 
+};
+// question votes belong to officer? // userid same like schema of waiting-user? oe email //
 exports.bigVote = async (req, res) => {
   try {
-    const {email, officerid, Proxy_code, voted } = req.body;
+    const { email, officerid, Proxy_code, voted, votes } = req.body; //votes:[{officerId,,voted}]
     var datetime = new Date();
-    await User.find({ email: email}).then(   /// use email or id??
+    await User.find({ _id: ObjectId(email) }).then(
+      /// use email or id??
       async (data) => {
         if (data.length !== 0) {
           const UserVotes = data[0].votes;
-          const Uservotesupdate = 
-               {
-                 proxyCode: Proxy_code,
-                 officerId: officerid,
-                 voted: voted,
-                 voteDate: datetime,
-               }
-           
-           UserVotes.push(Uservotesupdate);  // push?
-          }})
-  }
-  catch (e) {
+          const Uservotesupdate = {
+            proxyCode: Proxy_code,
+            officerId: officerid,
+            voted: voted,
+            voteDate: datetime,
+          };
+
+          UserVotes.push(Uservotesupdate); // push?
+        }
+      }
+    );
+  } catch (e) {
     console.log("could not run ????");
     res.send({ Ok: false, messege: "could not run ?????? " });
   }
 };
-
 
 //check if user exists

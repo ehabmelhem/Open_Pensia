@@ -12,6 +12,7 @@ return: {ok:false}
 exports.getDefaultQuestion = async (req, res) => {
   try {
     const { Security_ID } = req.body;
+
     await Proxy.find({ Security_ID: Security_ID }).then((data) => {
       if (data.length === 0) {
         res.send({ Ok: false, messege: "the Security_ID did not exists" });
@@ -36,6 +37,15 @@ exports.getDefaultQuestion = async (req, res) => {
 exports.getQuestionBySecurId = async (req, res) => {
   try {
     const { Security_ID } = req.body;
+    let url = `http://open-pension-tsofen.herokuapp.com/api/dimProxies`;
+    const encodedURI = encodeURI(url);
+    let settings = { method: "Get" };
+    // const
+    fetch(encodedURI, settings)
+      .then((r) => r.json())
+      .then((data) => {
+        console.log(data);
+      });
     await Proxy.find({ Security_ID: Security_ID }).then((data) => {
       if (data.length === 0) {
         res.send({ Ok: false, messege: "the Security_ID did not exists" });
@@ -93,10 +103,9 @@ exports.getAllFundNames = async (req, res) => {
       });
     const allResult = Array.from(fundnames);
     res.send({ OK: true, fund_name: allResult });
-  
   } catch (e) {
     console.log("could not run getAllFundNames in Proxy");
-    console.log(e)
+    console.log(e);
     res.send({ OK: false, messege: "error" });
   }
 };
