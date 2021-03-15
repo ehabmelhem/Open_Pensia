@@ -131,7 +131,7 @@ exports.addVote = async (req, res) => {
 
 
 /////////////////////////////////////////
-    votes.forEach(async currentVote=>
+    votes.forEach(async (currentVote)=>
 
       const userVotesUpdate =
       {
