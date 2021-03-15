@@ -15,11 +15,7 @@ router
 
   router
   .route("/add-vote")
-<<<<<<< Updated upstream
- .post(officerController.addVote);
-=======
  .post(officerController.bigVote2);
->>>>>>> Stashed changes
 
 //  router
 //  .route("/officer-percentages")
