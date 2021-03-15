@@ -131,31 +131,10 @@ exports.addVote = async (req, res) => {
 
 
 /////////////////////////////////////////
-<<<<<<< HEAD
-    votes.forEach(async (currentVote)=>
-
-      const userVotesUpdate =
-      {
-        proxyCode: currentVote.proxyCode,
-        officerId: currentVote.officerId,
-        voted: currentVote.voted,
-        voteDate: datetime
-      }
-
-      await User.findAndUpdate(
-        { email: email, "votes.proxyCode": currentVote.proxyCode,"votes.officerId": currentVote.officerId},
-     //  { "$push": 
-     //  {"votes.$.allvotes": newVoteOfficer}
-     {"votes": userVotesUpdate,upsert:true}
- //  }
-      )
-    )
-=======
     votes.forEach(async currentVote=>
      await  User.find({ email: email }).then(
       async (data) => {
         if (data.length !== 0) {
->>>>>>> serverteam
     
           const UserVoteItem = await User.findOne(
             { email: email },
