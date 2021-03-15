@@ -132,46 +132,6 @@ exports.addVote = async (req, res) => {
 
 /////////////////////////////////////////
     votes.forEach(async currentVote=>
-<<<<<<< Updated upstream
-
-      const userVotesUpdate =
-      {
-        proxyCode: currentVote.proxyCode,
-        officerId: currentVote.officerId,
-        voted: currentVote.voted,
-        voteDate: datetime
-      }
-
-      await User.findAndUpdate(
-        { email: email, "votes.proxyCode": currentVote.proxyCode,"votes.officerId": currentVote.officerId},
-     //  { "$push": 
-     //  {"votes.$.allvotes": newVoteOfficer}
-     {"votes": userVotesUpdate,upsert:true}
- //  }
-      )
-    )
-    
-
-
-
-      /////////////////////////////////////////////
-    //  await  User.find({ email: email }).then(
-    //   async (data) => {
-    //     if (data.length !== 0) {
-    //       const UserVotes = data[0].votes;
-
-          // const Uservotesupdate =
-          // {
-          //   proxyCode: Proxy_code,
-          //   officerId: officerid,
-          //   voted: voted,
-          //   voteDate: datetime,
-          // }
-
-      //     UserVotes.update(Uservotesupdate);  // push?
-      //   }
-      // }))
-=======
      await  User.find({ email: email }).then(
       async (data) => {
         if (data.length !== 0) {
@@ -199,7 +159,6 @@ exports.addVote = async (req, res) => {
             }
             ) }}))
             
->>>>>>> Stashed changes
   }
    catch (e) {
     console.log(e);
@@ -208,13 +167,10 @@ exports.addVote = async (req, res) => {
 };
 
 //check if user exists
-<<<<<<< Updated upstream
-=======
 
  // push?
     
 
->>>>>>> Stashed changes
 ////////////////////////////////////////////////////////
 exports.officerPercentages = async (req, res) => {
   try {
@@ -271,8 +227,6 @@ exports.officerPercentages = async (req, res) => {
     console.log("officerPercentages fun bug");
   }
 };
-<<<<<<< Updated upstream
-=======
 
 
 
@@ -402,4 +356,3 @@ exports.bigVote2 = async (req, res) =>
 //  }
 //  }
       
->>>>>>> Stashed changes
