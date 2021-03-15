@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {useDispatch} from 'react-redux';
 
 import {
     //COMPANIES LIST
@@ -30,10 +31,12 @@ export const fetchCompaniesFailure = (error) => ({
 
 
 export const fetchCompanies = () => {
+    
+
     console.log('fetchCompanies')
     return dispatch => {
-        
-        fetch('/proxy/get-all-Corporates', {
+        console.log('before fetch')
+        return fetch('/proxy/get-all-Corporates', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -48,27 +51,16 @@ export const fetchCompanies = () => {
             .then(r => r.json())
             .then(res => {
                 console.log(res);
-                const companiesList = res.data;
+                const companiesList = res.allResults;
+                console.log(companiesList)
                 dispatch(fetchCompaniesSuccess(companiesList));
                 // dispatch(fetchCompaniesRequest());
 
             })
             .catch(error => {
                 console.error(error)
-                dispatch(fetchCompaniesFailure(error.message));
+                // dispatch(fetchCompaniesFailure(error.message));
             });
 
     }
-
-    // "fundname":"מור",
-    // "chanell":"גמל/פנסיה"
-
-    //     "Security_ID": 1094986,
-    // "company_name": "אופל בלאנס",
-    // "Sector Nisha": "אשראי חוץ בנקאי",
-    // "fund_name": "אלטשולר",
-    // "Chanel": "גמל/פנסיה",
-    // "A AVE Vote": 0.085
-
-
 }
