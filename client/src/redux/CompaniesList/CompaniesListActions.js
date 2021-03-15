@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import {
     //COMPANIES LIST
@@ -30,37 +30,24 @@ export const fetchCompaniesFailure = (error) => ({
 });
 
 
-export const fetchCompanies = () => {
-    
+export const getCompanies = () => {
 
-    console.log('fetchCompanies')
+    console.log('before fetch')
+    return axios.post('/proxy/get-all-Corporates', {
+        "fundname": "מור",
+        "chanell": "גמל/פנסיה"
+    })
+
+
+}
+
+
+export function fetchCompanies() {
     return dispatch => {
-        console.log('before fetch')
-        return fetch('/proxy/get-all-Corporates', {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: "POST",
-            body: JSON.stringify({
-                fundname: 'מור',
-                chanell: 'גמל/פנסיה'
+        return getCompanies()
+            .then(data => {
+                console.log(data.data.allResult);
+                dispatch(fetchCompaniesSuccess(data.data.allResult))
             })
-
-        })
-            .then(r => r.json())
-            .then(res => {
-                console.log(res);
-                const companiesList = res.allResults;
-                console.log(companiesList)
-                dispatch(fetchCompaniesSuccess(companiesList));
-                // dispatch(fetchCompaniesRequest());
-
-            })
-            .catch(error => {
-                console.error(error)
-                // dispatch(fetchCompaniesFailure(error.message));
-            });
-
     }
 }
