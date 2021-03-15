@@ -277,4 +277,6 @@ setInterval(async () => {
       });
   });
   // http://open-pension-tsofen.herokuapp.com/api/proxies?filter[Proxy_Code]=520040700/1
-}, 10000);
+}, 1000000000);
+// 10000
+// i changed it just to stop update while coding

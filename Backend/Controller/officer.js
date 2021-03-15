@@ -155,7 +155,7 @@ exports.officerPercentages = async (req, res) => {
     // const likes= await Officer.find( { a: 5, b: 5, c: 5 } ).count()
 
     const officerProxy = await Officer.findOne(
-      { officerId: officerId },
+     { officerId: officerId },
       { votes: { $elemMatch: { proxyCode: proxyCode } } }
       //    { $and: [  { officerId: officerId },{ votes: { $elemMatch: { proxyCode: proxyCode }}}   ] }
       //    ,{allVotes}

@@ -178,22 +178,22 @@ exports.addApprovedUser = async (req, res) => {
 
       const savedUser = await User.findOne({ email: email });
       newUser.votes.forEach(async (e) => {
-        console.log(e);
+      //  console.log(e);
         // add to proxy
         const proxyOfVote = await Proxy.findOne({ Proxy_code: e.proxyCode });
-        console.log(proxyOfVote);
+       // console.log(proxyOfVote);
         const proxyOfVoteDetailes = {
           userId: savedUser._id,
           officerId: e.officerId,
           voted: e.voted,
         };
         if (proxyOfVote.votes !== null) {
-          console.log("proxy of votes :" + proxyOfVote.votes);
+       //   console.log("proxy of votes :" + proxyOfVote.votes);
           await Proxy.findOneAndUpdate(
             { Proxy_code: e.proxyCode },
             { $push: { votes: proxyOfVoteDetailes } }
           );
-          proxyOfVote.votes.push(proxyOfVoteDetailes);
+       //   proxyOfVote.votes.push(proxyOfVoteDetailes);
           console.log("proxy votes is not null");
         } else {
           const newArray = [proxyOfVoteDetailes];
@@ -205,20 +205,8 @@ exports.addApprovedUser = async (req, res) => {
         }
 
         // add to officer
-        let like = 0;
-        let absent = 0;
-        let dislike = 0;
-        console.log("counter 0");
-        if (e.voted === 1) {
-          like++;
-        }
-        if (e.voted === 0) {
-          absent++;
-        }
-        if (e.voted === -1) {
-          dislike++;
-        }
-        console.log("counter set");
+
+
         const officerOfVote = await Officer.findOne({ officerId: e.officerId });
         // const officerOfVoteDetailes= {userId: savedUser._id,
         //   officerId: e.officerId,
@@ -226,6 +214,7 @@ exports.addApprovedUser = async (req, res) => {
 
         //if officer votes null
         if (officerOfVote.votes === null) {
+          console.log("officerOfVote.votes is null");
           const newVotes = [
             {
               proxyCode: e.proxyCode,
@@ -237,9 +226,6 @@ exports.addApprovedUser = async (req, res) => {
                   voted: e.voted,
                 },
               ],
-              likesCounter: like,
-              absentCounter: absent,
-              disLikesCounter: dislike,
             },
           ];
           await Officer.findOneAndUpdate(
@@ -250,13 +236,16 @@ exports.addApprovedUser = async (req, res) => {
           // if officer votes has an array
 
           // const officerOfVote = await Officer.findOne({ officerId: e.officerId });
+          console.log(e.proxyCode);
           const officerProxy = await Officer.findOne(
-            { proxyCode: e.proxyCode },
-            { votes: { $elemMatch: { proxyCode: e.proxyCode } } }
+            { $and: [  { officerId: e.officerId },{ votes: { $elemMatch: { proxyCode: e.proxyCode }}}   ] }
+        //    { proxyCode: proxyCode },
+         //   { votes: { $elemMatch: { proxyCode: proxyCode } } }
           );
-          console.log(officerProxy);
+        //  console.log(officerProxy);
           //  const officerProxy = await officerProxy.votes.findOne({ proxyCode: e.proxyCode });
           if (officerProxy === null) {
+            console.log('officerProxy is null, need newProxyVotes');
             const newProxyVotes = {
               proxyCode: e.proxyCode,
               allvotes: [
@@ -267,9 +256,6 @@ exports.addApprovedUser = async (req, res) => {
                   voted: e.voted,
                 },
               ],
-              likesCounter: like,
-              absentCounter: absent,
-              disLikesCounter: dislike,
             };
             //   await Officer.findOneAndUpdate({ Proxy_code: e.proxyCode }, {votes:newVotes})
             //   db.inventory.find( { $and: [ { price: { $ne: 1.99 } }, { price: { $exists: true } } ] } )
@@ -279,10 +265,40 @@ exports.addApprovedUser = async (req, res) => {
               { $push: { votes: newProxyVotes } }
             );
           }
+        
+         else{
+             const newVoteOfficer={
+            
+              proxyCode: e.proxyCode,
+              Security_ID : proxyOfVote.Security_ID,
+              userId: savedUser._id,
+              voted: e.voted
+            }
+          //   db.collection.update(
+          //     { "_id": ID, "playlists._id": "58"},
+          //     { "$push": 
+          //         {"playlists.$.musics": 
+          //             {
+          //                 "name": "test name",
+          //                 "duration": "4.00"
+          //             }
+          //         }
+          //     }
+          // )
+           
+
+
+            await Officer.findOneAndUpdate(
+              { officerId: e.officerId, "votes.proxyCode": e.proxyCode},
+             { "$push": 
+             {"votes.$.allvotes": newVoteOfficer
+             }
+         }
+            );
+         }
         }
-        // else{
       });
-      ///////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////
       // add new article to officer
       addNewArticle(user.article);
       /////////////////////////////////////////////////////////////////////////////////

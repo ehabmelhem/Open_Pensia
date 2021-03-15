@@ -26,9 +26,9 @@ const officerModel = mongoose.model("officerCollection", {
           voted: Number,
         },
       ],
-      likesCounter: Number,
-      absentCounter: Number,
-      disLikesCounter: Number,
+    //  likesCounter: Number,
+    //  absentCounter: Number,
+    //  disLikesCounter: Number,
     },
   ],
 });
