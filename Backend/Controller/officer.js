@@ -67,7 +67,7 @@ exports.addArticle = async (req, res) => {
   }
 };
 
-async function addNewArticle(article) {}
+async function addNewArticle(article) { }
 // module.exports = { addNewArticle };
 ////////////////////////////////////////////////////////
 exports.officerData = async (req, res) => {
@@ -125,17 +125,18 @@ exports.bigVote = async (req, res) => {
       async (data) => {
         if (data.length !== 0) {
           const UserVotes = data[0].votes;
-          
-          const Uservotesupdate = 
-               {
-                 proxyCode: Proxy_code,
-                 officerId: officerid,
-                 voted: voted,
-                 voteDate: datetime,
-               }
-           
-           UserVotes.update(Uservotesupdate);  // push?
-          }})
+
+          const Uservotesupdate =
+          {
+            proxyCode: Proxy_code,
+            officerId: officerid,
+            voted: voted,
+            voteDate: datetime,
+          }
+
+          UserVotes.update(Uservotesupdate);  // push?
+        }
+      })
   }
   catch (e) {
     console.log("could not run ????");
@@ -147,17 +148,44 @@ exports.bigVote = async (req, res) => {
 ////////////////////////////////////////////////////////
 exports.officerPercentages = async (req, res) => {
   try {
-     const { officerId,proxyCode } = req.body;
+    const { officerId, proxyCode } = req.body;
+    let likes = 0, dislikes = 0;
+    // const officer = await Officer.findOne({ officerId });
 
-     const officer = await Officer.findOne({ officerId });
+    // const likes= await Officer.find( { a: 5, b: 5, c: 5 } ).count()
 
-     const likes= await Officer.find( { a: 5, b: 5, c: 5 } ).count()
-
-     const officerProxy = await Officer.find(
+    const officerProxy = await Officer.findOne(
       { officerId: officerId },
       { votes: { $elemMatch: { proxyCode: proxyCode } } }
+      //    { $and: [  { officerId: officerId },{ votes: { $elemMatch: { proxyCode: proxyCode }}}   ] }
+      //    ,{allVotes}
     );
+    //  console.log(officerProxy.allVotes)
+    // console.log(votes)
 
+    //  const officerProxy2 = await officerProxy.find(
+    //   { $and: [  { proxyCode: proxyCode },{ votes: { $elemMatch: { proxyCode: proxyCode }}}   ] } 
+    //   ,{allVotes} 
+    // );
+
+    //  console.log(officerProxy2)
+
+    const currentVotes = officerProxy.votes[0].allvotes;
+    currentVotes.forEach(async (arrayVote) => {
+      if (arrayVote.voted === 1) likes++;
+      if (arrayVote.voted === -1) dislikes++;
+    })
+    const likePercent = (likes / (likes + dislikes)) * 100;
+    const dislikePercent = (dislikes / (likes + dislikes)) * 100;
+    console.log(currentVotes)
+    console.log(likePercent)
+    console.log(dislikePercent)
+    console.log(likes)
+    console.log(dislikes)
+    res.send({
+      Ok: true,
+      doc: { likePercent: likePercent, dislikePercent: dislikePercent, allvotes: officerProxy.votes[0].allvotes }
+    });
     // if (officer.officerArticles !== null) {
     //   res.send({
     //     Ok: true,
