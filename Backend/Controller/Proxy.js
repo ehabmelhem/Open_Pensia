@@ -219,7 +219,7 @@ setInterval(async () => {
       });
     }
   });
-  console.log("---------");
+ // console.log("---------");
   await Proxy.find({}).then((data) => {
     allResult = [...data];
   });
@@ -227,9 +227,9 @@ setInterval(async () => {
   await officerModel.find({}).then((data) => {
     allOfficers = [...data];
   });
-  console.log(allOfficers[0].officerId);
+ // console.log(allOfficers[0].officerId);
   allResult.map(async (elm) => {
-    console.log(elm.Proxy_code);
+  //  console.log(elm.Proxy_code);
     let url = `http://open-pension-tsofen.herokuapp.com/api/proxies?filter[Proxy_Code]=${elm.Proxy_code}`;
     let settings = { method: "Get" };
     await fetch(url, settings)
@@ -262,7 +262,7 @@ setInterval(async () => {
             { Proxy_code: elm.Proxy_code },
             { officers: newOfficers }
           ).then(() => {
-            console.log("update proxy");
+          //  console.log("update proxy");
           });
 
           localOfficers.map((officer) => {

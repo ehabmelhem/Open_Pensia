@@ -118,12 +118,19 @@ exports.officerArticles = async (req, res) => {
 // question votes belong to officer? // userid same like schema of waiting-user? oe email //
 exports.bigVote = async (req, res) => {
   try {
-    const { email, officerid, Proxy_code, voted, votes } = req.body; //votes:[{officerId,,voted}]
+    const {votes, email} = req.body; //votes:[{officerId,,voted}]
     var datetime = new Date();
-    await User.find({ _id: ObjectId(email) }).then(
-      /// use email or id??
+    votes.forEach(async currentVote=>
+     await  User.find({ email: email }).then(
       async (data) => {
         if (data.length !== 0) {
+<<<<<<< HEAD
+          const UserVoteItem = await User.findOne(
+            { email: email },
+            { votes: { $elemMatch: { proxyCode: currentVote.proxyCode, officerid: currentVote.officerId } } }
+            ).then() }}))
+            console.log(UserVoteItem);
+=======
           const UserVotes = data[0].votes;
 
           const Uservotesupdate =
@@ -137,14 +144,20 @@ exports.bigVote = async (req, res) => {
           UserVotes.update(Uservotesupdate);  // push?
         }
       })
+>>>>>>> serverteam
   }
-  catch (e) {
+   catch (e) {
+    console.log(e);
     console.log("could not run ????");
     res.send({ Ok: false, messege: "could not run ?????? " });
   }
 };
 
 //check if user exists
+<<<<<<< HEAD
+
+
+=======
 ////////////////////////////////////////////////////////
 exports.officerPercentages = async (req, res) => {
   try {
@@ -201,3 +214,4 @@ exports.officerPercentages = async (req, res) => {
     console.log("officerPercentages fun bug");
   }
 };
+>>>>>>> serverteam
