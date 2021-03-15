@@ -124,13 +124,6 @@ exports.bigVote = async (req, res) => {
      await  User.find({ email: email }).then(
       async (data) => {
         if (data.length !== 0) {
-<<<<<<< HEAD
-          const UserVoteItem = await User.findOne(
-            { email: email },
-            { votes: { $elemMatch: { proxyCode: currentVote.proxyCode, officerid: currentVote.officerId } } }
-            ).then() }}))
-            console.log(UserVoteItem);
-=======
           const UserVotes = data[0].votes;
 
           const Uservotesupdate =
@@ -143,8 +136,7 @@ exports.bigVote = async (req, res) => {
 
           UserVotes.update(Uservotesupdate);  // push?
         }
-      })
->>>>>>> serverteam
+      }))
   }
    catch (e) {
     console.log(e);
@@ -154,10 +146,6 @@ exports.bigVote = async (req, res) => {
 };
 
 //check if user exists
-<<<<<<< HEAD
-
-
-=======
 ////////////////////////////////////////////////////////
 exports.officerPercentages = async (req, res) => {
   try {
@@ -214,4 +202,3 @@ exports.officerPercentages = async (req, res) => {
     console.log("officerPercentages fun bug");
   }
 };
->>>>>>> serverteam
