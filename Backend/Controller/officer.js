@@ -116,32 +116,64 @@ exports.officerArticles = async (req, res) => {
   }
 };
 // question votes belong to officer? // userid same like schema of waiting-user? oe email //
-exports.bigVote = async (req, res) => {
+exports.addVote = async (req, res) => {
   try {
-    const {votes, email} = req.body; //votes:[{officerId,,voted}]
+    const {email,votes} = req.body; //votes:[{officerId,,voted}]
     var datetime = new Date();
+
+//     await User.findAndUpdate(
+//       { email: email, "votes.proxyCode": e.proxyCode},
+//      { "$push": 
+//      {"votes.$.allvotes": newVoteOfficer
+//      }
+//  }
+//     );
+
+
+/////////////////////////////////////////
     votes.forEach(async currentVote=>
-     await  User.find({ email: email }).then(
-      async (data) => {
-        if (data.length !== 0) {
-          const UserVotes = data[0].votes;
 
-          const Uservotesupdate =
-          {
-            proxyCode: Proxy_code,
-            officerId: officerid,
-            voted: voted,
-            voteDate: datetime,
-          }
+      const userVotesUpdate =
+      {
+        proxyCode: currentVote.proxyCode,
+        officerId: currentVote.officerId,
+        voted: currentVote.voted,
+        voteDate: datetime
+      }
 
-          UserVotes.update(Uservotesupdate);  // push?
-        }
-      }))
+      await User.findAndUpdate(
+        { email: email, "votes.proxyCode": currentVote.proxyCode,"votes.officerId": currentVote.officerId},
+     //  { "$push": 
+     //  {"votes.$.allvotes": newVoteOfficer}
+     {"votes": userVotesUpdate,upsert:true}
+ //  }
+      )
+    )
+    
+
+
+
+      /////////////////////////////////////////////
+    //  await  User.find({ email: email }).then(
+    //   async (data) => {
+    //     if (data.length !== 0) {
+    //       const UserVotes = data[0].votes;
+
+          // const Uservotesupdate =
+          // {
+          //   proxyCode: Proxy_code,
+          //   officerId: officerid,
+          //   voted: voted,
+          //   voteDate: datetime,
+          // }
+
+      //     UserVotes.update(Uservotesupdate);  // push?
+      //   }
+      // }))
   }
    catch (e) {
     console.log(e);
-    console.log("could not run ????");
-    res.send({ Ok: false, messege: "could not run ?????? " });
+    console.log("addVote in Officer could not run ????");
   }
 };
 
