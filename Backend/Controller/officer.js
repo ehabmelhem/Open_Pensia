@@ -141,7 +141,7 @@ exports.addVote = async (req, res) => {
       // { email: email, "votes": { "$elemMatch": { "proxyCode": currentVote.proxyCode , "officerId": currentVote.officerId } }},{}
       const removeVotes = await User.findOneAndUpdate(
         { email: email, "votes.proxyCode": currentVote.proxyCode, "votes.officerId": currentVote.officerId },
-       { "$set": { "votes.$.eq": [] } },
+       { "$set": { votes: [] } },
         //  {votes: userVotesUpdate},
         // { upsert: true}
       )
@@ -153,7 +153,7 @@ exports.addVote = async (req, res) => {
         //  {votes: userVotesUpdate},
         // { upsert: true}
       )
-     // console.log(removeVotes)
+      console.log(removeVotes)
       console.log(addingVote)
     }
     )
