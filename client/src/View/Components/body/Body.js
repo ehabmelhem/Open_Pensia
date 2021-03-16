@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import ButtonShow from './ButtonShow'
 import ListQuestions from './ListQuestions'
 import './Body.css'
-
+/*
 const questionsList = [
     { status:"Top",name: 'פרשמרקט', par: 'קמעונאות מזון' },
     { status:{"results":true},  name: 'הולמס פלייס', par: 'חדרי כושר' },
@@ -12,7 +12,7 @@ const questionsList = [
     { status:"Open", name: 'הולמס פלייס', par: 'חדרי כושר' },
     { status:"Top", name: 'חילן', par: 'טכנולוגיה' },
     { status:"Open",  name: 'בנק הפועלים', par: 'בנקאות' }
- ]
+ ]*/
 
 export default function Body(props) {
     const [button1,setButton1] = useState(true);
@@ -27,8 +27,8 @@ export default function Body(props) {
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify({"Security_ID":`${props.security_ID}`})
           }).then(r=>r.json()).then(data=>{
-              console.log(data);
-              setAllQuestions(data);
+              console.log(data.data);
+              setAllQuestions(data.data);
             });
     }, [])
 
@@ -67,7 +67,7 @@ export default function Body(props) {
            <div id="button3" onClick={()=>select('button3')}>  <ButtonShow text="תוצאות" selected={button3}/></div>
             </div>
            
-            <ListQuestions questionsList={questionsList} sort={sort}/> 
+            <ListQuestions questionsList={allQuestions} sort={sort}/> 
         </div>
     )
 }

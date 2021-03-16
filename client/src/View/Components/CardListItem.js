@@ -1,9 +1,28 @@
 //import { Link } from "@material-ui/core";
-import React from "react";
+import React, { useState,useEffect } from "react";
 import "./CardListItem.css";
 import { Switch, Route, Link, NavLink } from "react-router-dom";
 
 export default function CompanyBar(props) {
+  const [status,setStatus]=useState("unknown");
+
+useEffect(() => {
+  switch (props.status) {
+    case "Open":
+      setStatus("ממתין להצבעתך") 
+      break;
+      case "Top":
+        setStatus("ממתין להצבעתך")
+        break;
+        case "results":
+          setStatus("ההצבעה נסגרה")
+          break;
+  
+    default:
+      break;
+ }
+},[])
+
   return (
     <div dir="rtl" className="background">
       <div className="companyitem">
@@ -14,7 +33,7 @@ export default function CompanyBar(props) {
           <div id="companyname">
             <ol>
               <p id="companyName">{props.name}</p>
-              <p id="companytype">{props.par}</p>
+              <p id="companytype">{status}</p>
             </ol>
           </div>
         </div>

@@ -5,14 +5,14 @@ import './Body.css'
 export default function ListQuestions(props) {
     return (
         <div id="allList">
-            {props.questionsList.map((item)=>{
+            { props.questionsList.map((item)=>{
                 if(props.sort == "results"){
                     if(item.status.results == true){
-                        return <CardListItem  hideImg="hideImg" name={item.name} par={item.par} toLink="/VoteDirectors" />
+                        return <CardListItem  hideImg="hideImg" status="results" name={item.Topic} par={item.par} toLink="/VoteDirectors" />
                     }
                 }
                 if(item.status == props.sort)
-             return  <CardListItem  hideImg="hideImg" name={item.name} par={item.par} toLink="/VoteDirectors" />
+             return  <CardListItem  hideImg="hideImg" status={item.status} name={item.Topic} par={item.par} toLink="/VoteDirectors" />
             })}
         </div>
     )
