@@ -20,8 +20,6 @@ import Body from "./View/Components/body/Body";
 import Header from './View/Components/Header';
 import NavBarLists from "./View/Components/NavBarLists";
 import MainButton from "./View/Components/MainButton";
-import SignUpRequest from "./View/Pages/SignUpRequest";
-
 
 function App() {
 
@@ -195,7 +193,7 @@ function App() {
         </Route>
 
         <Route path="/SignUpRequest">
-          <SignUpRequest />
+          <VoteAccept />
         </Route>
 
         <Route path="/SignUp">
