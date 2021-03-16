@@ -1,5 +1,6 @@
 import React from "react";
 import "./CardListItem.css";
+import { Link } from "react-router-dom";
 
 function CompanyBar(props) {
   return (
@@ -17,11 +18,14 @@ function CompanyBar(props) {
           </div>
         </div>
         <div className="Column" id="nexticon">
-          <img
-            className="img1"
-            src="https://image.flaticon.com/icons/png/512/130/130884.png"
-            alt="nexticon"
-          />
+          <Link to={props.link}>
+            <img
+              className="img1"
+              src="https://image.flaticon.com/icons/png/512/130/130884.png"
+              alt="nexticon"
+              onClick=""
+            />
+          </Link>
         </div>
       </div>
     </div>

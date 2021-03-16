@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function UploadInformation() {
-  return <div>hi</div>;
+  return <div>uploadinforamtion</div>;
 }
