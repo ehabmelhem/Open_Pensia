@@ -1,9 +1,32 @@
-import React from 'react'
+import React from "react";
+import Header2 from "../Components/CompanyHeader";
+import MainButton from "../Components/MainButton";
+
+let directors_lst = [
+  { name: "a", photo: "a" },
+  { name: "b", photo: "b" },
+  { name: "c", photo: "c" },
+];
 
 export default function VoteDirectors() {
-    return (
+  return (
+    <div>
+      <div style={{ maxWidth: "600px", margin: "auto" }}>
+        <Header2
+          percent="18.3%"
+          question="תבחרו מי יהיו הדירקטורים"
+          company="בנק הפועלים"
+        />
+
         <div>
-            
+          <p>בחר/י שני דירקטורים רגילים</p>
+
+          {directors_lst.map((elm) => {
+            return <div>{elm.name}</div>;
+          })}
         </div>
-    )
+        <MainButton text="שלח/י את ההצבעה שלי" />
+      </div>
+    </div>
+  );
 }
