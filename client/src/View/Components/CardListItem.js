@@ -2,7 +2,7 @@ import React from "react";
 import "./CardListItem.css";
 import { Link } from "react-router-dom";
 
-function CompanyBar(props) {
+function CardListItem(props) {
   return (
     <div dir="rtl" className="background">
       <div className="companyitem">
@@ -31,4 +31,4 @@ function CompanyBar(props) {
     </div>
   );
 }
-export default CompanyBar;
+export default CardListItem;

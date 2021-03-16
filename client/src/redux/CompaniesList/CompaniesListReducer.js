@@ -6,13 +6,13 @@ import {
 
 } from '../actionTypes';
 
-const initialCompaniesListState = {
+const initialState = {
     companies: [],
     loading: false,
     error: ''
 };
 
-const CompaniesListReducer = (state = initialCompaniesListState, action) => {
+const CompaniesListReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_COMPANIES_REQUEST:
             return {
@@ -22,14 +22,14 @@ const CompaniesListReducer = (state = initialCompaniesListState, action) => {
         case FETCH_COMPANIES_SUCCESS:
             return {
                 loading: false,
-                companies: action.payload,
+                companies: action.payload.content,
                 error: ''
             };
         case FETCH_COMPANIES_FAILURE:
             return {
                 loading: false,
                 companies: [],
-                error: action.payload
+                error: action.payload.content
             };
         default:
             return state;
