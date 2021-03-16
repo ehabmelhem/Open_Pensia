@@ -27,7 +27,10 @@ export default function VoteDirectors() {
           {directors_lst.map((elm) => {
             return (
               <div>
-                <DirectorListItem img={elm.photo} name={elm.name} />
+                <DirectorListItem
+                  logo={"https://picsum.photos/200"}
+                  name={elm.name}
+                />
               </div>
             );
           })}

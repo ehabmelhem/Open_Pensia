@@ -175,6 +175,7 @@ function App() {
         </Route>
 
         <Route path="/VoteAccept">
+          <VoteAccept />
           <FirstPages />
         </Route>
 
