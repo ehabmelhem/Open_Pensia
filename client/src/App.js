@@ -20,10 +20,31 @@ import Body from "./View/Components/body/Body";
 import Header from './View/Components/Header';
 import NavBarLists from "./View/Components/NavBarLists";
 import MainButton from "./View/Components/MainButton";
-import SignUpRequest from "./View/Pages/SignUpRequest";
-
 
 function App() {
+
+  // useEffect(()=>{
+  //   fetch('/proxy/get-all-Corporates', {
+  //     headers: {
+  //         'Accept': 'application/json',
+  //         'Content-Type': 'application/json'
+  //     },
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //         fundname: 'מור',
+  //         chanell: 'גמל/פנסיה'
+  //     })
+
+  // })
+  //     .then(r => r.json())
+  //     .then(res => {
+  //         console.log(res);
+  //         // const companiesList = res.data;
+  //         // dispatch(fetchCompaniesSuccess(companiesList));
+
+  //     })
+  // },[])
+
   return (
     <div>
       <nav className="navBar">
@@ -172,7 +193,7 @@ function App() {
         </Route>
 
         <Route path="/SignUpRequest">
-          <SignUpRequest />
+          <VoteAccept />
         </Route>
 
         <Route path="/SignUp">

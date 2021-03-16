@@ -7,6 +7,9 @@ import {
   NavLink,
   Switch,
 } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+// import { addMessage } from '../../redux/action';
+
 
 export default function InfoDirector() {
   let infoDirectorTabs = [
@@ -29,6 +32,17 @@ export default function InfoDirector() {
       content: "סיכום פרטים",
     },
   ];
+  // redux Test
+  // const dispatch = useDispatch();
+  // const message = useSelector(state => state.MessageReducer.message);
+
+  // const MessageReducer = useSelector(state => state.MessageReducer);
+  // console.log(message);
+  // console.log(MessageReducer);
+  // setTimeout(() => dispatch(addMessage("Ehab_Test")), 2000);
+
+  // console.log(message);
+  // console.log(MessageReducer);
 
   return (
     <div style={{ maxWidth: "600px", margin: "auto" }}>

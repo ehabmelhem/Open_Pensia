@@ -1,0 +1,48 @@
+fun: login
+
+path : http://localhost:3002/user/login
+
+description: 'Forget my Password is missed'
+fetch('/user/login'){
+.....
+  ....
+  body
+}
+
+Json Request:
+{
+ "email":"dema.raja@gmail.com",
+ "password":"pass12345"
+ }
+
+
+ Json Response:
+ {
+    "login": true,
+    "doc": {
+        "_id": "6048f7841956314ce09002e3",
+        "firstName": "Dema",
+        "lastName": "Raja",
+        "email": "dema.raja@gmail.com",
+        "phone": "05021399551",
+        "password": "pass12345",
+        "status": "Approved",
+        "fundName": "הראל",
+        "chanel": "גמל/פנסיה",
+        "votes": [
+            {
+                "_id": "60468be30b144219e4bed3d7",
+                "proxyCode": "12345678",
+                "officerId": "34343434",
+                "voted": 1
+            },
+            {
+                "_id": "60468be30b144219e4bed3d8",
+                "proxyCode": "12345678",
+                "officerId": "98989898",
+                "voted": -1
+            }
+        ],
+        "__v": 0
+    }
+}

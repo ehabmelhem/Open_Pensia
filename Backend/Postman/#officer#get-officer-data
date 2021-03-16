@@ -1,0 +1,39 @@
+fun: officerData
+
+path : http://localhost:3002/officer/get-officer-data
+
+description:
+fetch('/officer/get-officer-data'){
+.....
+  ....
+  body
+}
+
+Json Request:
+{"officerId":"64516271"}
+
+
+ Json Response:
+ {
+    "ok": true,
+    "doc": {
+        "data": {
+            "1": {
+                "Proxy_Code": "520040700/1",
+                "Officers_ID": 64516271,
+                "Officers_Name": "שלמה חנאל",
+                "Oficer_Birthday": "1950-01-10T12:00:00.000Z",
+                "Oficer_Personal_interest": "לא. (מעניק לגלובל ליסינג שירותי ניהול כיו\"ר דירקטוריון גלובל ליסינג).",
+                "Oficer_education": "מוסמך במנהל עסקים - אונ' תל אביב, בוגר הנדסה אווירונאוטית - טכניון",
+                "Oficer_VC": "יו\"ר כנספיים (החל מחודש ינואר 2013",
+                "Oficer_Other_jobs": "גלובל כנפיים ליסינג בע\"מ ( יו\"ר דירקטוריון) ; כנפי תחזוקה ( 2005 (בע\"מ ( יו\"ר דירקטוריון) ; QAS ישראל בע\"מ; ש. חנאל בע\"מ.",
+                "Relative": "לא",
+                "Financial expert": "כן"
+            }
+        },
+        "info": {
+            "current": 0,
+            "pages": 0
+        }
+    }
+}
