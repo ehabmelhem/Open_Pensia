@@ -1,9 +1,10 @@
-fun: login
+fun: 
 
-path : http://localhost:3002/user/user-voting-history
+path : http://localhost:3002/proxy/waiting-questions-by-fund
+
+description: p.28 after login
 POST
-description: 
-fetch('/user/user-voting-history'){
+fetch('/proxy/waiting-questions-by-fund'){
 .....
   ....
   body
