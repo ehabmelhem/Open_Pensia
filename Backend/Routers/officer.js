@@ -9,6 +9,14 @@ router
   .route("/get-officer-data")
   .get(officerController.officerData);
 
+  router
+  .route("/get-articles")
+  .post(officerController.officerArticles);
+
+  router
+  .route("/big-vote")
+  .post(officerController.bigVote);
+
 
 
 

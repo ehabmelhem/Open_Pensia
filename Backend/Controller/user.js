@@ -6,6 +6,7 @@ const Officer = require("../Schema/Officer");
 const Proxy = require("../Schema/Proxy");
 const WaitingUser = require("../Schema/WaitingUser");
 const { v4: uuidv4 } = require("uuid");
+const bcrypt = require('bcrypt');
 
 // const officerController = require("../Controller/officer");
 
@@ -315,11 +316,19 @@ exports.login = async (req, res) => {
       res.send({ ok: false, message: 'couldnt find such a user or user is not approved yet ' })
     } else {
 
-      if (user.password === password) {
-        res.send({ login: true,doc:user })
-      } else {
-        res.send({ login: false, message: 'Password is incorrect' })
-      }
+      bcrypt.compare(password, user.password, function (err, result) {
+        if (result == true) {
+          // redirect to location
+
+          // if (user.password === password) {
+          res.send({ login: true, doc: user })
+          // } 
+        }
+        else {
+          res.send({ login: false, message: 'Password is incorrect' })
+        }
+      })
+
 
     }
   } catch (e) {

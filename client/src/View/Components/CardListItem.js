@@ -3,7 +3,7 @@ import React from "react";
 import "./CardListItem.css";
 import { Switch, Route, Link, NavLink } from "react-router-dom";
 
-export default function CompanyBar(props) {
+function CompanyBar(props) {
   return (
     <div dir="rtl" className="background">
       <div className="companyitem">
@@ -31,3 +31,4 @@ export default function CompanyBar(props) {
     </div>
   );
 }
+export default CompanyBar;

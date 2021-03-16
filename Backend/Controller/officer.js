@@ -2,9 +2,9 @@ const express = require("express");
 const app = express();
 const { v4: uuidv4 } = require("uuid");
 const fetch = require('node-fetch');
-
 const Officer = require("../Schema/Officer");
-//const lib = require("./lib");
+const User = require("../Schema/User");
+
 
 /* 
 dis: add a new article
@@ -87,3 +87,54 @@ exports.officerData = async (req, res) => {
     console.log('officerData fun bug');
   }
 }
+////////////////////////////////////////////////////////
+exports.officerArticles = async (req, res) => {
+  try {
+    const {officerId} = req.body;
+
+    const officer = await Officer.findOne({officerId});
+
+    if (officer.officerArticles !== null) {
+      res.send({
+        Ok: true,
+        doc: officer.officerArticles,
+      });
+    } else {
+      res.send({
+        Ok: false,
+        messege:'articles not found for this officer'
+      });
+      }
+
+  } catch (e) {
+    console.log('officerArticles fun bug');
+  }
+}
+// question votes belong to officer? // userid same like schema of waiting-user? oe email // 
+exports.bigVote = async (req, res) => {
+  try {
+    const {email, officerid, Proxy_code, voted } = req.body;
+    var datetime = new Date();
+    await User.find({ email: email}).then(   /// use email or id??
+      async (data) => {
+        if (data.length !== 0) {
+          const UserVotes = data[0].votes;
+          const Uservotesupdate = 
+               {
+                 proxyCode: Proxy_code,
+                 officerId: officerid,
+                 voted: voted,
+                 voteDate: datetime,
+               }
+           
+           UserVotes.push(Uservotesupdate);  // push?
+          }})
+  }
+  catch (e) {
+    console.log("could not run ????");
+    res.send({ Ok: false, messege: "could not run ?????? " });
+  }
+};
+
+
+//check if user exists
