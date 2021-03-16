@@ -68,7 +68,7 @@ function DirectorListItem(props) {
       setdislikestate(true);
     }
 
-    if (likestate == false && dislikestate == true) {
+    if (likestate === false && dislikestate === true) {
       var btn = document.querySelectorAll(".body-dislikeActive");
       // console.log(btn);
       btn[0].classList.remove("body-dislikeActive");

@@ -4,6 +4,7 @@ import MainButton from "../Components/MainButton";
 import DirectorListItem from "../Components/DirectorsListItem";
 import { AiFillDislike } from "react-icons/ai";
 import { AiFillLike } from "react-icons/ai";
+import Arrow from "../Components/Arrow";
 
 let directors_lst = [
   { name: "a", photo: "a" },
@@ -30,6 +31,7 @@ export default function VoteDirectors() {
                 <DirectorListItem
                   logo={"https://picsum.photos/200"}
                   name={elm.name}
+                  link={`InfoDirector/${elm.id}`} //need to add proper id
                 />
               </div>
             );

@@ -1,4 +1,5 @@
 import React from "react";
+import Arrow from "../Components/Arrow";
 import CardListItem from "../Components/CardListItem";
 import "./CompaniesListSelect.css";
 
@@ -56,6 +57,9 @@ export default function CompaniesListSelect() {
           </a>
         </div>
         <div className="question">?על איזו חברה תרצה/י להשפיע</div>
+        <div>
+          <Arrow arrowToLink=" " color="#B7BCCC" />
+        </div>
       </header>
       {companies.map((list, index) => {
         return (
@@ -65,7 +69,7 @@ export default function CompaniesListSelect() {
             logo={list.link}
             name={list.title}
             par={list.subTitle}
-            link={"VoteDirectors"} //need to add proper link
+            link={"VoteDirectors"} //need to add proper link Security_ID
           />
         );
       })}
