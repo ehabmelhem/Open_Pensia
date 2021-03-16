@@ -1,0 +1,16 @@
+fun: getQuestionBySecurId
+
+path :  http://localhost:3002/proxy/get-Question-by-secur-Id
+
+____________________________________________
+Json Request:
+ { Security_ID:String }
+
+ e.x.: {
+    "Security_ID":"520040700"
+}
+___________________________________________
+ Json Response:
+  res.send({ OK: true,doc: data })
+
+  data is all the Proxies 

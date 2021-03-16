@@ -42,7 +42,7 @@ exports.getQuestionBySecurId = async (req, res) => {
       if (data.length === 0) {
         res.send({ Ok: false, messege: "the Security_ID did not exists" });
       } else {
-        res.send({ OK: true, data });
+        res.send({ OK: true, doc:data });
       }
     });
   } catch (e) {

@@ -1,0 +1,19 @@
+fun: login
+
+path : http://localhost:3002/user/user-voting-history
+
+description: 
+fetch('/user/user-voting-history'){
+.....
+  ....
+  body
+}
+____________________________________________________
+Json Request:
+{
+ "email":"dema.raja@gmail.com",
+ "password":"pass12345"
+ }
+
+_______________________________________________
+ Json Response:
