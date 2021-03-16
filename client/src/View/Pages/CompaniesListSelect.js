@@ -65,7 +65,7 @@ export default function CompaniesListSelect() {
             logo={list.link}
             name={list.title}
             par={list.subTitle}
-            link={list.index} //need to add proper link
+            link={"VoteDirectors"} //need to add proper link
           />
         );
       })}
