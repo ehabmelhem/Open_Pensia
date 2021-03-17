@@ -39,8 +39,10 @@ exports.getQuestionBySecurId = async (req, res) => {
   try {
     const { Security_ID } = req.body;
     await Proxy.find({ Security_ID: Security_ID }).then((data) => {
+    
       if (data.length === 0) {
-        res.send({ Ok: false, messege: "the Security_ID did not exists" });
+        console.log(data)
+        res.send({ Ok: false, messege: "the Security_ID not found" });
       } else {
         res.send({ OK: true, doc:data });
       }
