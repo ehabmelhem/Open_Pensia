@@ -20,7 +20,13 @@ import Body from "./View/Components/body/Body";
 import Header from './View/Components/Header';
 import NavBarLists from "./View/Components/NavBarLists";
 import MainButton from "./View/Components/MainButton";
+import GroupEffectCont from "./View/Components/newcom/GroupEffectCont";
+import CompanyNamePrev from "./View/Components/newcom/CompanyNamePrev";
+import NavBarAfterLogIn from "./View/Components/newcom/NavBarAfterLogIn";
+import CompanyVotingStatus from "./View/Components/newcom/CompanyVotingStatus";
 
+//NavBarAfterLogIn
+//CompanyVotingStatus
 function App() {
   return (
     <div>
@@ -129,10 +135,14 @@ function App() {
         <MainButton myClass='main-button' text='הצבעת הרווחת' tolink='InfoDirectorAfterLogin'/>
         </Route>
         <Route path="/TestDashBoardMosaab">
-      <Body />
-        <NavBarLists />
+      <NavBarAfterLogIn/>
+      <CompanyNamePrev/>
+          <CompanyVotingStatus/>
+          <GroupEffectCont/>
+          <MainButton text="אני רוצה להצביע" />
 
         </Route>
+
         <Route path="/FirstPages_1">
           <FirstPages />
         </Route>
@@ -190,11 +200,11 @@ function App() {
         </Route>
 
         <Route path="/VotesHistory">
-          <VotesList title="היסטורית הצבעות" sort={0}/>
+          <VotesList title="היסטורית הצבעות" sort={{"results":true}}/>
         </Route>
 
         <Route path="/VoteBending">
-          <VotesList title="הצבעות ממתינות לתשובה" sort={1}/>
+          <VotesList title="הצבעות ממתינות לתשובה" sort=""/>
         </Route>
 
         <Route path="/OpenVotes">

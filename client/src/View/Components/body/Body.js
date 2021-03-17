@@ -2,17 +2,17 @@ import React,{useState,useEffect} from 'react'
 import ButtonShow from './ButtonShow'
 import ListQuestions from './ListQuestions'
 import './Body.css'
-/*
+
 const questionsList = [
-    { status:"Top",name: 'פרשמרקט', par: 'קמעונאות מזון' },
-    { status:{"results":true},  name: 'הולמס פלייס', par: 'חדרי כושר' },
-    { status:{"results":false},  name: 'חילן', par: 'טכנולוגיה' },
-    { status:"Open", name: 'בנק הפועלים', par: 'בנקאות' },
-    { status:{"results":false}, name: 'פרשמרקט', par: 'קמעונאות מזון' },
-    { status:"Open", name: 'הולמס פלייס', par: 'חדרי כושר' },
-    { status:"Top", name: 'חילן', par: 'טכנולוגיה' },
-    { status:"Open",  name: 'בנק הפועלים', par: 'בנקאות' }
- ]*/
+    { status:"Top",Topic: 'פרשמרקט', par: 'קמעונאות מזון' },
+    { status:{"results":true},  Topic: 'הולמס פלייס', par: 'חדרי כושר' },
+    { status:{"results":false},  Topic: 'חילן', par: 'טכנולוגיה' },
+    { status:"Open", Topic: 'בנק הפועלים', par: 'בנקאות' },
+    { status:{"results":false}, Topic: 'פרשמרקט', par: 'קמעונאות מזון' },
+    { status:"Open", Topic: 'הולמס פלייס', par: 'חדרי כושר' },
+    { status:"Top", Topic: 'חילן', par: 'טכנולוגיה' },
+    { status:"Open",  Topic: 'בנק הפועלים', par: 'בנקאות' }
+ ]
 
 export default function Body(props) {
     const [button1,setButton1] = useState(true);
@@ -67,7 +67,10 @@ export default function Body(props) {
            <div id="button3" onClick={()=>select('button3')}>  <ButtonShow text="תוצאות" selected={button3}/></div>
             </div>
            
-            <ListQuestions questionsList={allQuestions} sort={sort}/> 
+            <ListQuestions questionsList={questionsList} sort={sort}/>  
         </div>
     )
 }
+/*
+ * change the questionList props to allQuestions
+ */

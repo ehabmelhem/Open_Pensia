@@ -1,0 +1,28 @@
+.GroupEffect {
+    margin: 0 32px 0 0;
+}
+
+.percentage {
+    font-size: 40px;
+    font-weight: bold;
+    color: #3D4257;
+    min-width: 100px;
+    max-width: 120px;
+}
+
+.perTitle {
+    font-size: 17px;
+    font-weight: bold;
+    margin: 0;
+    color: #3D4257;
+    min-width: 120px;
+    max-width: 150px;
+}
+
+.desc {
+    color: black;
+    font-size: 12px;
+    opacity: 60%;
+    min-width: 80px;
+    max-width: 100px;
+}
