@@ -12,7 +12,8 @@ export default function SignUpRequest() {
 
             <h2 className='title'>נתוני ההצבעה שלך שמורים במערכת</h2>
             <p className='description'>על מנת נוכל להעביר את הצבעתך לגוף הפנסיה שלך, אנו זקוקים לך כמשתמש רשום</p>
-            <MainButton text="אני רוצה להרשם" tolink={"SignUpRequest"} />
+            <MainButton  text="אני רוצה להרשם" tolink={"SignUpRequest"} />
+            
         </div>
     )
 }
