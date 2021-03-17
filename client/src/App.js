@@ -16,6 +16,12 @@ import VotesList from "./View/Pages/VotesList";
 import VoteAccept from "./View/Pages/VoteAccept";
 import CardListItem from "./View/Components/CardListItem";
 import Header from "./View/Components/Header";
+import NavBarAfterLogIn from "./View/Components/NavBarAfterLogIn";
+import CompanyNamePrev from "./View/Components/CompanyNamePrev";
+import OpenVoting from "./View/Components/OpenVoting";
+import VotingWaitingRes from "./View/Components/VotingWaitingRes";
+import CompanyVotingStatus from "./View/Components/CompanyVotingStatus";
+import GroupEffectCont from "./View/Components/GroupEffectCont";
 
 function App() {
   return (
@@ -120,51 +126,55 @@ function App() {
         </ul>
       </nav>
       <Switch>
-      <Route path="/TestDashBoardIbraheem">
-        <Header company='בנק הפועלים' perception='18.3'/>
+        <Route path="/TestDashBoardIbraheem">
+          <Header company="בנק הפועלים" perception="18.3" />
         </Route>
-        <Route path="/TestDashBoardMosaab">
-      
-          
-        <CardListItem 
-          companyImgSrc="https://is4-ssl.mzstatic.com/image/thumb/Purple123/v4/30/b7/8f/30b78f57-ec42-b14e-5b28-1b52a8d803c8/AppIcon-0-1x_U007emarketing-0-0-GLES2_U002c0-512MB-sRGB-0-0-0-85-220-0-0-0-5.png/320x0w.jpg"
-          companyName="בנק הפועלים"
-          companyType="קמעונאות מזון"
-          type="companyBar"
-          />
-           <CardListItem 
-          companyImgSrc="https://is4-ssl.mzstatic.com/image/thumb/Purple123/v4/30/b7/8f/30b78f57-ec42-b14e-5b28-1b52a8d803c8/AppIcon-0-1x_U007emarketing-0-0-GLES2_U002c0-512MB-sRGB-0-0-0-85-220-0-0-0-5.png/320x0w.jpg"
-          companyName="בנק הפועלים"
-          companyType="קמעונאות מזון"
-          type="companyBar"
-          />
-           <CardListItem 
-          companyImgSrc="https://is4-ssl.mzstatic.com/image/thumb/Purple123/v4/30/b7/8f/30b78f57-ec42-b14e-5b28-1b52a8d803c8/AppIcon-0-1x_U007emarketing-0-0-GLES2_U002c0-512MB-sRGB-0-0-0-85-220-0-0-0-5.png/320x0w.jpg"
-          companyName="בנק הפועלים"
-          companyType="קמעונאות מזון"
-          type="companyBar"
-          />
-          <CardListItem 
-          questionTitle="מי יהיו הדרקטורים בנק הפועלים"
-          questionStatus="ממתין להצבעתך"
-          type="questionBar"
-          />
-           <CardListItem 
-          questionTitle="מי יהיו הדרקטורים בנק הפועלים"
-          questionStatus="ממתין להצבעתך"
-          type="questionBar"
-          />
-           <CardListItem 
-          questionTitle="מי יהיו הדרקטורים בנק הפועלים"
-          questionStatus="ממתין להצבעתך"
-          type="questionBar"
-          />
-           <CardListItem 
-          questionTitle="מי יהיו הדרקטורים בנק הפועלים"
-          questionStatus="ממתין להצבעתך"
-          type="questionBar"
-          />
+        <Route path="/TestDashBoardMalik">
+          <NavBarAfterLogIn></NavBarAfterLogIn>
+          <CompanyNamePrev></CompanyNamePrev>
+          <CompanyVotingStatus></CompanyVotingStatus>
+          <GroupEffectCont></GroupEffectCont>
+        </Route>
 
+        <Route path="/TestDashBoardMosaab">
+          <CardListItem
+            companyImgSrc="https://is4-ssl.mzstatic.com/image/thumb/Purple123/v4/30/b7/8f/30b78f57-ec42-b14e-5b28-1b52a8d803c8/AppIcon-0-1x_U007emarketing-0-0-GLES2_U002c0-512MB-sRGB-0-0-0-85-220-0-0-0-5.png/320x0w.jpg"
+            companyName="בנק הפועלים"
+            companyType="קמעונאות מזון"
+            type="companyBar"
+          />
+          <CardListItem
+            companyImgSrc="https://is4-ssl.mzstatic.com/image/thumb/Purple123/v4/30/b7/8f/30b78f57-ec42-b14e-5b28-1b52a8d803c8/AppIcon-0-1x_U007emarketing-0-0-GLES2_U002c0-512MB-sRGB-0-0-0-85-220-0-0-0-5.png/320x0w.jpg"
+            companyName="בנק הפועלים"
+            companyType="קמעונאות מזון"
+            type="companyBar"
+          />
+          <CardListItem
+            companyImgSrc="https://is4-ssl.mzstatic.com/image/thumb/Purple123/v4/30/b7/8f/30b78f57-ec42-b14e-5b28-1b52a8d803c8/AppIcon-0-1x_U007emarketing-0-0-GLES2_U002c0-512MB-sRGB-0-0-0-85-220-0-0-0-5.png/320x0w.jpg"
+            companyName="בנק הפועלים"
+            companyType="קמעונאות מזון"
+            type="companyBar"
+          />
+          <CardListItem
+            questionTitle="מי יהיו הדרקטורים בנק הפועלים"
+            questionStatus="ממתין להצבעתך"
+            type="questionBar"
+          />
+          <CardListItem
+            questionTitle="מי יהיו הדרקטורים בנק הפועלים"
+            questionStatus="ממתין להצבעתך"
+            type="questionBar"
+          />
+          <CardListItem
+            questionTitle="מי יהיו הדרקטורים בנק הפועלים"
+            questionStatus="ממתין להצבעתך"
+            type="questionBar"
+          />
+          <CardListItem
+            questionTitle="מי יהיו הדרקטורים בנק הפועלים"
+            questionStatus="ממתין להצבעתך"
+            type="questionBar"
+          />
         </Route>
         <Route path="/FirstPages_1">
           <FirstPages />
