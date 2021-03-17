@@ -10,7 +10,6 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 // import { addMessage } from '../../redux/action';
 
-
 export default function InfoDirector() {
   let infoDirectorTabs = [
     {
@@ -46,7 +45,11 @@ export default function InfoDirector() {
 
   return (
     <div style={{ maxWidth: "600px", margin: "auto" }}>
-      <Header directorName="עיסאווי פריג'" company="בנק הפועלים" />
+      <Header
+        directorName="עיסאווי פריג'"
+        company="בנק הפועלים"
+        link={"../VoteDirectors"}
+      />
       <MainNavBar navTabs={infoDirectorTabs} />
     </div>
   );

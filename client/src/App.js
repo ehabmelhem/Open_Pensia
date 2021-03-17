@@ -17,33 +17,13 @@ import VoteAccept from "./View/Pages/VoteAccept";
 import CardListItem from "./View/Components/CardListItem";
 import ListQuestions from "./View/Components/body/ListQuestions";
 import Body from "./View/Components/body/Body";
-import Header from './View/Components/Header';
+import Header from "./View/Components/Header";
 import NavBarLists from "./View/Components/NavBarLists";
 import MainButton from "./View/Components/MainButton";
+import SignUpRequest from "./View/Pages/SignUpRequest";
 
 function App() {
 
-  // useEffect(()=>{
-  //   fetch('/proxy/get-all-Corporates', {
-  //     headers: {
-  //         'Accept': 'application/json',
-  //         'Content-Type': 'application/json'
-  //     },
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //         fundname: 'מור',
-  //         chanell: 'גמל/פנסיה'
-  //     })
-
-  // })
-  //     .then(r => r.json())
-  //     .then(res => {
-  //         console.log(res);
-  //         // const companiesList = res.data;
-  //         // dispatch(fetchCompaniesSuccess(companiesList));
-
-  //     })
-  // },[])
 
   return (
     <div>
@@ -147,14 +127,17 @@ function App() {
         </ul>
       </nav>
       <Switch>
-      <Route path="/TestDashBoardIbraheem">
-        <Header company='בנק הפועלים' perception='18.3'/>
-        <MainButton myClass='main-button' text='הצבעת הרווחת' tolink='InfoDirectorAfterLogin'/>
+        <Route path="/TestDashBoardIbraheem">
+          <Header company="בנק הפועלים" perception="18.3" />
+          <MainButton
+            myClass="main-button"
+            text="הצבעת הרווחת"
+            tolink="InfoDirectorAfterLogin"
+          />
         </Route>
         <Route path="/TestDashBoardMosaab">
-      <Body />
-        <NavBarLists />
-
+          <Body />
+          <NavBarLists />
         </Route>
         <Route path="/FirstPages_1">
           <FirstPages />
@@ -173,6 +156,7 @@ function App() {
         </Route>
 
         <Route path="/VoteAccept">
+          <VoteAccept />
           <FirstPages />
         </Route>
 
@@ -193,7 +177,8 @@ function App() {
         </Route>
 
         <Route path="/SignUpRequest">
-          <VoteAccept />
+          {/* <VoteAccept /> */}
+          <SignUpRequest />
         </Route>
 
         <Route path="/SignUp">
@@ -213,15 +198,15 @@ function App() {
         </Route>
 
         <Route path="/VotesHistory">
-          <VotesList title="היסטורית הצבעות" sort={0}/>
+          <VotesList title="היסטורית הצבעות" sort={0} />
         </Route>
 
         <Route path="/VoteBending">
-          <VotesList title="הצבעות ממתינות לתשובה" sort={1}/>
+          <VotesList title="הצבעות ממתינות לתשובה" sort={1} />
         </Route>
 
         <Route path="/OpenVotes">
-          <VotesList title="הצבעות פתוחות" sort={2}/>
+          <VotesList title="הצבעות פתוחות" sort={2} />
         </Route>
 
         <Route path="/VoteDirectorsAfterLogin">
