@@ -9,7 +9,9 @@ function CompaniesList(props) {
         dispatch(fetchCompanies())
     }, []);
     let companies = useSelector(state => state.CompaniesListReducer.companies)
+    function handleClick() {
 
+    }
     return (
         <div>
             {
@@ -20,8 +22,9 @@ function CompaniesList(props) {
                             logo='https://www.logolynx.com/images/logolynx/56/56f9957253c5718361c93a52c1ab950d.png'
                             name={company.company_name}
                             par={company['Sector Nisha']}
+                            onClick={handleClick}
+                            link='CompanyInfo'
                         />
-                        // <p>{company.company_name}</p>
                     )
                 })
             }

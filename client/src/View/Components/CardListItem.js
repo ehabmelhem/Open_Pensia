@@ -23,7 +23,7 @@ function CardListItem(props) {
               className="img1"
               src="https://image.flaticon.com/icons/png/512/130/130884.png"
               alt="nexticon"
-              onClick=""
+              onClick={props.onClick}
             />
           </Link>
         </div>
