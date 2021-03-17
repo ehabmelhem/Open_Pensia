@@ -112,20 +112,12 @@ exports.officerArticles = async (req, res) => {
   }
 };
 ////////////////////////////////////////////////////////////////////////
+
 exports.addVote = async (req, res) => {
   try {
     const { email, votes } = req.body; //votes:[{officerId,,voted}]
     var datetime = new Date();
-
-    //     await User.findAndUpdate(
-    //       { email: email, "votes.proxyCode": e.proxyCode},
-    //      { "$push": 
-    //      {"votes.$.allvotes": newVoteOfficer
-    //      }
-    //  }
-    //     );
-
-
+    
     votes.forEach(async (currentVote) => {
 
       const userVotesUpdate = {
@@ -134,32 +126,30 @@ exports.addVote = async (req, res) => {
         voted: currentVote.voted,
         voteDate: datetime,
       }
-
-      console.log(userVotesUpdate)
-
-    
-      // { email: email, "votes": { "$elemMatch": { "proxyCode": currentVote.proxyCode , "officerId": currentVote.officerId } }},{}
-      const removeVotes = await User.findOneAndUpdate(
-        { email: email, "votes.proxyCode": currentVote.proxyCode, "votes.officerId": currentVote.officerId },
-       { "$set": { votes: [] } },
-        //  {votes: userVotesUpdate},
-        // { upsert: true}
+     /// run on the recived vote[] find each vote and update  
+    const updateEveryVote = await User.findOneAndUpdate(
+     {'email':email,'votes.proxyCode': currentVote.proxyCode,'votes.officerId': currentVote.officerId }, 
+     {
+       '$set': {
+         'votes.$.proxyCode': currentVote.proxyCode,
+         'votes.$.officerId': currentVote.officerId,
+         'votes.$.voted': currentVote.voted,
+         'votes.$.voteDate': datetime,
+        } }   
       )
-
-      
-      const addingVote = await User.findOneAndUpdate(
-        { email: email},
-        { "$push": { votes: userVotesUpdate } },
-        //  {votes: userVotesUpdate},
-        // { upsert: true}
-      )
-      console.log(removeVotes)
-      console.log(addingVote)
+      /// if recived vote[] doesnt exist add it to the user
+      if(updateEveryVote == null )
+      {
+        const addingVote = await User.findOneAndUpdate(
+           { email: email},
+           { "$push": { votes: userVotesUpdate } },)          
+      }
+      console.log(updateEveryVote)
     }
     )
 
-    res.send({ ok: true });
-
+    console.log(res.send({ ok: true }));
+    
     
   }
   catch (e) {
@@ -199,3 +189,31 @@ exports.officerPercentages = async (req, res) => {
     console.log("officerPercentages fun bug");
   }
 };
+
+
+
+ ////////////////////////  for test   //////////////////////////
+      /**    t e s t      t e s t      t e s t         t e s t 
+      const removeAllVotes = await User.findOneAndUpdate(
+        { email: email, "votes.proxyCode": currentVote.proxyCode,
+         "votes.officerId": currentVote.officerId },
+         { "$set": { votes: [] } },
+        )
+         */
+ 
+     // const addingVote = await User.findOneAndUpdate(
+       // { email: email},
+        //{ "$push": { votes: userVotesUpdate } },)
+       //   {votes: userVotesUpdate},
+      //   { upsert: true}
+     /**
+
+      const userVotesUpdate = {
+        proxyCode: currentVote.proxyCode,
+        officerId: currentVote.officerId,
+        voted: currentVote.voted,
+        voteDate: datetime,
+      }
+      console.log(userVotesUpdate)
+       */
+      //////////////////////////////////////////////////////////////
