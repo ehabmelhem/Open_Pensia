@@ -116,6 +116,7 @@ exports.officerArticles = async (req, res) => {
 exports.addVote = async (req, res) => {
   try {
     const { email, votes } = req.body; //votes:[{officerId,,voted}]
+    const User_Id = await User.findOne({ email: email}); 
     var datetime = new Date();
     
     votes.forEach(async (currentVote) => {
@@ -126,25 +127,109 @@ exports.addVote = async (req, res) => {
         voted: currentVote.voted,
         voteDate: datetime,
       }
+        
+      
      /// run on the recived vote[] find each vote and update  
-    const updateEveryVote = await User.findOneAndUpdate(
+    const updateUserVote = await User.findOneAndUpdate(
      {'email':email,'votes.proxyCode': currentVote.proxyCode,'votes.officerId': currentVote.officerId }, 
-     {
+     {   
        '$set': {
          'votes.$.proxyCode': currentVote.proxyCode,
          'votes.$.officerId': currentVote.officerId,
          'votes.$.voted': currentVote.voted,
          'votes.$.voteDate': datetime,
-        } }   
-      )
+        } }    )
       /// if recived vote[] doesnt exist add it to the user
-      if(updateEveryVote == null )
+      if(updateUserVote == null )
       {
         const addingVote = await User.findOneAndUpdate(
            { email: email},
-           { "$push": { votes: userVotesUpdate } },)          
+           { "$push": { votes: userVotesUpdate } },) 
+           console.log("***addingVote*** "+addingVote);         
       }
-      console.log(updateEveryVote)
+      //-- proxy add-vote
+      /**
+       Proxy_code: String,
+  Security_ID: String,
+  Topic: String,
+  creationDate: String,
+  expiredDate: String,
+  votes: [
+    {
+      userId: String,
+      officerId: String,
+      voted: Number
+    },
+  ],
+      
+       */
+  const proxyVote = {
+    userId: User_Id._id,
+    officerId: currentVote.officerId,
+    voted: currentVote.voted,
+  }
+      
+      const ProxyVoteUpdate = await Proxy.findOneAndUpdate(
+        {'Proxy_code':currentVote.proxyCode,'votes.userId': User_Id._id,'votes.officerId': currentVote.officerId }, 
+        {
+          '$set': {
+            'votes.$.userId': User_Id._id,
+            'votes.$.officerId': currentVote.officerId,
+            'votes.$.voted': currentVote.voted,
+           } }   
+         )
+         /// if recived vote[] doesnt exist add it to the user
+         if(ProxyVoteUpdate == null )
+         {
+           const addingProxyVote = await Proxy.findOneAndUpdate(
+              { 'Proxy_code':currentVote.proxyCode},
+              { "$push": { votes: proxyVote } },)   
+              console.log(addingProxyVote);       
+         }
+         
+ //-- officer add-vote
+      /**
+            /**
+officerId: String,
+  votes: [
+    {
+      proxyCode: String,
+      allvotes: [
+        {
+          proxyCode: String,
+          Security_ID: String,
+          userId: String,
+          voted: Number,
+        },
+      ],
+    },
+  ],
+ */
+  const officerVote = {
+    
+    proxyCode: currentVote.proxyCode,
+    Security_ID: null,
+    userId: User_Id._id,
+    voted: currentVote.voted,
+  }
+  const OfficerVoteUpdate = await Officer.findOneAndUpdate(
+    {'officerId':currentVote.officerId,'votes.proxyCode': currentVote.proxyCode,'votes.allvotes.proxyCode': currentVote.proxyCode }, 
+    {
+      '$set': {
+        'votes.$.allvotes.$.voted': currentVote.voted,
+        'votes.$.officerId': currentVote.officerId,
+        'votes.$.voted': currentVote.voted,
+       } }   
+     )
+     /// if recived vote[] doesnt exist add it to the user
+     if(OfficerVoteUpdate == null )
+     {
+       const addingOfficerVote = await Officer.findOneAndUpdate(
+          {'officerId':currentVote.officerId,'votes.proxyCode': currentVote.proxyCode },
+          { "$push": { allvotes: officerVote } },)   
+          console.log(addingOfficerVote);       
+     }
+
     }
     )
 
