@@ -23,7 +23,7 @@ const initialState = {
     error: ''
 };
 
-const CompanyDataReducer = (state = initialState, action) => {
+const CompanyReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_QUESTIONS_REQUEST:
             return {
@@ -82,4 +82,4 @@ const CompanyDataReducer = (state = initialState, action) => {
     }
 }
 
-export default CompaniesListReducer;
+export default CompanyReducer;

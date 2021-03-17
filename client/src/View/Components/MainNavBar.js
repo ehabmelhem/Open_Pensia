@@ -9,7 +9,6 @@ import React, { useState } from "react";
 let votingPer = [{ disApprovePer: "20%", ApprovePer: "80%" }];
 
 function MainNavBar({ navTabs }) {
-  const [currentPage, setcurrentPage] = useState(0);
 
   const [navTabs1, setnavTabs1] = useState(navTabs);
 

@@ -28,18 +28,14 @@ export const fetchCompaniesFailure = (error) => ({
 });
 
 
-export const getCompanies = () => {
-    return axios.post('/proxy/get-all-Corporates', {
-        "fundname": "מור",
-        "chanell": "גמל/פנסיה"
-    })
-}
-
-
 export function fetchCompanies() {
     return dispatch => {
+        
         dispatch(fetchCompaniesRequest())
-        return getCompanies()
+        return axios.post('/proxy/get-all-Corporates', {
+            "fundname": "מור",
+            "chanell": "גמל/פנסיה"
+        })
             .then(res => {
                 console.log('inside the get companies().then')
                 console.log(res.data.allResult);
