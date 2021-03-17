@@ -25,7 +25,7 @@ export default function CompaniesListSelect() {
                 </div>
                 <div className="question">?על איזו חברה תרצה/י להשפיע</div>
                 <div>
-                    <Arrow arrowToLink=" " color="#B7BCCC" />
+                    <Arrow arrowToLink="QuestionsBeforeRegister" color="#B7BCCC" />
                 </div>
             </header>
             {!!companies && companies.map((company) => {
