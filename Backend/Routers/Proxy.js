@@ -3,7 +3,7 @@ const proxyController = require("../Controller/Proxy");
 
 router
   .route("/get-corporate-default-question-data")
-  .get(proxyController.getDefaultQuestion);
+  .post(proxyController.getDefaultQuestion);
 // /proxy/get-expanded-header POST
 
 router
