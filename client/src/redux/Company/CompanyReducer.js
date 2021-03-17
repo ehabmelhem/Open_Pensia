@@ -11,6 +11,7 @@ import {
 
 
 const initialState = {
+    companyName: '',
     securityID: '',
     questions: [],
     defaultQuestion: {
@@ -33,16 +34,18 @@ const CompanyReducer = (state = initialState, action) => {
         case FETCH_QUESTIONS_SUCCESS:
             return {
                 loading: false,
-                securityID:action.payload.securityID,
+                securityID: action.payload.securityID,
+                companyName: action.payload.companyName,
                 questions: action.payload.questions,
                 defaultQuestion: action.payload.questions[0],
                 error: ''
             };
         case FETCH_QUESTIONS_FAILURE:
             return {
-                questions:[],
-                securityID:'',
-                defaultQuestion:{
+                questions: [],
+                securityID: '',
+                companyName: '',
+                defaultQuestion: {
                     code: '',
                     topic: '',
                     ave: '',
@@ -61,6 +64,7 @@ const CompanyReducer = (state = initialState, action) => {
                 loading: false,
                 error: '',
                 securityID: action.payload.securityID,
+                companyName: action.payload.companyName,
                 questions: [],
                 defaultQuestion: action.payload.defaultQuestionInfo,
             };
@@ -69,6 +73,7 @@ const CompanyReducer = (state = initialState, action) => {
                 loading: false,
                 error: action.payload.error,
                 securityID: '',
+                companyName: '',
                 questions: [],
                 defaultQuestion: {
                     code: '',

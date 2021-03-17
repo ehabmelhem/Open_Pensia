@@ -20,7 +20,7 @@ export const fetchQuestionsRequest = () => ({
 export const fetchQuestionsSuccess = (content) => ({
     type: FETCH_QUESTIONS_SUCCESS,
     payload: {
-        content
+        content // need to be adjusted
     }
 });
 
@@ -39,6 +39,7 @@ export const fetchDefaultQuestionSuccess = (content) => ({
     type: FETCH_DEFAULT_QUESTION_SUCCESS,
     payload: {
         securityID: content.securityID,
+        companyName: content.companyName,
         defaultQuestionInfo: content.defaultQuestionInfo,
     }
 });
@@ -73,7 +74,7 @@ export function fetchCompanyDefaultQuestion(Security_ID) {
     Security_ID = typeof Security_ID === 'number' ? Security_ID.toString() : Security_ID;
 
     return dispatch => {
-        
+
         dispatch(fetchDefaultQuestionRequest());
         return axios.post('/proxy/get-corporate-default-question-data', {
             "Security_ID": Security_ID

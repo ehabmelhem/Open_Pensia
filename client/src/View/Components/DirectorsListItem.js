@@ -118,7 +118,7 @@ function DirectorListItem(props) {
               className="img1"
               src="https://www.flaticon.com/svg/vstatic/svg/157/157933.svg?token=exp=1615923349~hmac=77235a528d58c44b98c447e7c9bcb905"
               alt="nexticon"
-              onClick=""
+              onClick={props.onCandidateSelect}
             />
           </Link>
         </div>
