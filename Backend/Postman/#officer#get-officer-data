@@ -3,6 +3,7 @@ fun: officerData
 path : http://localhost:3002/officer/get-officer-data
 
 description:
+POST
 fetch('/officer/get-officer-data'){
 .....
   ....
@@ -10,6 +11,9 @@ fetch('/officer/get-officer-data'){
 }
 
 Json Request:
+{officerId:String}
+
+e.x:
 {"officerId":"64516271"}
 
 

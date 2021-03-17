@@ -7,7 +7,19 @@ router
 
 router
   .route("/get-officer-data")
-  .get(officerController.officerData);
+  .post(officerController.officerData);
+
+  router
+  .route("/get-articles")
+  .post(officerController.officerArticles);
+
+  router
+  .route("/add-vote")
+ .post(officerController.addVote)
+
+ router
+ .route("/officer-percentages")
+ .post(officerController.officerPercentages);
 
 
 

@@ -1,9 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export default function QuestionsBeforeRegister() {
-    return (
-        <div>
-            
-        </div>
-    )
+  return <div>4</div>;
 }

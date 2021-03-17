@@ -17,17 +17,20 @@ import VoteAccept from "./View/Pages/VoteAccept";
 import CardListItem from "./View/Components/CardListItem";
 import ListQuestions from "./View/Components/body/ListQuestions";
 import Body from "./View/Components/body/Body";
-import Header from './View/Components/Header';
+import Header from "./View/Components/Header";
 import NavBarLists from "./View/Components/NavBarLists";
 import MainButton from "./View/Components/MainButton";
 import GroupEffectCont from "./View/Components/newcom/GroupEffectCont";
 import CompanyNamePrev from "./View/Components/newcom/CompanyNamePrev";
 import NavBarAfterLogIn from "./View/Components/newcom/NavBarAfterLogIn";
 import CompanyVotingStatus from "./View/Components/newcom/CompanyVotingStatus";
+import SignUpRequest from "./View/Pages/SignUpRequest";
 
 //NavBarAfterLogIn
 //CompanyVotingStatus
 function App() {
+
+
   return (
     <div>
       <nav className="navBar">
@@ -130,9 +133,13 @@ function App() {
         </ul>
       </nav>
       <Switch>
-      <Route path="/TestDashBoardIbraheem">
-        <Header company='בנק הפועלים' perception='18.3'/>
-        <MainButton myClass='main-button' text='הצבעת הרווחת' tolink='InfoDirectorAfterLogin'/>
+        <Route path="/TestDashBoardIbraheem">
+          <Header company="בנק הפועלים" perception="18.3" />
+          <MainButton
+            myClass="main-button"
+            text="הצבעת הרווחת"
+            tolink="InfoDirectorAfterLogin"
+          />
         </Route>
         <Route path="/TestDashBoardMosaab">
       <NavBarAfterLogIn/>
@@ -141,6 +148,8 @@ function App() {
           <GroupEffectCont/>
           <MainButton text="אני רוצה להצביע" />
 
+          <Body />
+          <NavBarLists />
         </Route>
 
         <Route path="/FirstPages_1">
@@ -160,6 +169,7 @@ function App() {
         </Route>
 
         <Route path="/VoteAccept">
+          <VoteAccept />
           <FirstPages />
         </Route>
 
@@ -180,7 +190,8 @@ function App() {
         </Route>
 
         <Route path="/SignUpRequest">
-          <VoteAccept />
+          {/* <VoteAccept /> */}
+          <SignUpRequest />
         </Route>
 
         <Route path="/SignUp">
@@ -208,7 +219,7 @@ function App() {
         </Route>
 
         <Route path="/OpenVotes">
-          <VotesList title="הצבעות פתוחות" sort={2}/>
+          <VotesList title="הצבעות פתוחות" sort={2} />
         </Route>
 
         <Route path="/VoteDirectorsAfterLogin">

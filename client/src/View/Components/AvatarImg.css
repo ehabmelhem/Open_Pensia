@@ -3,7 +3,8 @@
     object-fit: cover;
     width: 80px ;
     height: 80px;
-    border: solid  rgb(167, 172, 188);
+    background: transparent 0% 0% no-repeat padding-box;
+    border: 1px solid #FFFFFF;
 }
 @media (max-width: 400px) {
     .round{

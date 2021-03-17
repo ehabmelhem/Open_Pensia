@@ -1,0 +1,30 @@
+.mainDiv {
+  text-align: right;
+  direction: rtl;
+  font-family: Arial, Arial, Helvetica, sans-serif;
+  background-color: #ffffff;
+  max-width: 600px;
+  margin: auto;
+  margin-top: 4%;
+  margin-bottom: 4%;
+  margin-right: 3%;
+}
+.body-h3{
+  font: normal normal 600 14px/18px Assistant;
+letter-spacing: 0.09px;
+color: #324483;
+opacity: 1;
+}
+.body-h5{
+  font: normal normal normal 12px/22px Assistant;
+letter-spacing: 0px;
+color: #717480;
+opacity: 1;
+}
+.body-button{
+  width: 70px;
+height: 21px;
+background: #3D4257 0% 0% no-repeat padding-box;
+border-radius: 8px;
+opacity: 1;
+}
