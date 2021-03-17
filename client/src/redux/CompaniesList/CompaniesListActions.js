@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-
 import {
     //COMPANIES LIST
     FETCH_COMPANIES_REQUEST,
@@ -9,7 +7,7 @@ import {
 
 } from '../actionTypes';
 
-// COMPANIES LIST Actions
+// COMPANIES LIST Action Creators
 
 export const fetchCompaniesRequest = () => ({
     type: FETCH_COMPANIES_REQUEST

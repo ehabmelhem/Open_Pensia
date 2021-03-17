@@ -29,7 +29,7 @@ const CompaniesListReducer = (state = initialState, action) => {
             return {
                 loading: false,
                 companies: [],
-                error: action.payload.content
+                error: action.payload.error
             };
         default:
             return state;

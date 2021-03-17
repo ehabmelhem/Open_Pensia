@@ -11,10 +11,10 @@ import {
     // FETCH_COMPANIES_REQUEST,
     // FETCH_COMPANIES_SUCCESS,
     // FETCH_COMPANIES_FAILURE,
-    //COMPANY
-    FETCH_QUESTIONS_REQUEST,
-    FETCH_QUESTIONS_SUCCESS,
-    FETCH_QUESTIONS_FAILURE,
+    // //COMPANY
+    // FETCH_QUESTIONS_REQUEST,
+    // FETCH_QUESTIONS_SUCCESS,
+    // FETCH_QUESTIONS_FAILURE,
     //OFFICER
     FETCH_OFFICER_DATA_REQUEST,
     FETCH_OFFICER_DATA_SUCCESS,
@@ -69,25 +69,6 @@ export const userSignupFailure = (error) => ({
 });
 
 
-// COMPANY Actions
-
-export const fetchQuestionsRequest = () => ({
-    type: FETCH_QUESTIONS_REQUEST
-});
-
-export const fetchQuestionsSuccess = (content) => ({
-    type: FETCH_QUESTIONS_SUCCESS,
-    payload: {
-        content
-    }
-});
-
-export const fetchQuestionsFailure = (error) => ({
-    type: FETCH_QUESTIONS_FAILURE,
-    payload: {
-        error
-    }
-});
 
 //OFFICER Actions
 
