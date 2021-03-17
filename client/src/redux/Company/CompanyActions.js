@@ -72,7 +72,7 @@ export function fetchCompanyQuestions(Security_ID) {
 
 export function fetchCompanyDefaultQuestion(Security_ID) {
     Security_ID = typeof Security_ID === 'number' ? Security_ID.toString() : Security_ID;
-
+    Security_ID = '520040700';
     return dispatch => {
 
         dispatch(fetchDefaultQuestionRequest());
@@ -80,8 +80,8 @@ export function fetchCompanyDefaultQuestion(Security_ID) {
             "Security_ID": Security_ID
         })
             .then(res => {
-                dispatch(fetchDefaultQuestionSuccess(res.data.allResult))
-                console.log(res.data.allResult);
+                dispatch(fetchDefaultQuestionSuccess(res.data))
+                console.log(res.data);
             })
             .catch(error => {
                 dispatch(fetchDefaultQuestionFailure(error.message));
