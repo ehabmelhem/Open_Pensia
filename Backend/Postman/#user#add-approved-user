@@ -1,0 +1,12 @@
+fun: addApprovedUser
+
+path :  http://localhost:3002/user/add-approved-user
+
+description: this fun add a new approved user to user Schema by sending the email of the user
+* add a new user to user Schema 
+* add user votes to :user,proxy,officer
+* add article to officer if status is approved
+* change the Waiting user status from Waiting to Transferred in WaitingUser Schema
+
+Json Request:
+{"email":"dema.raja@gmail.com"}

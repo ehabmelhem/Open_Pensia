@@ -1,9 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export default function VoteAccept() {
-    return (
-        <div>
-            
-        </div>
-    )
+  return <div>5</div>;
 }

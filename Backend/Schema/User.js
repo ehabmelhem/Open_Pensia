@@ -15,7 +15,7 @@ const userModel = mongoose.model("userCollection", {
       proxyCode: String,
       officerId: String,
       voted: Number,
-      voteDate: String,
+      voteDate: String
     },
   ],
 });

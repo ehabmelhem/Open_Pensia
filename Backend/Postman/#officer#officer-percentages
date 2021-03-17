@@ -1,0 +1,35 @@
+fun: officerPercentages
+
+path : http://localhost:3002/officer/officer-percentages
+
+description:
+ POST
+fetch('/officer/officer-percentages'){
+.....
+  ....
+  body
+}
+
+Json Request:
+{
+      "officerId":"64516271",
+      "proxyCode":"520040700/1"}
+
+
+ Json Response:
+ {
+    "Ok": true,
+    "doc": {
+        "likePercent": 100,
+        "dislikePercent": 0,
+        "allvotes": [
+            {
+                "_id": "6047f33d5533db453c01ded6",
+                "proxyCode": "520040700/1",
+                "Security_ID": "520040700",
+                "userId": "6047f33d5533db453c01dec8",
+                "voted": 1
+            }
+        ]
+    }
+}

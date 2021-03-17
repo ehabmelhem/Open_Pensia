@@ -5,6 +5,9 @@
     align-items: center;
     text-align: center;
     object-fit:contain;
+    max-width: 600px;
+    min-width: 375px;
+    margin: auto;
 }
 .page_above{  
     display: flex;
@@ -35,10 +38,9 @@
 }
 .vote-status-dashboard2{
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-left: 6%;
-    margin-right: 6%;
+    justify-content: space-around;
+    margin: auto;
+    min-width: 375px;
     margin-top: 10%;
     padding-bottom: 5%;
 }

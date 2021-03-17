@@ -8,10 +8,11 @@ const officerModel = mongoose.model("officerCollection", {
   officerImg: String,
   officerArticles: [
     {
-      articleId: Number,
+      articleId: String,
       articleTitle: String,
       articleText: String,
       articleUrl: String,
+      articleStatus: String, //{"Waiting","Approved"}
     },
   ],
   votes: [
@@ -25,9 +26,9 @@ const officerModel = mongoose.model("officerCollection", {
           voted: Number,
         },
       ],
-      likesCounter: Number,
-      absentCounter: Number,
-      disLikesCounter: Number,
+    //  likesCounter: Number,
+    //  absentCounter: Number,
+    //  disLikesCounter: Number,
     },
   ],
 });
