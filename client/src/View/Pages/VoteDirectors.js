@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export default function VoteDirectors() {
 
+  const dispatch = useDispatch();
   let directors = useSelector(state => !!state.CompanyDataReducer && state.CompanyDataReducer.defaultQuestion.officers);
   let defaultQuestion = useSelector(state => !!state.CompanyDataReducer && state.CompanyDataReducer.defaultQuestion);
   let companyName = useSelector(state => !!state.CompanyDataReducer && state.CompanyDataReducer.companyName);
