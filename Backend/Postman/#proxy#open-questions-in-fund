@@ -1,0 +1,22 @@
+fun: 
+
+path : http://localhost:3002/proxy/open-questions-in-fund
+
+description: same to p.28 after login
+POST
+fetch('/proxy/open-questions-in-fund'){
+.....
+  ....
+  body
+}
+____________________________________________________
+Json Request:
+{"userId":"String"}
+
+
+e.x: TO BE ADDED
+_______________________________________________
+ Json Response:
+{ok:true,doc:data}
+
+ data is --> [questions]

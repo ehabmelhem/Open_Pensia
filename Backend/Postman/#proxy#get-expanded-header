@@ -1,11 +1,18 @@
+fun:
 
-
-path: /proxy/get-expanded-header
-
+path: http://localhost:3002/proxy/get-expanded-header
+POSTfetch('/proxy/get-expanded-header')
+_____________________________________________
 Json req:
 {"userId":"String", "Security_ID":"String"}
 
 
+e.x: to be added
+
+______________________________________________
 respo:
 // get 5 parm dashboard p.23
 {company_name: String,AVE:Number,userOpen:Number,userPending:Number,userResults:Number}
+
+
+
