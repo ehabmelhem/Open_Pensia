@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const fetch = require("node-fetch");
 const Officer = require("../Schema/Officer");
 const User = require("../Schema/User");
+const Proxy = require("../Schema/Proxy");
 const ObjectId = require("mongoose").Types.ObjectId;
 
 /* 
@@ -217,8 +218,8 @@ officerId: String,
     {
       '$set': {
         'votes.$.allvotes.$.voted': currentVote.voted,
-        'votes.$.officerId': currentVote.officerId,
-        'votes.$.voted': currentVote.voted,
+        'votes.$.allvotes.$.officerId': currentVote.officerId,
+        'votes.$.allvotes.$.voted': currentVote.voted,
        } }   
      )
      /// if recived vote[] doesnt exist add it to the user
