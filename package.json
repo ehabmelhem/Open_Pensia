@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/ehabmelhem/Open_Pensia#readme",
   "dependencies": {
-    "concurrently": "^6.0.0"
+    "concurrently": "^6.0.0",
+    "cors": "^2.8.5"
   }
 }

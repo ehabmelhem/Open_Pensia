@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import Inputclass from '../Components/InputText'
 import "./QuestionsBeforeRegister.css";
+const cors = require('cors');
 
 export default function QuestionsBeforeRegister() {
     const [user,setuser]=useState({firstName: String,
-        lastName: String,
+        lastName: String,   
         email: String,
         phone: String,
         password: String,
@@ -12,24 +13,20 @@ export default function QuestionsBeforeRegister() {
         fundName: String,
         chanel: String,
         registerDate: String,
-        votes: [
-          {
-            proxyCode: String,
-            officerId: String,
-            voted: Number,
-            voteDate: String
-          },
-        ],});
+        
+        
+    });
  
     const lotery = (e) => {
         e.preventDefault();
-            fetch("/update-user", {
+        setuser({firstName : "kabha" , lastName : "rwed" , email : "kabha" , phone : "052658821" , password : "asdasd", status : "true", fundName : "ddd",chanel : "fsde",registerDate : "arab"})
+            fetch("http://localhost:3002/new-user/add-user", {
               method: "POST",
               headers: {
                 "Accept": "application/json; odata=verbose",
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ isname: allname }),
+              body: JSON.stringify({ userinformation : user }),
             })
               .then((r) => r.json())
               .then((data) => {
@@ -47,7 +44,7 @@ export default function QuestionsBeforeRegister() {
              < Inputclass textenglish  = {"phone"}  texter = {"מספר טלפון"} ></Inputclass>
 
          
-<button  onClick= {sendinfo} className="but">הלאה</button>
+<button  onClick= {lotery} className="but">הלאה</button>
         </div>
     )   
 }
