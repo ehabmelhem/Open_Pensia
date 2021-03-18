@@ -1,0 +1,24 @@
+.CompContainer{
+    display: table ;
+    width: 20% ; 
+    /* table-layout: fixed; */
+    margin-left: px;
+    max-width: 1000px;
+    min-width: 375px;
+}
+
+
+.StatusV_icon{
+    text-align: right ;
+    vertical-align: right;
+    float: left;
+    margin-left: 8px;
+    width: 40px;
+    height: 40px;  
+    transform: rotateY(180deg);
+}
+.StatusV_text{
+    margin-top: 12px;
+    margin-right: 8px;
+     vertical-align:middle;
+}

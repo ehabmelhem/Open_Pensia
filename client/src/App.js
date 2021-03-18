@@ -133,14 +133,16 @@ function App() {
         </ul>
       </nav>
       <Switch>
-        <Route path="/TestDashBoardIbraheem">
-          <Header company="בנק הפועלים" perception="18.3" />
-          <MainButton
-            myClass="main-button"
-            text="הצבעת הרווחת"
-            tolink="InfoDirectorAfterLogin"
-          />
+      <Route path="/TestDashBoardIbraheem">
+        <Header company='בנק הפועלים' perception='18.3'/>
         </Route>
+        <Route path="/TestDashBoardMalik">
+          <NavBarAfterLogIn></NavBarAfterLogIn>
+          <CompanyNamePrev></CompanyNamePrev>
+          <CompanyVotingStatus></CompanyVotingStatus>
+          <GroupEffectCont></GroupEffectCont>
+        </Route>
+
         <Route path="/TestDashBoardMosaab">
      
         </Route>
