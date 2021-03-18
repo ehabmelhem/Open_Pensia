@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import Inputclass from '../Components/InputText'
 import "./QuestionsBeforeRegister.css";
 
 export default function QuestionsBeforeRegister() {
+  const [name,setname]=useState("")
     const [user,setuser]=useState({firstName: String,
         lastName: String,
         email: String,
@@ -21,7 +22,7 @@ export default function QuestionsBeforeRegister() {
           },
         ],});
  
-    const lotery = (e) => {
+    const sendinfo = (e) => {
         e.preventDefault();
             fetch("/update-user", {
               method: "POST",
@@ -29,7 +30,7 @@ export default function QuestionsBeforeRegister() {
                 "Accept": "application/json; odata=verbose",
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ isname: allname }),
+              body: JSON.stringify({ isname: name }),
             })
               .then((r) => r.json())
               .then((data) => {
