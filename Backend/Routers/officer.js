@@ -5,9 +5,21 @@ router
   .route("/add-article")
   .post(officerController.addArticle);
 
-// router
-//   .route("/add-user")
-//   .post(userController.addUser);
+router
+  .route("/get-officer-data")
+  .post(officerController.officerData);
+
+  router
+  .route("/get-articles")
+  .post(officerController.officerArticles);
+
+  router
+  .route("/add-vote")
+ .post(officerController.addVote)
+
+ router
+ .route("/officer-percentages")
+ .post(officerController.officerPercentages);
 
 
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import Inputclass from '../Components/InputText'
 import "./QuestionsBeforeRegister.css";
@@ -52,4 +53,10 @@ export default function QuestionsBeforeRegister() {
 <button  onClick= {lotery} className="but">הלאה</button>
         </div>
     )   
+=======
+import React from "react";
+
+export default function QuestionsBeforeRegister() {
+  return <div>4</div>;
+>>>>>>> serverteam
 }

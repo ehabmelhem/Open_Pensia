@@ -4,7 +4,10 @@ const app = express();
 const WaitingUser = require("../Schema/WaitingUser");
 const Officer = require("../Schema/Officer");
 const { v4: uuidv4 } = require("uuid");
+const bcrypt = require('bcrypt');
 
+
+// var salt =10 //any random value
 /* 
 dis: add a new user
 parameters: user info from client
@@ -56,22 +59,25 @@ exports.addWaitingUser = async (req, res) => {
     //middleware
     console.log("in fun addNewUser");
 
-    
-
     var datetime = new Date();
 
-    const newVotes=[];
-    votes.forEach(e => {
-      let oneVote={
+    // bcrypt.hash(password, salt, (err, encrypted) => {
+    //   password = encrypted
+    //   next()
+    //   })
+    console.log(password);
+    let hash_password =await  hashPassword(password);
+    console.log(hash_password);
+    const newVotes = [];
+    votes.forEach((e) => {
+      let oneVote = {
         proxyCode: e.proxyCode,
-      officerId: e.officerId,
-      voted: e.voted,
-      voteDate: datetime,
-      }
+        officerId: e.officerId,
+        voted: e.voted,
+        voteDate: datetime,
+      };
       newVotes.push(oneVote);
     });
-
-   
 
     //check if user exists
     const newUser = new WaitingUser({
@@ -79,22 +85,20 @@ exports.addWaitingUser = async (req, res) => {
       lastName: lastName,
       email: email,
       phone: phone,
-      password: password,
+      password: hash_password,
       status: "Waiting", //{Waiting/Approved}
       fundName: fundName,
       chanel: chanel,
       registerDate: datetime,
       votes: newVotes,
-        article:{
-            officerId:newArticle.officerId,
-            articleId: newArticle.articleId,
-            articleTitle: newArticle.articleTitle,
-            articleText: newArticle.articleText,
-            articleUrl: newArticle.articleUrl,
-            articleStatus:"Approved"           //{"Waiting","Approved","declined"}
-          }
-
-      
+      article: {
+        officerId: newArticle.officerId,
+        articleId: newArticle.articleId,
+        articleTitle: newArticle.articleTitle,
+        articleText: newArticle.articleText,
+        articleUrl: newArticle.articleUrl,
+        articleStatus: "Approved", //{"Waiting","Approved","declined"}
+      },
     });
 
     const user = await WaitingUser.findOne({ email: newUser.email });
@@ -106,7 +110,6 @@ exports.addWaitingUser = async (req, res) => {
         message: "user with such user name already exists",
       });
     } else {
-
       await newUser.save().then(() => {
         console.log("user saved");
       });
@@ -121,7 +124,8 @@ exports.addWaitingUser = async (req, res) => {
       "articleUrl": "url"
     }
       */
-      if (flag) { //to be removed
+      if (flag) {
+        //to be removed
         res.send({
           Ok: true,
           doc: newUser,
@@ -129,8 +133,15 @@ exports.addWaitingUser = async (req, res) => {
       }
     }
   } catch (e) {
-      console.log(e);
+    console.log(e);
     console.log("could not run addUser in waiting User");
     res.send({ Ok: false });
   }
 };
+
+async function hashPassword(password) {
+  const salt = await bcrypt.genSalt(10)
+  const hash = await bcrypt.hash(password, salt)
+  console.log(hash)
+  return hash;
+}

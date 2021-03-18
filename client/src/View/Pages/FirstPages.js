@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 import React, { useState, useEffect } from 'react';
 
@@ -28,4 +29,10 @@ export default function FirstPages() {
         </div>
         
     )
+=======
+import React from "react";
+
+export default function FirstPages() {
+  return <div>1 2 3</div>;
+>>>>>>> serverteam
 }

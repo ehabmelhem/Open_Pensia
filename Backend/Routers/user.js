@@ -9,6 +9,10 @@ router
   .route("/add-user")
   .post(userController.addUser);
 
+  router
+  .route("/login")
+  .post(userController.login);
+
 
 
 

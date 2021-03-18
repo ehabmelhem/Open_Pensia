@@ -1,0 +1,18 @@
+.all-articles{
+    display: block;
+    width: 90%;
+    max-width: 500px;
+    margin: auto;
+}
+.article{
+    width: auto;
+    text-align: right;
+    padding: 3%;
+    border-bottom: solid rgb(215, 216, 219);
+}
+.sub-title{
+    color: rgb(195, 196, 197);
+}
+.title{
+    color: rgb(90, 104, 155);
+}

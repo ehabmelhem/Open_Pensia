@@ -4,7 +4,7 @@ path : http://localhost:3002/new-user/add-user
 
 
 fetch('/new-user/add-user '){
-
+.....
   ....
   bo
 }
