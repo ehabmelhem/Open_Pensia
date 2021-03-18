@@ -3,6 +3,7 @@ const app = express();
 const fetch = require("node-fetch");
 const Proxy = require("../Schema/Proxy");
 const officerModel = require("../Schema/Officer");
+const User = require("../Schema/User");
 const { v4: uuidv4 } = require("uuid");
 /* 
 dis: get the default Questions - before SignUp
@@ -178,6 +179,116 @@ exports.getAllCorporate = async (req, res) => {
   } catch (e) {
     console.log("could not run getAllFundNames in Proxy");
     res.send({ OK: false, messege: "error" });
+  }
+};
+
+exports.getFundInfo = async (req, res) => {
+  // TODO:
+   //    ,openVoting:fundOpenQuestions
+      //    ,waitingVoting:"Number"
+
+  try {
+    const {userId} = req.body;
+
+     const user = await User.findOne({_id:userId})
+     console.log(user)
+      if (user === null) {
+        res.send({ Ok: false, messege: "User not found" });
+      } else {
+        // {ok:true,firstPage:{"fundName":"String","chanel":"String","fundSrc":"String",
+        // "openVoting":"Number","waitingVoting":"Number","groupPower":"Number"}}
+
+        // get openVoting and waitingVoting
+       const openQuestions= await Proxy.find({"status":"Open"})
+       console.log(openQuestions)
+///////////////////////////////////////////////////////////////////////////////////////////////
+       // get list of corporates
+      // const allCorporates=this.getAllCorporate({ fundname:user.fundName, chanell:user.chanel })
+      console.log("getAllCorporate");
+    //  const { fundname, chanell } = req.body;
+      let url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${user.fundName}&filter[Chanel]=${user.chanel}&page=0`;
+      // let url = `https://open-pension-tsofen.herokuapp.com/api/interests`;
+      const encodedURI = encodeURI(url);
+      const allResult = [];
+      let settings = { method: "Get" };
+      await fetch(encodedURI, settings)
+        .then((res) => res.json())
+        .then(async (json) => {
+          console.log("in");
+          if (json.info.pages > 1) {
+            for (let i = 1; i <= json.info.pages; i++) {
+              console.log("in2");
+             // https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=%D7%94%D7%A8%D7%90%D7%9C&filter[Chanel]=%D7%92%D7%9E%D7%9C/%D7%A4%D7%A0%D7%A1%D7%99%D7%94&page=1
+              url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${user.fundName}}&filter[Chanel]=${user.chanel}&page=${i}`;
+              let encodedd = encodeURI(url);
+              await fetch(encodedd, settings)
+                .then((r) => r.json())
+                .then((data) => {
+                  console.log(data.data)
+                  for (var key in data.data) { // error is here, it could not enter the for loop
+                    // 
+                    console.log('in for')
+                    console.log(data.data[key]["A AVE Vote"])
+                    if (data.data[key]["A AVE Vote"]*10000 > 0.05) {
+                      console.log("in3");
+                      allResult.push(data.data[key]);
+                    }
+                  }
+                });
+            }
+          } else {
+            for (var key in json.data) {
+              if (json.data[key]["A AVE Vote"] > 0.05) {
+                console.log("in4");
+                allResult.push(json.data[key]);
+              }
+            }
+          }
+        });
+  ///////////////////////////////////////////////////////////////////////////////////////////////////
+ // const fundOpenQuestions = openQuestions.filter(item => allResult.Security_ID.includes(item.Security_ID)).count();
+  
+  
+  // res.send({ OK: true, allResult });
+      ////////////////////////////////////////////////////////////
+      
+      // groupPower
+      console.log('groupPower')
+      const groupPower = await User.find({fundName:user.fundName, chanel:user.chanel}).count()
+      console.log(groupPower)
+ 
+
+
+
+
+
+
+
+          res.send({
+            OK: true,firstPage:{fundName:user.fundName,chanel:user.chanel,fundSrc:"////"
+      //    ,openVoting:fundOpenQuestions
+      //    ,waitingVoting:"Number"
+      ,groupPower:groupPower
+          
+          
+          }
+          });
+        
+
+        
+
+        
+      }
+    // res.send({
+    //   OK: false
+    // });
+
+
+  } catch (e) {
+    res.send({
+      OK: false,
+      messege: "could not run getFundInfo in Proxy",
+    });
   }
 };
 
