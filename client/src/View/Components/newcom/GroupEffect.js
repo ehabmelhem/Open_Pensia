@@ -7,9 +7,9 @@ export default function GroupEffect(props) {
       <a className="percentage">{props.precent}%</a>
       <br></br>
       <p className="perTitle">{props.perTitle}</p>
-      <c className="desc">
+      <p className="desc">
         {props.desc}
-      </c>
+      </p>
     </div>
   );
 }

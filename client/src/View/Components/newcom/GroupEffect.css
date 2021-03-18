@@ -20,9 +20,8 @@
 }
 
 .desc {
-    color: black;
+    color: #747474;
     font-size: 12px;
-    opacity: 60%;
     min-width: 80px;
     max-width: 100px;
 }

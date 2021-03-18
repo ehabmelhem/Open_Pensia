@@ -7,6 +7,7 @@ function CardListItem(props) {
   const [status,setStatus]=useState("unknown");
 
 useEffect(() => {
+  console.log(props.status)
   switch (props.status) {
     case "Open":
       setStatus("ממתין להצבעתך") 
@@ -19,6 +20,7 @@ useEffect(() => {
           break;
   
     default:
+      setStatus("UnKnown")
       break;
  }
 },[])

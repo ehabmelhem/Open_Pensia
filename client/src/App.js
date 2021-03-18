@@ -142,14 +142,7 @@ function App() {
           />
         </Route>
         <Route path="/TestDashBoardMosaab">
-      <NavBarAfterLogIn/>
-      <CompanyNamePrev/>
-          <CompanyVotingStatus/>
-          <GroupEffectCont/>
-          <MainButton text="אני רוצה להצביע" />
-
-          <Body />
-          <NavBarLists />
+     
         </Route>
 
         <Route path="/FirstPages_1">
@@ -211,15 +204,15 @@ function App() {
         </Route>
 
         <Route path="/VotesHistory">
-          <VotesList title="היסטורית הצבעות" sort={{"results":true}}/>
+          <VotesList title="היסטורית הצבעות" status={{"results":true}}/>
         </Route>
 
         <Route path="/VoteBending">
-          <VotesList title="הצבעות ממתינות לתשובה" sort=""/>
+          <VotesList title="הצבעות ממתינות לתשובה" status={{"results":true}}/>
         </Route>
 
         <Route path="/OpenVotes">
-          <VotesList title="הצבעות פתוחות" sort={2} />
+          <VotesList title="הצבעות פתוחות" status="Open" />
         </Route>
 
         <Route path="/VoteDirectorsAfterLogin">

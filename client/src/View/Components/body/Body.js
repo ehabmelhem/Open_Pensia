@@ -8,7 +8,7 @@ const questionsList = [
     { status:{"results":true},  Topic: 'הולמס פלייס', par: 'חדרי כושר' },
     { status:{"results":false},  Topic: 'חילן', par: 'טכנולוגיה' },
     { status:"Open", Topic: 'בנק הפועלים', par: 'בנקאות' },
-    { status:{"results":false}, Topic: 'פרשמרקט', par: 'קמעונאות מזון' },
+    { status:{"results":true}, Topic: 'פרשמרקט', par: 'קמעונאות מזון' },
     { status:"Open", Topic: 'הולמס פלייס', par: 'חדרי כושר' },
     { status:"Top", Topic: 'חילן', par: 'טכנולוגיה' },
     { status:"Open",  Topic: 'בנק הפועלים', par: 'בנקאות' }
@@ -18,7 +18,7 @@ export default function Body(props) {
     const [button1,setButton1] = useState(true);
     const [button2,setButton2] = useState(false);
     const [button3,setButton3] = useState(false);
-    const [sort,setSort] = useState("Top");
+    const [sort,setSort] = useState("Open");
     const [allQuestions,setAllQuestions] = useState([]);
 
     useEffect(() => {
@@ -53,7 +53,7 @@ export default function Body(props) {
                         setButton1(false);
                         setButton2(false);
                         setButton3(true);
-                        setSort('results')
+                        setSort({"results":true})
                         break;      
             default:
                 break;

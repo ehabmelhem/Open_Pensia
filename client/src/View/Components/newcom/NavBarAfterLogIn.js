@@ -39,7 +39,7 @@ export default function NavBarAfterLogIn(props) {
           />
         </th>
       </table>
-      <SimpleSlide ToF={ToF}/>
+      <SimpleSlide exit={exit} ToF={ToF}/>
 </div>
   );
 }

@@ -1,110 +1,78 @@
-// import React, { useEffect } from 'react';
-// import Switch from '@material-ui/core/Switch';
-// import Paper from '@material-ui/core/Paper';
-// import Slide from '@material-ui/core/Slide';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import { makeStyles } from '@material-ui/core/styles';
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     height: 180,
-//   },
-//   wrapper: {
-//     width: 100 + theme.spacing(2),
-//   },
-//   paper: {
-//     zIndex: 1,
-//     position: 'relative',
-//     margin: theme.spacing(1),
-//   },
-//   svg: {
-//     width: 100,
-//     height: 100,
-//   },
-//   polygon: {
-//     fill: theme.palette.common.white,
-//     stroke: theme.palette.divider,
-//     strokeWidth: 1,
-//   },
-// }));
-
-// export default function SimpleSlide(props) {
-//   const classes = useStyles();
-//   const [checked, setChecked] = React.useState(false);
-
-//   return (
-//     <div className={classes.root}>
-//       <div className={classes.wrapper}>
-//         <Slide direction="left" in={props.ToF} mountOnEnter unmountOnExit>
-//           <Paper elevation={4} className={classes.paper}>
-//           <ul id="allListMenu">
-//                 <li className="eachLineInMenu">חברות האחזקה שלי</li>
-//                 <li className="eachLineInMenu">הצבעות ממתינות לתשובה</li>
-//                 <li className="eachLineInMenu">היסטורית הצבעות</li>
-//                 <li className="eachLineInMenu">הצבעות פתוחות</li>
-//                 <li className="eachLineInMenu">שתף לחברים</li>
-//                 <li className="eachLineInMenu">תרומה לעמותה</li>
-//                 <li className="eachLineInMenuLast">התנתק/י</li>
-//             </ul>
-//           </Paper>
-//         </Slide>
-//       </div>
-//     </div>
-//   );
-// }
-import React, { useState } from 'react';
-import {Link} from "react-router-dom";
-import { FaBars,FaCartPlus } from "react-icons/fa";
-import { AiOutlineClose,AiFillHome } from "react-icons/ai";
-import { IoIosPaper } from "react-icons/io";
-import {IconContext} from "react-icons";
-
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { FaBars, FaCartPlus } from "react-icons/fa";
 import "./Slidebar.css";
 
+function Sidebar(props){
+  const [sidebar, setSidebar] = useState(false);
 
-const Sidebar = ({}) => {
-    const [sidebar,setSidebar] =useState(false);
+  const showSidebar = () => {
+    setSidebar(!sidebar);
+  };
 
-    const showSidebar =()=>{
-        setSidebar(!sidebar)
-    }
-
-    console.log(sidebar);
-    return ( <>
-    <IconContext.Provider value={{color:"#fff"}}>
-    <div className="navbar">
-        <Link to="#" className="menu-bars">
-            <FaBars onClick={showSidebar} />
-        </Link>
-    </div>
-    <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
-        <ul className="nav-menu-items">
-            <li className="navbar-toggle" onClick={()=> setSidebar(false)}>
-                <Link to="#" className="menu-bars">
-                    <AiOutlineClose/>
-                </Link>
+  return (
+    <>
+      {/* <IconContext.Provider value={{ color: "#fff" }}> */}
+        <nav className={props.ToF ? "nav-menu active" : "nav-menu"}>
+          <ul className="nav-menu-items">
+            <li className="nav-text">
+              <img onClick={() => props.exit()} id="exitMenu" src="https://cdn4.iconfinder.com/data/icons/basic-user-interface-elements/700/exit-delete-remove-close-x-256.png"/>
             </li>
             <li className="nav-text">
-                <Link to="/" className="menu-bars">
-                    
-                    <span>Home</span>
-                </Link>
+              <Link to="/CompaniesList" className="menu-bars">
+                <span>חברות האחזקה שלי</span>
+              </Link>
             </li>
             <li className="nav-text">
-                <Link to="/reports" className="menu-bars">
-                   
-                    <span>Reports</span>
-                </Link>
+              <Link to="/VoteBending" className="menu-bars">
+                <span>הצבעות ממתינות לתשובה</span>
+              </Link>
             </li>
             <li className="nav-text">
-                <Link to="/products" className="menu-bars">
-                   
-                    <span>Products</span>
-                </Link>
+              <Link to="/VotesHistory" className="menu-bars">
+                <span>היסטורית הצבעות</span>
+              </Link>
             </li>
-        </ul>
-    </nav>
-    </IconContext.Provider>
-    </>);
-}
- 
+            {/* 4 */}
+            <li className="nav-text">
+              <Link to="/OpenVotes" className="menu-bars">
+                <span>הצבעות פתוחות</span>
+              </Link>
+            </li>
+            {/* 5 */}
+            <li className="nav-text">
+              <Link to="/null" className="menu-bars">
+                <span>שתף לחברים</span>
+              </Link>
+            </li>
+            {/* 6 */}
+            <li className="nav-text">
+              <Link to="/null" className="menu-bars">
+                <span>תרומה לעמותה</span>
+              </Link>
+            </li>
+            {/* 7 */}
+            <li className="nav-text">
+              <Link to="/null" className="menu-bars">
+                <span>התנתק/י</span>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      {/* </IconContext.Provider> */}
+    </>
+  );
+};
+
 export default Sidebar;
+
+{/* <img onClick={exit} id="exitMenu" src="https://cdn4.iconfinder.com/data/icons/basic-user-interface-elements/700/exit-delete-remove-close-x-256.png"/>
+<ul id="allListMenu">
+    <li className="eachLineInMenu"><Link>חברות האחזקה שלי</Link></li>
+    <li className="eachLineInMenu"><Link>הצבעות ממתינות לתשובה</Link></li>
+    <li className="eachLineInMenu"><Link>היסטורית הצבעות</Link></li>
+    <li className="eachLineInMenu"><Link>הצבעות פתוחות</Link></li>
+    <li className="eachLineInMenu"><Link>שתף לחברים</Link></li>
+    <li className="eachLineInMenu"><Link>תרומה לעמותה</Link></li>
+    <li className="eachLineInMenuLast"><Link>התנתק/י</Link></li>
+</ul> */}

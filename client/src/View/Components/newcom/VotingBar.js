@@ -13,7 +13,7 @@ useEffect(() => {
 }, [])
 
   return (
-    <div dir="rtl" id="par" style={checkIfZero?{opacity:"100%"}:{opacity:"30%"}}>
+    <div dir="rtl" id="par" style={checkIfZero?{color:"black"}:{color:"#8080808c"}}>
       <table>
         <tr>
           <th id="firstChild">

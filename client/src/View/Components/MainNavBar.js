@@ -26,10 +26,10 @@ function MainNavBar({ navTabs }) {
     <Router>
       <div>
         <nav className="all-tabs">
-          <ul>
+          <ul id="ul1">
             {navTabs1.map(({ id, className, href, content }, index) => {
               return (
-                <li key={index} className={className}>
+                <li id="li1" key={index} className={className}>
                   <Link
                     to={`/${href}`}
                     onClick={(id) => {
