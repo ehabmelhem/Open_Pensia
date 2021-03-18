@@ -8,13 +8,13 @@ router
 
 router
   .route("/all-Questions-of-corporate")
-  .get(proxyController.getAllQuestions);
+  .post(proxyController.getAllQuestions);
 router
   .route("/get-Question-by-secur-Id")
   .post(proxyController.getQuestionBySecurId);
 
-router.route("/get-all-fund").get(proxyController.getAllFundNames); // {FundName:[]} Set
-router.route("/get-all-chanell").get(proxyController.getChanellNames); // request param= {fundname:String0} {chanell:[]} Set
+router.route("/get-all-fund").post(proxyController.getAllFundNames); // {FundName:[]} Set
+router.route("/get-all-chanell").post(proxyController.getChanellNames); // request param= {fundname:String0} {chanell:[]} Set
 router.route("/get-all-Corporates").post(proxyController.getAllCorporate); // return {Coeporate:[]}
 
 module.exports = router;
