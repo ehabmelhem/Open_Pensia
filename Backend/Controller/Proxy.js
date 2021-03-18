@@ -262,7 +262,7 @@ setInterval(async () => {
                 officerName: data.data[key].Officers_Name,
                 officerImg: "///",
               };
-              console.log(obj.officerName);
+              // console.log(obj.officerName);
 
               localOfficers.push({
                 officerId: data.data[key].Officers_ID,
@@ -284,7 +284,7 @@ setInterval(async () => {
           localOfficers.map((officer) => {
             var save = new officerModel(officer);
             save.save().then(() => {
-              console.log("save new officer into db");
+              // console.log("save new officer into db");
             });
           });
           // 64516271
