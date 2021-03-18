@@ -4,6 +4,7 @@ import "./QuestionsBeforeRegister.css";
 const cors = require('cors');
 
 export default function QuestionsBeforeRegister() {
+  const [name,setname]=useState("")
     const [user,setuser]=useState({firstName: String,
         lastName: String,   
         email: String,
@@ -17,7 +18,7 @@ export default function QuestionsBeforeRegister() {
         
     });
  
-    const lotery = (e) => {
+    const sendinfo = (e) => {
         e.preventDefault();
         setuser({firstName : "kabha" , lastName : "rwed" , email : "kabha" , phone : "052658821" , password : "asdasd", status : "true", fundName : "ddd",chanel : "fsde",registerDate : "arab"})
             fetch("http://localhost:3002/new-user/add-user", {
@@ -26,7 +27,11 @@ export default function QuestionsBeforeRegister() {
                 "Accept": "application/json; odata=verbose",
                 "Content-Type": "application/json",
               },
+<<<<<<< HEAD
               body: JSON.stringify({ userinformation : user }),
+=======
+              body: JSON.stringify({ isname: name }),
+>>>>>>> OnBoarding
             })
               .then((r) => r.json())
               .then((data) => {
