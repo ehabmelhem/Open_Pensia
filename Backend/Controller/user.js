@@ -8,42 +8,6 @@ const WaitingUser = require("../Schema/WaitingUser");
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
 
-// const officerController = require("../Controller/officer");
-
-/* 
-dis: add a new user
-parameters: user info from client
-return: {ok:true}
-return: {ok: false,message:'could not add user'}			 
-*/
-/**
- * 
- {
-      "firstName": "Rami",
-      "lastName": "Mohammed",
-      "email": "rami.mohammed@gmail.com",
-      "phone": "0502134551",
-      "password": "pass123",
-      "fundName": "הראל",
-      "chanel": "גמל/פנסיה",
-      "vote": 
-        {
-          "proxyCode": "12345678",
-          "officerId": "87654321",
-          "voted": 1
-        },
-        "newArticle":{
-      "officerId":"123",
-      "articleId":"77777",
-      "articleTitle": "My Article",
-      "articleText": "this is an article",
-      "articleUrl": "url"
-    }
-
-
-    }
-
- */
 exports.addUser = async (req, res) => {
   try {
     const flag = true;
@@ -178,22 +142,22 @@ exports.addApprovedUser = async (req, res) => {
 
       const savedUser = await User.findOne({ email: email });
       newUser.votes.forEach(async (e) => {
-      //  console.log(e);
+        //  console.log(e);
         // add to proxy
         const proxyOfVote = await Proxy.findOne({ Proxy_code: e.proxyCode });
-       // console.log(proxyOfVote);
+        // console.log(proxyOfVote);
         const proxyOfVoteDetailes = {
           userId: savedUser._id,
           officerId: e.officerId,
           voted: e.voted,
         };
         if (proxyOfVote.votes !== null) {
-       //   console.log("proxy of votes :" + proxyOfVote.votes);
+          //   console.log("proxy of votes :" + proxyOfVote.votes);
           await Proxy.findOneAndUpdate(
             { Proxy_code: e.proxyCode },
             { $push: { votes: proxyOfVoteDetailes } }
           );
-       //   proxyOfVote.votes.push(proxyOfVoteDetailes);
+          //   proxyOfVote.votes.push(proxyOfVoteDetailes);
           console.log("proxy votes is not null");
         } else {
           const newArray = [proxyOfVoteDetailes];
@@ -238,11 +202,11 @@ exports.addApprovedUser = async (req, res) => {
           // const officerOfVote = await Officer.findOne({ officerId: e.officerId });
           console.log(e.proxyCode);
           const officerProxy = await Officer.findOne(
-            { $and: [  { officerId: e.officerId },{ votes: { $elemMatch: { proxyCode: e.proxyCode }}}   ] }
-        //    { proxyCode: proxyCode },
-         //   { votes: { $elemMatch: { proxyCode: proxyCode } } }
+            { $and: [{ officerId: e.officerId }, { votes: { $elemMatch: { proxyCode: e.proxyCode } } }] }
+            //    { proxyCode: proxyCode },
+            //   { votes: { $elemMatch: { proxyCode: proxyCode } } }
           );
-        //  console.log(officerProxy);
+          //  console.log(officerProxy);
           //  const officerProxy = await officerProxy.votes.findOne({ proxyCode: e.proxyCode });
           if (officerProxy === null) {
             console.log('officerProxy is null, need newProxyVotes');
@@ -265,37 +229,39 @@ exports.addApprovedUser = async (req, res) => {
               { $push: { votes: newProxyVotes } }
             );
           }
-        
-         else{
-             const newVoteOfficer={
-            
+
+          else {
+            const newVoteOfficer = {
+
               proxyCode: e.proxyCode,
-              Security_ID : proxyOfVote.Security_ID,
+              Security_ID: proxyOfVote.Security_ID,
               userId: savedUser._id,
               voted: e.voted
             }
-          //   db.collection.update(
-          //     { "_id": ID, "playlists._id": "58"},
-          //     { "$push": 
-          //         {"playlists.$.musics": 
-          //             {
-          //                 "name": "test name",
-          //                 "duration": "4.00"
-          //             }
-          //         }
-          //     }
-          // )
-           
+            //   db.collection.update(
+            //     { "_id": ID, "playlists._id": "58"},
+            //     { "$push": 
+            //         {"playlists.$.musics": 
+            //             {
+            //                 "name": "test name",
+            //                 "duration": "4.00"
+            //             }
+            //         }
+            //     }
+            // )
+
 
 
             await Officer.findOneAndUpdate(
-              { officerId: e.officerId, "votes.proxyCode": e.proxyCode},
-             { "$push": 
-             {"votes.$.allvotes": newVoteOfficer
-             }
-         }
+              { officerId: e.officerId, "votes.proxyCode": e.proxyCode },
+              {
+                "$push":
+                {
+                  "votes.$.allvotes": newVoteOfficer
+                }
+              }
             );
-         }
+          }
         }
       });
       ///////////////////////////////////////////////////////////////////////////////
@@ -326,7 +292,6 @@ exports.addApprovedUser = async (req, res) => {
     res.send({ Ok: false });
   }
 };
-
 ////////////////////////////////////////////////////////
 exports.login = async (req, res) => {
   try {
@@ -356,6 +321,35 @@ exports.login = async (req, res) => {
     }
   } catch (e) {
     console.log("login fun bug");
+  }
+};
+/////////////////////////////////////////////////////////////////////
+exports.getUserVotingHistory = async (req, res) => {
+  try {
+    const { userId } = req.body;
+
+    const allHistory = [];
+    const user = await User.findOne({ _id: userId })
+    const userVotes = user.votes
+
+    const groupBy = key => userVotes =>
+      userVotes.reduce((objectsByKeyValue, obj) => {
+        const value = obj[key];
+        objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
+        return objectsByKeyValue;
+
+      }, {});
+
+    const groupByBrand = groupBy('proxyCode');
+    const groupedProxies = groupByBrand(userVotes)
+    console.log(groupedProxies)
+    for (var currentProxy in groupedProxies) {
+      console.log(currentProxy)
+      allHistory.push(await Proxy.findOne({ Proxy_code: currentProxy }))
+    }
+    res.send({ ok: true, doc: allHistory });
+  } catch (e) {
+    console.log("getUserVotingHistory fun bug");
   }
 };
 /////////////////////////////////////////////////////////////////////

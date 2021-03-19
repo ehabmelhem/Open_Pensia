@@ -13,6 +13,10 @@ router
   .route("/login")
   .post(userController.login);
 
+  router
+  .route("/user-voting-history")
+  .post(userController.getUserVotingHistory);
+
 
 
 
