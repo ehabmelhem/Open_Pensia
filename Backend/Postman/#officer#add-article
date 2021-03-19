@@ -1,14 +1,16 @@
 fun: addArticle
 
 path :  http://localhost:3002/officer/add-article
+POST
+fetch('/officer/add-article')
 
 
 Json Request:
 {
       "officerId":"64516271",
-      "articleId":"0000000000333333",
-      "articleTitle": "My Article 33333",
-      "articleText": "this is an article____3333___________",
+      "articleId":"0000000044444455667899941",
+      "articleTitle": "My Article clientSideNewArticle",
+      "articleText": "this is an article____clientSideNewArticle___________",
       "articleUrl": "url"
     }
 

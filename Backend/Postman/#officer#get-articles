@@ -1,7 +1,7 @@
 fun: officerArticles
 
 path :  http://localhost:3002/officer/get-articles
-
+POST
 
 Json Request:
 {"officerId":"64516271"}

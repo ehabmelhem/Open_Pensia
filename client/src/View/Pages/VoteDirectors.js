@@ -1,43 +1,60 @@
-import React from "react";
+import React, { useEffect } from 'react';
 import Header2 from "../Components/CompanyHeader";
 import MainButton from "../Components/MainButton";
 import DirectorListItem from "../Components/DirectorsListItem";
-import { AiFillDislike } from "react-icons/ai";
-import { AiFillLike } from "react-icons/ai";
-import Arrow from "../Components/Arrow";
 
-let directors_lst = [
-  { name: "a", photo: "a" },
-  { name: "b", photo: "b" },
-  { name: "c", photo: "c" },
-];
+import { fetchOfficerData } from '../../redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+// import Arrow from "../Components/Arrow";
 
 export default function VoteDirectors() {
+
+  const dispatch = useDispatch();
+  let defaultQuestion = useSelector(state => !!state.CompanyReducer && state.CompanyReducer.defaultQuestion);
+  let companyName = useSelector(state => !!state.CompanyReducer && state.CompanyReducer.companyName);
+
+  console.log(!!defaultQuestion && defaultQuestion.officers)
+  console.log(defaultQuestion)
+  console.log(companyName)
+  useEffect(() => {
+
+  }, []);
+  function handleCandidateSelect(id) {
+    console.log(id);
+    dispatch(fetchOfficerData(id));
+  }
+  let officers = !!defaultQuestion && defaultQuestion.officers;
   return (
     <div>
       <div style={{ maxWidth: "600px", margin: "auto" }}>
         <Header2
-          percent="18.3%"
-          question="תבחרו מי יהיו הדירקטורים"
-          company="בנק הפועלים"
+          percent={!!defaultQuestion && defaultQuestion.ave}
+          question={!!defaultQuestion && defaultQuestion.topic}
+          company={companyName}
         />
 
         <div>
           <p>בחר/י שני דירקטורים רגילים</p>
 
-          {directors_lst.map((elm) => {
-            return (
-              <div>
+          {
+            officers && officers.map((officer) => {
+              console.log(officer);
+              return (
+
                 <DirectorListItem
-                  logo={"https://picsum.photos/200"}
-                  name={elm.name}
-                  link={`InfoDirector/${elm.id}`} //need to add proper id
+                  key={officer.officerId}
+                  logo={"https://www.lego.com/cdn/cs/set/assets/blt0bf03ae97678db52/Batman2_App_Sidekick-Tall1.jpg?fit=crop&format=jpg&quality=80&width=800&height=600&dpr=1"}
+                  name={officer.officerName}
+                  link={`InfoDirector/${officer.officerId}`}
+                  onCandidateSelect={() => handleCandidateSelect(officer.officerId)}
                 />
-              </div>
-            );
-          })}
+
+              );
+            })}
+
         </div>
-        <MainButton text="שלח/י את ההצבעה שלי" />
+        <MainButton text="שלח/י את ההצבעה שלי" tolink={"SignUpRequest"} />
       </div>
     </div>
   );

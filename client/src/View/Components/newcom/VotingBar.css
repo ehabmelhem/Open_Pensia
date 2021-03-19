@@ -1,0 +1,14 @@
+#firstChild{
+    padding: 0;
+        margin-left: 12px;
+    }
+    
+    #imglogo{
+        width: 20px;
+        height: 20px;
+    }
+    
+    #textL{
+        font-size: 12px;
+        margin-right: 6px;
+    }

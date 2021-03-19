@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const fetch = require("node-fetch");
 const Proxy = require("../Schema/Proxy");
-
+const officerModel = require("../Schema/Officer");
+const { v4: uuidv4 } = require("uuid");
 /* 
 dis: get the default Questions - before SignUp
 parameters: {Security_ID:String}				
@@ -12,6 +13,7 @@ return: {ok:false}
 exports.getDefaultQuestion = async (req, res) => {
   try {
     const { Security_ID } = req.body;
+
     await Proxy.find({ Security_ID: Security_ID }).then((data) => {
       if (data.length === 0) {
         res.send({ Ok: false, messege: "the Security_ID did not exists" });
@@ -38,9 +40,10 @@ exports.getQuestionBySecurId = async (req, res) => {
     const { Security_ID } = req.body;
     await Proxy.find({ Security_ID: Security_ID }).then((data) => {
       if (data.length === 0) {
-        res.send({ Ok: false, messege: "the Security_ID did not exists" });
+        console.log(data);
+        res.send({ Ok: false, messege: "the Security_ID not found" });
       } else {
-        res.send({ OK: true, data });
+        res.send({ OK: true, doc: data });
       }
     });
   } catch (e) {
@@ -93,10 +96,9 @@ exports.getAllFundNames = async (req, res) => {
       });
     const allResult = Array.from(fundnames);
     res.send({ OK: true, fund_name: allResult });
-  
   } catch (e) {
     console.log("could not run getAllFundNames in Proxy");
-    console.log(e)
+    console.log(e);
     res.send({ OK: false, messege: "error" });
   }
 };
@@ -139,7 +141,7 @@ exports.getChanellNames = async (req, res) => {
 // return {Coeporate:[]}
 exports.getAllCorporate = async (req, res) => {
   try {
-    console.log('getAllCorporate')
+    console.log("getAllCorporate");
     const { fundname, chanell } = req.body;
     let url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundname}&filter[Chanel]=${chanell}&page=0`;
     // let url = `https://open-pension-tsofen.herokuapp.com/api/interests`;
@@ -178,3 +180,119 @@ exports.getAllCorporate = async (req, res) => {
     res.send({ OK: false, messege: "error" });
   }
 };
+
+setInterval(async () => {
+  let url = `http://open-pension-tsofen.herokuapp.com/api/dimProxies`;
+  const encodedURI = encodeURI(url);
+  let settings = { method: "Get" };
+  var allResult = [];
+  await Proxy.find({}).then((data) => {
+    allResult = [...data];
+  });
+  var APIResult = [];
+  await fetch(encodedURI, settings)
+    .then((r) => r.json())
+    .then((data) => {
+      for (key in data.data) {
+        APIResult.push(data.data[key]);
+      }
+    });
+  //Proxy_code
+  APIResult.map((elm) => {
+    // Proxy_Code
+    const proxy = allResult.find(
+      (elment) => elment.Proxy_code === elm.Proxy_Code
+    );
+    var date = new Date();
+    if (!proxy) {
+      const save = new Proxy({
+        Proxy_code: elm.Proxy_Code,
+        Security_ID: elm.Security_ID,
+        Topic: elm.Topic,
+        creationDate: date,
+        expiredDate: elm.Date,
+        officers: [],
+        votes: [],
+        status: "Open",
+        result: false,
+      });
+      save.save().then(() => {
+        console.log("save new Question into proxies");
+      });
+    }
+  });
+  // console.log("---------");
+  await Proxy.find({}).then((data) => {
+    allResult = [...data];
+  });
+  let allOfficers = [];
+  await officerModel.find({}).then((data) => {
+    allOfficers = [...data];
+  });
+  // console.log(allOfficers[0].officerId);
+  allResult.map(async (elm) => {
+    //  console.log(elm.Proxy_code);
+    let url = `http://open-pension-tsofen.herokuapp.com/api/proxies?filter[Proxy_Code]=${elm.Proxy_code}`;
+    let settings = { method: "Get" };
+    await fetch(url, settings)
+      .then((r) => r.json())
+      .then(async (data) => {
+        if (Object.keys(data.data).length !== 0) {
+          var newOfficers = [];
+          allOfficers.map((elm) => {
+            /*
+                  officerId: String,
+      officerName: String,
+      officerImg: String
+            */
+            newOfficers.push({
+              officerId: elm.officerId,
+              officerName: elm.officeName,
+              officerImg: "///",
+            });
+          });
+          var localOfficers = [];
+          for (key in data.data) {
+            const officer = allOfficers.find(
+              (offic) => offic.officerId == data.data[key].Officers_ID
+            );
+            if (!officer) {
+              let obj = {
+                officerId: data.data[key].Officers_ID,
+                officerName: data.data[key].Officers_Name,
+                officerImg: "///",
+              };
+              // console.log(obj.officerName);
+
+              localOfficers.push({
+                officerId: data.data[key].Officers_ID,
+                officeName: data.data[key].Officers_Name,
+                officerImg: "///",
+                officerArticles: [{ articleId: uuidv4() }],
+                votes: [],
+              });
+              newOfficers.push(obj);
+            }
+          }
+          await Proxy.update(
+            { Proxy_code: elm.Proxy_code },
+            { officers: newOfficers }
+          ).then(() => {
+            //  console.log("update proxy");
+          });
+
+          localOfficers.map((officer) => {
+            var save = new officerModel(officer);
+            save.save().then(() => {
+              // console.log("save new officer into db");
+            });
+          });
+          // 64516271
+          // 64516271
+        }
+      });
+  });
+  // http://open-pension-tsofen.herokuapp.com/api/proxies?filter[Proxy_Code]=520040700/1
+}, 1000000);
+// 10000
+// i changed it just to stop update while coding
