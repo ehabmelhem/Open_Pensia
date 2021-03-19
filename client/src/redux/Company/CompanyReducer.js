@@ -22,7 +22,9 @@ const initialState = {
         officers: []
     },
     loading: false,
-    error: ''
+    error: '',
+    fundName:'',
+    chanel:''
 };
 
 const CompanyReducer = (state = initialState, action) => {
@@ -60,7 +62,7 @@ const CompanyReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 error: '',
-                defaultQuestion: action.payload.defaultQuestion
+                defaultQuestion: action.payload.defaultQuestion,
             };
         case FETCH_DEFAULT_QUESTION_FAILURE:
             return {

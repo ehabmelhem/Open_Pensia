@@ -118,6 +118,7 @@ function _fetchCompanyDefaultQuestion(dispatch, companyName, securityID) {
     dispatch(fetchDefaultQuestionRequest());
     axios.post('/proxy/get-corporate-default-question-data', {
         "Security_ID": securityID
+
     })
         .then(res => {
             dispatch(fetchDefaultQuestionSuccess({
