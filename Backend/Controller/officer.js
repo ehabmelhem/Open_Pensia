@@ -146,10 +146,9 @@ exports.addVote = async (req, res) => {
         }
       );
 
-
       /// if recived vote[] doesnt exist add it to the user
       console.log(updateUserVote);
-  
+
       const proxyVote = {
         userId: User_Id._id,
         officerId: currentVote.officerId,
@@ -160,7 +159,7 @@ exports.addVote = async (req, res) => {
         {
           Proxy_code: currentVote.proxyCode,
           "votes.userId": User_Id._id,
-        //  "votes.officerId": currentVote.officerId,
+          //  "votes.officerId": currentVote.officerId,
         },
         {
           $set: {
@@ -174,40 +173,33 @@ exports.addVote = async (req, res) => {
       /// if recived vote[] doesnt exist add it to the user
       if (ProxyVoteUpdate == null) {
         console.log("Proxy +" + currentVote.proxyCode + "not found");
-        
       }
-
 
       const existofficer = await Proxy.findOne({
         officerId: currentVote.articleId,
       });
-       console.log("******  OFFICER ***********>" + existofficer);
+      console.log("******  OFFICER ***********>" + existofficer);
       const proxyOfVoteDetailes = {
         userId: User_Id._id,
         officerId: currentVote.officerId,
         voted: currentVote.voted,
       };
-      if ( existofficer == null )
-       {
+      if (existofficer == null) {
         //   console.log("proxy of votes :" + proxyOfVote.votes);
-         await Proxy.findOneAndUpdate(
+        await Proxy.findOneAndUpdate(
           { Proxy_code: currentVote.proxyCode },
-          { $push: { votes: proxyOfVoteDetailes } });
-       }
-       else {
+          { $push: { votes: proxyOfVoteDetailes } }
+        );
+      } else {
         console.log("do this");
         //console.log(newArray);
       }
-
-
-
-
 
       // add to officer Vote
       const officerOfVote = await Officer.findOne({
         officerId: currentVote.officerId,
       });
-  
+
       if (officerOfVote.votes === null) {
         console.log("officerOfVote.votes is null");
         const newVotes = [
@@ -231,15 +223,12 @@ exports.addVote = async (req, res) => {
         // if officer votes has an array
 
         console.log(currentVote.proxyCode);
-        const officerProxy = await Officer.findOne(
-          {
-            $and: [
-              { officerId: currentVote.officerId },
-              { votes: { $elemMatch: { proxyCode: currentVote.proxyCode } } },
-            ],
-          }
-
-        );
+        const officerProxy = await Officer.findOne({
+          $and: [
+            { officerId: currentVote.officerId },
+            { votes: { $elemMatch: { proxyCode: currentVote.proxyCode } } },
+          ],
+        });
 
         if (officerProxy === null) {
           console.log("officerProxy is null, need newProxyVotes");
@@ -262,23 +251,25 @@ exports.addVote = async (req, res) => {
         } else {
           const newVoteOfficer = {
             proxyCode: currentVote.proxyCode,
-            Security_ID: null,                                // must add here
+            Security_ID: null, // must add here
             userId: currentVote._id,
             voted: currentVote.voted,
           };
-          console.log(userId._id); 
+          console.log(userId._id);
           //const officerOfVote = await Officer.findOne();
-            console.log(_id); 
-            console.log(User_Id); 
-          console.log("the User id exist in the officer's proxy" + officerOfVote); 
+          console.log(_id);
+          console.log(User_Id);
+          console.log(
+            "the User id exist in the officer's proxy" + officerOfVote
+          );
           await Officer.findOneAndUpdate(
             {
               officerId: currentVote.officerId,
               "votes.proxyCode": currentVote.proxyCode,
             },
-            {  
-            $push: {
-    //            "votes.$.allvotes": newVoteOfficer,
+            {
+              $push: {
+                //            "votes.$.allvotes": newVoteOfficer,
               },
             }
           );
@@ -290,6 +281,11 @@ exports.addVote = async (req, res) => {
   } catch (e) {
     console.log(e);
     console.log("addVote in Officer could not run ????");
+    res.send({
+      ok: false,
+      messege:
+        "System or connection error please check your Internet Connection",
+    });
   }
 };
 

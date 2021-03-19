@@ -4,12 +4,16 @@ const jwt = require("jwt-simple");
 const secret = "1234";
 
 function checkRole(req, res, next) {
-  let role = req.cookies.role;
-  decRole = jwt.decode(role, secret);
-  if (decRole.role === "user") {
-    next();
-  } else {
-    res.send({ ok: false, messege: "you dont have Premeision" });
+  try {
+    let role = req.cookies.role;
+    decRole = jwt.decode(role, secret);
+    if ((decRole.role = "user")) {
+      next();
+    } else {
+      res.send({ ok: false, messege: "you dont have Premeision" });
+    }
+  } catch (e) {
+    res.send({ ok: false, messege: "you have to login" });
   }
 }
 router
