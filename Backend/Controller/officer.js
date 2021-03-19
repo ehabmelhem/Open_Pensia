@@ -131,24 +131,95 @@ exports.addVote = async (req, res) => {
       };
 
       /// run on the recived vote[] find each vote and update
-      const updateUserVote = await User.findOneAndUpdate(
-        {
-          email: email,
-          "votes.proxyCode": currentVote.proxyCode,
-          "votes.officerId": currentVote.officerId,
-        },
-        {
-          $set: {
-            "votes.$.proxyCode": currentVote.proxyCode,
-            "votes.$.officerId": currentVote.officerId,
-            "votes.$.voted": currentVote.voted,
-            "votes.$.voteDate": datetime,
-          },
+      // const updateUserVote = await User.findOneAndUpdate(
+      //   {
+      //     email: email,
+      //     "votes.proxyCode": currentVote.proxyCode,
+      //     "votes.officerId": currentVote.officerId,
+      //   },
+      //   {
+      //     $set: {
+      //       "votes.$.proxyCode": currentVote.proxyCode,
+      //       "votes.$.officerId": currentVote.officerId,
+      //       "votes.$.voted": currentVote.voted,
+      //       "votes.$.voteDate": datetime,
+      //     },
+      //   }
+      // );
+
+      var newUserVotes = [];
+      var isChanged = false;
+      var isEmpty = false;
+      await User.find({ email: email }).then((data) => {
+        if (data.length !== 0) {
+          console.log(data.length);
+          if (!data[0].votes || data[0].votes.length === 0) {
+            isEmpty = true;
+          } else {
+            data[0].votes.map((elm) => {
+              console.log(
+                "proxyCode : " +
+                  elm.proxyCode +
+                  " -------------- " +
+                  currentVote.proxyCode
+              );
+              console.log(
+                "officerId : " +
+                  elm.officerId +
+                  " -------------- " +
+                  currentVote.officerId
+              );
+              console.log(
+                "voted : " + elm.voted + " -------------- " + currentVote.voted
+              );
+              if (
+                elm.proxyCode == currentVote.proxyCode &&
+                elm.officerId == currentVote.officerId &&
+                elm.voted != currentVote.voted
+              ) {
+                newUserVotes.push({
+                  proxyCode: currentVote.proxyCode,
+                  officerId: currentVote.officerId,
+                  voted: currentVote.voted,
+                  voteDate: new Date(),
+                });
+                isChanged = true;
+              } else {
+                newUserVotes.push(elm);
+              }
+            });
+          }
         }
-      );
+      });
+      console.log(isChanged);
+      if (isEmpty) {
+        await User.update(
+          { email: email },
+          {
+            votes: [
+              {
+                proxyCode: currentVote.proxyCode,
+                officerId: currentVote.officerId,
+                voted: currentVote.voted,
+                voteDate: new Date(),
+              },
+            ],
+          }
+        ).then(() => {
+          console.log("update new vote");
+        });
+      } else {
+        if (isChanged) {
+          await User.update({ email: email }, { votes: newUserVotes }).then(
+            () => {
+              console.log("update the user votes");
+            }
+          );
+        }
+      }
 
       /// if recived vote[] doesnt exist add it to the user
-      console.log(updateUserVote);
+      // console.log(updateUserVote);
 
       const proxyVote = {
         userId: User_Id._id,
@@ -238,7 +309,7 @@ exports.addVote = async (req, res) => {
             allvotes: [
               {
                 proxyCode: currentVote.proxyCode,
-                Security_ID: proxyOfVote.Security_ID,
+                Security_ID: currentVote.Security_ID,
                 userId: _id,
                 voted: currentVote.voted,
               },
@@ -269,15 +340,29 @@ exports.addVote = async (req, res) => {
           }).then(async (data) => {
             if (data.length !== 0) {
               data[0].votes.map((elm) => {
-                if (proxyCode === currentVote.proxyCode) {
+                if (elm.proxyCode === currentVote.proxyCode) {
                   elm.allvotes.map((vote) => {
+                    console.log(
+                      "proxyCode : " +
+                        vote.proxyCode +
+                        " ------- " +
+                        currentVote.proxyCode
+                    );
+                    console.log(
+                      "Securiry_ID : " +
+                        vote.Security_ID +
+                        " ------- " +
+                        currentVote.Security_ID
+                    );
+                    console.log("userId : " + vote.userId + " ------- " + _id);
                     if (
-                      vote.proxyCode === currentVote.proxyCode &&
-                      vote.Security_ID === currentVote.Security_ID &&
-                      vote.userId === _id
+                      vote.proxyCode == currentVote.proxyCode &&
+                      vote.Security_ID == currentVote.Security_ID &&
+                      vote.userId == _id
                     ) {
                       flag = true;
                     }
+                    console.log(flag);
                   });
                 }
               });
