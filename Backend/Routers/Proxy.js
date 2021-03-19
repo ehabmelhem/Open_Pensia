@@ -18,7 +18,7 @@ function checkRole(req, res, next) {
 }
 router
   .route("/get-corporate-default-question-data")
-  .post( proxyController.getDefaultQuestion);
+  .post(checkRole, proxyController.getDefaultQuestion);
 // /proxy/get-expanded-header POST
 
 router
