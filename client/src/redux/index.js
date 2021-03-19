@@ -5,8 +5,9 @@ export {
   fetchCompanyQuestions,
 } from "./Company/CompanyActions";
 
-export { fetchOfficerData } from "./Officer/OfficerActions";
+
 
 export { addVote } from "./Votes/VotesAction";
+
 export { fetchOfficerData, fetchOfficerArticles, addOfficerArticle } from './Officer/OfficerActions';
 

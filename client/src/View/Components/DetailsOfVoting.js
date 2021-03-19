@@ -2,7 +2,7 @@ import "./DetailsOfVoting.css";
 import { AiFillDislike } from "react-icons/ai";
 import { AiFillLike } from "react-icons/ai";
 import React, { useState } from "react";
-import { addVote } from "../../redux";
+import { addVote } from '../../redux';
 import { useDispatch, useSelector } from "react-redux";
 
 function DetailsOfVoting({ voting }) {
