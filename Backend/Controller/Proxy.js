@@ -15,22 +15,22 @@ exports.getDefaultQuestion = async (req, res) => {
   try {
     const {fundName,chanel, Security_ID } = req.body;
 
-    await Proxy.find({ Security_ID: Security_ID }).then((data) => {
+    await Proxy.find({ Security_ID: Security_ID }).then(async(data) => {
       if (data.length === 0) {
         res.send({ Ok: false, messege: "the Security_ID did not exists" });
-      } else {
-  //       let  AVE=1;
-  //    let url =
-  //     `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundName}&filter[Chanel]=${chanel}&filter[Security_ID]=${Security_ID}`
-  //  const encodedURI = encodeURI(url);
-  //   let settings = { method: "Get" };
-  //   await fetch(encodedURI, settings)
-  //     .then((res) => res.json())
-  //     .then((json) => {
-  //     for (var key in json.data) {
-  //       AVE=json.data[key]["A AVE Vote"]*100;
-  //     }
-  //     });
+      } else  {
+        let  AVE=1;
+     let url =
+      `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundName}&filter[Chanel]=${chanel}&filter[Security_ID]=${Security_ID}`
+   const encodedURI = encodeURI(url);
+    let settings = { method: "Get" };
+    await fetch(encodedURI, settings)
+      .then((res) => res.json())
+      .then((json) => {
+      for (var key in json.data) {
+        AVE=json.data[key]["A AVE Vote"]*100;
+      }
+      });
 
 
 
@@ -39,7 +39,7 @@ exports.getDefaultQuestion = async (req, res) => {
           officers: data[0].officers,
           proxyCode: data[0].Proxy_code,
           topic: data[0].Topic,
-        //  ave: AVE,
+          ave: AVE,
         });
       }
     });
@@ -371,6 +371,82 @@ exports.getExpandedHeader = async (req, res) => {
     });
   } catch (e) {
     console.log("getExpandedHeader fun bug");
+  }
+};
+////////////////////////////////////////////////////////
+exports.getOpenQuestionsInFund = async (req, res) => {
+  try {
+    const {userId} = req.body;
+    const user = await User.findOne({ _id: userId });
+  //  console.log("current user:", user);
+  
+    // get all corporates
+    console.log("getAllCorporate");
+   // const { fundname, chanell } = req.body;
+    let url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${user.fundName}&filter[Chanel]=${user.chanel}&page=0`;
+    // let url = `https://open-pension-tsofen.herokuapp.com/api/interests`;
+    const encodedURI = encodeURI(url);
+    const allResult = [];
+    let settings = { method: "Get" };
+    await fetch(encodedURI, settings)
+      .then((res) => res.json())
+      .then(async (json) => {
+        if (json.info.pages > 1) {
+          for (let i = 1; i <= json.info.pages; i++) {
+            url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${user.fundName}&filter[Chanel]=${user.chanel}&page=${i}`;
+            let encodedd = encodeURI(url);
+            await fetch(encodedd, settings)
+              .then((r) => r.json())
+              .then((data) => {
+                console.log(data);
+                for (var key in data.data) {
+                  if (data.data[key]["A AVE Vote"] > 0.05) {
+                    allResult.push(data.data[key]);
+                  }
+                }
+              });
+          }
+          // "fundname":"הראל", "chanell":"גמל/פנסיה"
+        } else {
+          for (var key in json.data) {
+            if (json.data[key]["A AVE Vote"] > 0.05) {
+              allResult.push(json.data[key]);
+            }
+          }
+        }
+      });
+      // group
+
+      const groupBy = (key) => (allResult) =>
+      allResult.reduce((objectsByKeyValue, obj) => {
+        const value = obj[key];
+        objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
+        return objectsByKeyValue;
+      }, {});
+
+    const groupByProxy = groupBy("Security_ID");
+    const groupedProxies = groupByProxy(allResult);
+    console.log(groupedProxies);
+    // for (var currentProxy in groupedProxies) {
+    //   console.log(currentProxy);
+     
+    //   let resultVotes = await Proxy.findOne({
+    //     Proxy_code: currentProxy,
+    //     result: true,
+    //   });
+    //   if (resultVotes !== null) resultCounter++;
+    // }
+
+      res.send({doc:allResult});
+
+
+
+
+
+   //////////////////////////////////////////////////////////////
+  } catch (e) {
+    console.log("getOpenQuestionsInFund fun bug");
+    res.send({ login: false});
   }
 };
 /////////////////////////////////////////////////////////////////

@@ -4,12 +4,16 @@ const jwt = require("jwt-simple");
 const secret = "1234";
 
 function checkRole(req, res, next) {
-  let role = req.cookies.role;
-  decRole = jwt.decode(role, secret);
-  if (decRole.role === "user") {
-    next();
-  } else {
-    res.send({ ok: false, messege: "you dont have Premeision" });
+  try {
+    let role = req.cookies.role;
+    decRole = jwt.decode(role, secret);
+    if ((decRole.role = "user")) {
+      next();
+    } else {
+      res.send({ ok: false, messege: "you dont have Premeision" });
+    }
+  } catch (e) {
+    res.send({ ok: false, messege: "you have to login" });
   }
 }
 router
@@ -23,14 +27,26 @@ router
 
 router
   .route("/get-Question-by-secur-Id")
-  .post(checkRole, proxyController.getQuestionBySecurId);
-router.route("/get-all-fund").post(proxyController.getAllFundNames); // {FundName:[]} Set
-router.route("/get-all-chanell").post(proxyController.getChanellNames); // request param= {fundname:String0} {chanell:[]} Set
-router.route("/get-all-Corporates").post(proxyController.getAllCorporate); // return {Coeporate:[]}
+  .post( proxyController.getQuestionBySecurId);
+router
+  .route("/get-all-fund")
+  .post(proxyController.getAllFundNames); // {FundName:[]} Set
+router
+  .route("/get-all-chanell")
+  .post(proxyController.getChanellNames); // request param= {fundname:String0} {chanell:[]} Set
+router
+  .route("/get-all-Corporates")
+  .post(proxyController.getAllCorporate); // return {Coeporate:[]}
 
-router.route("/get-fund-info").post(checkRole, proxyController.getFundInfo); // return
+router
+  .route("/get-fund-info")
+  .post( proxyController.getFundInfo); // return
 router
   .route("/get-expanded-header")
-  .post(checkRole, proxyController.getExpandedHeader); // return
+  .post( proxyController.getExpandedHeader); // return
+  router
+  .route("/open-questions-in-fund")
+  .post(proxyController.getOpenQuestionsInFund); // return
+
 
 module.exports = router;
