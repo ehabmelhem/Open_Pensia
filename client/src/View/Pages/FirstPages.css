@@ -1,4 +1,5 @@
 .body {
+  
   top   : 0px;
   left  : 0px;
   width : 375px;
@@ -8,6 +9,8 @@
   align-items : center;
   /* max-height: 600px; */
   border  :solid #3244831c;
+  
+ 
 }
 
 

@@ -8,6 +8,7 @@ page 31 : VoteDirectors //voting//
 page 15-19-32 : InfoDirector //voting// 
 page 33 : UploadInformation    //voting//
 page 12-13 : SignUp    //onboarding
+page 15: login //onboarding
 ____________
 dashboard:
 

@@ -25,7 +25,7 @@ import CompanyNamePrev from "./View/Components/newcom/CompanyNamePrev";
 import NavBarAfterLogIn from "./View/Components/newcom/NavBarAfterLogIn";
 import CompanyVotingStatus from "./View/Components/newcom/CompanyVotingStatus";
 import SignUpRequest from "./View/Pages/SignUpRequest";
-
+import Login from './View/Pages/Login';
 //NavBarAfterLogIn
 //CompanyVotingStatus
 function App() {
@@ -130,6 +130,11 @@ function App() {
               Page 15-19-32
             </NavLink>
           </li>
+          <li>
+            <NavLink exact to="Login">
+              Page login
+            </NavLink>
+          </li>
         </ul>
       </nav>
       <Switch>
@@ -223,6 +228,9 @@ function App() {
 
         <Route path="/InfoDirectorAfterLogin">
           <InfoDirector />
+        </Route>
+        <Route path="/Login">
+          <Login />
         </Route>
       </Switch>
     </div>
