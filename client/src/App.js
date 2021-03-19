@@ -20,8 +20,14 @@ import Body from "./View/Components/body/Body";
 import Header from "./View/Components/Header";
 import NavBarLists from "./View/Components/NavBarLists";
 import MainButton from "./View/Components/MainButton";
+import GroupEffectCont from "./View/Components/newcom/GroupEffectCont";
+import CompanyNamePrev from "./View/Components/newcom/CompanyNamePrev";
+import NavBarAfterLogIn from "./View/Components/newcom/NavBarAfterLogIn";
+import CompanyVotingStatus from "./View/Components/newcom/CompanyVotingStatus";
 import SignUpRequest from "./View/Pages/SignUpRequest";
 
+//NavBarAfterLogIn
+//CompanyVotingStatus
 function App() {
 
 
@@ -127,18 +133,20 @@ function App() {
         </ul>
       </nav>
       <Switch>
-        <Route path="/TestDashBoardIbraheem">
-          <Header company="בנק הפועלים" perception="18.3" />
-          <MainButton
-            myClass="main-button"
-            text="הצבעת הרווחת"
-            tolink="InfoDirectorAfterLogin"
-          />
+      <Route path="/TestDashBoardIbraheem">
+        <Header company='בנק הפועלים' perception='18.3'/>
         </Route>
+        <Route path="/TestDashBoardMalik">
+          <NavBarAfterLogIn></NavBarAfterLogIn>
+          <CompanyNamePrev></CompanyNamePrev>
+          <CompanyVotingStatus></CompanyVotingStatus>
+          <GroupEffectCont></GroupEffectCont>
+        </Route>
+
         <Route path="/TestDashBoardMosaab">
-          <Body />
-          <NavBarLists />
+     
         </Route>
+
         <Route path="/FirstPages_1">
           <FirstPages />
         </Route>
@@ -198,15 +206,15 @@ function App() {
         </Route>
 
         <Route path="/VotesHistory">
-          <VotesList title="היסטורית הצבעות" sort={0} />
+          <VotesList title="היסטורית הצבעות" status={{"results":true}}/>
         </Route>
 
         <Route path="/VoteBending">
-          <VotesList title="הצבעות ממתינות לתשובה" sort={1} />
+          <VotesList title="הצבעות ממתינות לתשובה" status={{"results":true}}/>
         </Route>
 
         <Route path="/OpenVotes">
-          <VotesList title="הצבעות פתוחות" sort={2} />
+          <VotesList title="הצבעות פתוחות" status="Open" />
         </Route>
 
         <Route path="/VoteDirectorsAfterLogin">

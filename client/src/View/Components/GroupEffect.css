@@ -1,0 +1,21 @@
+.GroupEffect{
+    margin-right: 72px;
+}
+
+.percentage{
+    font-size:  64px ;
+    font-weight: bold;
+}
+
+
+.perTitle{
+    font-size:  22px ;
+    font-weight: bold;
+    margin-top: -1px;
+    margin-bottom: -4px;
+}
+
+.desc{
+    color: lightgray;
+    font-size:  24px ;
+}
