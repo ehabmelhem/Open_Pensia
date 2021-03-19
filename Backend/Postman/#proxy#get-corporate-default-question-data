@@ -7,6 +7,10 @@ fetch('/proxy/get-corporate-default-question-data')
 ____________________________________________
 Json Request:
  { Security_ID:String }
+ // {fundName,chanel, Security_ID }
+ {fundName"הראל
+",chanel:"גמל/פנסיה
+", Security_ID:"412015" }
 
  e.x.: {
     "Security_ID":"520040700"

@@ -13,18 +13,33 @@ return: {ok:false}
 */
 exports.getDefaultQuestion = async (req, res) => {
   try {
-    const { Security_ID } = req.body;
+    const {fundName,chanel, Security_ID } = req.body;
 
     await Proxy.find({ Security_ID: Security_ID }).then((data) => {
       if (data.length === 0) {
         res.send({ Ok: false, messege: "the Security_ID did not exists" });
       } else {
+  //       let  AVE=1;
+  //    let url =
+  //     `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundName}&filter[Chanel]=${chanel}&filter[Security_ID]=${Security_ID}`
+  //  const encodedURI = encodeURI(url);
+  //   let settings = { method: "Get" };
+  //   await fetch(encodedURI, settings)
+  //     .then((res) => res.json())
+  //     .then((json) => {
+  //     for (var key in json.data) {
+  //       AVE=json.data[key]["A AVE Vote"]*100;
+  //     }
+  //     });
+
+
+
         res.send({
           OK: true,
           officers: data[0].officers,
           proxyCode: data[0].Proxy_code,
           topic: data[0].Topic,
-          ave: 0,
+        //  ave: AVE,
         });
       }
     });
