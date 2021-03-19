@@ -16,12 +16,10 @@ router
   .route("/get-corporate-default-question-data")
   .post(checkRole, proxyController.getDefaultQuestion);
 // /proxy/get-expanded-header POST
-//  check
 
 router
   .route("/all-Questions-of-corporate")
   .post(proxyController.getAllQuestions);
-//  check
 
 router
   .route("/get-Question-by-secur-Id")
@@ -29,10 +27,8 @@ router
 router.route("/get-all-fund").post(proxyController.getAllFundNames); // {FundName:[]} Set
 router.route("/get-all-chanell").post(proxyController.getChanellNames); // request param= {fundname:String0} {chanell:[]} Set
 router.route("/get-all-Corporates").post(proxyController.getAllCorporate); // return {Coeporate:[]}
-//  check
 
 router.route("/get-fund-info").post(checkRole, proxyController.getFundInfo); // return
-//  check
 router
   .route("/get-expanded-header")
   .post(checkRole, proxyController.getExpandedHeader); // return

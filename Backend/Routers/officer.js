@@ -18,7 +18,6 @@ router.route("/add-article").post(officerController.addArticle);
 router.route("/get-officer-data").post(officerController.officerData);
 
 router.route("/get-articles").post(officerController.officerArticles);
-//  check
 router.route("/add-vote").post(checkRole, officerController.addVote);
 
 router.route("/officer-percentages").post(officerController.officerPercentages);
