@@ -1,0 +1,26 @@
+fun: getDefaultQuestion
+
+path :  http://localhost:3002/proxy/get-corporate-default-question-data
+POST
+fetch('/proxy/get-corporate-default-question-data')
+
+____________________________________________
+Json Request:
+ { Security_ID:String }
+ // {fundName,chanel, Security_ID }
+ {fundName"הראל
+",chanel:"גמל/פנסיה
+", Security_ID:"412015" }
+
+ e.x.: {
+    "Security_ID":"520040700"
+}
+___________________________________________
+ Json Response:
+ {
+          OK: true,
+          officers: data[0].officers,
+          proxyCode: data[0].Proxy_code,
+          topic: data[0].Topic,
+          ave: 0,
+        }

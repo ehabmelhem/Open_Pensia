@@ -1,0 +1,22 @@
+fun: login
+
+path : http://localhost:3002/user/user-voting-history
+POST
+description: 
+fetch('/user/user-voting-history'){
+.....
+  ....
+  body
+}
+____________________________________________________
+Json Request:
+{"userId":"String"}
+
+{"userId":"604f03f62e7ffa6328494fd5"}
+{"userId":"6047f33d5533db453c01dec8"}
+e.x: TO BE ADDED
+_______________________________________________
+ Json Response:
+{ok:true,doc:data}
+
+ data is --> [questions]

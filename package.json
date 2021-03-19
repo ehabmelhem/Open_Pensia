@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"cd Backend && nodemon server.js",
-    "dev":"cd Backend && nodemon server.js  && cd .. && cd client && npm start",
-    "iall":"cd client && npm i && cd .. && cd Backend && npm i",
-    "build":"cd client && npm run build"
+    "start": "cd Backend && nodemon server.js",
+    "iall": "cd client && npm i && cd .. && cd Backend && npm i",
+    "build": "cd client && npm run build",
+    "client": "cd client && npm start",
+    "server": "cd Backend && nodemon server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -20,5 +22,15 @@
   "bugs": {
     "url": "https://github.com/ehabmelhem/Open_Pensia/issues"
   },
-  "homepage": "https://github.com/ehabmelhem/Open_Pensia#readme"
+  "homepage": "https://github.com/ehabmelhem/Open_Pensia#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bcrypt": "^5.0.1",
+    "concurrently": "^6.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.0",
+    "node-fetch": "^2.6.1",
+    "uuid": "^8.3.2"
+  }
 }

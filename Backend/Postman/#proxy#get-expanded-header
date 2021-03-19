@@ -1,0 +1,29 @@
+fun:
+
+path: http://localhost:3002/proxy/get-expanded-header
+POSTfetch('/proxy/get-expanded-header')
+_____________________________________________
+Json req:
+{"userId":"String", "Security_ID":"String"}
+
+{"userId":"604ecb5c3a4add242471d352", "Security_ID":"662577"}
+
+e.x: to be added
+https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=%D7%94%D7%A8%D7%90%D7%9C&filter[Chanel]=%D7%92%D7%9E%D7%9C/%D7%A4%D7%A0%D7%A1%D7%99%D7%94&filter[Security_ID]=662577
+______________________________________________
+respo:
+// get 5 parm dashboard p.23
+{company_name: String,AVE:Number,userOpen:Number,userPending:Number,userResults:Number}
+
+{
+    "ok": true,
+    "doc": {
+        "company_name": "פועלים",
+        "AVE": 4.26,
+        "userOpen": 1,
+        "userPending": 0,
+        "userResults": 0
+    }
+}
+
+
