@@ -13,26 +13,23 @@ return: {ok:false}
 */
 exports.getDefaultQuestion = async (req, res) => {
   try {
-    const {fundName,chanel, Security_ID } = req.body;
+    const { fundName, chanel, Security_ID } = req.body;
 
-    await Proxy.find({ Security_ID: Security_ID }).then(async(data) => {
+    await Proxy.find({ Security_ID: Security_ID }).then(async (data) => {
       if (data.length === 0) {
         res.send({ Ok: false, messege: "the Security_ID did not exists" });
-      } else  {
-        let  AVE=1;
-     let url =
-      `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundName}&filter[Chanel]=${chanel}&filter[Security_ID]=${Security_ID}`
-   const encodedURI = encodeURI(url);
-    let settings = { method: "Get" };
-    await fetch(encodedURI, settings)
-      .then((res) => res.json())
-      .then((json) => {
-      for (var key in json.data) {
-        AVE=json.data[key]["A AVE Vote"]*100;
-      }
-      });
-
-
+      } else {
+        let AVE = 1;
+        let url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundName}&filter[Chanel]=${chanel}&filter[Security_ID]=${Security_ID}`;
+        const encodedURI = encodeURI(url);
+        let settings = { method: "Get" };
+        await fetch(encodedURI, settings)
+          .then((res) => res.json())
+          .then((json) => {
+            for (var key in json.data) {
+              AVE = json.data[key]["A AVE Vote"] * 100;
+            }
+          });
 
         res.send({
           OK: true,
@@ -376,13 +373,13 @@ exports.getExpandedHeader = async (req, res) => {
 ////////////////////////////////////////////////////////
 exports.getOpenQuestionsInFund = async (req, res) => {
   try {
-    const {userId} = req.body;
+    const { userId } = req.body;
     const user = await User.findOne({ _id: userId });
-  //  console.log("current user:", user);
-  
+    //  console.log("current user:", user);
+
     // get all corporates
     console.log("getAllCorporate");
-   // const { fundname, chanell } = req.body;
+    // const { fundname, chanell } = req.body;
     let url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${user.fundName}&filter[Chanel]=${user.chanel}&page=0`;
     // let url = `https://open-pension-tsofen.herokuapp.com/api/interests`;
     const encodedURI = encodeURI(url);
@@ -415,9 +412,9 @@ exports.getOpenQuestionsInFund = async (req, res) => {
           }
         }
       });
-      // group
+    // group
 
-      const groupBy = (key) => (allResult) =>
+    const groupBy = (key) => (allResult) =>
       allResult.reduce((objectsByKeyValue, obj) => {
         const value = obj[key];
         objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
@@ -429,7 +426,7 @@ exports.getOpenQuestionsInFund = async (req, res) => {
     console.log(groupedProxies);
     // for (var currentProxy in groupedProxies) {
     //   console.log(currentProxy);
-     
+
     //   let resultVotes = await Proxy.findOne({
     //     Proxy_code: currentProxy,
     //     result: true,
@@ -437,16 +434,12 @@ exports.getOpenQuestionsInFund = async (req, res) => {
     //   if (resultVotes !== null) resultCounter++;
     // }
 
-      res.send({doc:allResult});
+    res.send({ doc: allResult });
 
-
-
-
-
-   //////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
   } catch (e) {
     console.log("getOpenQuestionsInFund fun bug");
-    res.send({ login: false});
+    res.send({ login: false });
   }
 };
 /////////////////////////////////////////////////////////////////
@@ -543,6 +536,14 @@ setInterval(async () => {
               newOfficers.push(obj);
             }
           }
+          newOfficers = [];
+          for (key in data.data) {
+            newOfficers.push({
+              officerId: data.data[key].Officers_ID,
+              officerName: data.data[key].Officers_Name,
+              officerImg: "///",
+            });
+          }
           await Proxy.update(
             { Proxy_code: elm.Proxy_code },
             { officers: newOfficers }
@@ -562,6 +563,23 @@ setInterval(async () => {
       });
   });
   // http://open-pension-tsofen.herokuapp.com/api/proxies?filter[Proxy_Code]=520040700/1
-}, 1000000);
+}, 10000);
 // 10000
 // i changed it just to stop update while coding
+
+// setInterval(async () => {
+//   await Proxy.find({}).then(async (data) => {
+//     data.map(async (proxy) => {
+//       var date = new Date(proxy.expiredDate);
+//       if (new Date() > date) {
+//         await Proxy.update(
+//           { Proxy_code: proxy.Proxy_code },
+//           { status: "Pending" }
+//         ).then(() => {
+//           console.log("update Status Proxy");
+//         });
+//       }
+//     });
+//   });
+// }, 10000);
+// // 86400000
