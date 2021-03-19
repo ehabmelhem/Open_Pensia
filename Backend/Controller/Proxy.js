@@ -169,11 +169,12 @@ exports.getAllCorporate = async (req, res) => {
       .then(async (json) => {
         if (json.info.pages > 1) {
           for (let i = 1; i <= json.info.pages; i++) {
-            url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundname}}&filter[Chanel]=${chanell}&page=${i}`;
+            url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundname}&filter[Chanel]=${chanell}&page=${i}`;
             let encodedd = encodeURI(url);
             await fetch(encodedd, settings)
               .then((r) => r.json())
               .then((data) => {
+                console.log(data);
                 for (var key in data.data) {
                   if (data.data[key]["A AVE Vote"] > 0.05) {
                     allResult.push(data.data[key]);
@@ -181,6 +182,7 @@ exports.getAllCorporate = async (req, res) => {
                 }
               });
           }
+          // "fundname":"הראל", "chanell":"גמל/פנסיה"
         } else {
           for (var key in json.data) {
             if (json.data[key]["A AVE Vote"] > 0.05) {
@@ -199,28 +201,28 @@ exports.getAllCorporate = async (req, res) => {
 
 exports.getFundInfo = async (req, res) => {
   // TODO:
-   //    ,openVoting:fundOpenQuestions
-      //    ,waitingVoting:"Number"
+  //    ,openVoting:fundOpenQuestions
+  //    ,waitingVoting:"Number"
 
   try {
-    const {userId} = req.body;
+    const { userId } = req.body;
 
-     const user = await User.findOne({_id:userId})
-     console.log(user)
-      if (user === null) {
-        res.send({ Ok: false, messege: "User not found" });
-      } else {
-        // {ok:true,firstPage:{"fundName":"String","chanel":"String","fundSrc":"String",
-        // "openVoting":"Number","waitingVoting":"Number","groupPower":"Number"}}
+    const user = await User.findOne({ _id: userId });
+    console.log(user);
+    if (user === null) {
+      res.send({ Ok: false, messege: "User not found" });
+    } else {
+      // {ok:true,firstPage:{"fundName":"String","chanel":"String","fundSrc":"String",
+      // "openVoting":"Number","waitingVoting":"Number","groupPower":"Number"}}
 
-        // get openVoting and waitingVoting
-       const openQuestions= await Proxy.find({"status":"Open"})
-       console.log(openQuestions)
-///////////////////////////////////////////////////////////////////////////////////////////////
-       // get list of corporates
+      // get openVoting and waitingVoting
+      const openQuestions = await Proxy.find({ status: "Open" });
+      console.log(openQuestions);
+      ///////////////////////////////////////////////////////////////////////////////////////////////
+      // get list of corporates
       // const allCorporates=this.getAllCorporate({ fundname:user.fundName, chanell:user.chanel })
       console.log("getAllCorporate");
-    //  const { fundname, chanell } = req.body;
+      //  const { fundname, chanell } = req.body;
       let url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${user.fundName}&filter[Chanel]=${user.chanel}&page=0`;
       // let url = `https://open-pension-tsofen.herokuapp.com/api/interests`;
       const encodedURI = encodeURI(url);
@@ -233,18 +235,19 @@ exports.getFundInfo = async (req, res) => {
           if (json.info.pages > 1) {
             for (let i = 1; i <= json.info.pages; i++) {
               console.log("in2");
-             // https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=%D7%94%D7%A8%D7%90%D7%9C&filter[Chanel]=%D7%92%D7%9E%D7%9C/%D7%A4%D7%A0%D7%A1%D7%99%D7%94&page=1
+              // https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=%D7%94%D7%A8%D7%90%D7%9C&filter[Chanel]=%D7%92%D7%9E%D7%9C/%D7%A4%D7%A0%D7%A1%D7%99%D7%94&page=1
               url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${user.fundName}}&filter[Chanel]=${user.chanel}&page=${i}`;
               let encodedd = encodeURI(url);
               await fetch(encodedd, settings)
                 .then((r) => r.json())
                 .then((data) => {
-                  console.log(data.data)
-                  for (var key in data.data) { // error is here, it could not enter the for loop
-                    // 
-                    console.log('in for')
-                    console.log(data.data[key]["A AVE Vote"])
-                    if (data.data[key]["A AVE Vote"]*10000 > 0.05) {
+                  console.log(data.data);
+                  for (var key in data.data) {
+                    // error is here, it could not enter the for loop
+                    //
+                    console.log("in for");
+                    console.log(data.data[key]["A AVE Vote"]);
+                    if (data.data[key]["A AVE Vote"] * 10000 > 0.05) {
                       console.log("in3");
                       allResult.push(data.data[key]);
                     }
@@ -260,45 +263,35 @@ exports.getFundInfo = async (req, res) => {
             }
           }
         });
-  ///////////////////////////////////////////////////////////////////////////////////////////////////
- // const fundOpenQuestions = openQuestions.filter(item => allResult.Security_ID.includes(item.Security_ID)).count();
-  
-  
-  // res.send({ OK: true, allResult });
+      ///////////////////////////////////////////////////////////////////////////////////////////////////
+      // const fundOpenQuestions = openQuestions.filter(item => allResult.Security_ID.includes(item.Security_ID)).count();
+
+      // res.send({ OK: true, allResult });
       ////////////////////////////////////////////////////////////
-      
+
       // groupPower
-      console.log('groupPower')
-      const groupPower = await User.find({fundName:user.fundName, chanel:user.chanel}).count()
-      console.log(groupPower)
- 
+      console.log("groupPower");
+      const groupPower = await User.find({
+        fundName: user.fundName,
+        chanel: user.chanel,
+      }).count();
+      console.log(groupPower);
 
-
-
-
-
-
-
-          res.send({
-            OK: true,firstPage:{fundName:user.fundName,chanel:user.chanel,fundSrc:"////"
-      //    ,openVoting:fundOpenQuestions
-      //    ,waitingVoting:"Number"
-      ,groupPower:groupPower
-          
-          
-          }
-          });
-        
-
-        
-
-        
-      }
+      res.send({
+        OK: true,
+        firstPage: {
+          fundName: user.fundName,
+          chanel: user.chanel,
+          fundSrc: "////",
+          //    ,openVoting:fundOpenQuestions
+          //    ,waitingVoting:"Number"
+          groupPower: groupPower,
+        },
+      });
+    }
     // res.send({
     //   OK: false
     // });
-
-
   } catch (e) {
     res.send({
       OK: false,
@@ -309,67 +302,73 @@ exports.getFundInfo = async (req, res) => {
 /////////////////////////////////////////////////////////////////////
 exports.getExpandedHeader = async (req, res) => {
   try {
-    const { userId,Security_ID } = req.body;
-    const user = await User.findOne({ _id: userId })
+    const { userId, Security_ID } = req.body;
+    const user = await User.findOne({ _id: userId });
 
     // get company_name and AVE - API
-    let company_name= '';
-    let  AVE=1;
-    let url =
-      `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${user.fundName}&filter[Chanel]=${user.chanel}&filter[Security_ID]=${Security_ID}`
-   const encodedURI = encodeURI(url);
+    let company_name = "";
+    let AVE = 1;
+    let url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${user.fundName}&filter[Chanel]=${user.chanel}&filter[Security_ID]=${Security_ID}`;
+    const encodedURI = encodeURI(url);
     let settings = { method: "Get" };
 
     await fetch(encodedURI, settings)
       .then((res) => res.json())
       .then((json) => {
-      for (var key in json.data) {
-        company_name=json.data[key]["company_name"];
-        console.log(company_name);
+        for (var key in json.data) {
+          company_name = json.data[key]["company_name"];
+          console.log(company_name);
 
-        AVE=json.data[key]["A AVE Vote"]*100;
-        console.log(AVE);
-      }
+          AVE = json.data[key]["A AVE Vote"] * 100;
+          console.log(AVE);
+        }
       });
 
-
     //Votes counters
-    const userVotes = user.votes
-    let resultCounter=0;
-    let OpenCounter=0;
-    let pendingCounter=0;
+    const userVotes = user.votes;
+    let resultCounter = 0;
+    let OpenCounter = 0;
+    let pendingCounter = 0;
 
-    const groupBy = key => userVotes =>
+    const groupBy = (key) => (userVotes) =>
       userVotes.reduce((objectsByKeyValue, obj) => {
         const value = obj[key];
         objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
         return objectsByKeyValue;
-
       }, {});
 
-    const groupByProxy = groupBy('proxyCode');
-    const groupedProxies = groupByProxy(userVotes)
-    console.log(groupedProxies)
-   for(var currentProxy in groupedProxies) {
-      console.log(currentProxy)
+    const groupByProxy = groupBy("proxyCode");
+    const groupedProxies = groupByProxy(userVotes);
+    console.log(groupedProxies);
+    for (var currentProxy in groupedProxies) {
+      console.log(currentProxy);
       // result Votes
-      let resultVotes=await Proxy.findOne({ Proxy_code: currentProxy,result: true });
-      if(resultVotes !== null)resultCounter++;
-  }
-
-    OpenCounter=await Proxy.find({ Security_ID:Security_ID,status:'Open'}).count();
-    pendingCounter=await Proxy.find({ expiredDate:  { $gte : new Date()},result: false }).count();
-   
-
-    res.send({ ok: true, doc:
-      {
-        company_name: company_name
-        ,AVE:AVE
-        ,userOpen:OpenCounter
-        ,userPending:pendingCounter
-        ,userResults:resultCounter
-    } 
+      let resultVotes = await Proxy.findOne({
+        Proxy_code: currentProxy,
+        result: true,
       });
+      if (resultVotes !== null) resultCounter++;
+    }
+
+    OpenCounter = await Proxy.find({
+      Security_ID: Security_ID,
+      status: "Open",
+    }).count();
+    pendingCounter = await Proxy.find({
+      expiredDate: { $gte: new Date() },
+      result: false,
+    }).count();
+
+    res.send({
+      ok: true,
+      doc: {
+        company_name: company_name,
+        AVE: AVE,
+        userOpen: OpenCounter,
+        userPending: pendingCounter,
+        userResults: resultCounter,
+      },
+    });
   } catch (e) {
     console.log("getExpandedHeader fun bug");
   }

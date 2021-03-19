@@ -7,7 +7,8 @@ const Proxy = require("../Schema/Proxy");
 const WaitingUser = require("../Schema/WaitingUser");
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
-
+const jwt = require("jwt-simple");
+const secret = "1234";
 exports.addUser = async (req, res) => {
   try {
     const flag = true;
@@ -170,7 +171,6 @@ exports.addApprovedUser = async (req, res) => {
 
         // add to officer
 
-
         const officerOfVote = await Officer.findOne({ officerId: e.officerId });
         // const officerOfVoteDetailes= {userId: savedUser._id,
         //   officerId: e.officerId,
@@ -202,14 +202,19 @@ exports.addApprovedUser = async (req, res) => {
           // const officerOfVote = await Officer.findOne({ officerId: e.officerId });
           console.log(e.proxyCode);
           const officerProxy = await Officer.findOne(
-            { $and: [{ officerId: e.officerId }, { votes: { $elemMatch: { proxyCode: e.proxyCode } } }] }
+            {
+              $and: [
+                { officerId: e.officerId },
+                { votes: { $elemMatch: { proxyCode: e.proxyCode } } },
+              ],
+            }
             //    { proxyCode: proxyCode },
             //   { votes: { $elemMatch: { proxyCode: proxyCode } } }
           );
           //  console.log(officerProxy);
           //  const officerProxy = await officerProxy.votes.findOne({ proxyCode: e.proxyCode });
           if (officerProxy === null) {
-            console.log('officerProxy is null, need newProxyVotes');
+            console.log("officerProxy is null, need newProxyVotes");
             const newProxyVotes = {
               proxyCode: e.proxyCode,
               allvotes: [
@@ -228,20 +233,17 @@ exports.addApprovedUser = async (req, res) => {
               { officerId: e.officerId },
               { $push: { votes: newProxyVotes } }
             );
-          }
-
-          else {
+          } else {
             const newVoteOfficer = {
-
               proxyCode: e.proxyCode,
               Security_ID: proxyOfVote.Security_ID,
               userId: savedUser._id,
-              voted: e.voted
-            }
+              voted: e.voted,
+            };
             //   db.collection.update(
             //     { "_id": ID, "playlists._id": "58"},
-            //     { "$push": 
-            //         {"playlists.$.musics": 
+            //     { "$push":
+            //         {"playlists.$.musics":
             //             {
             //                 "name": "test name",
             //                 "duration": "4.00"
@@ -250,15 +252,12 @@ exports.addApprovedUser = async (req, res) => {
             //     }
             // )
 
-
-
             await Officer.findOneAndUpdate(
               { officerId: e.officerId, "votes.proxyCode": e.proxyCode },
               {
-                "$push":
-                {
-                  "votes.$.allvotes": newVoteOfficer
-                }
+                $push: {
+                  "votes.$.allvotes": newVoteOfficer,
+                },
               }
             );
           }
@@ -311,6 +310,9 @@ exports.login = async (req, res) => {
         if (result == true) {
           // redirect to location
 
+          // create role for cookies
+          const jwtInc = jwt.encode({ role: "user", name: "yes" }, secret);
+          res.cookie("role", jwtInc, { httpOnly: true });
           // if (user.password === password) {
           res.send({ login: true, doc: user });
           // }
@@ -321,6 +323,7 @@ exports.login = async (req, res) => {
     }
   } catch (e) {
     console.log("login fun bug");
+    res.send({ login: false, messege: "cannot login" });
   }
 };
 /////////////////////////////////////////////////////////////////////
@@ -329,23 +332,22 @@ exports.getUserVotingHistory = async (req, res) => {
     const { userId } = req.body;
 
     const allHistory = [];
-    const user = await User.findOne({ _id: userId })
-    const userVotes = user.votes
+    const user = await User.findOne({ _id: userId });
+    const userVotes = user.votes;
 
-    const groupBy = key => userVotes =>
+    const groupBy = (key) => (userVotes) =>
       userVotes.reduce((objectsByKeyValue, obj) => {
         const value = obj[key];
         objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
         return objectsByKeyValue;
-
       }, {});
 
-    const groupByProxy = groupBy('proxyCode');
-    const groupedProxies = groupByProxy(userVotes)
-    console.log(groupedProxies)
+    const groupByProxy = groupBy("proxyCode");
+    const groupedProxies = groupByProxy(userVotes);
+    console.log(groupedProxies);
     for (var currentProxy in groupedProxies) {
-      console.log(currentProxy)
-      allHistory.push(await Proxy.findOne({ Proxy_code: currentProxy }))
+      console.log(currentProxy);
+      allHistory.push(await Proxy.findOne({ Proxy_code: currentProxy }));
     }
     res.send({ ok: true, doc: allHistory });
   } catch (e) {
