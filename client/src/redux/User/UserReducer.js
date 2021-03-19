@@ -12,6 +12,7 @@ const initialState = {
   userFirstName: "",
   userlastName: "",
   userEmail: "",
+  userPassword: "",
   userStatus: "",
   loading: false,
   error: "",
@@ -26,9 +27,11 @@ const UserReducer = (state = initialState, action) => {
       };
     case USER_LOGIN_SUCCESS:
       return {
+        ...state,
         userFirstName: action.payload.firstName,
         userlastName: action.payload.lastName,
         userEmail: action.payload.email,
+        userPassword: action.payload.password,
         userStatus: action.payload.status,
         loading: false,
         error: "",
@@ -38,6 +41,7 @@ const UserReducer = (state = initialState, action) => {
         userFirstName: "",
         userlastName: "",
         userEmail: "",
+        userPassword: "",
         userStatus: "",
         loading: false,
         error: action.payload.error,
@@ -47,6 +51,7 @@ const UserReducer = (state = initialState, action) => {
         userFirstName: "",
         userlastName: "",
         userEmail: "",
+        userPassword: "",
         userStatus: "",
         loading: false,
       };
@@ -61,6 +66,7 @@ const UserReducer = (state = initialState, action) => {
         userFirstName: action.payload.firstName,
         userlastName: action.payload.lastName,
         userEmail: action.payload.email,
+        userPassword: action.payload.password,
         userStatus: action.payload.status,
         loading: false,
         error: "",
@@ -70,6 +76,7 @@ const UserReducer = (state = initialState, action) => {
         userFirstName: "",
         userlastName: "",
         userEmail: "",
+        userPassword: "",
         userStatus: "",
         loading: false,
         error: action.payload.error,
