@@ -27,26 +27,17 @@ router
 
 router
   .route("/get-Question-by-secur-Id")
-  .post( proxyController.getQuestionBySecurId);
-router
-  .route("/get-all-fund")
-  .post(proxyController.getAllFundNames); // {FundName:[]} Set
-router
-  .route("/get-all-chanell")
-  .post(proxyController.getChanellNames); // request param= {fundname:String0} {chanell:[]} Set
-router
-  .route("/get-all-Corporates")
-  .post(proxyController.getAllCorporate); // return {Coeporate:[]}
+  .post(proxyController.getQuestionBySecurId);
+router.route("/get-all-fund").post(proxyController.getAllFundNames); // {FundName:[]} Set
+router.route("/get-all-chanell").post(proxyController.getChanellNames); // request param= {fundname:String0} {chanell:[]} Set
+router.route("/get-all-Corporates").post(proxyController.getAllCorporate); // return {Coeporate:[]}
 
-router
-  .route("/get-fund-info")
-  .post( proxyController.getFundInfo); // return
+router.route("/get-fund-info").post(checkRole, proxyController.getFundInfo); // return
 router
   .route("/get-expanded-header")
-  .post( proxyController.getExpandedHeader); // return
-  router
+  .post(checkRole, proxyController.getExpandedHeader); // return
+router
   .route("/open-questions-in-fund")
   .post(proxyController.getOpenQuestionsInFund); // return
-
 
 module.exports = router;
