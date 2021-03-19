@@ -5,9 +5,15 @@ import './Body.css'
 export default function ListQuestions(props) {
     return (
         <div id="allList">
-            {props.questionsList.map((item)=>{
-                if(item.sort == props.sort)
-             return  <CardListItem  hideImg="hideImg" name={item.name} par={item.par} />
+            {props.questionsList.map((item, index) => {
+                if (item.sort == props.sort)
+                    return <CardListItem
+                        key={index}
+                        hideImg="hideImg"
+                        name={item.name}
+                        par={item.par}
+                        link="/"
+                    />
             })}
         </div>
     )

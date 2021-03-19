@@ -20,7 +20,7 @@ const initialState = {
         ave: '',
         officers: []
     },
-    loading = false,
+    loading: false,
     error: ''
 };
 
@@ -66,7 +66,7 @@ const CompanyReducer = (state = initialState, action) => {
                 securityID: action.payload.securityID,
                 companyName: action.payload.companyName,
                 questions: [],
-                defaultQuestion: action.payload.defaultQuestionInfo,
+                defaultQuestion: action.payload.defaultQuestion
             };
         case FETCH_DEFAULT_QUESTION_FAILURE:
             return {

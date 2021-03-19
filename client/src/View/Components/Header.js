@@ -13,10 +13,10 @@ export default function Header(props) { // height width tolink text
                 <h1>{props.company}</h1>
             </div>
             <h1>{props.perception}%</h1>
-            <h0>שיעור ההחזקה שלך</h0>
+            <h4>שיעור ההחזקה שלך</h4>
             <div className='vote-status-dashboard2'>
-                {myarr.map(vote => {
-                    return (<VoteStatus number={vote.number} description={vote.descreption} />);
+                {myarr.map((vote, index) => {
+                    return (<VoteStatus key={index} number={vote.number} description={vote.descreption} />);
                 })}
             </div>
         </div >

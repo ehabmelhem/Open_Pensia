@@ -11,9 +11,9 @@ export default function CompaniesListSelect() {
         dispatch(fetchCompanies())
     }, []);
     let companies = useSelector(state => !!state.CompaniesListReducer && state.CompaniesListReducer.companies);
-    function handleClick(Security_ID) {
-        console.log(Security_ID);
-        dispatch(fetchCompanyDefaultQuestion(Security_ID));
+    function handleClick(securityID, companyName) {
+        console.log(securityID);
+        dispatch(fetchCompanyDefaultQuestion(securityID, companyName));
 
     }
     return (
@@ -34,7 +34,7 @@ export default function CompaniesListSelect() {
                         logo='https://www.logolynx.com/images/logolynx/56/56f9957253c5718361c93a52c1ab950d.png'
                         name={company.company_name}
                         par={company['Sector Nisha']}
-                        onClick={() => handleClick(company.Security_ID)}
+                        onClick={() => handleClick(company.Security_ID, company.company_name)}
                         link={"VoteDirectors"}
                     />
                 );
