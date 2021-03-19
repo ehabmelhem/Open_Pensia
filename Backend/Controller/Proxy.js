@@ -15,22 +15,22 @@ exports.getDefaultQuestion = async (req, res) => {
   try {
     const {fundName,chanel, Security_ID } = req.body;
 
-    await Proxy.find({ Security_ID: Security_ID }).then((data) => {
+    await Proxy.find({ Security_ID: Security_ID }).then(async(data) => {
       if (data.length === 0) {
         res.send({ Ok: false, messege: "the Security_ID did not exists" });
-      } else {
-  //       let  AVE=1;
-  //    let url =
-  //     `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundName}&filter[Chanel]=${chanel}&filter[Security_ID]=${Security_ID}`
-  //  const encodedURI = encodeURI(url);
-  //   let settings = { method: "Get" };
-  //   await fetch(encodedURI, settings)
-  //     .then((res) => res.json())
-  //     .then((json) => {
-  //     for (var key in json.data) {
-  //       AVE=json.data[key]["A AVE Vote"]*100;
-  //     }
-  //     });
+      } else  {
+        let  AVE=1;
+     let url =
+      `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundName}&filter[Chanel]=${chanel}&filter[Security_ID]=${Security_ID}`
+   const encodedURI = encodeURI(url);
+    let settings = { method: "Get" };
+    await fetch(encodedURI, settings)
+      .then((res) => res.json())
+      .then((json) => {
+      for (var key in json.data) {
+        AVE=json.data[key]["A AVE Vote"]*100;
+      }
+      });
 
 
 
@@ -39,7 +39,7 @@ exports.getDefaultQuestion = async (req, res) => {
           officers: data[0].officers,
           proxyCode: data[0].Proxy_code,
           topic: data[0].Topic,
-        //  ave: AVE,
+          ave: AVE,
         });
       }
     });
