@@ -3,11 +3,12 @@ import "./Header.css";
 import Arrow from "./Arrow";
 import VoteStatus from "./VoteStatus";
 import { Switch, Route, Link, NavLink } from "react-router-dom";
+import {useSelector} from 'react-redux';
 
-export default function Header(props) {
+export default function Header({companyName, securityID}) {
   // height width tolink text
 
-  const [allData, setAllData] = useState(null);
+
 /*
   useState(() => {
     fetch("/proxy/get-expanded-header",{
@@ -28,19 +29,21 @@ export default function Header(props) {
     { number:2, descreption: "ממתינות" },
     { number:5, descreption: "הצבעות שלי" },
   ];
-  let company_name ="בנק הפועלים"
-  let AVE =25
+  
+  let AVE =25;
+
+  console.log(useSelector(state=>state.CompanyReducer))
 
   return (
     <div className="container1">
       <div className="page_above">
         <Arrow arrowToLink="/CompaniesList" color="white" />
-       {/* <h1>{allData.company_name}</h1>*/}
-        <h1>{company_name}</h1>
+     
+        <h1>{companyName}</h1>
       </div>
      {/* <h1>{allData.AVE}%</h1>*/}
      <h1>{AVE}%</h1>
-      <h0>שיעור ההחזקה שלך</h0>
+      <p>שיעור ההחזקה שלך</p>
       <div className="vote-status-dashboard2">
         {myarr.map((vote) => {
           return (

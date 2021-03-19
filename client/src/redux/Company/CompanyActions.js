@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {
     //COMPANY
+    SET_COMPANY_DETAILS,
     FETCH_QUESTIONS_REQUEST,
     FETCH_QUESTIONS_SUCCESS,
     FETCH_QUESTIONS_FAILURE,
@@ -12,6 +13,19 @@ import {
 
 
 // COMPANY Action Creators
+
+//comapany details
+export const setCompanyDetails = (companyName, securityID) => {
+    console.log('setCompanyDetails',companyName, securityID)
+    return ({
+
+        type: SET_COMPANY_DETAILS,
+        payload: {
+            companyName,
+            securityID
+        }
+    })
+}
 
 // Questions
 export const fetchQuestionsRequest = () => ({
@@ -42,10 +56,11 @@ export function fetchCompanyQuestions(securityID, companyName) {
 }
 
 
-function _fetchCompanyQuestions(dispatch, companyName, securityID) {
+export function _fetchCompanyQuestions(dispatch, securityID) {
+    console.log('aaaaaa')
     dispatch(fetchQuestionsRequest());
     console.log('insede _fetchCompanyQuestions')
-    axios.post('/proxy/all-Questions-of-corporate', {
+    axios.post('/proxy/get-Question-by-secur-Id', {
         "Security_ID": securityID
     })
         .then(res => {
@@ -53,7 +68,6 @@ function _fetchCompanyQuestions(dispatch, companyName, securityID) {
             console.log('inside the get fetchCompanyQuestions().then');
             dispatch(fetchQuestionsSuccess({
                 securityID,
-                companyName,
                 questions: res.data,
             }));
             console.log(res.data);
