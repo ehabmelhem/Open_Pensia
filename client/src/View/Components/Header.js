@@ -9,14 +9,16 @@ export default function Header({companyName, securityID}) {
   // height width tolink text
 
 
-/*
+
   useState(() => {
     fetch("/proxy/get-expanded-header",{
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({"Security_ID": `${props.security_ID}`, "userId": `${props.userId}`}).then((r) => r.json()).then((data) => {setAllData(data)}),
+      body: JSON.stringify({"Security_ID": `${securityID}`, "userId": `604f03f62e7ffa6328494fd5`})
+      .then((r) => r.json())
+      .then((data) => {console.log(data)}),
     });
-  }, []);*/
+  }, []);
 
   /*let myarr = [
     { number:allData.userOpen, descreption: "פתוחות" },
