@@ -1,0 +1,29 @@
+#divCompanyNamesIn {
+    width: 90%;
+}
+
+#divCompanyNames {
+    text-align: right;
+    width: 100%;
+    margin: auto auto auto auto;
+    max-width: 600px;
+    min-width: 375px;
+}
+    
+    #firstP{
+        margin-top: 0;
+        color: #3D4257;
+        font-size: 57px;
+        margin-bottom: 0;
+        font-weight: bold;
+    }
+    
+    #secP{
+        color: lightgray;
+        font-size: 57px;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+
+  

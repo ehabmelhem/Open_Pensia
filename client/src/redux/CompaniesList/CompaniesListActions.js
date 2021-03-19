@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-
 import {
     //COMPANIES LIST
     FETCH_COMPANIES_REQUEST,
@@ -9,7 +7,7 @@ import {
 
 } from '../actionTypes';
 
-// COMPANIES LIST Actions
+// COMPANIES LIST Action Creators
 
 export const fetchCompaniesRequest = () => ({
     type: FETCH_COMPANIES_REQUEST
@@ -30,24 +28,21 @@ export const fetchCompaniesFailure = (error) => ({
 });
 
 
-export const getCompanies = () => {
-
-    console.log('before fetch')
-    return axios.post('/proxy/get-all-Corporates', {
-        "fundname": "מור",
-        "chanell": "גמל/פנסיה"
-    })
-
-
-}
-
-
 export function fetchCompanies() {
     return dispatch => {
-        return getCompanies()
-            .then(data => {
-                console.log(data.data.allResult);
-                dispatch(fetchCompaniesSuccess(data.data.allResult))
+        
+        dispatch(fetchCompaniesRequest())
+        return axios.post('/proxy/get-all-Corporates', {
+            "fundname": "מור",
+            "chanell": "גמל/פנסיה"
+        })
+            .then(res => {
+                console.log('inside the get companies().then')
+                console.log(res.data.allResult);
+                dispatch(fetchCompaniesSuccess(res.data.allResult))
+            })
+            .catch(error => {
+                dispatch(fetchCompaniesFailure(error.message))
             })
     }
 }

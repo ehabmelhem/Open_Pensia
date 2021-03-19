@@ -1,24 +1,37 @@
 import React, { useEffect } from 'react';
-import { fetchCompanies } from '../../redux/CompaniesList/CompaniesListActions';
-import {useDispatch} from 'react-redux';
-// import { CompanyBar } from '../Components/CardListItem';
+import { fetchCompanies, fetchCompanyQuestions } from '../../redux';
+import { useDispatch, useSelector } from 'react-redux';
+import CardListItem from '../Components/CardListItem';
 
 function CompaniesList(props) {
     const dispatch = useDispatch();
-    useEffect(()=> {
-        console.log(fetchCompanies);
-       dispatch(fetchCompanies())
-    },[]);
-    
 
+    useEffect(() => {
+        dispatch(fetchCompanies());
+
+    }, []);
+    let companies = useSelector(state => state.CompaniesListReducer.companies)
+    // function handleClick(securityID, companyName) {
+    //     console.log('....', securityID, companyName)
+    //     dispatch(fetchCompanyQuestions(securityID, companyName));
+    // }
     return (
         <div>
             {
-                // props.companies.map(company => {
-                //     return (
-                //         <CompanyBar />
-                //     )
-                // })
+                !!companies && companies.map(company => {
+                    console.log(company)
+                    return (
+                        <CardListItem
+                            securityID={company.Security_ID}
+                            companyName={company.company_name}
+                            key={company.Security_ID}
+                            logo='https://www.logolynx.com/images/logolynx/56/56f9957253c5718361c93a52c1ab950d.png'
+                            sectorNisha={company['Sector Nisha']}
+                            // onClick={() => handleClick(company.Security_ID, company.company_name)}
+                            toLink='CompanyInfo'
+                        />
+                    )
+                })
             }
         </div>
     )

@@ -1,0 +1,27 @@
+
+.loginpage {
+    top   : 0px;
+    left  : 0px;
+    width : 375px;
+    height: 667px;
+    text-align  : center;
+    margin      : auto;
+    /* max-height: 600px; */
+    border  :solid #3244831c;
+    direction: rtl;
+   
+  }
+  .message{
+    color:red;
+    text-align: center;
+}
+
+.login{
+margin-top: 50px;
+  left: 16px;
+  width: 343px;
+  height: 38px;
+  background: #3D4257 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 1px #00000024;
+  opacity: 1;
+  }

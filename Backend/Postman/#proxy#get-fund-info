@@ -1,0 +1,29 @@
+fun: 
+
+path : http://localhost:3002/proxy/get-fund-info
+
+description: 
+POST
+fetch('/proxy/get-fund-info'){
+.....
+  ....
+  body
+}
+
+Json Request:
+{"userId":"string"}
+{"userId":"604f03f62e7ffa6328494fd5"}
+
+
+
+e.x: TO BE ADDED
+
+
+ Json Response:
+ {ok:true,firstPage:{"fundName":"String","chanel":"String","fundSrc":"String","openVoting":"Number","waitingVoting":"Number","groupPower":"Number"}}
+
+* groupPower stands for the 50%
+* the 14% will be dumb number
+* fundSrc will be empty 			
+			
+			

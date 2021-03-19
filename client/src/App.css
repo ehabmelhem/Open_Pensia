@@ -46,13 +46,16 @@
   object-fit:contain;
 }
 
-.main-button{
-  background-color: #3d4257;
-  color: #e6e7ea;
+.main-btn{
+  background-color:rgb(61, 66, 87);
+  color: rgb(226, 227, 230);
+  width: 60%;
+  padding: 15px;
   border-radius: 5px;
-  box-shadow: 0 6px 2.5px -3px #ccc;
-  padding: 1%;
-  font-size: medium;
-  height: 10%;
-  width: 80%;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 3%;
+  border: none !important;
+  outline:none !important;
+  
 }

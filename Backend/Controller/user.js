@@ -6,44 +6,9 @@ const Officer = require("../Schema/Officer");
 const Proxy = require("../Schema/Proxy");
 const WaitingUser = require("../Schema/WaitingUser");
 const { v4: uuidv4 } = require("uuid");
-const bcrypt = require('bcrypt');
-
-// const officerController = require("../Controller/officer");
-
-/* 
-dis: add a new user
-parameters: user info from client
-return: {ok:true}
-return: {ok: false,message:'could not add user'}			 
-*/
-/**
- * 
- {
-      "firstName": "Rami",
-      "lastName": "Mohammed",
-      "email": "rami.mohammed@gmail.com",
-      "phone": "0502134551",
-      "password": "pass123",
-      "fundName": "הראל",
-      "chanel": "גמל/פנסיה",
-      "vote": 
-        {
-          "proxyCode": "12345678",
-          "officerId": "87654321",
-          "voted": 1
-        },
-        "newArticle":{
-      "officerId":"123",
-      "articleId":"77777",
-      "articleTitle": "My Article",
-      "articleText": "this is an article",
-      "articleUrl": "url"
-    }
-
-
-    }
-
- */
+const bcrypt = require("bcrypt");
+const jwt = require("jwt-simple");
+const secret = "1234";
 exports.addUser = async (req, res) => {
   try {
     const flag = true;
@@ -147,11 +112,8 @@ exports.addUser = async (req, res) => {
 exports.addApprovedUser = async (req, res) => {
   try {
     const flag = true;
-    const {
-      email
-    } = req.body;
+    const { email } = req.body;
     console.log("in fun addApprovedUser");
-
 
     var datetime = new Date();
 
@@ -159,7 +121,7 @@ exports.addApprovedUser = async (req, res) => {
     const user = await WaitingUser.findOne({ email: email });
 
     if (user !== null) {
-      console.log('in if');
+      console.log("in if");
       const newUser = new User({
         firstName: user.firstName,
         lastName: user.lastName,
@@ -170,51 +132,45 @@ exports.addApprovedUser = async (req, res) => {
         fundName: user.fundName,
         chanel: user.chanel,
         registerDate: user.datetime,
-        votes: user.votes
+        votes: user.votes,
       });
 
       await newUser.save().then(() => {
         console.log("new Approved user saved to User Schema");
       });
 
-
       // add votes to proxy and officer
 
       const savedUser = await User.findOne({ email: email });
       newUser.votes.forEach(async (e) => {
-        console.log(e);
+        //  console.log(e);
         // add to proxy
         const proxyOfVote = await Proxy.findOne({ Proxy_code: e.proxyCode });
-        console.log(proxyOfVote);
+        // console.log(proxyOfVote);
         const proxyOfVoteDetailes = {
           userId: savedUser._id,
           officerId: e.officerId,
-          voted: e.voted
-        }
+          voted: e.voted,
+        };
         if (proxyOfVote.votes !== null) {
-          console.log('proxy of votes :' + proxyOfVote.votes);
+          //   console.log("proxy of votes :" + proxyOfVote.votes);
           await Proxy.findOneAndUpdate(
             { Proxy_code: e.proxyCode },
-            { $push: { "votes": proxyOfVoteDetailes } }
+            { $push: { votes: proxyOfVoteDetailes } }
           );
-          proxyOfVote.votes.push(proxyOfVoteDetailes);
-          console.log('proxy votes is not null');
-        }
-        else {
+          //   proxyOfVote.votes.push(proxyOfVoteDetailes);
+          console.log("proxy votes is not null");
+        } else {
           const newArray = [proxyOfVoteDetailes];
-          await Proxy.findOneAndUpdate({ Proxy_code: e.proxyCode }, { votes: newArray })
+          await Proxy.findOneAndUpdate(
+            { Proxy_code: e.proxyCode },
+            { votes: newArray }
+          );
           console.log(newArray);
         }
 
         // add to officer
-        let like = 0;
-        let absent = 0;
-        let dislike = 0;
-        console.log('counter 0');
-        if (e.voted === 1) { like++; }
-        if (e.voted === 0) { absent++; }
-        if (e.voted === -1) { dislike++; }
-        console.log('counter set');
+
         const officerOfVote = await Officer.findOne({ officerId: e.officerId });
         // const officerOfVoteDetailes= {userId: savedUser._id,
         //   officerId: e.officerId,
@@ -222,6 +178,7 @@ exports.addApprovedUser = async (req, res) => {
 
         //if officer votes null
         if (officerOfVote.votes === null) {
+          console.log("officerOfVote.votes is null");
           const newVotes = [
             {
               proxyCode: e.proxyCode,
@@ -233,24 +190,32 @@ exports.addApprovedUser = async (req, res) => {
                   voted: e.voted,
                 },
               ],
-              likesCounter: like,
-              absentCounter: absent,
-              disLikesCounter: dislike,
             },
           ];
-          await Officer.findOneAndUpdate({ Proxy_code: e.proxyCode }, { votes: newVotes })
-
+          await Officer.findOneAndUpdate(
+            { Proxy_code: e.proxyCode },
+            { votes: newVotes }
+          );
         } else {
           // if officer votes has an array
 
           // const officerOfVote = await Officer.findOne({ officerId: e.officerId });
-          const officerProxy = await Officer.findOne({ proxyCode: e.proxyCode },
-            { votes: { $elemMatch: { proxyCode: e.proxyCode } } })
-          console.log(officerProxy);
+          console.log(e.proxyCode);
+          const officerProxy = await Officer.findOne(
+            {
+              $and: [
+                { officerId: e.officerId },
+                { votes: { $elemMatch: { proxyCode: e.proxyCode } } },
+              ],
+            }
+            //    { proxyCode: proxyCode },
+            //   { votes: { $elemMatch: { proxyCode: proxyCode } } }
+          );
+          //  console.log(officerProxy);
           //  const officerProxy = await officerProxy.votes.findOne({ proxyCode: e.proxyCode });
           if (officerProxy === null) {
-            const newProxyVotes =
-            {
+            console.log("officerProxy is null, need newProxyVotes");
+            const newProxyVotes = {
               proxyCode: e.proxyCode,
               allvotes: [
                 {
@@ -260,29 +225,54 @@ exports.addApprovedUser = async (req, res) => {
                   voted: e.voted,
                 },
               ],
-              likesCounter: like,
-              absentCounter: absent,
-              disLikesCounter: dislike,
             };
             //   await Officer.findOneAndUpdate({ Proxy_code: e.proxyCode }, {votes:newVotes})
             //   db.inventory.find( { $and: [ { price: { $ne: 1.99 } }, { price: { $exists: true } } ] } )
             //    { $inc: { no_of_likes: 1 }, "$push": { "users": userInfo } }
             await Officer.findOneAndUpdate(
               { officerId: e.officerId },
-              { $push: { "votes": newProxyVotes } }
+              { $push: { votes: newProxyVotes } }
+            );
+          } else {
+            const newVoteOfficer = {
+              proxyCode: e.proxyCode,
+              Security_ID: proxyOfVote.Security_ID,
+              userId: savedUser._id,
+              voted: e.voted,
+            };
+            //   db.collection.update(
+            //     { "_id": ID, "playlists._id": "58"},
+            //     { "$push":
+            //         {"playlists.$.musics":
+            //             {
+            //                 "name": "test name",
+            //                 "duration": "4.00"
+            //             }
+            //         }
+            //     }
+            // )
+
+            await Officer.findOneAndUpdate(
+              { officerId: e.officerId, "votes.proxyCode": e.proxyCode },
+              {
+                $push: {
+                  "votes.$.allvotes": newVoteOfficer,
+                },
+              }
             );
           }
-
         }
-        // else{
       });
-      ///////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////
       // add new article to officer
       addNewArticle(user.article);
       /////////////////////////////////////////////////////////////////////////////////
-      console.log('in if3');
+      console.log("in if3");
       if (flag) {
-        const updateStaus = await WaitingUser.findOneAndUpdate({ email: email }, { status: "Transferred" });
+        const updateStaus = await WaitingUser.findOneAndUpdate(
+          { email: email },
+          { status: "Transferred" }
+        );
         res.send({
           Ok: true,
           doc: newUser,
@@ -301,40 +291,69 @@ exports.addApprovedUser = async (req, res) => {
     res.send({ Ok: false });
   }
 };
-
-
 ////////////////////////////////////////////////////////
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(email, password)
+    console.log(email, password);
 
     const user = await User.findOne({ email });
-    console.log('current user:', user)
+    console.log("current user:", user);
 
     if (user === null) {
-      res.send({ ok: false, message: 'couldnt find such a user or user is not approved yet ' })
+      res.send({
+        ok: false,
+        message: "couldnt find such a user or user is not approved yet ",
+      });
     } else {
-
       bcrypt.compare(password, user.password, function (err, result) {
         if (result == true) {
           // redirect to location
 
+          // create role for cookies
+          const jwtInc = jwt.encode({ role: "user", name: "yes" }, secret);
+          res.cookie("role", jwtInc, { httpOnly: true });
           // if (user.password === password) {
-          res.send({ login: true, doc: user })
-          // } 
+          res.send({ login: true, doc: user });
+          // }
+        } else {
+          res.send({ login: false, message: "Password is incorrect" });
         }
-        else {
-          res.send({ login: false, message: 'Password is incorrect' })
-        }
-      })
-
-
+      });
     }
   } catch (e) {
-    console.log('login fun bug');
+    console.log("login fun bug");
+    res.send({ login: false, messege: "cannot login" });
   }
-}
+};
+/////////////////////////////////////////////////////////////////////
+exports.getUserVotingHistory = async (req, res) => {
+  try {
+    const { userId } = req.body;
+
+    const allHistory = [];
+    const user = await User.findOne({ _id: userId });
+    const userVotes = user.votes;
+
+    const groupBy = (key) => (userVotes) =>
+      userVotes.reduce((objectsByKeyValue, obj) => {
+        const value = obj[key];
+        objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
+        return objectsByKeyValue;
+      }, {});
+
+    const groupByProxy = groupBy("proxyCode");
+    const groupedProxies = groupByProxy(userVotes);
+    console.log(groupedProxies);
+    for (var currentProxy in groupedProxies) {
+      console.log(currentProxy);
+      allHistory.push(await Proxy.findOne({ Proxy_code: currentProxy }));
+    }
+    res.send({ ok: true, doc: allHistory });
+  } catch (e) {
+    console.log("getUserVotingHistory fun bug");
+  }
+};
 /////////////////////////////////////////////////////////////////////
 async function addNewArticle(article) {
   console.log(article);
@@ -343,14 +362,14 @@ async function addNewArticle(article) {
       await Officer.find({ officerId: article.officerId }).then(
         async (data) => {
           if (data.length !== 0) {
-            if (article.articleStatus === 'Approved') {
+            if (article.articleStatus === "Approved") {
               const allArticle = data[0].officerArticles;
               const Articletoupdate = {
                 articleId: uuidv4(),
                 articleTitle: article.articleTitle,
                 articleText: article.articleText,
                 articleUrl: article.articleUrl,
-                articleStatus: article.articleStatus
+                articleStatus: article.articleStatus,
               };
               allArticle.push(Articletoupdate);
               await Officer.update(
@@ -375,7 +394,6 @@ async function addNewArticle(article) {
       );
     }
   } catch (e) {
-    console.log('add article fun bug');
+    console.log("add article fun bug");
   }
-};
-
+}

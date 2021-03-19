@@ -1,0 +1,19 @@
+#buttonShow{
+    width: 100%;
+     height: 48px;
+     color:#324483;
+     outline: none;
+}
+
+.selected{
+   border: 4px solid #324483;
+   border-top: none;
+   border-left: none;
+   border-right: none;
+}
+.notSelected{
+   border: 4px solid #bdbdbd;
+   border-top: none;
+   border-left: none;
+   border-right: none;
+}
