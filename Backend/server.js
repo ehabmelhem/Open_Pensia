@@ -1,7 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-var cors = require('cors');
+var cors = require("cors");
 
+var cookieParser = require("cookie-parser");
 
 const officer = require("./Routers/officer");
 const proxy = require("./Routers/Proxy");
@@ -12,8 +13,8 @@ const officerSchema = require("./Schema/Officer");
 
 const app = express();
 
-app.use(cors())
-
+app.use(cors());
+app.use(cookieParser());
 
 const mongoose = require("mongoose");
 const userModel = require("./Schema/User");
@@ -35,14 +36,13 @@ db.once("open", () => {
   console.log("we are connected to DB");
 });
 
-let article={
-  officerId:"64516271",
-  articleId:"00000000006",
+let article = {
+  officerId: "64516271",
+  articleId: "00000000006",
   articleTitle: "My Article my article works",
   articleText: "this is an article____my article___________",
-  articleUrl: "url"
-}
-
+  articleUrl: "url",
+};
 
 // var add = new officerSchema({
 //   officerId: "123",

@@ -21,13 +21,9 @@ import Header from "./View/Components/Header";
 import NavBarLists from "./View/Components/NavBarLists";
 import MainButton from "./View/Components/MainButton";
 import SignUpRequest from "./View/Pages/SignUpRequest";
-
 import Login from './View/Pages/Login';
 //NavBarAfterLogIn
 //CompanyVotingStatus
-
-
-
 function App() {
 
 
