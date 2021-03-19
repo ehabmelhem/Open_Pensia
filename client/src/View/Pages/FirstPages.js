@@ -1,8 +1,7 @@
-<<<<<<< HEAD
 
 import React, { useState, useEffect } from 'react';
 
-import './FirstPages.css'
+import './FirstPages.css';
 
 export default function FirstPages() {
      let firstPages=[
@@ -19,20 +18,15 @@ export default function FirstPages() {
       setindex(index)
   }
     return (
-        <div className='first'>
-            <img class="icon" src='https://convertingcolors.com/plain-EAEAEA.svg'/>
-             <a className='title1'>{firstPages[index].title}</a>
+        <div className='body'>
+            <div className='icon'></div>
+             <a className='title'>{firstPages[index].title}</a>
              <p class='description'>{firstPages[index].dec}</p>
-      <button className='button' onClick={next}>{firstPages[index].buttonTitle}</button>
-      
-         <a className='signin'>יש לי כבר חשבון </a>
+             <button onClick={next}>{firstPages[index].buttonTitle}</button>
+             <div></div>
+             <a className='signin'>יש לי כבר חשבון </a>
         </div>
         
     )
-=======
-import React from "react";
 
-export default function FirstPages() {
-  return <div>1 2 3</div>;
->>>>>>> serverteam
 }

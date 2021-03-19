@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 import React, { useState, useEffect } from 'react';
 import Inputclass from '../Components/InputText'
 import "./QuestionsBeforeRegister.css";
-const cors = require('cors');
+
 
 export default function QuestionsBeforeRegister() {
   const [name,setname]=useState("")
@@ -19,7 +19,7 @@ export default function QuestionsBeforeRegister() {
         
     });
  
-    const sendinfo = (e) => {
+    const savePersonalInfo = (e) => {
         e.preventDefault();
         setuser({firstName : "kabha" , lastName : "rwed" , email : "kabha" , phone : "052658821" , password : "asdasd", status : "true", fundName : "ddd",chanel : "fsde",registerDate : "arab"})
             fetch("http://localhost:3002/new-user/add-user", {
@@ -28,11 +28,9 @@ export default function QuestionsBeforeRegister() {
                 "Accept": "application/json; odata=verbose",
                 "Content-Type": "application/json",
               },
-<<<<<<< HEAD
+
               body: JSON.stringify({ userinformation : user }),
-=======
-              body: JSON.stringify({ isname: name }),
->>>>>>> OnBoarding
+
             })
               .then((r) => r.json())
               .then((data) => {
@@ -50,13 +48,7 @@ export default function QuestionsBeforeRegister() {
              < Inputclass textenglish  = {"phone"}  texter = {"מספר טלפון"} ></Inputclass>
 
          
-<button  onClick= {lotery} className="but">הלאה</button>
+<button  onClick= {savePersonalInfo} className="but">הלאה</button>
         </div>
     )   
-=======
-import React from "react";
-
-export default function QuestionsBeforeRegister() {
-  return <div>4</div>;
->>>>>>> serverteam
-}
+    }

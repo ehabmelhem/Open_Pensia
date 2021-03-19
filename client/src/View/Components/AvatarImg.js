@@ -7,11 +7,10 @@ function AvatarImg({ className = '', src, alt = '' }) {
             src={src}
             alt={alt}
         >
-<<<<<<< HEAD
+
 
 <input type = "text" ></input>
-=======
->>>>>>> serverteam
+
         </img>
     );
 }
