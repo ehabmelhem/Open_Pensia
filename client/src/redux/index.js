@@ -11,3 +11,5 @@ export { addVote } from "./Votes/VotesAction";
 
 export { fetchOfficerData, fetchOfficerArticles, addOfficerArticle } from './Officer/OfficerActions';
 
+export { fetchUserData} from './User/UserActions';
+
