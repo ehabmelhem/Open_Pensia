@@ -21,7 +21,13 @@ import Header from "./View/Components/Header";
 import NavBarLists from "./View/Components/NavBarLists";
 import MainButton from "./View/Components/MainButton";
 import SignUpRequest from "./View/Pages/SignUpRequest";
+<<<<<<< HEAD
+import Login from './View/Pages/Login';
+//NavBarAfterLogIn
+//CompanyVotingStatus
+=======
 
+>>>>>>> malik-redux
 function App() {
 
 
@@ -124,6 +130,11 @@ function App() {
               Page 15-19-32
             </NavLink>
           </li>
+          <li>
+            <NavLink exact to="Login">
+              Page login
+            </NavLink>
+          </li>
         </ul>
       </nav>
       <Switch>
@@ -215,6 +226,9 @@ function App() {
 
         <Route path="/InfoDirectorAfterLogin">
           <InfoDirector />
+        </Route>
+        <Route path="/Login">
+          <Login />
         </Route>
       </Switch>
     </div>

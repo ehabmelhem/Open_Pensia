@@ -7,6 +7,10 @@ function AvatarImg({ className = '', src, alt = '' }) {
             src={src}
             alt={alt}
         >
+
+
+<input type = "text" ></input>
+
         </img>
     );
 }
