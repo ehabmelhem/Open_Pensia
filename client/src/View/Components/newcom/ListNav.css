@@ -1,0 +1,33 @@
+#firstDivMenu {
+    max-width: 512px;
+    min-width: 375px;
+    height: 100%;
+    text-align: right;
+    margin: auto;
+    border: 1px solid red;
+}
+
+#secondDivMenu {
+    text-align: right;
+    position: relative;
+    width: 91%;
+}
+
+#exitMenu {
+    width: 20px;
+    margin: 8px;
+    height: 20px;
+}
+
+#allListMenu {
+    list-style-type: none;
+    margin-right: 22px;
+    max-width: 600px;
+}
+.eachLineInMenu {
+    margin-top: 20px;
+}
+
+.eachLineInMenuLast{
+margin-top:120px;
+}
