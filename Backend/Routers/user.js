@@ -7,7 +7,7 @@ function checkRole(req, res, next) {
   try {
     let role = req.cookies.role;
     decRole = jwt.decode(role, secret);
-    if ((decRole.role = "user")) {
+    if (decRole.role === "user") {
       next();
     } else {
       res.send({ ok: false, messege: "you dont have Premeision" });
