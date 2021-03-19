@@ -536,6 +536,14 @@ setInterval(async () => {
               newOfficers.push(obj);
             }
           }
+          newOfficers = [];
+          for (key in data.data) {
+            newOfficers.push({
+              officerId: data.data[key].Officers_ID,
+              officerName: data.data[key].Officers_Name,
+              officerImg: "///",
+            });
+          }
           await Proxy.update(
             { Proxy_code: elm.Proxy_code },
             { officers: newOfficers }
@@ -555,7 +563,7 @@ setInterval(async () => {
       });
   });
   // http://open-pension-tsofen.herokuapp.com/api/proxies?filter[Proxy_Code]=520040700/1
-}, 1000000000);
+}, 10000);
 // 10000
 // i changed it just to stop update while coding
 
