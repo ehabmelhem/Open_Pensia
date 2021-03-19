@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const fetch = require("node-fetch");
 const Officer = require("../Schema/Officer");
 const User = require("../Schema/User");
+const Proxy = require("../Schema/Proxy");
 const ObjectId = require("mongoose").Types.ObjectId;
 
 /* 
@@ -64,7 +65,7 @@ exports.addArticle = async (req, res) => {
   }
 };
 
-async function addNewArticle(article) { }
+async function addNewArticle(article) {}
 // module.exports = { addNewArticle };
 ////////////////////////////////////////////////////////
 exports.officerData = async (req, res) => {
@@ -116,128 +117,177 @@ exports.officerArticles = async (req, res) => {
 exports.addVote = async (req, res) => {
   try {
     const { email, votes } = req.body; //votes:[{officerId,,voted}]
-    const User_Id = await User.findOne({ email: email}); 
-    var datetime = new Date();
-    
-    votes.forEach(async (currentVote) => {
+    const User_Id = await User.findOne({ email: email });
 
+    var datetime = new Date();
+
+    votes.forEach(async (currentVote) => {
       const userVotesUpdate = {
         proxyCode: currentVote.proxyCode,
         officerId: currentVote.officerId,
         voted: currentVote.voted,
         voteDate: datetime,
-      }
-        
-      
-     /// run on the recived vote[] find each vote and update  
-    const updateUserVote = await User.findOneAndUpdate(
-     {'email':email,'votes.proxyCode': currentVote.proxyCode,'votes.officerId': currentVote.officerId }, 
-     {   
-       '$set': {
-         'votes.$.proxyCode': currentVote.proxyCode,
-         'votes.$.officerId': currentVote.officerId,
-         'votes.$.voted': currentVote.voted,
-         'votes.$.voteDate': datetime,
-        } }    )
-      /// if recived vote[] doesnt exist add it to the user
-      if(updateUserVote == null )
-      {
-        const addingVote = await User.findOneAndUpdate(
-           { email: email},
-           { "$push": { votes: userVotesUpdate } },) 
-           console.log("***addingVote*** "+addingVote);         
-      }
-      //-- proxy add-vote
-      /**
-       Proxy_code: String,
-  Security_ID: String,
-  Topic: String,
-  creationDate: String,
-  expiredDate: String,
-  votes: [
-    {
-      userId: String,
-      officerId: String,
-      voted: Number
-    },
-  ],
-      
-       */
-  const proxyVote = {
-    userId: User_Id._id,
-    officerId: currentVote.officerId,
-    voted: currentVote.voted,
-  }
-      
-      const ProxyVoteUpdate = await Proxy.findOneAndUpdate(
-        {'Proxy_code':currentVote.proxyCode,'votes.userId': User_Id._id,'votes.officerId': currentVote.officerId }, 
+      };
+
+      /// run on the recived vote[] find each vote and update
+      const updateUserVote = await User.findOneAndUpdate(
         {
-          '$set': {
-            'votes.$.userId': User_Id._id,
-            'votes.$.officerId': currentVote.officerId,
-            'votes.$.voted': currentVote.voted,
-           } }   
-         )
-         /// if recived vote[] doesnt exist add it to the user
-         if(ProxyVoteUpdate == null )
-         {
-           const addingProxyVote = await Proxy.findOneAndUpdate(
-              { 'Proxy_code':currentVote.proxyCode},
-              { "$push": { votes: proxyVote } },)   
-              console.log(addingProxyVote);       
-         }
-         
- //-- officer add-vote
-      /**
-            /**
-officerId: String,
-  votes: [
-    {
-      proxyCode: String,
-      allvotes: [
-        {
-          proxyCode: String,
-          Security_ID: String,
-          userId: String,
-          voted: Number,
+          email: email,
+          "votes.proxyCode": currentVote.proxyCode,
+          "votes.officerId": currentVote.officerId,
         },
-      ],
-    },
-  ],
- */
-  const officerVote = {
-    
-    proxyCode: currentVote.proxyCode,
-    Security_ID: null,
-    userId: User_Id._id,
-    voted: currentVote.voted,
-  }
-  const OfficerVoteUpdate = await Officer.findOneAndUpdate(
-    {'officerId':currentVote.officerId,'votes.proxyCode': currentVote.proxyCode,'votes.allvotes.proxyCode': currentVote.proxyCode }, 
-    {
-      '$set': {
-        'votes.$.allvotes.$.voted': currentVote.voted,
-        'votes.$.officerId': currentVote.officerId,
-        'votes.$.voted': currentVote.voted,
-       } }   
-     )
-     /// if recived vote[] doesnt exist add it to the user
-     if(OfficerVoteUpdate == null )
-     {
-       const addingOfficerVote = await Officer.findOneAndUpdate(
-          {'officerId':currentVote.officerId,'votes.proxyCode': currentVote.proxyCode },
-          { "$push": { allvotes: officerVote } },)   
-          console.log(addingOfficerVote);       
-     }
+        {
+          $set: {
+            "votes.$.proxyCode": currentVote.proxyCode,
+            "votes.$.officerId": currentVote.officerId,
+            "votes.$.voted": currentVote.voted,
+            "votes.$.voteDate": datetime,
+          },
+        }
+      );
 
-    }
-    )
 
-    console.log(res.send({ ok: true }));
-    
-    
-  }
-  catch (e) {
+      /// if recived vote[] doesnt exist add it to the user
+      console.log(updateUserVote);
+  
+      const proxyVote = {
+        userId: User_Id._id,
+        officerId: currentVote.officerId,
+        voted: currentVote.voted,
+      };
+
+      const ProxyVoteUpdate = await Proxy.findOneAndUpdate(
+        {
+          Proxy_code: currentVote.proxyCode,
+          "votes.userId": User_Id._id,
+        //  "votes.officerId": currentVote.officerId,
+        },
+        {
+          $set: {
+            "votes.$.userId": User_Id._id,
+            "votes.$.officerId": currentVote.officerId,
+            "votes.$.voted": currentVote.voted,
+          },
+        }
+      );
+      console.log("*&*&*&" + ProxyVoteUpdate);
+      /// if recived vote[] doesnt exist add it to the user
+      if (ProxyVoteUpdate == null) {
+        console.log("Proxy +" + currentVote.proxyCode + "not found");
+        
+      }
+
+
+      const existofficer = await Proxy.findOne({
+        officerId: currentVote.articleId,
+      });
+       console.log("******  OFFICER ***********>" + existofficer);
+      const proxyOfVoteDetailes = {
+        userId: User_Id._id,
+        officerId: currentVote.officerId,
+        voted: currentVote.voted,
+      };
+      if ( existofficer == null )
+       {
+        //   console.log("proxy of votes :" + proxyOfVote.votes);
+         await Proxy.findOneAndUpdate(
+          { Proxy_code: currentVote.proxyCode },
+          { $push: { votes: proxyOfVoteDetailes } });
+       }
+       else {
+        console.log("do this");
+        //console.log(newArray);
+      }
+
+
+
+
+
+      // add to officer Vote
+      const officerOfVote = await Officer.findOne({
+        officerId: currentVote.officerId,
+      });
+  
+      if (officerOfVote.votes === null) {
+        console.log("officerOfVote.votes is null");
+        const newVotes = [
+          {
+            proxyCode: currentVote.proxyCode,
+            allvotes: [
+              {
+                proxyCode: currentVote.proxyCode,
+                Security_ID: ProxyVoteUpdate.Security_ID,
+                userId: currentVote._id,
+                voted: currentVote.voted,
+              },
+            ],
+          },
+        ];
+        await Officer.findOneAndUpdate(
+          { Proxy_code: currentVote.proxyCode },
+          { votes: newVotes }
+        );
+      } else {
+        // if officer votes has an array
+
+        console.log(currentVote.proxyCode);
+        const officerProxy = await Officer.findOne(
+          {
+            $and: [
+              { officerId: currentVote.officerId },
+              { votes: { $elemMatch: { proxyCode: currentVote.proxyCode } } },
+            ],
+          }
+
+        );
+
+        if (officerProxy === null) {
+          console.log("officerProxy is null, need newProxyVotes");
+          const newProxyVotes = {
+            proxyCode: currentVote.proxyCode,
+            allvotes: [
+              {
+                proxyCode: currentVote.proxyCode,
+                Security_ID: proxyOfVote.Security_ID,
+                userId: currentVote._id,
+                voted: currentVote.voted,
+              },
+            ],
+          };
+
+          await Officer.findOneAndUpdate(
+            { officerId: currentVote.officerId },
+            { $push: { votes: newProxyVotes } }
+          );
+        } else {
+          const newVoteOfficer = {
+            proxyCode: currentVote.proxyCode,
+            Security_ID: null,                                // must add here
+            userId: currentVote._id,
+            voted: currentVote.voted,
+          };
+          console.log(userId._id); 
+          //const officerOfVote = await Officer.findOne();
+            console.log(_id); 
+            console.log(User_Id); 
+          console.log("the User id exist in the officer's proxy" + officerOfVote); 
+          await Officer.findOneAndUpdate(
+            {
+              officerId: currentVote.officerId,
+              "votes.proxyCode": currentVote.proxyCode,
+            },
+            {  
+            $push: {
+    //            "votes.$.allvotes": newVoteOfficer,
+              },
+            }
+          );
+        }
+      }
+    });
+
+    res.send({ ok: true });
+  } catch (e) {
     console.log(e);
     console.log("addVote in Officer could not run ????");
   }
@@ -247,7 +297,8 @@ officerId: String,
 exports.officerPercentages = async (req, res) => {
   try {
     const { officerId, proxyCode } = req.body;
-    let likes = 0, dislikes = 0;
+    let likes = 0,
+      dislikes = 0;
 
     const officerProxy = await Officer.findOne(
       { officerId: officerId },
@@ -258,40 +309,42 @@ exports.officerPercentages = async (req, res) => {
     currentVotes.forEach(async (arrayVote) => {
       if (arrayVote.voted === 1) likes++;
       if (arrayVote.voted === -1) dislikes++;
-    })
+    });
     const likePercent = (likes / (likes + dislikes)) * 100;
     const dislikePercent = (dislikes / (likes + dislikes)) * 100;
-    console.log(currentVotes)
-    console.log(likePercent)
-    console.log(dislikePercent)
-    console.log(likes)
-    console.log(dislikes)
+    console.log(currentVotes);
+    console.log(likePercent);
+    console.log(dislikePercent);
+    console.log(likes);
+    console.log(dislikes);
     res.send({
       Ok: true,
-      doc: { likePercent: likePercent, dislikePercent: dislikePercent, allvotes: officerProxy.votes[0].allvotes }
+      doc: {
+        likePercent: likePercent,
+        dislikePercent: dislikePercent,
+        allvotes: officerProxy.votes[0].allvotes,
+      },
     });
   } catch (e) {
     console.log("officerPercentages fun bug");
   }
 };
 
-
-
- ////////////////////////  for test   //////////////////////////
-      /**    t e s t      t e s t      t e s t         t e s t 
+////////////////////////  for test   //////////////////////////
+/**    t e s t      t e s t      t e s t         t e s t 
       const removeAllVotes = await User.findOneAndUpdate(
         { email: email, "votes.proxyCode": currentVote.proxyCode,
          "votes.officerId": currentVote.officerId },
          { "$set": { votes: [] } },
         )
          */
- 
-     // const addingVote = await User.findOneAndUpdate(
-       // { email: email},
-        //{ "$push": { votes: userVotesUpdate } },)
-       //   {votes: userVotesUpdate},
-      //   { upsert: true}
-     /**
+
+// const addingVote = await User.findOneAndUpdate(
+// { email: email},
+//{ "$push": { votes: userVotesUpdate } },)
+//   {votes: userVotesUpdate},
+//   { upsert: true}
+/**
 
       const userVotesUpdate = {
         proxyCode: currentVote.proxyCode,
@@ -301,4 +354,4 @@ exports.officerPercentages = async (req, res) => {
       }
       console.log(userVotesUpdate)
        */
-      //////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
