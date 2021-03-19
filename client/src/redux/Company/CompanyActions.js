@@ -11,9 +11,8 @@ import {
 } from '../actionTypes';
 
 
-// COMPANY Action Creators
-
-// Questions
+// COMPANY Action Creators -- Questions
+ 
 export const fetchQuestionsRequest = () => ({
     type: FETCH_QUESTIONS_REQUEST
 });
@@ -65,7 +64,7 @@ function _fetchCompanyQuestions(dispatch, companyName, securityID) {
         });
 }
 
-//Default Question
+// COMPANY Action Creators -- Default Question
 
 export const fetchDefaultQuestionRequest = () => ({
     type: FETCH_DEFAULT_QUESTION_REQUEST
