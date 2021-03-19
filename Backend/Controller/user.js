@@ -340,8 +340,8 @@ exports.getUserVotingHistory = async (req, res) => {
 
       }, {});
 
-    const groupByBrand = groupBy('proxyCode');
-    const groupedProxies = groupByBrand(userVotes)
+    const groupByProxy = groupBy('proxyCode');
+    const groupedProxies = groupByProxy(userVotes)
     console.log(groupedProxies)
     for (var currentProxy in groupedProxies) {
       console.log(currentProxy)

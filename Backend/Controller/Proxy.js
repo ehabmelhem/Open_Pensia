@@ -291,7 +291,75 @@ exports.getFundInfo = async (req, res) => {
     });
   }
 };
+/////////////////////////////////////////////////////////////////////
+exports.getExpandedHeader = async (req, res) => {
+  try {
+    const { userId,Security_ID } = req.body;
+    const user = await User.findOne({ _id: userId })
 
+    // get company_name and AVE - API
+    let company_name= '';
+    let  AVE=1;
+    let url =
+      `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${user.fundName}&filter[Chanel]=${user.chanel}&filter[Security_ID]=${Security_ID}`
+   const encodedURI = encodeURI(url);
+    let settings = { method: "Get" };
+
+    await fetch(encodedURI, settings)
+      .then((res) => res.json())
+      .then((json) => {
+      for (var key in json.data) {
+        company_name=json.data[key]["company_name"];
+        console.log(company_name);
+
+        AVE=json.data[key]["A AVE Vote"]*100;
+        console.log(AVE);
+      }
+      });
+
+
+    //Votes counters
+    const userVotes = user.votes
+    let resultCounter=0;
+    let OpenCounter=0;
+    let pendingCounter=0;
+
+    const groupBy = key => userVotes =>
+      userVotes.reduce((objectsByKeyValue, obj) => {
+        const value = obj[key];
+        objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
+        return objectsByKeyValue;
+
+      }, {});
+
+    const groupByProxy = groupBy('proxyCode');
+    const groupedProxies = groupByProxy(userVotes)
+    console.log(groupedProxies)
+   for(var currentProxy in groupedProxies) {
+      console.log(currentProxy)
+      // result Votes
+      let resultVotes=await Proxy.findOne({ Proxy_code: currentProxy,result: true });
+      if(resultVotes !== null)resultCounter++;
+  }
+
+    OpenCounter=await Proxy.find({ Security_ID:Security_ID,status:'Open'}).count();
+    pendingCounter=await Proxy.find({ expiredDate:  { $gte : new Date()},result: false }).count();
+   
+
+    res.send({ ok: true, doc:
+      {
+        company_name: company_name
+        ,AVE:AVE
+        ,userOpen:OpenCounter
+        ,userPending:pendingCounter
+        ,userResults:resultCounter
+    } 
+      });
+  } catch (e) {
+    console.log("getExpandedHeader fun bug");
+  }
+};
+/////////////////////////////////////////////////////////////////
 setInterval(async () => {
   let url = `http://open-pension-tsofen.herokuapp.com/api/dimProxies`;
   const encodedURI = encodeURI(url);

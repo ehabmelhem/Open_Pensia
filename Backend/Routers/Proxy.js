@@ -24,5 +24,8 @@ router
   router
   .route("/get-fund-info")
   .post(proxyController.getFundInfo); // return 
+  router
+  .route("/get-expanded-header")
+  .post(proxyController.getExpandedHeader); // return
 
 module.exports = router;
