@@ -7,10 +7,14 @@ import {
 
 const initialState = {
   // add relevant vote state
-  securityID: "",
-  questionID: "",
-  directorID: "",
-  like: false,
+  votes: [
+    {
+      securityID: "",
+      questionID: "",
+      directorID: "",
+      vote: 0,
+    },
+  ],
 };
 
 const VotesReducer = (state = initialState, action) => {
@@ -20,14 +24,18 @@ const VotesReducer = (state = initialState, action) => {
     //     ...state,
     //     loading: true,
     //   };
+    
     case ADD_VOTE:
       return {
-        loading: false,
-        securityID: action.payload.securityID,
-        questionID: action.payload.questionID,
-        directorID: action.payload.directorID,
-        like: action.payload.like,
-        error: "",
+        votes: [
+          ...state.vates,
+          {
+            securityID: action.payload.securityID,
+            questionID: action.payload.questionID,
+            directorID: action.payload.directorID,
+            vote: action.payload.vote,
+          },
+        ],
       };
     case UPDATE_VOTE:
       return {

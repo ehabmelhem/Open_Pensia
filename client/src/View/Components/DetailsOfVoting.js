@@ -2,21 +2,48 @@ import "./DetailsOfVoting.css";
 import { AiFillDislike } from "react-icons/ai";
 import { AiFillLike } from "react-icons/ai";
 import React, { useState } from "react";
+import { addVote } from "../../redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function DetailsOfVoting({ voting }) {
   const [likestate, setlikestate] = useState(false);
   const [dislikestate, setdislikestate] = useState(false);
+  const dispatch = useDispatch();
+
+  let companyData = useSelector(
+    (state) =>
+      !!state.CompanyReducer && {
+        companyName: state.CompanyReducer.companyName,
+        securityID: state.CompanyReducer.securityID,
+      }
+  );
+
+  let officerData = useSelector(
+    (state) =>
+      !!state.OfficerReducer && {
+        officerID: state.OfficerReducer.officerID,
+      }
+  );
 
   function handelclicklike(e) {
-    // redux update like
-
-    if (likestate == false && dislikestate == false) {
+    if (likestate === false && dislikestate === false) {
       var btn = document.querySelectorAll(".body-like");
       // console.log(btn);
       btn[0].classList.remove("body-like");
       btn[0].classList.add("body-likeActive");
 
       setlikestate(true);
+
+      // redux update like
+
+      dispatch(
+        addVote(
+          companyData.securityID,
+          companyData.securityID, //need to UPDATE !!!!!
+          officerData.officerID, //need to UPDATE !!!!!
+          likestate
+        )
+      );
     }
 
     if (likestate == true) {
