@@ -171,16 +171,17 @@ exports.getFundInfo = async (req, res) => {
   try {
     // const { userId } = req.body;
     let role = req.cookies.role;
-    decRole = jwt.decode(role, secret);
-    const user = await User.findOne({ _id: decRole });
+    let decRole = jwt.decode(role, secret);
+    const user = await User.findOne({ _id: decRole.name });
 
     if (user === null) {
       res.send({ Ok: false, messege: "User not found" });
     } else {
-      const fundOpenQuestions = await (await openQuestions(decRole, "Open"))
-        .length;
+      const fundOpenQuestions = await (
+        await openQuestions(decRole.name, "Open")
+      ).length;
       const fundPendingQuestions = await (
-        await openQuestions(decRole, "Pending")
+        await openQuestions(decRole.name, "Pending")
       ).length;
 
       //groupPower
