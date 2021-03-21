@@ -43,11 +43,11 @@ router
 
   router      // needs checkRole
   .route("/get-fund-info")
-  .post(checkRole, proxyController.getFundInfo); // return
+  .post(proxyController.getFundInfo); // return
 
   router      // needs checkRole
   .route("/get-expanded-header")
-  .post(checkRole, proxyController.getExpandedHeader); // return
+  .post( proxyController.getExpandedHeader); // return
 
   router      // needs checkRole
   .route("/open-questions-in-fund")
