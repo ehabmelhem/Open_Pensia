@@ -9,8 +9,8 @@ export default function ListQuestions(props) {
         <div id="allList">
             { !!props.questionsList &&props.questionsList.map((question) => {
 
-
-               <p>{question.Topic}</p>
+return <CardListItem hideImg="hideImg" companyName={question.Topic} par={question.par}/>
+            //    <p>{question.Topic}</p>
 
 
             })}
