@@ -23,6 +23,6 @@ router.route("/login").post(userController.login);
 
 router // needs checkRole
   .route("/user-voting-history")
-  .post(userController.getUserVotingHistory);
+  .get(userController.getUserVotingHistory);
 
 module.exports = router;
