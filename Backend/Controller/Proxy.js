@@ -5,6 +5,8 @@ const Proxy = require("../Schema/Proxy");
 const officerModel = require("../Schema/Officer");
 const User = require("../Schema/User");
 const { v4: uuidv4 } = require("uuid");
+const jwt =require("jwt-simple")
+const secret ="1234"
 /* 
 dis: get the default Questions - before SignUp
 parameters: {Security_ID:String}				
@@ -171,16 +173,16 @@ exports.getFundInfo = async (req, res) => {
   try {
     // const { userId } = req.body;
     let role = req.cookies.role;
-    decRole = jwt.decode(role, secret);
-    const user = await User.findOne({ _id: decRole });
-
+   let decRole = jwt.decode(role, secret);
+    const user = await User.findOne({ _id: decRole.name });
+    console.log(user)
     if (user === null) {
       res.send({ Ok: false, messege: "User not found" });
     } else {
-      const fundOpenQuestions = await (await openQuestions(decRole, "Open"))
+      const fundOpenQuestions = await (await openQuestions(decRole.name, "Open"))
         .length;
       const fundPendingQuestions = await (
-        await openQuestions(decRole, "Pending")
+        await openQuestions(decRole.name, "Pending")
       ).length;
 
       //groupPower
@@ -203,6 +205,9 @@ exports.getFundInfo = async (req, res) => {
       });
     }
   } catch (e) {
+    let role = req.cookies.role;
+    let decRole = jwt.decode(role, secret);
+    console.log(decRole.name)
     res.send({
       OK: false,
       messege: "could not run getFundInfo in Proxy",

@@ -1,6 +1,7 @@
 import React from 'react'
 import NavBarLists from '../Components/NavBarLists'
 import ListQuestions from '../Components/body/ListQuestions'
+import ListQuestionsByFetch from '../Components/body/ListQuestionsByFetch'
 
 const questionsList = [
     { status:{"results":true},Topic: 'פרשמרקט', par: 'קמעונאות מזון' },
@@ -32,6 +33,15 @@ const questionsList = [
  ]
 
 export default function VotesList(props) {
+    if(props.fetch !== null && props.fetch !== undefined){
+        return(
+              <div>
+            <NavBarLists title={props.title}/>
+            <ListQuestionsByFetch  fetch={props.fetch}/>
+        </div>
+        )
+    }
+    else
     return (
         <div>
             <NavBarLists title={props.title}/>

@@ -6,10 +6,10 @@ export default function VotingBar(props) {
   const [checkIfZero,setCheckIfZero] = useState(false);
 
 useEffect(() => {
-  if(props.times !== '0'){
+  if(props.times > 0){
     setCheckIfZero(true);
   }
-  
+  console.log(props.times)
 }, [])
 
   return (

@@ -205,15 +205,15 @@ function App() {
         </Route>
 
         <Route path="/VotesHistory">
-          <VotesList title="היסטורית הצבעות" status={{"results":true}}/>
+          <VotesList title="היסטורית הצבעות" fetch="/user/user-voting-history"/>
         </Route>
 
         <Route path="/VoteBending">
-          <VotesList title="הצבעות ממתינות לתשובה" status={{"results":true}}/>
+          <VotesList title="הצבעות ממתינות לתשובה" fetch="/proxy/waiting-questions-by-fund"/>
         </Route>
 
         <Route path="/OpenVotes">
-          <VotesList title="הצבעות פתוחות" status="Open" />
+          <VotesList title="הצבעות פתוחות" fetch="/proxy/open-questions-in-fund" />
         </Route>
 
         <Route path="/VoteDirectorsAfterLogin">
