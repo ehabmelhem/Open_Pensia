@@ -156,42 +156,10 @@ exports.getAllCorporate = async (req, res) => {
   try {
     console.log("getAllCorporate");
     const { fundname, chanell } = req.body;
-    let url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundname}&filter[Chanel]=${chanell}&page=0`;
-    // let url = `https://open-pension-tsofen.herokuapp.com/api/interests`;
-    const encodedURI = encodeURI(url);
-    const allResult = [];
-    let settings = { method: "Get" };
-    await fetch(encodedURI, settings)
-      .then((res) => res.json())
-      .then(async (json) => {
-        if (json.info.pages > 1) {
-          for (let i = 1; i <= json.info.pages; i++) {
-            url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundname}&filter[Chanel]=${chanell}&page=${i}`;
-            let encodedd = encodeURI(url);
-            await fetch(encodedd, settings)
-              .then((r) => r.json())
-              .then((data) => {
-                console.log(data);
-                for (var key in data.data) {
-                  if (data.data[key]["A AVE Vote"] > 0.05) {
-                    allResult.push(data.data[key]);
-                  }
-                }
-              });
-          }
-          // "fundname":"הראל", "chanell":"גמל/פנסיה"
-        } else {
-          for (var key in json.data) {
-            if (json.data[key]["A AVE Vote"] > 0.05) {
-              allResult.push(json.data[key]);
-            }
-          }
-        }
-      });
-
+    const allResult = await allCorporates(fundname,chanell);
     res.send({ OK: true, allResult });
   } catch (e) {
-    console.log("could not run getAllFundNames in Proxy");
+    console.log("could not run getAllCorporate in Proxy");
     res.send({ OK: false, messege: "error" });
   }
 };
