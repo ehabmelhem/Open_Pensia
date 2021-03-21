@@ -1,0 +1,81 @@
+.body {
+  
+  top   : 0px;
+  left  : 0px;
+  width : 375px;
+  height: 667px;
+  text-align  : center;
+  margin      : auto;
+  align-items : center;
+  /* max-height: 600px; */
+  border  :solid #3244831c;
+  
+ 
+}
+
+
+.description{
+
+  top: 330px;
+left: 16px;
+width: 343px;
+height: 94px;
+text-align: center;
+font: normal normal normal 18px/22px Assistant;
+letter-spacing: 0px;
+color: #343434;
+opacity: 0.6;
+}
+
+button{
+  top: 571px;
+left: 16px;
+width: 343px;
+height: 38px;
+background: #3D4257 0% 0% no-repeat padding-box;
+box-shadow: 0px 2px 1px #00000024;
+opacity: 1;
+}
+
+.icon{
+  margin-top: 82px;
+  margin-left: 114px;
+width: 146px;
+height: 146px;
+background: #EAEAEA 0% 0% no-repeat padding-box;
+opacity: 1;
+border-radius: 50%;
+
+  }
+  
+.title{
+  padding-top: 264px;
+  top: 264px;
+left: 110px;
+width: 160px;
+height: 42px;
+text-align: left;
+font: normal normal 600 32px/16px Assistant;
+letter-spacing: 0px;
+color: #324483;
+text-transform: uppercase;
+opacity: 1;
+
+}
+.signin{
+  top: 633px;
+left: 137px;
+width: 102px;
+height: 18px;
+text-align: center;
+text-decoration: underline;
+font: normal normal 600 14px/16px Assistant;
+letter-spacing: 1.25px;
+color: #324483;
+text-transform: uppercase;
+opacity: 1;
+}
+
+
+
+

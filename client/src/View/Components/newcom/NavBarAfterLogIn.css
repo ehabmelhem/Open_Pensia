@@ -1,0 +1,60 @@
+.NavBar {
+    margin: auto;
+    width: 100%;
+    max-width: 600px;
+    min-width: 375px;
+    padding-top: 10px;
+}
+
+#companyimageAfterLogin {
+    height: 30px;
+    width: 30px;
+    border-radius: 40px;
+}
+
+#firstCol {
+    text-align: left;
+}
+
+.addProfile {
+    width: 30px;
+    height: 30px;
+    margin-left: 23px;
+    opacity:30%;
+}
+
+#companyThImage {
+    text-align: center;
+}
+
+.ColumnP {
+    max-width: max-content;
+    min-width: 120px;
+    width: 33.3333%;
+}
+
+#companyimage {
+    height: 30px;
+    width: 30px;
+    border-radius: 40px;
+}
+
+#leftCol {
+    text-align: right;
+}
+
+.showList {
+    opacity: 30%;
+    margin-right: 15px;
+    width: 30px;
+    height: 30px;
+}
+
+#menu{
+       text-align: right;
+    margin: auto;
+    max-width: 600px;
+    min-width: 375px; 
+    width: 100%;
+}
+

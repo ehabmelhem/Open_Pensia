@@ -33,15 +33,15 @@ function CandidateInfo(props) {
 
   return (
     <div>
-      <div className="all-articles">
+      <div className="mainDiv">
         {cand_info.map((data, index) => {
           return (
             <div key={index}>
-              <h4 className="title"> {data.title} </h4>
-
+              <h4 className='body-h3'> {data.title} </h4>
               {data.details.map((d, index) => {
-                return <p key={index}> {d} </p>;
+                return <p className='body-h5' key={index}> {d} </p>;
               })}
+              
             </div>
           );
         })}
