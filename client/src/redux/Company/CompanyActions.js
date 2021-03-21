@@ -16,7 +16,7 @@ import {
 
 //comapany details
 export const setCompanyDetails = (companyName, securityID) => {
-    console.log('setCompanyDetails',companyName, securityID)
+    console.log('setCompanyDetails', companyName, securityID)
     return ({
 
         type: SET_COMPANY_DETAILS,
@@ -57,7 +57,6 @@ export function fetchCompanyQuestions(securityID, companyName) {
 
 
 export function _fetchCompanyQuestions(dispatch, securityID) {
-    console.log('aaaaaa')
     dispatch(fetchQuestionsRequest());
     console.log('insede _fetchCompanyQuestions')
     axios.post('/proxy/get-Question-by-secur-Id', {
@@ -85,11 +84,11 @@ export const fetchDefaultQuestionRequest = () => ({
     type: FETCH_DEFAULT_QUESTION_REQUEST
 });
 
-export const fetchDefaultQuestionSuccess = ({ defaultQuestionInfo, securityID, companyName }) => ({
+export const fetchDefaultQuestionSuccess = ({ defaultQuestionInfo, securityID }) => ({
     type: FETCH_DEFAULT_QUESTION_SUCCESS,
     payload: {
         securityID: securityID,
-        companyName: companyName,
+        // companyName: companyName,
         defaultQuestion: {
             code: defaultQuestionInfo.proxyCode,
             topic: defaultQuestionInfo.topic,
@@ -106,25 +105,29 @@ export const fetchDefaultQuestionFailure = (error) => ({
     }
 });
 
-export function fetchCompanyDefaultQuestion(securityID, companyName) {
+export function fetchCompanyDefaultQuestion(securityID, fundName, chanel) {
     securityID = typeof securityID === 'number' ? securityID.toString() : securityID;
 
     securityID = '662577'; //temporary
+    fundName = "מור"
+    chanel = "גמל/פנסיה"
 
-    return (dispatch) => _fetchCompanyDefaultQuestion(dispatch, companyName, securityID);
+    return (dispatch) => _fetchCompanyDefaultQuestion(dispatch, securityID, fundName, chanel);
 }
 
-function _fetchCompanyDefaultQuestion(dispatch, companyName, securityID) {
+function _fetchCompanyDefaultQuestion(dispatch, securityID, fundName, chanel) {
     dispatch(fetchDefaultQuestionRequest());
     axios.post('/proxy/get-corporate-default-question-data', {
         "Security_ID": securityID
+        , fundName, chanel
 
     })
         .then(res => {
             dispatch(fetchDefaultQuestionSuccess({
                 defaultQuestionInfo: res.data,
                 securityID,
-                companyName
+                companyName: res.data.company_name
+
             }));
             console.log(res.data);
         })

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Header2 from "../Components/CompanyHeader";
 import MainButton from "../Components/MainButton";
 import DirectorListItem from "../Components/DirectorsListItem";
-
+import { fetchCompanyDefaultQuestion } from '../../redux';
 import { fetchOfficerData } from '../../redux';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,14 +11,15 @@ import { useDispatch, useSelector } from 'react-redux';
 export default function VoteDirectors() {
 
   const dispatch = useDispatch();
-  let defaultQuestion = useSelector(state => !!state.CompanyReducer && state.CompanyReducer.defaultQuestion);
-  let companyName = useSelector(state => !!state.CompanyReducer && state.CompanyReducer.companyName);
 
+  const { companyName, securityID, defaultQuestion } = useSelector(state => state.CompanyReducer)
+
+  console.log(useSelector(state => state.CompanyReducer))
   console.log(!!defaultQuestion && defaultQuestion.officers)
   console.log(defaultQuestion)
-  console.log(companyName)
-  useEffect(() => {
 
+  useEffect(() => {
+    dispatch(fetchCompanyDefaultQuestion(securityID, '', ''));
   }, []);
   function handleCandidateSelect(id) {
     console.log(id);
