@@ -1,5 +1,5 @@
 .mainDiv {
-  text-align: center;
+  text-align: right;
   direction: rtl;
   font-family: Arial, Arial, Helvetica, sans-serif;
   background-color: #ffffff;
@@ -7,73 +7,24 @@
   margin: auto;
   margin-top: 4%;
   margin-bottom: 4%;
+  margin-right: 3%;
 }
-
-.grid-container {
-  direction: rtl;
-  display: grid;
-  grid-template-columns: auto auto auto;
-  grid-gap: 5px;
-  width: 80%;
-  margin: auto;
-  opacity: 1;
+.body-h3{
+  font: normal normal 600 14px/18px Assistant;
+letter-spacing: 0.09px;
+color: #324483;
+opacity: 1;
 }
-
-.grid-container > div {
-  text-align: center;
+.body-h5{
+  font: normal normal normal 12px/22px Assistant;
+letter-spacing: 0px;
+color: #717480;
+opacity: 1;
 }
-
-.linebetween {
-  font-size: 99px;
-  width: 0px;
-  border: #b7bccc solid 1px;
-  opacity: 1;
-}
-.percent-div {
-  text-align: left;
-  font: normal normal bold 30px/18px Assistant;
-  letter-spacing: 0.3px;
-  color: #3d4257;
-  opacity: 1;
-}
-
-.percent-div > p {
-  font: normal normal 600 18px/18px Assistant;
-  letter-spacing: 0.14px;
-  color: #3d4257;
-  opacity: 1;
-}
-
-.bold-font {
-  font-size: 16px;
-  text-align: center;
-  font: normal normal 600 16px/16px Assistant;
-  letter-spacing: 0px;
-  color: #324483;
-  text-transform: uppercase;
-  opacity: 1;
-}
-.body-div {
-  background-color: #fafafa;
-}
-.body-like {
-  width: 100%;
-  height: 100px;
-  color: #324483;
-}
-
-.body-div > p {
-  font: normal normal 600 18px/23px Assistant;
-  letter-spacing: 0.11px;
-  color: #324483;
-  opacity: 1;
-}
-
-.body-dislike {
-  width: 100%;
-  height: 100px;
-  color: #324483;
-}
-
-@media screen and (min-width: 300px) {
+.body-button{
+  width: 70px;
+height: 21px;
+background: #3D4257 0% 0% no-repeat padding-box;
+border-radius: 8px;
+opacity: 1;
 }

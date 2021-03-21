@@ -519,7 +519,7 @@ setInterval(async () => {
       });
   });
   // http://open-pension-tsofen.herokuapp.com/api/proxies?filter[Proxy_Code]=520040700/1
-}, 10000);
+}, 2400000);
 // 10000
 // i changed it just to stop update while coding
 
@@ -537,6 +537,8 @@ setInterval(async () => {
 //       }
 //     });
 //   });
-// }, 10000);
+// }, 86400000);
 // // 86400000
 ///////////////////////////////////////////////////////////////////////
+
+//  we have to update the cookies to be the userId

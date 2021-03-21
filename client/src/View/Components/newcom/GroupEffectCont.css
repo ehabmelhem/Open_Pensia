@@ -1,0 +1,14 @@
+.GroupEffectCont {
+  display: flex;
+  margin: auto;
+  max-width: 600px;
+  min-width: 375px;
+}
+
+.divider {
+  width: 1px;
+  background-color: black;
+  margin-top: 32px;
+  margin-bottom: 15px;
+  margin-right: 5px;
+}

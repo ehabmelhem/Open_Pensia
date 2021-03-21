@@ -1,0 +1,26 @@
+.textdisplay {
+
+    top: 194px;
+    margin-left: 321px;
+    width: 38px;
+    height: 15px;
+    
+text-align: right;
+font: normal normal normal 16px/21px Assistant;
+letter-spacing: 0.1px;
+color: #717480;
+opacity: 0.6;
+
+display: inline;
+direction: rtl;
+
+}
+.first { 
+direction:  rtl;
+}
+
+
+.textinput {
+    
+    border: 0px none;
+}

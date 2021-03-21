@@ -1,0 +1,24 @@
+.ComNamebackground{
+    background-color: white;
+    width: 95%;
+    margin-top: 32px;
+    min-width: 375px;
+    max-width: 1000px;
+    /* width: 500px;
+    height: 1000px; */
+    /* margin-left: 5px; */
+     /* padding-right: 5px; */
+}
+
+.firstName{
+    font-size: 80px;
+    margin-right: 32px;
+}
+
+
+.LastName{
+    margin-right: 30px;
+    font-size: 64px;
+    color: lightgray;
+}
+
