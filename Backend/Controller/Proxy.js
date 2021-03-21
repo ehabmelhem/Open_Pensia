@@ -327,7 +327,10 @@ exports.getExpandedHeader = async (req, res) => {
 ////////////////////////////////////////////////////////
 exports.getPendingQuestionsInFund = async (req, res) => {
   try {
-    const { userId } = req.body;
+    let role = req.cookies.role;
+    let decRole = jwt.decode(role, secret);
+    const userId = decRole.name;
+  //  const { userId } = req.body;
     const allPendingQuestions = await openQuestions(userId, "Pending");
 
     res.send({ ok: true, doc: allPendingQuestions });
@@ -339,9 +342,14 @@ exports.getPendingQuestionsInFund = async (req, res) => {
 ////////////////////////////////////////////////////////
 exports.getOpenQuestionsInFund = async (req, res) => {
   try {
-    const { userId } = req.body;
-    const allOpenQuestions = await openQuestions(userId, "Open");
+    let role = req.cookies.role;
+    let decRole = jwt.decode(role, secret);
+  //  const user = await User.findOne({ _id: decRole.name });
 
+  //  const { userId } = req.body;
+   const userId = decRole.name;
+    const allOpenQuestions = await openQuestions(userId, "Open");
+    
     res.send({ ok: true, doc: allOpenQuestions });
   } catch (e) {
     console.log("getOpenQuestionsInFund fun bug");
