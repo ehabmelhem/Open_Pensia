@@ -1,0 +1,32 @@
+.CompContainer{
+    display: table;
+    /* flex-direction: row; */
+    width: 20%;
+    max-width: 1000px;
+    min-width: 375px;
+}
+
+
+.OpenV_icon{
+    text-align: right ;
+    vertical-align: right;
+    float: left;
+    margin-right: 16px;
+    margin-top: 8px;
+    margin-left: 8px;
+    width: 30px;
+    height: 30px;  
+    transform: rotateY(180deg);
+}
+.OpenV_text{
+    margin-top: 12px;
+     vertical-align:middle;
+}
+
+.Column1{
+    display: table-cell;
+    vertical-align: top ;
+    vertical-align: middle ;
+    text-align: right ;
+    min-width: 20px;
+}

@@ -311,9 +311,10 @@ exports.login = async (req, res) => {
           // redirect to location
 
           // create role for cookies
-          const jwtInc = jwt.encode({ role: "user", name: "yes" }, secret);
+          const jwtInc = jwt.encode({ role: "user", name: user._id }, secret);
           res.cookie("role", jwtInc, { httpOnly: true });
           // if (user.password === password) {
+          console.log(user.id);
           res.send({ login: true, doc: user });
           // }
         } else {
