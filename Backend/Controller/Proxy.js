@@ -20,7 +20,7 @@ exports.getDefaultQuestion = async (req, res) => {
         res.send({ Ok: false, messege: "the Security_ID did not exists" });
       } else {
         let AVE = 1;
-        let company_name='';
+        let company_name = "";
         let url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundName}&filter[Chanel]=${chanel}&filter[Security_ID]=${Security_ID}`;
         const encodedURI = encodeURI(url);
         let settings = { method: "Get" };
@@ -28,7 +28,7 @@ exports.getDefaultQuestion = async (req, res) => {
           .then((res) => res.json())
           .then((json) => {
             for (var key in json.data) {
-              company_name = json.data[key]["company_name"] ;
+              company_name = json.data[key]["company_name"];
               AVE = json.data[key]["A AVE Vote"] * 100;
             }
           });
@@ -38,7 +38,7 @@ exports.getDefaultQuestion = async (req, res) => {
           officers: data[0].officers,
           proxyCode: data[0].Proxy_code,
           topic: data[0].Topic,
-          company_name:company_name,
+          company_name: company_name,
           ave: AVE,
         });
       }
@@ -169,7 +169,7 @@ exports.getAllCorporate = async (req, res) => {
 
 exports.getFundInfo = async (req, res) => {
   try {
-    const { userId } = req.body;
+    // const { userId } = req.body;
     let role = req.cookies.role;
     decRole = jwt.decode(role, secret);
     const user = await User.findOne({ _id: decRole });
