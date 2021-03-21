@@ -1,0 +1,12 @@
+.textdisplay {
+    top: 221px;
+left: 338px;
+width: 31px;
+height: 21px;
+text-align: right;
+font: normal normal normal 16px/21px Assistant;
+letter-spacing: 0.1px;
+color: #324483;
+opacity: 1;
+display: inline;
+}
