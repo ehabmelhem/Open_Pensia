@@ -21,6 +21,12 @@ router
   .post(proxyController.getDefaultQuestion);
 // /proxy/get-expanded-header POST
 
+router // needs checkrole
+  .route("/get-selected-question")
+  .post(proxyController.getSelectedQuestion);
+// /proxy/get-expanded-header POST
+
+
 router
   .route("/all-Questions-of-corporate")
   .post(proxyController.getAllQuestions);
