@@ -74,7 +74,7 @@ export function fetchUserData(content) {
       .catch((error) => {
         console.log(error.message);
         dispatch(userLoginFailure(error.message));
-      });//commit
+      });//commit 2
   };
 }
 
