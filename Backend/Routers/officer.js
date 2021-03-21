@@ -17,13 +17,24 @@ function checkRole(req, res, next) {
   }
 }
 
-router.route("/add-article").post(officerController.addArticle);
+router
+  .route("/add-article")
+  .post(officerController.addArticle);
 
-router.route("/get-officer-data").post(officerController.officerData);
+router
+  .route("/get-officer-data")
+  .post(officerController.officerData);
 
-router.route("/get-articles").post(officerController.officerArticles);
-router.route("/add-vote").post(checkRole, officerController.addVote);
+router
+  .route("/get-articles")
+  .post(officerController.officerArticles);
 
-router.route("/officer-percentages").post(officerController.officerPercentages);
+router    // needs checkRole
+  .route("/add-vote")
+  .post(checkRole, officerController.addVote);
+
+router
+  .route("/officer-percentages")
+  .post(officerController.officerPercentages);
 
 module.exports = router;

@@ -16,13 +16,19 @@ function checkRole(req, res, next) {
     res.send({ ok: false, messege: "you have to login" });
   }
 }
-router.route("/add-approved-user").post(userController.addApprovedUser);
-
-router.route("/add-user").post(userController.addUser);
-
-router.route("/login").post(userController.login);
+router
+  .route("/add-approved-user")
+  .post(userController.addApprovedUser);
 
 router
+  .route("/add-user")
+  .post(userController.addUser);
+
+router
+  .route("/login")
+  .post(userController.login);
+
+router    // needs checkRole
   .route("/user-voting-history")
   .post(checkRole, userController.getUserVotingHistory);
 

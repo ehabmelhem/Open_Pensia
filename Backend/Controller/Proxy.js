@@ -197,10 +197,6 @@ exports.getAllCorporate = async (req, res) => {
 };
 
 exports.getFundInfo = async (req, res) => {
-  // TODO:
-  //    ,openVoting:fundOpenQuestions
-  //    ,waitingVoting:"Number"
-
   try {
     const { userId } = req.body;
 
@@ -209,31 +205,9 @@ exports.getFundInfo = async (req, res) => {
     if (user === null) {
       res.send({ Ok: false, messege: "User not found" });
     } else {
-      // {ok:true,firstPage:{"fundName":"String","chanel":"String","fundSrc":"String",
-      // "openVoting":"Number","waitingVoting":"Number","groupPower":"Number"}}
 
-      // get openVoting and waitingVoting
-     // const openQuestions = await Proxy.find({ status: "Open" });
-    //  console.log(openQuestions);
-      ///////////////////////////////////////////////////////////////////////////////////////////////
-     // get list of corporates
-     // const fundOpenQuestions=
      const fundOpenQuestions = await openQuestions(userId,"Open").length;
-      // this.getAllCorporate({ fundname:user.fundName, chanell:user.chanel })
-
-      ///////////////////////////////////////////////////////////////////////////////////////////////////
-      // const fundOpenQuestions = openQuestions.filter(item => allResult.Security_ID.includes(item.Security_ID)).count();
-
-      // res.send({ OK: true, allResult });
-      ////////////////////////////////////////////////////////////
-
-      // groupPower
-      console.log("groupPower");
-      const groupPower = await User.find({
-        fundName: user.fundName,
-        chanel: user.chanel,
-      }).count();
-      console.log(groupPower);
+     const fundPendingQuestions = await openQuestions(userId,"Pending").length;
 
       res.send({
         OK: true,
@@ -242,14 +216,11 @@ exports.getFundInfo = async (req, res) => {
           chanel: user.chanel,
           fundSrc: "////",
           openVoting:fundOpenQuestions,
-          //    ,waitingVoting:"Number"
+          waitingVoting:fundPendingQuestions,
           groupPower: groupPower
         },
       });
     }
-    // res.send({
-    //   OK: false
-    // });
   } catch (e) {
     res.send({
       OK: false,
