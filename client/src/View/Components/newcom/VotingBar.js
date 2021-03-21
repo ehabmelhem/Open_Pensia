@@ -3,17 +3,19 @@ import "./VotingBar.css";
 
 export default function VotingBar(props) {
 
-  const [checkIfZero,setCheckIfZero] = useState(false);
+  const [checkIfZero,setCheckIfZero] = useState(null);
 
 useEffect(() => {
-  if(props.times > 0){
+  if(props.times !== 0){
     setCheckIfZero(true);
   }
-  console.log(props.times)
+  else{
+    setCheckIfZero(false);
+  }
 }, [])
 
   return (
-    <div dir="rtl" id="par" style={checkIfZero?{color:"black"}:{color:"#8080808c"}}>
+    <div dir="rtl" id="par" style={checkIfZero?{color:"#3D4257"}:{color:"gray"}}>
       <table>
         <tr>
           <th id="firstChild">

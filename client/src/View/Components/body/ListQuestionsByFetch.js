@@ -6,13 +6,15 @@ export default function ListQuestionsByFetch(props) {
    const [questionsList,setQuestionsList] = useState();
 
    useEffect(()=>{
-       fetch(`${props.fetch}`).then(r=>r.json()).then(data=>console.log(data))
-   },[])
-
+       fetch(`${props.fetch}`).then(r=>r.json()).then(data=>{setQuestionsList(data.doc);
+    })
+},[])
+console.log(questionsList)
     return (
         <div id="allList">
-            { !!questionsList && questionsList.map((question) => {
-return <CardListItem hideImg="hideImg" companyName={question.Topic} par={question.par}/>
+            {questionsList !== undefined && questionsList.filter(e=>e!==null).map((question) => {
+                console.log('joined')
+return <CardListItem status={question.status} hideImg="hideImg" companyName={question.Topic} par={question.par}/>
             })}
         </div>
     )

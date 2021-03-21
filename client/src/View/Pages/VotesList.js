@@ -33,7 +33,8 @@ const questionsList = [
  ]
 
 export default function VotesList(props) {
-    if(props.fetch !== null && props.fetch !== undefined){
+ if(props.fetch !== null && props.fetch !== undefined){
+     console.log("joined")
         return(
               <div>
             <NavBarLists title={props.title}/>
@@ -45,7 +46,7 @@ export default function VotesList(props) {
     return (
         <div>
             <NavBarLists title={props.title}/>
-            <ListQuestions questionsList={questionsList} sort={props.status}/>
+            <ListQuestions fetch={props.fetch} questionsList={questionsList} sort={props.status}/>
         </div>
     )
 }

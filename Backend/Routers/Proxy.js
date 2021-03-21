@@ -51,10 +51,10 @@ router // needs checkRole
 
 router // needs checkRole
   .route("/open-questions-in-fund")
-  .post(proxyController.getOpenQuestionsInFund); // return
+  .get(proxyController.getOpenQuestionsInFund); // return
 
 router // needs checkRole
   .route("/waiting-questions-by-fund")
-  .post(proxyController.getPendingQuestionsInFund);
+  .get(proxyController.getPendingQuestionsInFund);
 
 module.exports = router;

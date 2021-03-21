@@ -216,17 +216,12 @@ exports.getFundInfo = async (req, res) => {
     let decRole = jwt.decode(role, secret);
     const user = await User.findOne({ _id: decRole.name });
 
-   let decRole = jwt.decode(role, secret);
-    const user = await User.findOne({ _id: decRole.name });
-    console.log(user)
     if (user === null) {
       res.send({ Ok: false, messege: "User not found" });
     } else {
       const fundOpenQuestions = await (
         await openQuestions(decRole.name, "Open")
       ).length;
-      const fundOpenQuestions = await (await openQuestions(decRole.name, "Open"))
-        .length;
       const fundPendingQuestions = await (
         await openQuestions(decRole.name, "Pending")
       ).length;
@@ -354,11 +349,12 @@ exports.getOpenQuestionsInFund = async (req, res) => {
   try {
     let role = req.cookies.role;
     let decRole = jwt.decode(role, secret);
+
   //  const user = await User.findOne({ _id: decRole.name });
 
   //  const { userId } = req.body;
    const userId = decRole.name;
-    const allOpenQuestions = await openQuestions(userId, "Open");
+    const allOpenQuestions = await openQuestions(decRole.name, "Open");
     
     res.send({ ok: true, doc: allOpenQuestions });
   } catch (e) {
