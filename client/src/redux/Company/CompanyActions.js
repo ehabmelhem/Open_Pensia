@@ -79,7 +79,7 @@ export function _fetchCompanyQuestions(dispatch, securityID) {
         });
 }
 
-//Default Question
+// COMPANY Action Creators -- Default Question
 
 export const fetchDefaultQuestionRequest = () => ({
     type: FETCH_DEFAULT_QUESTION_REQUEST

@@ -1,5 +1,36 @@
-import React from "react";
+
+import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router";
+import './FirstPages.css';
 
 export default function FirstPages() {
-  return <div>1 2 3</div>;
+    const history = useHistory();
+     let firstPages=[
+         {title:'למה זה חשוב' , dec :'ורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית מוסן מנת. להאמית קרהשק סכעיט דז מא, מנכם למטכין נשואי מנורך. סחטיר בלובק. תצטנפל בלינדו למרקל אס לכימפו, דול, צוט ומעיוט - לפתיעם ברשג - ולתיעם גדדיש. קוויז דומור ליאמום בלינך רוגצה. לפמעט ' ,buttonTitle:'אהבתי '}
+     ,{title:'למה זה טוב לך' , dec :'ורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית מוסן מנת. להאמית קרהשק סכעיט דז מא, מנכם למטכין נשואי מנורך. סחטיר בלובק. תצטנפל בלינדו למרקל אס לכימפו, דול, צוט ומעיוט - לפתיעם ' ,buttonTitle:'מעולה '}
+    ,{title:'איך זה משרת אותך' , dec :'ורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית מוסן מנת. להאמית קרהשק סכעיט דז מא, מנכם למטכין נשואי מנורך. סחטיר בלובק. תצטנפל בלינדו למרקל אס לכימפו, דול, צוט ומעיוט - לפתיעם' ,buttonTitle:'אני רוצה להתחיל '}
+    ,{title:'זהינו שיש לך החזקה ב10 חברות בשוק' , dec :'והאם תרצה להשפיע' ,buttonTitle:'אני רוצה להתחיל '}]
+  let [index,setindex]=useState(0);
+  
+  function next(){
+     
+    index++;
+     if(index <= firstPages.length)
+      setindex(index)
+  }
+  function toLoginPage(){
+    history.push('Login')
+  }
+    return (
+        <div className='body'>
+            <div className='icon'></div>
+             <a className='title'>{firstPages[index].title}</a>
+             <p class='description'>{firstPages[index].dec}</p>
+             <button onClick={next}>{firstPages[index].buttonTitle}</button>
+             <div></div>
+             <a className='signin' onClick={toLoginPage}>יש לי כבר חשבון </a>
+        </div>
+        
+    )
+
 }
