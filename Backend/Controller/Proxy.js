@@ -218,7 +218,7 @@ exports.getFundInfo = async (req, res) => {
       ///////////////////////////////////////////////////////////////////////////////////////////////
      // get list of corporates
      // const fundOpenQuestions=
-     const fundOpenQuestions = await openQuestions(userId).length;
+     const fundOpenQuestions = await openQuestions(userId,"Open").length;
       // this.getAllCorporate({ fundname:user.fundName, chanell:user.chanel })
 
       ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -332,10 +332,23 @@ exports.getExpandedHeader = async (req, res) => {
   }
 };
 ////////////////////////////////////////////////////////
+exports.getPendingQuestionsInFund = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const allPendingQuestions = await openQuestions(userId,"Pending");
+
+    res.send({ ok: true, doc:allPendingQuestions});
+
+ } catch (e) {
+    console.log("getPendingQuestionsInFund fun bug");
+    res.send({ ok: false });
+  }
+};
+////////////////////////////////////////////////////////
 exports.getOpenQuestionsInFund = async (req, res) => {
   try {
     const { userId } = req.body;
-    const allOpenQuestions = await openQuestions(userId);
+    const allOpenQuestions = await openQuestions(userId,"Open");
 
     res.send({ ok: true, doc: allOpenQuestions });
  } catch (e) {
@@ -420,8 +433,8 @@ async function groupBy(keyValue, objectToGroup) {
 
 }
 /////////////////////////////////////////////////////////////////
-async function openQuestions(userId) {
-  try {
+async function openQuestions(userId,questiontatus) { //open or Pending Questions
+  try {                                             // status might be Open/Pending 
     const user = await User.findOne({ _id: userId });
     console.log("current user:", user, user.fundName, user.chanel);
 
@@ -434,7 +447,7 @@ async function openQuestions(userId) {
     }
     let allOpenQuestions = [];
 
-    await Proxy.find({ status: "Open" }).then(async (data) => {
+    await Proxy.find({ status: questiontatus }).then(async (data) => {
       if (data.Security_ID in groupBySecurityId) {
         await allOpenQuestions.push(data);
       }

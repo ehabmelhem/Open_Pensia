@@ -18,26 +18,43 @@ function checkRole(req, res, next) {
 }
 router
   .route("/get-corporate-default-question-data")
-  .post(checkRole, proxyController.getDefaultQuestion);
+  .post(proxyController.getDefaultQuestion);
 // /proxy/get-expanded-header POST
 
 router
   .route("/all-Questions-of-corporate")
   .post(proxyController.getAllQuestions);
 
-router
+router      // needs checkRole
   .route("/get-Question-by-secur-Id")
   .post(proxyController.getQuestionBySecurId);
-router.route("/get-all-fund").post(proxyController.getAllFundNames); // {FundName:[]} Set
-router.route("/get-all-chanell").post(proxyController.getChanellNames); // request param= {fundname:String0} {chanell:[]} Set
-router.route("/get-all-Corporates").post(proxyController.getAllCorporate); // return {Coeporate:[]}
 
-router.route("/get-fund-info").post(checkRole, proxyController.getFundInfo); // return
 router
+  .route("/get-all-fund")
+  .post(proxyController.getAllFundNames); // {FundName:[]} Set
+
+  router
+  .route("/get-all-chanell")
+  .post(proxyController.getChanellNames); // request param= {fundname:String0} {chanell:[]} Set
+
+  router
+  .route("/get-all-Corporates")
+  .post(proxyController.getAllCorporate); // return {Coeporate:[]}
+
+  router      // needs checkRole
+  .route("/get-fund-info")
+  .post(checkRole, proxyController.getFundInfo); // return
+
+  router      // needs checkRole
   .route("/get-expanded-header")
   .post(checkRole, proxyController.getExpandedHeader); // return
-router
+
+  router      // needs checkRole
   .route("/open-questions-in-fund")
   .post(proxyController.getOpenQuestionsInFund); // return
+
+  router      // needs checkRole
+  .route("/waiting-questions-by-fund")
+  .post(proxyController.getPendingQuestionsInFund);
 
 module.exports = router;
