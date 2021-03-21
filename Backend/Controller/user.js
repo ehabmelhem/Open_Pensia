@@ -330,10 +330,17 @@ exports.login = async (req, res) => {
 /////////////////////////////////////////////////////////////////////
 exports.getUserVotingHistory = async (req, res) => {
   try {
-    const { userId } = req.body;
+    let role = req.cookies.role;
+    let decRole = jwt.decode(role, secret);
+  //  const user = await User.findOne({ _id: decRole.name });
 
+  //  const { userId } = req.body;
+   // const allOpenQuestions = await openQuestions(decRole.name, "Open")
+   // const { userId } = req.body;
+    const userId= decRole.name
+    
     const allHistory = [];
-    const user = await User.findOne({ _id: userId });
+    const user = await User.findOne({ _id: userId});
     const userVotes = user.votes;
 
     const groupBy = (key) => (userVotes) =>
