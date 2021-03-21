@@ -156,7 +156,7 @@ exports.getAllCorporate = async (req, res) => {
   try {
     console.log("getAllCorporate");
     const { fundname, chanell } = req.body;
-    const allResult = await allCorporates(fundname,chanell);
+    const allResult = await allCorporates(fundname, chanell);
     res.send({ OK: true, allResult });
   } catch (e) {
     console.log("could not run getAllCorporate in Proxy");
@@ -167,22 +167,25 @@ exports.getAllCorporate = async (req, res) => {
 exports.getFundInfo = async (req, res) => {
   try {
     const { userId } = req.body;
-    const user = await User.findOne({ _id: userId });
+    let role = req.cookies.role;
+    decRole = jwt.decode(role, secret);
+    const user = await User.findOne({ _id: decRole });
 
     if (user === null) {
       res.send({ Ok: false, messege: "User not found" });
     } else {
+      const fundOpenQuestions = await (await openQuestions(decRole, "Open"))
+        .length;
+      const fundPendingQuestions = await (
+        await openQuestions(decRole, "Pending")
+      ).length;
 
-     const fundOpenQuestions = await (await openQuestions(userId,"Open")).length;
-     const fundPendingQuestions = await (await openQuestions(userId,"Pending")).length;
-
-
-     //groupPower
-     console.log("groupPower");
-     const groupPower = await User.find({
-       fundName:user.fundName,
-       chanel:user.chanel
-     }).count();
+      //groupPower
+      console.log("groupPower");
+      const groupPower = await User.find({
+        fundName: user.fundName,
+        chanel: user.chanel,
+      }).count();
 
       res.send({
         OK: true,
@@ -190,9 +193,9 @@ exports.getFundInfo = async (req, res) => {
           fundName: user.fundName,
           chanel: user.chanel,
           fundSrc: "////",
-          openVoting:fundOpenQuestions,
-          waitingVoting:fundPendingQuestions,
-          groupPower: groupPower
+          openVoting: fundOpenQuestions,
+          waitingVoting: fundPendingQuestions,
+          groupPower: groupPower,
         },
       });
     }
@@ -281,11 +284,10 @@ exports.getExpandedHeader = async (req, res) => {
 exports.getPendingQuestionsInFund = async (req, res) => {
   try {
     const { userId } = req.body;
-    const allPendingQuestions = await openQuestions(userId,"Pending");
+    const allPendingQuestions = await openQuestions(userId, "Pending");
 
-    res.send({ ok: true, doc:allPendingQuestions});
-
- } catch (e) {
+    res.send({ ok: true, doc: allPendingQuestions });
+  } catch (e) {
     console.log("getPendingQuestionsInFund fun bug");
     res.send({ ok: false });
   }
@@ -294,10 +296,10 @@ exports.getPendingQuestionsInFund = async (req, res) => {
 exports.getOpenQuestionsInFund = async (req, res) => {
   try {
     const { userId } = req.body;
-    const allOpenQuestions = await openQuestions(userId,"Open");
+    const allOpenQuestions = await openQuestions(userId, "Open");
 
     res.send({ ok: true, doc: allOpenQuestions });
- } catch (e) {
+  } catch (e) {
     console.log("getOpenQuestionsInFund fun bug");
     res.send({ ok: false });
   }
@@ -343,8 +345,6 @@ async function allCorporates(fundName, chanel) {
   } catch (e) {
     console.log("allCorporate fun bug");
   }
-
-
 }
 /////////////////////////////////////////////////////////////////
 async function groupBy(keyValue, objectToGroup) {
@@ -355,20 +355,20 @@ async function groupBy(keyValue, objectToGroup) {
         objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
         return objectsByKeyValue;
       }, {});
-   
+
     const groupByKey = groupBy(keyValue);
     const groupedObject = groupByKey(objectToGroup);
-  
+
     return groupedObject;
   } catch (e) {
     console.log("groupBy fun bug");
   }
-
-
 }
 /////////////////////////////////////////////////////////////////
-async function openQuestions(userId,questiontatus) { //open or Pending Questions
-  try {                                             // status might be Open/Pending 
+async function openQuestions(userId, questiontatus) {
+  //open or Pending Questions
+  try {
+    // status might be Open/Pending
     const user = await User.findOne({ _id: userId });
 
     // get all corporates
@@ -376,19 +376,18 @@ async function openQuestions(userId,questiontatus) { //open or Pending Questions
     // groupBy Security_ID
     let groupBySecurityId = [];
     if (allCorporate !== null) {
-      groupBySecurityId = await groupBy("Security_ID", allCorporate)
+      groupBySecurityId = await groupBy("Security_ID", allCorporate);
     }
     let allOpenQuestions = [];
 
-    await Proxy.find({ status: questiontatus }).then( async(proxies) => {
+    await Proxy.find({ status: questiontatus }).then(async (proxies) => {
       proxies.forEach(async (proxy) => {
-      if (proxy.Security_ID in groupBySecurityId) {
-        console.log(proxy.Security_ID);
-         await allOpenQuestions.push(proxy);
-      }
-    })
-   
-    })
+        if (proxy.Security_ID in groupBySecurityId) {
+          console.log(proxy.Security_ID);
+          await allOpenQuestions.push(proxy);
+        }
+      });
+    });
     return allOpenQuestions;
   } catch (e) {
     console.log("openQuestions fun bug");
