@@ -205,7 +205,7 @@ exports.getFundInfo = async (req, res) => {
     const { userId } = req.body;
 
     const user = await User.findOne({ _id: userId });
-    console.log(user);
+
     if (user === null) {
       res.send({ Ok: false, messege: "User not found" });
     } else {
@@ -213,53 +213,14 @@ exports.getFundInfo = async (req, res) => {
       // "openVoting":"Number","waitingVoting":"Number","groupPower":"Number"}}
 
       // get openVoting and waitingVoting
-      const openQuestions = await Proxy.find({ status: "Open" });
-      console.log(openQuestions);
+     // const openQuestions = await Proxy.find({ status: "Open" });
+    //  console.log(openQuestions);
       ///////////////////////////////////////////////////////////////////////////////////////////////
-      // get list of corporates
-      // const allCorporates=this.getAllCorporate({ fundname:user.fundName, chanell:user.chanel })
-      console.log("getAllCorporate");
-      //  const { fundname, chanell } = req.body;
-      let url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${user.fundName}&filter[Chanel]=${user.chanel}&page=0`;
-      // let url = `https://open-pension-tsofen.herokuapp.com/api/interests`;
-      const encodedURI = encodeURI(url);
-      const allResult = [];
-      let settings = { method: "Get" };
-      await fetch(encodedURI, settings)
-        .then((res) => res.json())
-        .then(async (json) => {
-          console.log("in");
-          if (json.info.pages > 1) {
-            for (let i = 1; i <= json.info.pages; i++) {
-              console.log("in2");
-              // https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=%D7%94%D7%A8%D7%90%D7%9C&filter[Chanel]=%D7%92%D7%9E%D7%9C/%D7%A4%D7%A0%D7%A1%D7%99%D7%94&page=1
-              url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${user.fundName}}&filter[Chanel]=${user.chanel}&page=${i}`;
-              let encodedd = encodeURI(url);
-              await fetch(encodedd, settings)
-                .then((r) => r.json())
-                .then((data) => {
-                  console.log(data.data);
-                  for (var key in data.data) {
-                    // error is here, it could not enter the for loop
-                    //
-                    console.log("in for");
-                    console.log(data.data[key]["A AVE Vote"]);
-                    if (data.data[key]["A AVE Vote"] * 10000 > 0.05) {
-                      console.log("in3");
-                      allResult.push(data.data[key]);
-                    }
-                  }
-                });
-            }
-          } else {
-            for (var key in json.data) {
-              if (json.data[key]["A AVE Vote"] > 0.05) {
-                console.log("in4");
-                allResult.push(json.data[key]);
-              }
-            }
-          }
-        });
+     // get list of corporates
+     // const fundOpenQuestions=
+     const fundOpenQuestions = await openQuestions(userId).length;
+      // this.getAllCorporate({ fundname:user.fundName, chanell:user.chanel })
+
       ///////////////////////////////////////////////////////////////////////////////////////////////////
       // const fundOpenQuestions = openQuestions.filter(item => allResult.Security_ID.includes(item.Security_ID)).count();
 
@@ -280,9 +241,9 @@ exports.getFundInfo = async (req, res) => {
           fundName: user.fundName,
           chanel: user.chanel,
           fundSrc: "////",
-          //    ,openVoting:fundOpenQuestions
+          openVoting:fundOpenQuestions,
           //    ,waitingVoting:"Number"
-          groupPower: groupPower,
+          groupPower: groupPower
         },
       });
     }
@@ -374,47 +335,18 @@ exports.getExpandedHeader = async (req, res) => {
 exports.getOpenQuestionsInFund = async (req, res) => {
   try {
     const { userId } = req.body;
-    const user = await User.findOne({ _id: userId });
-      console.log("current user:", user,user.fundName,user.chanel);
+    const allOpenQuestions = await openQuestions(userId);
 
-    // get all corporates
-    const allCorporate=await allCorporates(user.fundName,user.chanel);
-    // group
-
-    // const groupBy = (key) => (allCorporates) =>
-    // allCorporates.reduce((objectsByKeyValue, obj) => {
-    //     const value = obj[key];
-    //     objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
-    //     return objectsByKeyValue;
-    //   }, {});
-
-    // const groupByProxy = groupBy("Security_ID");
-    // const groupedProxies = groupByProxy(allCorporates);
-    // console.log(groupedProxies);
-
-
-    // for (var currentProxy in groupedProxies) {
-    //   console.log(currentProxy);
-
-    //   let resultVotes = await Proxy.findOne({
-    //     Proxy_code: currentProxy,
-    //     result: true,
-    //   });
-    //   if (resultVotes !== null) resultCounter++;
-    // }
-
-    res.send({ doc: allCorporate });
-
-    //////////////////////////////////////////////////////////////
-  } catch (e) {
+    res.send({ ok: true, doc: allOpenQuestions });
+ } catch (e) {
     console.log("getOpenQuestionsInFund fun bug");
     res.send({ ok: false });
   }
 };
 /////////////////////////////////////////////////////////////////
-async function allCorporates(fundName,chanel){
-  try{
-  console.log("getAllCorporate",fundName,chanel);
+async function allCorporates(fundName, chanel) {
+  try {
+    console.log("getAllCorporate", fundName, chanel);
     // const { fundName,chanel } = req.body;
     let url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundName}&filter[Chanel]=${chanel}&page=0`;
     // let url = `https://open-pension-tsofen.herokuapp.com/api/interests`;
@@ -448,15 +380,72 @@ async function allCorporates(fundName,chanel){
           }
         }
       });
-      console.log(allResult)
-      return allResult;
-    }catch (e) {
-      console.log("allCorporate fun bug");
-    }
+    console.log(allResult)
+    return allResult;
+  } catch (e) {
+    console.log("allCorporate fun bug");
+  }
 
 
 }
 /////////////////////////////////////////////////////////////////
+async function groupBy(keyValue, objectToGroup) {
+  try {
+    const groupBy = (key) => (objectToGroup) =>
+      objectToGroup.reduce((objectsByKeyValue, obj) => {
+        const value = obj[key];
+        objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
+        return objectsByKeyValue;
+      }, {});
+    //
+    const groupByKey = groupBy(keyValue);
+    const groupedObject = groupByKey(objectToGroup);
+    console.log(groupedObject);
+    return groupedObject;
+
+    // for (var currentProxy in groupedProxies) {
+    //   console.log(currentProxy);
+
+    //   let resultVotes = await Proxy.findOne({
+    //     Proxy_code: currentProxy,
+    //     result: true,
+    //   });
+    //   if (resultVotes !== null) resultCounter++;
+    // }
+
+  } catch (e) {
+    console.log("groupBy fun bug");
+  }
+
+
+}
+/////////////////////////////////////////////////////////////////
+async function openQuestions(userId) {
+  try {
+    const user = await User.findOne({ _id: userId });
+    console.log("current user:", user, user.fundName, user.chanel);
+
+    // get all corporates
+    const allCorporate = await allCorporates(user.fundName, user.chanel);
+    // groupBy Security_ID
+    let groupBySecurityId = [];
+    if (allCorporate !== null) {
+      groupBySecurityId = await groupBy("Security_ID", allCorporate)
+    }
+    let allOpenQuestions = [];
+
+    await Proxy.find({ status: "Open" }).then(async (data) => {
+      if (data.Security_ID in groupBySecurityId) {
+        await allOpenQuestions.push(data);
+      }
+    })
+    return allOpenQuestions;
+  } catch (e) {
+    console.log("openQuestions fun bug");
+  }
+}
+/////////////////////////////////////////////////////////////////
+
 setInterval(async () => {
   let url = `http://open-pension-tsofen.herokuapp.com/api/dimProxies`;
   const encodedURI = encodeURI(url);
