@@ -176,8 +176,7 @@ exports.getFundInfo = async (req, res) => {
      const fundOpenQuestions = await (await openQuestions(userId,"Open")).length;
      const fundPendingQuestions = await (await openQuestions(userId,"Pending")).length;
 
-     console.log("fundOpenQuestions"+fundOpenQuestions);
-     console.log(fundPendingQuestions);
+
      //groupPower
      console.log("groupPower");
      const groupPower = await User.find({
