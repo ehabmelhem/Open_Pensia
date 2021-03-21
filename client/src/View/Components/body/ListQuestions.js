@@ -2,15 +2,15 @@ import React from 'react'
 import CardListItem from '../CardListItem'
 import './Body.css'
 //item.status:"Top" -- props.sort ="Top"
-export default function ListQuestions(props) {
-    console.log(props.questionsList)
+export default function ListQuestions({questionsList, sort}) {
+    console.log(questionsList)
 
     return (
         <div id="allList">
-            { !!props.questionsList &&props.questionsList.map((question) => {
+            { !!questionsList &&questionsList.map((question) => {
 
 
-               <p>{question.Topic}</p>
+               return (<p>{question.Topic}</p>)
 
 
             })}
