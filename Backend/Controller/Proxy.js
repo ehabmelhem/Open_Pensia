@@ -5,6 +5,7 @@ const Proxy = require("../Schema/Proxy");
 const officerModel = require("../Schema/Officer");
 const User = require("../Schema/User");
 const { v4: uuidv4 } = require("uuid");
+const secret = "1234";
 /* 
 dis: get the default Questions - before SignUp
 parameters: {Security_ID:String}				
@@ -53,8 +54,15 @@ exports.getDefaultQuestion = async (req, res) => {
 //////////////////////////////////////////////////////////////
 exports.getSelectedQuestion = async (req, res) => {
   try {
-    const { fundName, chanel, Security_ID } = req.body;
 
+    const { fundName, chanel, Security_ID } = req.body;
+   // console.log(fundName, chanel, Security_ID);
+     let role = req.cookies.role;
+     console.log(role)
+     let decRole = jwt.decode(role, secret);
+  
+    const user = await User.findOne({ _id: decRole.name });
+   // console.log(user)
     await Proxy.find({ Security_ID: Security_ID }).then(async (data) => {
       if (data.length === 0) {
         res.send({ Ok: false, messege: "the Security_ID did not exists" });
@@ -80,10 +88,12 @@ exports.getSelectedQuestion = async (req, res) => {
           topic: data[0].Topic,
           company_name:company_name,
           ave: AVE,
+          user:user
         });
       }
     });
   } catch (e) {
+    console.log()
     res.send({
       OK: false,
       messege: "could not run getDefaultQuestion in Proxy",
@@ -344,10 +354,10 @@ exports.getOpenQuestionsInFund = async (req, res) => {
   try {
     let role = req.cookies.role;
     let decRole = jwt.decode(role, secret);
-  //  const user = await User.findOne({ _id: decRole.name });
 
-  //  const { userId } = req.body;
-   const userId = decRole.name;
+    const userId= decRole.name
+
+    ////////////////////////////////
     const allOpenQuestions = await openQuestions(userId, "Open");
     
     res.send({ ok: true, doc: allOpenQuestions });
