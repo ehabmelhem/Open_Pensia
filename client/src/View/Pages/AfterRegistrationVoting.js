@@ -10,13 +10,7 @@ export default function AfterRegistrationVoting() {
     const [userId,setUserId] = useState();
 
     useEffect(()=>{
-        fetch('getIdFromCookie').then(r=>r.json()).then(data=>{setUserId(data)})
-
-fetch('/proxy/get-fund-info',{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify('604f03f62e7ffa6328494fd5')
-  }).then(r=>r.json()).then(data=>{console.log(data)})
+fetch('/proxy/get-fund-info').then(r=>r.json()).then(data=>{console.log(data)})
     },[])
 
     return (

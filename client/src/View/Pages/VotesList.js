@@ -1,7 +1,7 @@
 import React from 'react'
 import NavBarLists from '../Components/NavBarLists'
 import ListQuestions from '../Components/body/ListQuestions'
-/*
+
 const questionsList = [
     { status:{"results":true},Topic: 'פרשמרקט', par: 'קמעונאות מזון' },
     { status:{"results":true},  Topic: 'הולמס פלייס', par: 'חדרי כושר' },
@@ -30,7 +30,7 @@ const questionsList = [
 { status:{"results":true}, Topic: 'חילן', par: 'טכנולוגיה' },
 { status:{"results":false},  Topic: 'בנק הפועלים', par: 'בנקאות' }
  ]
-*/
+
 export default function VotesList(props) {
     return (
         <div>
