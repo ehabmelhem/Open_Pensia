@@ -1,5 +1,5 @@
 import React from 'react'
-import CardListItem from '../CardListItem'
+import QuestionListItem from '../QuestionListItem'
 import './Body.css'
 //item.status:"Top" -- props.sort ="Top"
 export default function ListQuestions({questionsList, sort}) {
@@ -10,7 +10,7 @@ export default function ListQuestions({questionsList, sort}) {
             { !!questionsList &&questionsList.map((question) => {
 
 
-               return (<p>{question.Topic}</p>)
+               return <QuestionListItem key={question._id} question={question} />
 
 
             })}
