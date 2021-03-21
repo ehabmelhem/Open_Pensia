@@ -12,6 +12,9 @@ fetch('/proxy/get-fund-info'){
 
 Json Request:
 {"userId":"string"}
+{"userId":"604f03f62e7ffa6328494fd5"}
+
+
 
 e.x: TO BE ADDED
 
