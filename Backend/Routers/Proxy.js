@@ -37,7 +37,7 @@ router.route("/get-all-Corporates").post(proxyController.getAllCorporate); // re
 
 router // needs checkRole
   .route("/get-fund-info")
-  .post(proxyController.getFundInfo); // return
+  .get(proxyController.getFundInfo); // return
 
 router // needs checkRole
   .route("/get-expanded-header")
