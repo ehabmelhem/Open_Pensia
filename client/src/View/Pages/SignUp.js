@@ -2,49 +2,77 @@ import React, { useState, useEffect } from 'react';
 import ButtonShow from './ButtonShow'
 import PersonaiInfo from './QuestionsBeforeRegister'
 import Inputclass from '../Components/InputText'
+import './SignUp.css';
 export default function SignUp() {
-    const [button1, setButton1] = useState(true);
-    const [button2, setButton2] = useState(false);
+    const [Personal, setPersonal] = useState(true);
+    const [Confirm, setConfirm] = useState(false);
     const [sort, setSort] = useState("PersonalInfo");
 
     function select(selectedButton) {
         switch (selectedButton) {
-            case 'button1':
-                setButton1(true);
-                setButton2(false);
+            case 'Personal':
+                setPersonal(true);
+                setConfirm(false);
                 setSort("PersonalInfo")
                 break;
 
-            case 'button2':
-                setButton1(false);
-                setButton2(true);
+            case 'Confirm':
+                setPersonal(false);
+                setConfirm(true);
                 setSort("Confirmation")
                 break;
 
-            
+
             default:
                 break;
         }
     }
-    function PassToConfirm(e){
-        setButton1(false)
-        setButton2(true)
+    function PassToConfirm(e) {
+        setPersonal(false)
+        setConfirm(true)
         setSort("Confirmation")
     }
+    function confirmMe(e) {
+
+    }
     return (
-        <div>
+        <div className="body">
+            <div className="title2"><h8 className="title5">תהליך רישום</h8></div>
+            <div >
+                <div id="buttonsBar">
+                    <div id="Personal" > <ButtonShow text="פרטים אישיים" selected={Personal} /> </div>
+                    <div id="Confirm" > <ButtonShow text="אימות נתונים" selected={Confirm} /></div>
+                </div>
 
-            <div id="buttonsBar">
-                <div id="button1" onClick={() => select('button1')}> <ButtonShow text="פרטים אישיים" selected={button1} /> </div>
-                <div id="button2" onClick={() => select('button1')}> <ButtonShow text="אימות נתונים" selected={button2} /></div>
+                {sort === "PersonalInfo" ?
+                    <div>
+                        <h3 className="info">נתוני ההצבעה שלך שמורים במערכת</h3>
+                        <br></br>
+                        < Inputclass textenglish={"nameprivate"} texter={"שם פרטי"} ></Inputclass>
+                        < Inputclass textenglish={"family"} texter={"שם משפחה"} ></Inputclass>
+
+                        < Inputclass textenglish={"email"} texter={"כתובת מייל"} ></Inputclass>
+                        < Inputclass textenglish={"phone"} texter={"מספר טלפון"} ></Inputclass>
+
+                        <br></br>
+                        <button onClick={PassToConfirm} className="but">הלאה</button>
+                    </div>
+                    : <div><h3 className="info">איך תרצ/י שנאמת אותך?</h3>
+                        <div >
+                            <h1>
+                                <input className="radiobutton" type="radio" value="folder" name="confirm" /> אימות על ידי מסמך מזהה
+                      </h1>
+                            <div className="line" />
+                            <h1>
+                                <input className="radiobutton2" type="radio" value="folder" name="confirm" />אימות על ידי מסלקה פנסיונית
+                      </h1>
+                            <div className="line" />
+                        </div>
+                        <button className="button" onClick={confirmMe}>תאמתו אותי!</button></div>}
+
+
+
             </div>
-
-            {sort==="PersonalInfo"?
-            <button onClick={PassToConfirm}/>:<div>sdljhsldh</div>}
-            
-
-
-
         </div>
     )
 }

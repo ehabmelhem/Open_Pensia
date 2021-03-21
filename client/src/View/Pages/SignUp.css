@@ -1,14 +1,73 @@
 #buttonsBar {
-    width: 100%;
+    width:375px;
     display: flex;
     min-width: 375px;
     flex-direction: row-reverse;
     max-width: 600px;
-    margin: auto;
+    margin-left: 188px;
+    display: flex;
   }
   
-  #button1,
-  #button2
+  #Personal,
+  #Confirm
   {
-    width: 33.33333333%;
+    width :50%;
   }
+.title2{
+  top: 0px;
+  width: 375px;
+  height: 56px;
+  opacity: 1;
+  background-color: #3D4257;
+}
+  .radiobutton{
+    
+    top: 213px;
+    left: 203px;
+    width: 200px;
+    height: 21px;
+    text-align: right;
+    font: normal normal 600 16px/21px Assistant;
+    letter-spacing: 0.1px;
+    color: #324483;
+    opacity: 1;
+  }
+  .radiobutton2{
+    top: 295px;
+    left: 178px;
+    width: 181px;
+    height: 21px;
+    text-align: right;
+    
+    letter-spacing: 0.1px;
+    color: #324483;
+    opacity: 1;  
+  }
+
+  h1{
+    font: normal normal 600 16px/16px Assistant;
+  }
+
+  .line {
+    width: 350px;
+    background-color: #00000024;
+    height: 1.5px;
+    margin-left: 10px;
+}
+.button{
+  top: 605px;
+left: 16px;
+width: 343px;
+height: 38px;
+background: #3D4257 0% 0% no-repeat padding-box;
+box-shadow: 0px 2px 1px #00000024;
+opacity: 1;
+}
+
+.title5{
+  color: white;
+  font-weight: bold;
+  margin-top: 100px;
+  padding-top: 50px;
+  top:50px;
+}
