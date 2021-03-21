@@ -38,7 +38,7 @@ export default function QuestionsBeforeRegister() {
               });
     }
     return (
-        <div>
+        <div className="body">
             <h3 className="info">נתוני ההצבעה שלך שמורים במערכת</h3>
             <br></br>
              < Inputclass textenglish  = {"nameprivate"}  texter = {"שם פרטי"} ></Inputclass>
@@ -47,7 +47,7 @@ export default function QuestionsBeforeRegister() {
              < Inputclass textenglish  = {"email"}  texter = {"כתובת מייל"} ></Inputclass>
              < Inputclass textenglish  = {"phone"}  texter = {"מספר טלפון"} ></Inputclass>
 
-         
+         <br></br>
 <button  onClick= {savePersonalInfo} className="but">הלאה</button>
         </div>
     )   

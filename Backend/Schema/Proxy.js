@@ -20,7 +20,7 @@ const proxyModel = mongoose.model("proxyCollection", {
       voted: Number
     },
   ],
-  status: String, // {Top/Open/Results}
+  status: String, // {Top/Open/Pending/Results}
   result: Boolean, //result by default false
 });
 
