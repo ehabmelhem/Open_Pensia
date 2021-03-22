@@ -21,10 +21,10 @@ export default function VoteDirectors() {
   useEffect(() => {
     dispatch(fetchCompanyDefaultQuestion(securityID, '', ''));
   }, []);
-  function handleCandidateSelect(id) {
-    console.log(id);
-    dispatch(fetchOfficerData(id));
-  }
+  // function handleCandidateSelect(id) {
+  //   console.log(id);
+  //   dispatch(fetchOfficerData(id));
+  // }
   let officers = !!defaultQuestion && defaultQuestion.officers;
   return (
     <div>
@@ -36,7 +36,7 @@ export default function VoteDirectors() {
         />
 
         <div>
-          <p>בחר/י שני דירקטורים רגילים</p>
+          <p>מי היית רוצה שיכהן כדירקטור?</p>
 
           {
             officers && officers.map((officer) => {
@@ -47,15 +47,15 @@ export default function VoteDirectors() {
                   key={officer.officerId}
                   logo={"https://www.lego.com/cdn/cs/set/assets/blt0bf03ae97678db52/Batman2_App_Sidekick-Tall1.jpg?fit=crop&format=jpg&quality=80&width=800&height=600&dpr=1"}
                   name={officer.officerName}
-                  link={`InfoDirector/${officer.officerId}`}
-                  onCandidateSelect={() => handleCandidateSelect(officer.officerId)}
+                  link={`/InfoDirector/${officer.officerId}`}
+                  // onCandidateSelect={() => handleCandidateSelect(officer.officerId)}
                 />
 
               );
             })}
 
         </div>
-        <MainButton text="שלח/י את ההצבעה שלי" tolink={"SignUpRequest"} />
+        <MainButton text="שלח/י את ההצבעה שלי" tolink={"/SignUpRequest"} />
       </div>
     </div>
   );

@@ -108,7 +108,7 @@ export const fetchDefaultQuestionFailure = (error) => ({
 export function fetchCompanyDefaultQuestion(securityID, fundName, chanel) {
     securityID = typeof securityID === 'number' ? securityID.toString() : securityID;
 
-    securityID = '662577'; //temporary
+    securityID = '770016'; //temporary
     fundName = "מור"
     chanel = "גמל/פנסיה"
 

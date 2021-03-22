@@ -20,11 +20,11 @@ export default function CompaniesListSelect() {
     <div className="App1">
       <header className="App-header1">
         <div>
-          <a className="login" href="#" target="_blank"> כניסה </a>
+          <a className="login-from-companies-list" href="/Login" target="_blank"> כניסה </a>
         </div>
         <div className="question">?על איזו חברה תרצה/י להשפיע</div>
         <div>
-          <Arrow arrowToLink="QuestionsBeforeRegister" color="#B7BCCC" />
+          <Arrow arrowToLink="/QuestionsBeforeRegister" color="#B7BCCC" />
         </div>
       </header>
       {!!companies && companies.map((company) => {
