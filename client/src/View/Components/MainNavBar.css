@@ -10,7 +10,7 @@
 
 ul {
   display: flex;
-  width: 80%;
+  width: 100%;
   padding: 0%;
   margin: 0%;
   margin-right: auto;
@@ -18,20 +18,20 @@ ul {
 }
 li {
   list-style-type: none;
-  padding: 10px;
+  padding-top:10px;
+  padding-bottom:10px;
   width: 100%;
   cursor: pointer;
   font-size: 18px;
 }
 .active-nav {
-  display: flexbox;
+  /* display: flexbox; */
   color: rgb(94, 108, 157);
   border-bottom: solid rgb(94, 108, 157);
-}
-.non-active-nav {
-  color: rgb(167, 172, 188);
 }
 
 a {
   text-decoration: none;
+  width: 33.33%;
+  color: rgb(167, 172, 188);
 }
