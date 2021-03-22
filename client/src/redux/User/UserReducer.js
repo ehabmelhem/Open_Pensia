@@ -9,11 +9,14 @@ import {
 } from "../actionTypes";
 
 const initialState = {
+  userid: "",
   userFirstName: "",
   userlastName: "",
   userEmail: "",
   userPassword: "",
   userStatus: "",
+  userfundName: "",
+  userchanel: "",
   loading: false,
   error: "",
 };
@@ -28,6 +31,7 @@ const UserReducer = (state = initialState, action) => {
     case USER_LOGIN_SUCCESS:
       return {
         ...state,
+        userid: action.payload._id,
         userFirstName: action.payload.firstName,
         userlastName: action.payload.lastName,
         userEmail: action.payload.email,
@@ -38,6 +42,7 @@ const UserReducer = (state = initialState, action) => {
       };
     case USER_LOGIN_FAILURE:
       return {
+        userid:"",
         userFirstName: "",
         userlastName: "",
         userEmail: "",
@@ -48,6 +53,7 @@ const UserReducer = (state = initialState, action) => {
       };
     case USER_LOGOUT:
       return {
+        userid:"",
         userFirstName: "",
         userlastName: "",
         userEmail: "",
@@ -63,6 +69,7 @@ const UserReducer = (state = initialState, action) => {
       };
     case USER_SIGNUP_SUCCESS:
       return {
+        userid: action.payload._id,
         userFirstName: action.payload.firstName,
         userlastName: action.payload.lastName,
         userEmail: action.payload.email,
@@ -73,6 +80,7 @@ const UserReducer = (state = initialState, action) => {
       };
     case USER_SIGNUP_FAILURE:
       return {
+        userid: "",
         userFirstName: "",
         userlastName: "",
         userEmail: "",
