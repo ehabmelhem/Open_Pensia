@@ -47,12 +47,12 @@ export function fetchOfficerData(officerId) {
 
     return dispatch => {
         dispatch(fetchOfficerDataRequest());
-        axios.get('/officer/get-officer-data', {
+        axios.post('/officer/get-officer-data', {
             officerId
         })
             .then(res => {
-                console.log(res.data);
-                let content = res.data;
+                console.log(res.data.doc[Object.keys(res.data.doc)[0]]); 
+                let content = res.data.doc[Object.keys(res.data.doc)[0]]; // to get the first element on the object
                 dispatch(fetchOfficerDataSuccess({
                     officerName: content.Officers_Name,
                     officerId: content.Officers_ID,

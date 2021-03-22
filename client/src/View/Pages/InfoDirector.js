@@ -12,19 +12,21 @@ export default function InfoDirector() {
 
   const dispatch = useDispatch();
   const { id } = useParams()
-  console.log(id)
 
   useEffect(() => {
     dispatch(fetchOfficerData(id));
-  }, [])
+  }, []);
+
+  let officer = useSelector(state => state.OfficerReducer)
+  let company = useSelector(state => state.CompanyReducer)
   let votingPer = [{ disApprovePer: "20%", ApprovePer: "80%" }];
 
   return (
     <Router>
       <div style={{ maxWidth: "600px", margin: "auto" }}>
         <VotingHeader
-          directorName="עיסאווי פריג'"
-          company="בנק הפועלים"
+          directorName={officer.name}
+          company={company.companyName}
           backToLink={`/VoteDirectors/${id}`}
         />
 
@@ -36,7 +38,7 @@ export default function InfoDirector() {
             <DetailsOfVoting voting={votingPer} />
           </Route>
           <Route path="/">
-            <CandidateInfo />
+            <CandidateInfo officer={officer} />
           </Route>
         </Switch>
       </div>

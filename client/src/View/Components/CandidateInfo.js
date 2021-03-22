@@ -1,33 +1,31 @@
 import "./CandidateInfo.css";
 import MainButton from "./MainButton";
 
-function CandidateInfo(props) {
-  // const candidateInfo = props.candidateInfo;
-
+function CandidateInfo({ officer }) {
   const cand_info = [
     {
       title: "ניסיון תעסוקתי",
-      details: [" מנכל פוקס", "אלוף משנה 8200", "סמנכל כספים מחסני חשמל"],
+      details: [officer.VC],
     },
     {
       title: "מומחיות פיננסית",
-      details: [" יש מומחיות"],
+      details: [officer.financialExpert],
     },
     {
       title: "השכלה",
-      details: [
-        "לימודי משפטים",
-        "קורס ברמנים ,בא מאסטר",
-        "לימודי דת ורוח, האונבירסיטה הפתוחה",
-      ],
+      details: [officer.education],
     },
     {
       title: "ניגוד עניינים",
-      details: ["אין"],
+      details: [officer.relative],
     },
     {
-      title: "קרוב משפחה של בעל שליטה",
-      details: ["בן דוד של מנכל הראל פיננסים "],
+      title: "עבודות אחרות",
+      details: [officer.otherJobs],
+    },
+    {
+      title: "personalInterest",
+      details: [officer.personalInterest],
     },
   ];
 
@@ -41,13 +39,11 @@ function CandidateInfo(props) {
               {data.details.map((d, index) => {
                 return <p className='body-h5' key={index}> {d} </p>;
               })}
-              
+
             </div>
           );
         })}
       </div>
-
-      <info_block cand_info={cand_info} />
       <MainButton
         myClass="add-info-btn"
         tolink="/UploadInformation"

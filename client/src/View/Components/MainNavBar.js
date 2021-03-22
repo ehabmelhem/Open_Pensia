@@ -16,10 +16,10 @@ function MainNavBar({ navTabs }) {
     const closestLi = !!e.target && e.target.closest("li");
     console.log(closestLi);
     var tabs = document.querySelectorAll(".all-tabs ul li");
-    tabs.forEach((element) => {
-      element.classList.remove("active-nav");
+    !!tabs && tabs.forEach((element) => {
+      !!element.classList && element.classList.remove("active-nav");
     });
-    closestLi.classList.add("active-nav");
+    !!closestLi && !!closestLi.classList && closestLi.classList.add("active-nav");
   }
 
   return (
