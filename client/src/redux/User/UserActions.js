@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import {
   //USER
   USER_LOGIN_REQUEST,
@@ -19,6 +20,7 @@ export const userLoginRequest = () => ({
 export const userLoginSuccess = (content) => ({
   type: USER_LOGIN_SUCCESS,
   payload: {
+    _id: content._id,
     firstName: content.firstName,
     lastName: content.lastName,
     email: content.email,
@@ -45,6 +47,7 @@ export const userSignupRequest = () => ({
 export const userSignupSuccess = (content) => ({
   type: USER_SIGNUP_SUCCESS,
   payload: {
+    _id: content._id,
     firstName: content.firstName,
     lastName: content.lastName,
     email: content.email,
@@ -75,6 +78,36 @@ export function fetchUserData(content) {
         console.log(error.message);
         dispatch(userLoginFailure(error.message));
       });//commit 2
+  };
+}
+
+export function fetchSignUpUser(content) {
+  let userfundName = useSelector((state) => state.UserReducer.userfundName);
+  let userchanel = useSelector((state) => state.UserReducer.userchanel);
+  let Votes = useSelector((state) => state.VotesReducer.votes);
+  let Article = useSelector((state) => state.OfficerReducer.articles);
+
+  return (dispatch) => {
+    axios
+      .post("/new-user/add-user", {
+        firstName: content.firstName,
+        lastName: content.lastName,
+        email: content.userEmail,
+        phone: content.phone,
+        password: content.userPassword, //need to be added in page 13
+        fundName: userfundName, //need to be updated in the page 4
+        userchanel: userchanel, //need to be updated in the page 4
+        votes: Votes,
+        newArticle: Article[0],
+      })
+      .then((res) => {
+        console.log(res.data);
+        //dispatch(userSignupSuccess(res.data)); //the server team is 
+      })
+      .catch((error) => {
+        console.log(error.message);
+        ///dispatch(userLoginFailure(error.message));
+      }); //commit 2
   };
 }
 
