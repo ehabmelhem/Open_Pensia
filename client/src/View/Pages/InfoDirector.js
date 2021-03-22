@@ -1,6 +1,8 @@
 import React from "react";
 import MainNavBar from "../Components/MainNavBar";
 import Header from "../Components/VotingHeader";
+import { useParams } from 'react-router'
+import { fetchOfficerData } from '../../redux'
 import {
   BrowserRouter as Router,
   Route,
@@ -12,12 +14,17 @@ import { useSelector, useDispatch } from "react-redux";
 
 export default function InfoDirector() {
 
+  const { id } = useParams()
+  console.log(id)
+  const dispatch = useDispatch();
+  dispatch(fetchOfficerData(id));
+
   return (
     <div style={{ maxWidth: "600px", margin: "auto" }}>
       <Header
         directorName="עיסאווי פריג'"
         company="בנק הפועלים"
-        link={"../VoteDirectors"}
+        link={"/VoteDirectors"}
       />
       <MainNavBar navTabs={infoDirectorTabs} />
     </div>
