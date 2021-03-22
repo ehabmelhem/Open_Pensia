@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import './Login.css'
 //user- "email":"new.test@gmail.com","password":"newtest"
-import {fetchUserData} from '../../redux/User/UserActions';
+import {fetchUserData} from '../../redux';
 import { useDispatch, useSelector } from 'react-redux';
 
 function Login(){
     const dispatch = useDispatch();
     const [userEmail,setEmail]=useState("")
     const [userPassword,setPassword]=useState("")
-    const [error,setError]=useState("")
+    //const [error,setError]=useState("")
+    let error = useSelector(state => !!state.userReducer && state.userReducer.error)
+    
     function handleLogin(e) {
         e.preventDefault();
         dispatch(fetchUserData({userEmail,userPassword}))
-        
+    
     }
     return(
         
