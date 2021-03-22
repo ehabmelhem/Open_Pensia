@@ -47,7 +47,7 @@ export function fetchOfficerData(officerId) {
 
     return dispatch => {
         dispatch(fetchOfficerDataRequest());
-        axios.get('/officer/get-officer-data', {
+        axios.post('/officer/get-officer-data', {
             officerId
         })
             .then(res => {
