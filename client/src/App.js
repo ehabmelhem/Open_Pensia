@@ -171,7 +171,7 @@ function App() {
           <CompaniesListSelect />
         </Route>
 
-        <Route path="/VoteDirectors">
+        <Route path="/VoteDirectors/:questionID">
           <VoteDirectors />
         </Route>
 
