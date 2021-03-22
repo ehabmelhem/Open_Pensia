@@ -84,6 +84,7 @@ exports.officerData = async (req, res) => {
     fetch(url, settings)
       .then((res) => res.json())
       .then((json) => {
+        console.log( json.data)
         res.send({ ok: true, doc: json.data });
         // do something with JSON
       });
