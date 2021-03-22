@@ -53,7 +53,7 @@ function QuestionListItem({question}) {
             <div id="companyname">
               <ol>
                 <p id="companyName">{question.Topic}</p>
-              
+                <p>{question.status}</p>
               </ol>
             </div>
           </div>
