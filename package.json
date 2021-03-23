@@ -24,7 +24,11 @@
   },
   "homepage": "https://github.com/ehabmelhem/Open_Pensia#readme",
   "dependencies": {
+<<<<<<< Updated upstream
     "@material-ui/core": "^4.11.3",
+=======
+    "@material-ui/icons": "^4.11.2",
+>>>>>>> Stashed changes
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "concurrently": "^6.0.0",
