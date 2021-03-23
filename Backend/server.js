@@ -36,34 +36,7 @@ db.once("open", () => {
   console.log("we are connected to DB");
 });
 
-let article = {
-  officerId: "64516271",
-  articleId: "00000000006",
-  articleTitle: "My Article my article works",
-  articleText: "this is an article____my article___________",
-  articleUrl: "url",
-};
 
-// var add = new officerSchema({
-//   officerId: "123",
-//   officeName: "ehab",
-//   officerImg: "///",
-//   officerArticles: [],
-//   votes: [
-//     {
-//       proxyCode: "first",
-//       allvotes: [],
-//       likesCounter: 0,
-//       absentCounter: 0,
-//       disLikesCounter: 0,
-//     },
-//   ],
-// });
-// add.save().then(() => {
-//   console.log("add new officer to db");
-// });
-
-//app.use(addNewUser);
 
 const port = process.env.PORT || 3002;
 
