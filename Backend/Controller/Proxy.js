@@ -6,6 +6,9 @@ const officerModel = require("../Schema/Officer");
 const User = require("../Schema/User");
 const { v4: uuidv4 } = require("uuid");
 const secret = "1234";
+const jwt = require("jwt-simple");
+
+//  jwt
 /* 
 dis: get the default Questions - before SignUp
 parameters: {Security_ID:String}				
