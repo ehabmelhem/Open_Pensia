@@ -4,7 +4,7 @@ import './Articles.css'
 function Articles({articles}) {
     return (
         <div className='all-articles'>
-            {articles.map((article, index) => {
+            {!!articles && articles.map((article, index) => {
                 return (
                     <div key={index} className='article'>
                         <h4 className='article-title'> {article.title} </h4>
