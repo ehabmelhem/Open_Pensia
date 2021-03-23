@@ -33,7 +33,11 @@ export default function SignUp() {
         setSort("Confirmation")
     }
     function confirmMe(e) {
-
+        console.log(localStorage.getItem("nameprivate"))
+        console.log(localStorage.getItem("family"))
+        console.log(localStorage.getItem("email"))
+        console.log(localStorage.getItem("password"))
+        console.log(localStorage.getItem("phone"))
     }
     return (
         <div className="body">
@@ -46,18 +50,19 @@ export default function SignUp() {
 
                 {sort === "PersonalInfo" ?
                     <div>
-                        <h3 className="info">נתוני ההצבעה שלך שמורים במערכת</h3>
+                        <h3 >נתוני ההצבעה שלך שמורים במערכת</h3>
                         <br></br>
                         < Inputclass textenglish={"nameprivate"} texter={"שם פרטי"} ></Inputclass>
                         < Inputclass textenglish={"family"} texter={"שם משפחה"} ></Inputclass>
 
                         < Inputclass textenglish={"email"} texter={"כתובת מייל"} ></Inputclass>
+                        < Inputclass textenglish={"password"} texter={"סיסמה"} ></Inputclass>
                         < Inputclass textenglish={"phone"} texter={"מספר טלפון"} ></Inputclass>
 
                         <br></br>
-                        <button onClick={PassToConfirm} className="but">הלאה</button>
+                        <button onClick={PassToConfirm} className="complete">הלאה</button>
                     </div>
-                    : <div><h3 className="info">איך תרצ/י שנאמת אותך?</h3>
+                    : <div><h3 >?איך תרצ/י שנאמת אותך</h3>
                         <div >
                             <h1>
                                 <input className="radiobutton" type="radio" value="folder" name="confirm" /> אימות על ידי מסמך מזהה
@@ -68,6 +73,7 @@ export default function SignUp() {
                       </h1>
                             <div className="line" />
                         </div>
+                        <div className="space"/>
                         <button className="button" onClick={confirmMe}>תאמתו אותי!</button></div>}
 
 

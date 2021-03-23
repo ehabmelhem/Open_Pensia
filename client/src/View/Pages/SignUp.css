@@ -6,6 +6,7 @@
     max-width: 600px;
     margin-left: 188px;
     display: flex;
+    height: 56px;
   }
   
   #Personal,
@@ -20,6 +21,18 @@
   opacity: 1;
   background-color: #3D4257;
 }
+.space{
+  margin-left: 27px;
+}
+.complete{
+top: 605px;
+left: 16px;
+width: 343px;
+height: 38px;
+background: #3C4157 0% 0% no-repeat padding-box;
+box-shadow: 0px 2px 1px #00000024;
+opacity: 1;
+}
   .radiobutton{
     
     top: 213px;
@@ -31,6 +44,7 @@
     letter-spacing: 0.1px;
     color: #324483;
     opacity: 1;
+    display: inline-block;
   }
   .radiobutton2{
     top: 295px;
@@ -46,6 +60,7 @@
 
   h1{
     font: normal normal 600 16px/16px Assistant;
+    
   }
 
   .line {
@@ -70,4 +85,16 @@ opacity: 1;
   margin-top: 100px;
   padding-top: 50px;
   top:50px;
+}
+h3{
+  top: 144px;
+left: 16px;
+width: 343px;
+height: 26px;
+text-align: right;
+font: normal normal 600 20px/16px Assistant;
+letter-spacing: 0px;
+color: #324483;
+text-transform: uppercase;
+opacity: 1;
 }
