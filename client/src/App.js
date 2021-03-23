@@ -175,7 +175,7 @@ function App() {
           <VoteDirectors />
         </Route>
 
-        <Route path="/InfoDirector">
+        <Route path="/InfoDirector/:id">
           <InfoDirector />
         </Route>
 
