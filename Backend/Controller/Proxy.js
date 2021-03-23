@@ -5,7 +5,12 @@ const Proxy = require("../Schema/Proxy");
 const officerModel = require("../Schema/Officer");
 const User = require("../Schema/User");
 const { v4: uuidv4 } = require("uuid");
+<<<<<<< HEAD
 const secret = "1234";
+=======
+const jwt =require("jwt-simple")
+const secret ="1234"
+>>>>>>> Dashboard_Team
 /* 
 dis: get the default Questions - before SignUp
 parameters: {Security_ID:String}				
@@ -254,6 +259,9 @@ exports.getFundInfo = async (req, res) => {
       });
     }
   } catch (e) {
+    let role = req.cookies.role;
+    let decRole = jwt.decode(role, secret);
+    console.log(decRole.name)
     res.send({
       OK: false,
       messege: "could not run getFundInfo in Proxy",
@@ -354,11 +362,20 @@ exports.getOpenQuestionsInFund = async (req, res) => {
   try {
     let role = req.cookies.role;
     let decRole = jwt.decode(role, secret);
+<<<<<<< HEAD
 
     const userId= decRole.name
 
     ////////////////////////////////
     const allOpenQuestions = await openQuestions(userId, "Open");
+=======
+
+  //  const user = await User.findOne({ _id: decRole.name });
+
+  //  const { userId } = req.body;
+   const userId = decRole.name;
+    const allOpenQuestions = await openQuestions(decRole.name, "Open");
+>>>>>>> Dashboard_Team
     
     res.send({ ok: true, doc: allOpenQuestions });
   } catch (e) {
