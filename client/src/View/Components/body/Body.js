@@ -19,6 +19,8 @@ import { fetchCompanyQuestions } from '../../../redux/Company/CompanyActions'
 //     { status: "Open", Topic: 'בנק הפועלים', par: 'בנקאות' }
 // ]
 
+let questions = [];
+
 export default function Body(props) {
 
     const dispatch = useDispatch();
@@ -27,7 +29,7 @@ export default function Body(props) {
     const [button2, setButton2] = useState(false);
     const [button3, setButton3] = useState(false);
     const [sort, setSort] = useState("Open");
-    const [questionsList, setAllQuestions] = useState([]);
+    const [questionsList, setQuestionsList] = useState([]);
 
     useEffect(() => {
         dispatch(fetchCompanyQuestions(props.security_ID))
@@ -38,36 +40,48 @@ export default function Body(props) {
             body: JSON.stringify({ "Security_ID": `${props.security_ID}` })
         }).then(r => r.json()).then(({ doc }) => {
             console.log(doc);
-            setAllQuestions(doc);
+            setQuestionsList(doc);
+            questions = doc;
+            select('open')
         });
     }, [])
 
 
     function select(selectedButton) {
+        let status = ''
         switch (selectedButton) {
             case 'top':
                 setButton1(true);
                 setButton2(false);
                 setButton3(false);
-                setSort("Top")
+                status = "Top"
+                setQuestionsList(questions.filter(question=>question.status === status))
+               
                 break;
+                
 
             case 'open':
                 setButton1(false);
                 setButton2(true);
                 setButton3(false);
-                setSort("Open")
+                status = "Open"  
+                setQuestionsList(questions.filter(question=>question.status === status))
                 break;
 
             case 'results':
                 setButton1(false);
                 setButton2(false);
                 setButton3(true);
-                setSort("Results")
+                status= "Results";
+                
+                setQuestionsList(questions.filter(question=>question.status === status || question.status === 'Pending'))
                 break;
             default:
                 break;
         }
+
+        setSort(status);
+       
     }
     return (
         <div>

@@ -1,16 +1,20 @@
 import React from 'react'
-import CardListItem from '../CardListItem'
+import QuestionListItem from '../QuestionListItem'
 import './Body.css'
 //item.status:"Top" -- props.sort ="Top"
-export default function ListQuestions(props) {
-    console.log(props.questionsList)
+export default function ListQuestions({questionsList, sort}) {
+    console.log(questionsList)
 
     return (
         <div id="allList">
-            { !!props.questionsList &&props.questionsList.map((question) => {
+            { !!questionsList &&questionsList.map((question) => {
 
 
-               <p>{question.Topic}</p>
+
+               return <QuestionListItem key={question._id} question={question} />
+
+//return <CardListItem hideImg="hideImg" companyName={question.Topic} par={question.par}/>
+            //    <p>{question.Topic}</p>
 
 
             })}

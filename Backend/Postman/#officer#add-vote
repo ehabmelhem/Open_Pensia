@@ -1,0 +1,28 @@
+fun: addArticle
+
+path :  http://localhost:3002/officer/add-vote
+POST
+fetch('/officer/add-vote')
+
+
+Json Request:
+{
+     "email":"sam.tam3@gmail.com",
+    "votes": 
+        [
+             {
+          "proxyCode": "520040700/1",
+          "officerId": "64516271",
+          "voted": 9
+        },
+        {
+          "proxyCode": "520040700/1",
+          "officerId": "56400997",
+          "voted": 7
+        }]
+}
+
+Json res:
+{
+    "ok": true
+}

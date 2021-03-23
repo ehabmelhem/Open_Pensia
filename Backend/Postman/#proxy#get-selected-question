@@ -1,0 +1,16 @@
+fun: 
+
+path : http://localhost:3002/proxy/get-selected-question
+
+description: 
+fetch('/proxy/get-selected-question'){
+.....
+  ....
+  body
+}
+
+Json Request:
+ {"fundName":"מור","chanel":"גמל/פנסיה", "Security_ID":"770016" }
+
+
+ Json Response:

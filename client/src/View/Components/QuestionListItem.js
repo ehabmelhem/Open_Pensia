@@ -8,9 +8,9 @@ import { Link } from "react-router-dom";
 //redux
 import { setCompanyDetails} from '../../redux/Company/CompanyActions'
 
-function CardListItem(props) {
+function QuestionListItem({question}) {
 
-  const {companyName, securityID ,sectorNisha} = props;
+  
 
   const [status, setStatus] = useState("unknown");
   const dispatch = useDispatch();
@@ -20,16 +20,13 @@ function CardListItem(props) {
 
 
  
-    switch (props.status) {
+    switch (question.status) {
       case "Open":
         setStatus("ממתין להצבעתך")
         break;
       case "Top":
         setStatus("ממתין להצבעתך")
         break;
-        case "Pending":
-          setStatus("ההצבעה נסגרה")
-          break;
       case "results":
         setStatus("ההצבעה נסגרה")
         break;
@@ -43,22 +40,20 @@ function CardListItem(props) {
   function handleClick(){
     console.log('click......');
 
-    dispatch(setCompanyDetails(companyName, securityID))
+    // dispatch(setCompanyDetails(companyName, securityID))
   }
 
   return (
-    <Link to={props.toLink}>
+    <Link to={`/VoteDirectors/${question.Id}`}>
 
       <div dir="rtl" className="background" onClick={handleClick}>
         <div className="companyitem">
-          <div className="Column" id={props.hideImg ? "hideImg" : "withImg"}>
-            <img id="companyimage" src={props.logo} alt="companyimage" />
-          </div>
+         
           <div className="Column" id="formoreres1">
             <div id="companyname">
               <ol>
-                <p id="companyName">{props.companyName}</p>
-                <p id="companytype">{status}</p>
+                <p id="companyName">{question.Topic}</p>
+                <p>{question.status}</p>
               </ol>
             </div>
           </div>
@@ -78,4 +73,4 @@ function CardListItem(props) {
 
   );
 }
-export default CardListItem;
+export default QuestionListItem;

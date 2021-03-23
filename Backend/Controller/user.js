@@ -311,9 +311,10 @@ exports.login = async (req, res) => {
           // redirect to location
 
           // create role for cookies
-          const jwtInc = jwt.encode({ role: "user", name: "yes" }, secret);
+          const jwtInc = jwt.encode({ role: "user", name: user._id }, secret);
           res.cookie("role", jwtInc, { httpOnly: true });
           // if (user.password === password) {
+          console.log(user.id);
           res.send({ login: true, doc: user });
           // }
         } else {
@@ -329,10 +330,16 @@ exports.login = async (req, res) => {
 /////////////////////////////////////////////////////////////////////
 exports.getUserVotingHistory = async (req, res) => {
   try {
-    const { userId } = req.body;
+    let role = req.cookies.role;
+    let decRole = jwt.decode(role, secret);
+<<<<<<< HEAD
 
+=======
+>>>>>>> Dashboard_Team
+    const userId= decRole.name
+    
     const allHistory = [];
-    const user = await User.findOne({ _id: userId });
+    const user = await User.findOne({ _id: userId});
     const userVotes = user.votes;
 
     const groupBy = (key) => (userVotes) =>

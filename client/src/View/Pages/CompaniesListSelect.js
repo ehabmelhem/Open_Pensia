@@ -1,6 +1,6 @@
 import Arrow from "../Components/Arrow";
 import React, { useEffect } from 'react';
-import { fetchCompanies, fetchCompanyDefaultQuestion } from '../../redux';
+import { fetchCompanies } from '../../redux';
 import { useDispatch, useSelector } from 'react-redux';
 import CardListItem from '../Components/CardListItem';
 import "./CompaniesListSelect.css";
@@ -11,20 +11,20 @@ export default function CompaniesListSelect() {
     dispatch(fetchCompanies())
   }, []);
   let companies = useSelector(state => !!state.CompaniesListReducer && state.CompaniesListReducer.companies);
-  // function handleClick(securityID, companyName) {
+  // function handleClick(securityID) {
   //   console.log(securityID);
-  //   dispatch(fetchCompanyDefaultQuestion(securityID, companyName));
+  //   dispatch(fetchCompanyDefaultQuestion(securityID,'',''));
 
   // }
   return (
     <div className="App1">
       <header className="App-header1">
         <div>
-          <a className="login" href="#" target="_blank"> כניסה </a>
+          <a className="login-from-companies-list" href="/Login" target="_blank"> כניסה </a>
         </div>
         <div className="question">?על איזו חברה תרצה/י להשפיע</div>
         <div>
-          <Arrow arrowToLink="QuestionsBeforeRegister" color="#B7BCCC" />
+          <Arrow arrowToLink="/QuestionsBeforeRegister" color="#B7BCCC" />
         </div>
       </header>
       {!!companies && companies.map((company) => {
@@ -37,7 +37,7 @@ export default function CompaniesListSelect() {
 
             sectorNisha={company['Sector Nisha']}
 
-            toLink={"VoteDirectors"}
+            toLink={`VoteDirectors/${company.Security_ID}`}
           />
         );
       })}
