@@ -1,0 +1,63 @@
+#title{
+    text-align: left;
+font: normal normal 600 20px/16px Assistant;
+letter-spacing: 0px;
+color: #324483;
+text-transform: uppercase;
+opacity: 1;
+margin-bottom: 25px;
+}
+
+#titleCover{
+    margin-bottom: 20px;
+}
+
+#icon{
+    margin: 30px auto;
+        width: 146px;
+        height: 146px;
+        background: #EAEAEA 0% 0% no-repeat padding-box;
+        opacity: 1;
+        border-radius: 50%;
+}
+
+#center{
+    text-align: center;
+}
+#registerForm{
+    text-align: center;
+}
+.titleOfForm{
+    margin-bottom: 0;
+    margin-right: 5%;
+    margin-top: 8px;
+    text-align: right;
+font: normal normal normal 12px/22px Assistant;
+letter-spacing: 0px;
+color: #717480;
+opacity: 0.6;
+}
+
+.inputOfForm{
+    width: 90%;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid #00000026;
+    font-size: 16px;
+    color: #324483;
+}
+
+#buttonInputReg{
+    width: 90%;
+    height: 38px;
+    background-color: #324483;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0px 2px 1px #00000024;
+    margin-top: 20%;
+}
+#allPage{
+    margin: auto;
+    max-width: 600px;
+    min-width: 375px;
+}
