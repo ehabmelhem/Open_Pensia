@@ -7,7 +7,7 @@ export default function SignUp() {
     const [Personal, setPersonal] = useState(true);
     const [Confirm, setConfirm] = useState(false);
     const [sort, setSort] = useState("PersonalInfo");
-
+    const [error,setError]=useState("")
     function select(selectedButton) {
         switch (selectedButton) {
             case 'Personal':
@@ -28,9 +28,26 @@ export default function SignUp() {
         }
     }
     function PassToConfirm(e) {
-        setPersonal(false)
-        setConfirm(true)
-        setSort("Confirmation")
+        console.log(localStorage.getItem("nameprivate"))
+        console.log(localStorage.getItem("family"))
+        console.log(localStorage.getItem("email"))
+        console.log(localStorage.getItem("password"))
+        console.log(localStorage.getItem("phone"))
+        if(localStorage.getItem("nameprivate")!=="" && localStorage.getItem("family")!=="" && localStorage.getItem("email") !== "" && localStorage.getItem("password")!=="" && localStorage.getItem("phone")!==""){
+            setPersonal(false)
+            setConfirm(true)
+            setSort("Confirmation")
+            localStorage.setItem("nameprivate","")
+            localStorage.setItem("family","")
+            localStorage.setItem("email","")
+            localStorage.setItem("password","")
+            localStorage.setItem("phone","")
+            
+        }
+        else{
+            setError("צריך למלא את כל הפרטים!")
+        }
+       
     }
     function confirmMe(e) {
         console.log(localStorage.getItem("nameprivate"))
@@ -60,7 +77,8 @@ export default function SignUp() {
                         < Inputclass textenglish={"phone"} texter={"מספר טלפון"} ></Inputclass>
 
                         <br></br>
-                        <button onClick={PassToConfirm} className="complete">הלאה</button>
+                        <button type="submit" onClick={PassToConfirm} className="complete">הלאה</button>
+                        <div className="error"> {error}</div>
                     </div>
                     : <div><h3 >?איך תרצ/י שנאמת אותך</h3>
                         <div >

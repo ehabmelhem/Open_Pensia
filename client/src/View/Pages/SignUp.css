@@ -46,6 +46,9 @@ opacity: 1;
     opacity: 1;
     display: inline-block;
   }
+  .error{
+    color: red;
+  }
   .radiobutton2{
     top: 295px;
     left: 178px;

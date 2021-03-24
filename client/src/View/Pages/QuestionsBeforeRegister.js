@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 export default function QuestionsBeforeRegister() {
   const [fundNames,setFundNames]=useState([])
   const [chanellNames,setChanellNames]=useState([])
+  const [FundsData,setFundsData]=useState({})
   const [fundNameChosen,setFundNameChosen]=useState("");
   const [chanellNameChosen,setChanellNameChosen]=useState("")
   const classes = useStyles();
@@ -44,8 +45,14 @@ async function getAllFund(e){
   })
     .then((r) => r.json())
     .then((data) => {
-     setFundNames(data.fund_name)
-     console.log(data.fund_name)
+      let arr=[]
+      for(let key in data.data){
+        arr.push(key)
+      }
+     setFundNames(arr)
+     setFundsData(data.data)
+     console.log(arr)
+
     });
 }
 useEffect(() => {
@@ -54,21 +61,11 @@ useEffect(() => {
 }, []);
   const handleChange = (event) => {
     const name = event.target.name;
-    console.log(event.target.value)
+    console.log(FundsData[event.target.value])
     setFundNameChosen(event.target.value)
-    fetch("/proxy/get-all-chanell", {
-      method: "POST",
-      headers: {
-        "Accept": "application/json; odata=verbose",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({fundname:fundNameChosen}),
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        setChanellNames(data.chaneles)
-       console.log(data.chaneles)
-      });
+    
+    setChanellNames(FundsData[event.target.value])
+    
     setState({
       ...state,
       [name]: event.target.value,
@@ -84,7 +81,7 @@ useEffect(() => {
       [name]: event.target.value,
     });
   };
-
+//fundsData[fundsChoosen]=>Array
   return (
 
     <div >
@@ -107,10 +104,10 @@ useEffect(() => {
           >
             <option aria-label="None" value="" />
             {fundNames.map((index,fund)=>
-              
               <option key={fund} value={index}>{index}</option>
               
             )}
+           
           </Select>
         </FormControl>
         
@@ -129,6 +126,7 @@ useEffect(() => {
             }}
           >
             <option aria-label="None" value="" />
+
             {chanellNames.map((index2,chanell)=>
               <option key={chanell} value={index2}>{index2}</option>
               
