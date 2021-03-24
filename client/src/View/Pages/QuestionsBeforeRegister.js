@@ -102,9 +102,9 @@ useEffect(() => {
             )}
           </Select>
         </FormControl>
-        <div className="space" />
-        <div className="line" />
-        <div className="space" />
+        
+        
+        
         <div className="channelname">בחר/י אפיק חיסכון</div>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="age-native-simple"></InputLabel>
@@ -118,21 +118,15 @@ useEffect(() => {
             }}
           >
             <option aria-label="None" value="" />
-            {chanellNames.map((index,fund)=>
-              console.log({index})
-              
+            {chanellNames.map((index2,chanell)=>
+              <option key={chanell} value={index2}>{index2}</option>
               
             )}
-            <option value="ten">Ten</option>
-            <option value={20}>Twenty</option>
-            <option value={30}>Thirty</option>
           </Select>
         </FormControl>
-        <div className="space" />
-        <div className="line" />
-        <button className="but">אהבתי</button>
+        
         <div />
-        <a className='signin' onClick={toLoginPage}>יש לי כבר חשבון </a>
+        
       </div>
     </div>
 

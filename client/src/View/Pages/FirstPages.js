@@ -10,13 +10,14 @@ export default function FirstPages() {
          {title:'למה זה חשוב' , dec :'ורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית מוסן מנת. להאמית קרהשק סכעיט דז מא, מנכם למטכין נשואי מנורך. סחטיר בלובק. תצטנפל בלינדו למרקל אס לכימפו, דול, צוט ומעיוט - לפתיעם ברשג - ולתיעם גדדיש. קוויז דומור ליאמום בלינך רוגצה. לפמעט ' ,buttonTitle:'אהבתי '}
      ,{title:'למה זה טוב לך' , dec :'ורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית מוסן מנת. להאמית קרהשק סכעיט דז מא, מנכם למטכין נשואי מנורך. סחטיר בלובק. תצטנפל בלינדו למרקל אס לכימפו, דול, צוט ומעיוט - לפתיעם ' ,buttonTitle:'מעולה '}
     ,{title:'איך זה משרת אותך' , dec :'ורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית מוסן מנת. להאמית קרהשק סכעיט דז מא, מנכם למטכין נשואי מנורך. סחטיר בלובק. תצטנפל בלינדו למרקל אס לכימפו, דול, צוט ומעיוט - לפתיעם' ,buttonTitle:'אני רוצה להתחיל '}
-    ,{title:'זהינו שיש לך החזקה ב10 חברות בשוק' , dec :'והאם תרצה להשפיע' ,buttonTitle:'אני רוצה להשפיע '}]
+    ,{title:''},
+    {title:'זהינו שיש לך החזקה ב10 חברות בשוק' , dec :'והאם תרצה להשפיע' ,buttonTitle:'אני רוצה להשפיע '}]
   let [index,setindex]=useState(0);
   
   function next(){
      
     index++;
-     if(index < 4)
+     if(index <= 4)
       setindex(index)
       else{
         history.push('CompaniesList')
@@ -29,7 +30,10 @@ export default function FirstPages() {
       <div >
         
           {index === 3 ?
-          <QuestionsBeforeRegister/>:
+          <>
+          <QuestionsBeforeRegister/>
+          <button onClick={next} className="but">אהבתי</button>
+          <a className='signin' onClick={toLoginPage}>יש לי כבר חשבון </a></>:
           
           <div className='body'>
             <div className='icon'></div>

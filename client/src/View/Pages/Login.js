@@ -9,12 +9,12 @@ function Login(){
     const [userEmail,setEmail]=useState("")
     const [userPassword,setPassword]=useState("")
     //const [error,setError]=useState("")
-    let error = useSelector(state => !!state.userReducer && state.userReducer.error)
+    let error = useSelector(state => !!state.userReducer && state.userReducer.login)
     
     function handleLogin(e) {
         e.preventDefault();
         dispatch(fetchUserData({userEmail,userPassword}))
-    
+        console.log(error)
     }
     return(
         
