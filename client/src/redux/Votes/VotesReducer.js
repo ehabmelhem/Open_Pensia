@@ -7,14 +7,7 @@ import {
 
 const initialState = {
   // add relevant vote state
-  votes: [
-    {
-      securityID: "",
-      questionID: "",
-      directorID: "",
-      vote: 0,
-    },
-  ],
+  votes: [],
 };
 
 const VotesReducer = (state = initialState, action) => {
@@ -24,56 +17,29 @@ const VotesReducer = (state = initialState, action) => {
     //     ...state,
     //     loading: true,
     //   };
-    
-    case ADD_VOTE:
+
+    case ADD_VOTE: {
+      let new_votes = state.votes;
+
+      new_votes = state.votes.filter(function (item) {
+        return item.securityID !== action.payload.securityID;
+        // check also useriD and officer id
+      });
+
+      new_votes = [
+        ...new_votes,
+        { securityID: action.payload.securityID, vote: action.payload.vote },
+      ];
+      console.log(new_votes);
+
+      // new_votes.add(action.payload);
+
       return {
-        votes: [
-          ...state.vates,
-          {
-            securityID: action.payload.securityID,
-            questionID: action.payload.questionID,
-            directorID: action.payload.directorID,
-            vote: action.payload.vote,
-          },
-        ],
+        ...state,
+        votes: new_votes,
       };
-    case UPDATE_VOTE:
-      return {
-        loading: false,
-        securityID: action.payload.securityID,
-        questionID: action.payload.questionID,
-        directorID: action.payload.directorID,
-        like: action.payload.like,
-        error: "",
-      };
-    // case FETCH_DEFAULT_QUESTION_REQUEST:
-    //   return {
-    //     ...state,
-    //     loading: true,
-    //   };
-    // case FETCH_DEFAULT_QUESTION_SUCCESS:
-    //   return {
-    //     loading: false,
-    //     error: "",
-    //     securityID: action.payload.securityID,
-    //     companyName: action.payload.companyName,
-    //     questions: [],
-    //     defaultQuestion: action.payload.defaultQuestionInfo,
-    //   };
-    // case FETCH_DEFAULT_QUESTION_FAILURE:
-    //   return {
-    //     loading: false,
-    //     error: action.payload.error,
-    //     securityID: "",
-    //     companyName: "",
-    //     questions: [],
-    //     defaultQuestion: {
-    //       code: "",
-    //       topic: "",
-    //       ave: "",
-    //       officers: [],
-    //     },
-    //   };
+    }
+
     default:
       return state;
   }

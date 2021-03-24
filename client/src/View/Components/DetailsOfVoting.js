@@ -2,13 +2,19 @@ import "./DetailsOfVoting.css";
 import { AiFillDislike } from "react-icons/ai";
 import { AiFillLike } from "react-icons/ai";
 import React, { useState } from "react";
-import { addVote } from '../../redux';
+import { addVote } from "../../redux";
 import { useDispatch, useSelector } from "react-redux";
 
 function DetailsOfVoting({ voting }) {
   const [likestate, setlikestate] = useState(false);
   const [dislikestate, setdislikestate] = useState(false);
   const dispatch = useDispatch();
+
+  // securityID: action.payload.securityID,
+  // questionID: action.payload.questionID,
+  // directorID: action.payload.directorID,
+  // // userID
+  // vote: action.payload.vote,
 
   let companyData = useSelector(
     (state) =>
@@ -18,12 +24,16 @@ function DetailsOfVoting({ voting }) {
       }
   );
 
+  console.log(companyData);
+
   let officerData = useSelector(
     (state) =>
       !!state.OfficerReducer && {
         officerID: state.OfficerReducer.officerID,
       }
   );
+
+  // console.log(officerData);
 
   function handelclicklike(e) {
     if (likestate === false && dislikestate === false) {
@@ -36,14 +46,7 @@ function DetailsOfVoting({ voting }) {
 
       // redux update like
 
-      dispatch(
-        addVote(
-          companyData.securityID,
-          companyData.securityID, //need to UPDATE !!!!!
-          officerData.officerID, //need to UPDATE !!!!!
-          likestate
-        )
-      );
+      dispatch(addVote({ securityID: companyData.securityID, vote: 1 }));
     }
 
     if (likestate == true) {
@@ -52,6 +55,8 @@ function DetailsOfVoting({ voting }) {
       btn[0].classList.remove("body-likeActive");
       btn[0].classList.add("body-like");
       setlikestate(false);
+
+      dispatch(addVote({ securityID: companyData.securityID, vote: 0 }));
     }
 
     if (likestate == false && dislikestate == true) {
@@ -68,6 +73,8 @@ function DetailsOfVoting({ voting }) {
       btn[0].classList.add("body-likeActive");
 
       setlikestate(true);
+
+      dispatch(addVote({ securityID: companyData.securityID, vote: 1 }));
     }
   }
   function handelclickdislike(e) {
@@ -86,6 +93,8 @@ function DetailsOfVoting({ voting }) {
 
       setlikestate(false);
       setdislikestate(true);
+
+      dispatch(addVote({ securityID: companyData.securityID, vote: -1 }));
     }
 
     if (likestate == false && dislikestate == false) {
@@ -95,6 +104,8 @@ function DetailsOfVoting({ voting }) {
       btn[0].classList.add("body-dislikeActive");
 
       setdislikestate(true);
+
+      dispatch(addVote({ securityID: companyData.securityID, vote: -1 }));
     }
 
     if (likestate == false && dislikestate == true) {
@@ -104,6 +115,7 @@ function DetailsOfVoting({ voting }) {
       btn[0].classList.add("body-dislike");
 
       setdislikestate(false);
+      dispatch(addVote({ securityID: companyData.securityID, vote: 0 }));
     }
   }
   return (
