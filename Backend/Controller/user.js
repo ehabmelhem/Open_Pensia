@@ -302,7 +302,7 @@ exports.login = async (req, res) => {
 
     if (user === null) {
       res.send({
-        ok: false,
+        login: false,
         message: "couldnt find such a user or user is not approved yet ",
       });
     } else {
