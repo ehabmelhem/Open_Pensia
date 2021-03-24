@@ -6,6 +6,9 @@ const officerModel = require("../Schema/Officer");
 const User = require("../Schema/User");
 const { v4: uuidv4 } = require("uuid");
 const secret = "1234";
+const jwt = require("jwt-simple");
+
+//  jwt
 /* 
 dis: get the default Questions - before SignUp
 parameters: {Security_ID:String}				
@@ -54,21 +57,20 @@ exports.getDefaultQuestion = async (req, res) => {
 //////////////////////////////////////////////////////////////
 exports.getSelectedQuestion = async (req, res) => {
   try {
-
     const { fundName, chanel, Security_ID } = req.body;
-   // console.log(fundName, chanel, Security_ID);
-     let role = req.cookies.role;
-     console.log(role)
-     let decRole = jwt.decode(role, secret);
-  
+    // console.log(fundName, chanel, Security_ID);
+    let role = req.cookies.role;
+    console.log(role);
+    let decRole = jwt.decode(role, secret);
+
     const user = await User.findOne({ _id: decRole.name });
-   // console.log(user)
+    // console.log(user)
     await Proxy.find({ Security_ID: Security_ID }).then(async (data) => {
       if (data.length === 0) {
         res.send({ Ok: false, messege: "the Security_ID did not exists" });
       } else {
         let AVE = 1;
-        let company_name='';
+        let company_name = "";
         let url = `https://open-pension-tsofen.herokuapp.com/api/interests?filter[fund_name]=${fundName}&filter[Chanel]=${chanel}&filter[Security_ID]=${Security_ID}`;
         const encodedURI = encodeURI(url);
         let settings = { method: "Get" };
@@ -76,7 +78,7 @@ exports.getSelectedQuestion = async (req, res) => {
           .then((res) => res.json())
           .then((json) => {
             for (var key in json.data) {
-              company_name = json.data[key]["company_name"] ;
+              company_name = json.data[key]["company_name"];
               AVE = json.data[key]["A AVE Vote"] * 100;
             }
           });
@@ -86,14 +88,14 @@ exports.getSelectedQuestion = async (req, res) => {
           officers: data[0].officers,
           proxyCode: data[0].Proxy_code,
           topic: data[0].Topic,
-          company_name:company_name,
+          company_name: company_name,
           ave: AVE,
-          user:user
+          user: user,
         });
       }
     });
   } catch (e) {
-    console.log()
+    console.log();
     res.send({
       OK: false,
       messege: "could not run getDefaultQuestion in Proxy",
@@ -135,33 +137,15 @@ exports.getAllQuestions = async (req, res) => {
 exports.getAllFundNames = async (req, res) => {
   try {
     //const { fundname } = req.body;
-    let url = `https://open-pension-tsofen.herokuapp.com/api/interests?page=0`;
+
+    let url = `http://open-pension-tsofen.herokuapp.com/api/bodyChannels?per_page=100000`;
     const encodedURI = encodeURI(url);
     let settings = { method: "Get" };
-    const fundnames = new Set();
     await fetch(encodedURI, settings)
-      .then((res) => res.json())
-      .then(async (json) => {
-        if (json.info.pages > 1) {
-          for (let i = 1; i <= json.info.pages; i++) {
-            url = `https://open-pension-tsofen.herokuapp.com/api/interests?page=${i}`;
-            let encodedd = encodeURI(url);
-            await fetch(encodedd, settings)
-              .then((r) => r.json())
-              .then((data) => {
-                for (var key in data.data) {
-                  fundnames.add(data.data[key]["fund_name"]);
-                }
-              });
-          }
-        } else {
-          for (var key in json.data) {
-            fundnames.add(json.data[key]["fund_name"]);
-          }
-        }
+      .then((r) => r.json())
+      .then((data) => {
+        res.send({ OK: true, data: data.data });
       });
-    const allResult = Array.from(fundnames);
-    res.send({ OK: true, fund_name: allResult });
   } catch (e) {
     console.log("could not run getAllFundNames in Proxy");
     console.log(e);
@@ -340,7 +324,7 @@ exports.getPendingQuestionsInFund = async (req, res) => {
     let role = req.cookies.role;
     let decRole = jwt.decode(role, secret);
     const userId = decRole.name;
-  //  const { userId } = req.body;
+    //  const { userId } = req.body;
     const allPendingQuestions = await openQuestions(userId, "Pending");
 
     res.send({ ok: true, doc: allPendingQuestions });
@@ -355,11 +339,11 @@ exports.getOpenQuestionsInFund = async (req, res) => {
     let role = req.cookies.role;
     let decRole = jwt.decode(role, secret);
 
-    const userId= decRole.name
+    const userId = decRole.name;
 
     ////////////////////////////////
     const allOpenQuestions = await openQuestions(userId, "Open");
-    
+
     res.send({ ok: true, doc: allOpenQuestions });
   } catch (e) {
     console.log("getOpenQuestionsInFund fun bug");
