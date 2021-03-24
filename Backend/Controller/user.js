@@ -302,7 +302,7 @@ exports.login = async (req, res) => {
 
     if (user === null) {
       res.send({
-        ok: false,
+        login: false,
         message: "couldnt find such a user or user is not approved yet ",
       });
     } else {
@@ -330,10 +330,13 @@ exports.login = async (req, res) => {
 /////////////////////////////////////////////////////////////////////
 exports.getUserVotingHistory = async (req, res) => {
   try {
-    const { userId } = req.body;
+    let role = req.cookies.role;
+    let decRole = jwt.decode(role, secret);
 
+    const userId= decRole.name
+    
     const allHistory = [];
-    const user = await User.findOne({ _id: userId });
+    const user = await User.findOne({ _id: userId});
     const userVotes = user.votes;
 
     const groupBy = (key) => (userVotes) =>

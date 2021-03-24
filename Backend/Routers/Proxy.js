@@ -21,6 +21,12 @@ router
   .post(proxyController.getDefaultQuestion);
 // /proxy/get-expanded-header POST
 
+router // needs checkrole
+  .route("/get-selected-question")
+  .post(proxyController.getSelectedQuestion);
+// /proxy/get-expanded-header POST
+// 
+
 router
   .route("/all-Questions-of-corporate")
   .post(proxyController.getAllQuestions);
@@ -45,10 +51,11 @@ router // needs checkRole
 
 router // needs checkRole
   .route("/open-questions-in-fund")
-  .post(proxyController.getOpenQuestionsInFund); // return
-
+  .get(proxyController.getOpenQuestionsInFund); // return
+// 
 router // needs checkRole
   .route("/waiting-questions-by-fund")
-  .post(proxyController.getPendingQuestionsInFund);
+  .get(proxyController.getPendingQuestionsInFund);
+  // 
 
 module.exports = router;
