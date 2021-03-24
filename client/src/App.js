@@ -83,7 +83,7 @@ function App() {
           </li>
           <li>
             <NavLink exact to="SignUp">
-              Page 12-13
+              signup
             </NavLink>
           </li>
           <li>

@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import ButtonShow from './ButtonShow'
 import PersonaiInfo from './QuestionsBeforeRegister'
-import Inputclass from '../Components/InputText'
+import InputText from '../Components/InputText'
 import './SignUp.css';
+import { useDispatch } from 'react-redux';
+
+//redux
+import { sendSignUpUser } from '../../redux/User/UserActions'
+
+
 export default function SignUp() {
+
+    const dispatch = useDispatch();
+
     const [Personal, setPersonal] = useState(true);
     const [Confirm, setConfirm] = useState(false);
     const [sort, setSort] = useState("PersonalInfo");
+    const [userInfo, setUserInfo] = useState({})
 
     function select(selectedButton) {
         switch (selectedButton) {
@@ -31,6 +41,10 @@ export default function SignUp() {
         setPersonal(false)
         setConfirm(true)
         setSort("Confirmation")
+
+        //set detials to redux
+        dispatch(sendSignUpUser({...userInfo}))
+
     }
     function confirmMe(e) {
 
@@ -48,11 +62,11 @@ export default function SignUp() {
                     <div>
                         <h3 className="info">נתוני ההצבעה שלך שמורים במערכת</h3>
                         <br></br>
-                        < Inputclass textenglish={"nameprivate"} texter={"שם פרטי"} ></Inputclass>
-                        < Inputclass textenglish={"family"} texter={"שם משפחה"} ></Inputclass>
+                        < InputText textenglish={"firstName"} texter={"שם פרטי"} userInfo={userInfo} setUserInfo={setUserInfo} ></InputText>
+                        < InputText textenglish={"lastName"} texter={"שם משפחה"} userInfo={userInfo} setUserInfo={setUserInfo}></InputText>
 
-                        < Inputclass textenglish={"email"} texter={"כתובת מייל"} ></Inputclass>
-                        < Inputclass textenglish={"phone"} texter={"מספר טלפון"} ></Inputclass>
+                        < InputText textenglish={"email"} texter={"כתובת מייל"} userInfo={userInfo} setUserInfo={setUserInfo}></InputText>
+                        < InputText textenglish={"phone"} texter={"מספר טלפון"} userInfo={userInfo} setUserInfo={setUserInfo}></InputText>
 
                         <br></br>
                         <button onClick={PassToConfirm} className="but">הלאה</button>

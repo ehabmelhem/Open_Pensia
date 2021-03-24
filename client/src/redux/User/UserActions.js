@@ -81,34 +81,34 @@ export function fetchUserData(content) {
   };
 }
 
-// export function fetchSignUpUser(content) {
-//   let userfundName = useSelector((state) => state.UserReducer.userfundName);
-//   let userchanel = useSelector((state) => state.UserReducer.userchanel);
-//   let Votes = useSelector((state) => state.VotesReducer.votes);
-//   let Article = useSelector((state) => state.OfficerReducer.articles);
+export function sendSignUpUser(userData) {
+  // let userfundName = useSelector((state) => state.UserReducer.userfundName);
+  // let userchanel = useSelector((state) => state.UserReducer.userchanel);
+  // let Votes = useSelector((state) => state.VotesReducer.votes);
+  // let Article = useSelector((state) => state.OfficerReducer.articles);
 
-//   return (dispatch) => {
-//     axios
-//       .post("/new-user/add-user", {
-//         firstName: content.firstName,
-//         lastName: content.lastName,
-//         email: content.userEmail,
-//         phone: content.phone,
-//         password: content.userPassword, //need to be added in page 13
-//         fundName: userfundName, //need to be updated in the page 4
-//         userchanel: userchanel, //need to be updated in the page 4
-//         votes: Votes,
-//         newArticle: Article[0],
-//       })
-//       .then((res) => {
-//         console.log(res.data);
-//         //dispatch(userSignupSuccess(res.data)); //the server team is 
-//       })
-//       .catch((error) => {
-//         console.log(error.message);
-//         ///dispatch(userLoginFailure(error.message));
-//       }); //commit 2
-//   };
-// }
+  return (dispatch) => {
+    axios
+      .post("/new-user/add-user", {
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        email: userData.userEmail,
+        phone: userData.phone,
+        // password: content.userPassword, //need to be added in page 13
+        // fundName: userfundName, //need to be updated in the page 4
+        // userchanel: userchanel, //need to be updated in the page 4
+        // votes: Votes,
+        // newArticle: Article[0],
+      })
+      .then((res) => {
+        console.log(res.data);
+        //dispatch(userSignupSuccess(res.data)); //the server team is 
+      })
+      .catch((error) => {
+        console.log(error.message);
+        ///dispatch(userLoginFailure(error.message));
+      }); //commit 2
+  };
+}
 
 
