@@ -10,12 +10,6 @@ function DetailsOfVoting({ voting }) {
   const [dislikestate, setdislikestate] = useState(false);
   const dispatch = useDispatch();
 
-  // securityID: action.payload.securityID,
-  // questionID: action.payload.questionID,
-  // directorID: action.payload.directorID,
-  // // userID
-  // vote: action.payload.vote,
-
   let companyData = useSelector(
     (state) =>
       !!state.CompanyReducer && {
@@ -24,15 +18,9 @@ function DetailsOfVoting({ voting }) {
       }
   );
 
-  console.log(companyData);
+  // console.log(companyData);
 
-  let officerData = useSelector(
-    (state) =>
-      !!state.OfficerReducer && {
-        officerID: state.OfficerReducer.officerID,
-      }
-  );
-
+  let officerData = useSelector((state) => state.OfficerReducer);
   // console.log(officerData);
 
   function handelclicklike(e) {
@@ -46,7 +34,14 @@ function DetailsOfVoting({ voting }) {
 
       // redux update like
 
-      dispatch(addVote({ securityID: companyData.securityID, vote: 1 }));
+      dispatch(
+        addVote({
+          securityID: companyData.securityID,
+          questionID: officerData.Proxy_Code,
+          officerID: officerData.id,
+          vote: 1,
+        })
+      );
     }
 
     if (likestate == true) {
@@ -56,7 +51,14 @@ function DetailsOfVoting({ voting }) {
       btn[0].classList.add("body-like");
       setlikestate(false);
 
-      dispatch(addVote({ securityID: companyData.securityID, vote: 0 }));
+      dispatch(
+        addVote({
+          securityID: companyData.securityID,
+          questionID: officerData.Proxy_Code,
+          officerID: officerData.id,
+          vote: 0,
+        })
+      );
     }
 
     if (likestate == false && dislikestate == true) {
@@ -74,7 +76,14 @@ function DetailsOfVoting({ voting }) {
 
       setlikestate(true);
 
-      dispatch(addVote({ securityID: companyData.securityID, vote: 1 }));
+      dispatch(
+        addVote({
+          securityID: companyData.securityID,
+          questionID: officerData.Proxy_Code,
+          officerID: officerData.id,
+          vote: 1,
+        })
+      );
     }
   }
   function handelclickdislike(e) {
@@ -94,7 +103,14 @@ function DetailsOfVoting({ voting }) {
       setlikestate(false);
       setdislikestate(true);
 
-      dispatch(addVote({ securityID: companyData.securityID, vote: -1 }));
+      dispatch(
+        addVote({
+          securityID: companyData.securityID,
+          questionID: officerData.Proxy_Code,
+          officerID: officerData.id,
+          vote: -1,
+        })
+      );
     }
 
     if (likestate == false && dislikestate == false) {
@@ -105,7 +121,14 @@ function DetailsOfVoting({ voting }) {
 
       setdislikestate(true);
 
-      dispatch(addVote({ securityID: companyData.securityID, vote: -1 }));
+      dispatch(
+        addVote({
+          securityID: companyData.securityID,
+          questionID: officerData.Proxy_Code,
+          officerID: officerData.id,
+          vote: -1,
+        })
+      );
     }
 
     if (likestate == false && dislikestate == true) {
@@ -115,7 +138,14 @@ function DetailsOfVoting({ voting }) {
       btn[0].classList.add("body-dislike");
 
       setdislikestate(false);
-      dispatch(addVote({ securityID: companyData.securityID, vote: 0 }));
+      dispatch(
+        addVote({
+          securityID: companyData.securityID,
+          questionID: officerData.Proxy_Code,
+          officerID: officerData.id,
+          vote: 0,
+        })
+      );
     }
   }
   return (

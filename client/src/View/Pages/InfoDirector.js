@@ -38,7 +38,7 @@ export default function InfoDirector() {
             <DetailsOfVoting voting={votingPer} />
           </Route>
           <Route path="/">
-            <CandidateInfo officer={officer} />
+            <CandidateInfo officer={officer}  />
           </Route>
         </Switch>
       </div>
