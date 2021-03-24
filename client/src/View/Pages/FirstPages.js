@@ -30,10 +30,12 @@ export default function FirstPages() {
       <div >
         
           {index === 3 ?
-          <>
+          < div className='body'>
           <QuestionsBeforeRegister/>
-          <button onClick={next} className="but">אהבתי</button>
-          <a className='signin' onClick={toLoginPage}>יש לי כבר חשבון </a></>:
+          <div></div>
+          <button onClick={next}>אהבתי</button>
+          <div></div>
+          <a className='signin' onClick={toLoginPage}>יש לי כבר חשבון </a></ div>:
           
           <div className='body'>
             <div className='icon'></div>

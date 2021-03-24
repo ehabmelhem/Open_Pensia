@@ -22,6 +22,7 @@ export default function QuestionsBeforeRegister() {
   const [fundNames,setFundNames]=useState([])
   const [chanellNames,setChanellNames]=useState([])
   const [fundNameChosen,setFundNameChosen]=useState("");
+  const [chanellNameChosen,setChanellNameChosen]=useState("")
   const classes = useStyles();
   const [state, setState] = React.useState({
     age: '',
@@ -74,9 +75,19 @@ useEffect(() => {
     });
   };
 
+  const handleChanell = (event) => {
+    const name = event.target.name;
+    console.log(event.target.value)
+    setChanellNameChosen(event.target.value)
+    setState({
+      ...state,
+      [name]: event.target.value,
+    });
+  };
+
   return (
 
-    <div className="bod">
+    <div >
       <div className="icon"> </div>
       <div className="space" />
       <div className="direction">
@@ -110,11 +121,11 @@ useEffect(() => {
           <InputLabel htmlFor="age-native-simple"></InputLabel>
           <Select
             native
-            value={state.age}
-            onChange={handleChange}
+            value={state.year}
+            onChange={handleChanell}
             inputProps={{
-              name: 'age',
-              id: 'age-native-simple',
+              name: 'year',
+              id: 'year-native-simple',
             }}
           >
             <option aria-label="None" value="" />
