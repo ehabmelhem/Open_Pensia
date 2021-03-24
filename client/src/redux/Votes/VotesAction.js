@@ -13,6 +13,7 @@ export const addVote = (content) => ({
     securityID: content.securityID,
     questionID: content.questionID,
     directorID: content.directorID,
+    userID: content.userID,
     vote: content.vote,
     // company_id, director_id, question_id, ?user_id
   },
