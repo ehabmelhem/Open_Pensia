@@ -28,7 +28,7 @@ const VotesReducer = (state = initialState, action) => {
     case ADD_VOTE:
       return {
         votes: [
-          ...state.vates,
+          ...state.votes,
           {
             securityID: action.payload.securityID,
             questionID: action.payload.questionID,

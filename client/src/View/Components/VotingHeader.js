@@ -20,19 +20,19 @@ export default VotingHeader;
 let infoDirectorTabs = [
   {
     id: 0,
-    className: "non-active-nav",
+    className: "active-nav",
     toLink: "/about",
     content: "סיכום פרטים",
   },
   {
     id: 1,
-    className: "non-active-nav",
+    className: "",
     toLink: "/moreInfo",
     content: "עוד מידע",
   },
   {
     id: 2,
-    className: "non-active-nav",
+    className: "",
     toLink: "/VotingDetails",
     content: "נתוני הצבעה",
   },

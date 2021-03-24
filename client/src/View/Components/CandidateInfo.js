@@ -3,30 +3,12 @@ import MainButton from "./MainButton";
 
 function CandidateInfo({ officer }) {
   const cand_info = [
-    {
-      title: "ניסיון תעסוקתי",
-      details: [officer.VC],
-    },
-    {
-      title: "מומחיות פיננסית",
-      details: [officer.financialExpert],
-    },
-    {
-      title: "השכלה",
-      details: [officer.education],
-    },
-    {
-      title: "ניגוד עניינים",
-      details: [officer.relative],
-    },
-    {
-      title: "עבודות אחרות",
-      details: [officer.otherJobs],
-    },
-    {
-      title: "personalInterest",
-      details: [officer.personalInterest],
-    },
+    { title: "ניסיון תעסוקתי", details: [officer.VC] },
+    { title: "מומחיות פיננסית", details: [officer.financialExpert] },
+    { title: "השכלה", details: [officer.education] },
+    { title: "ניגוד עניינים", details: [officer.relative] },
+    { title: "עבודות אחרות", details: [officer.otherJobs] },
+    { title: "personalInterest", details: [officer.personalInterest] },
   ];
 
   return (
@@ -44,11 +26,9 @@ function CandidateInfo({ officer }) {
           );
         })}
       </div>
-      <MainButton
-        myClass="add-info-btn"
-        tolink="/UploadInformation"
-        text="צפייה בנתונים בלינקדאיןן"
-      />
+      <a href='https://www.linkedin.com' target='blanck'>
+        <button className='main-btn'>"צפייה בנתונים בלינקדאיןן"</button>
+      </a>
     </div>
   );
 }
