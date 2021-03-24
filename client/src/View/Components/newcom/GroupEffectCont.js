@@ -10,7 +10,7 @@ export default function GroupEffectCont(props) {
       </p>
       <div class="divider"/>
       <p>
-        <GroupEffect precent={14} perTitle="התחשבות החלטות" desc="אחוז ההחלטות ששהתקבלו לפי השקפתנו"/>
+        <GroupEffect precent="14%" perTitle="התחשבות החלטות" desc="אחוז ההחלטות ששהתקבלו לפי השקפתנו"/>
       </p>
     </div>
   );
