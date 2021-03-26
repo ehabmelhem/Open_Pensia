@@ -23,17 +23,41 @@ function MainNavBar({ navTabs }) {
   }
 
   return (
-    <nav className="all-tabs">
-      <ul>
-        {navTabs.map(({ id, toLink, className, content }) => {
-          return (
-            <Link key={id} to={toLink} onClick={setNavActive}>
-              <li className={className}>{content}</li>
-            </Link>
-          );
-        })}
-      </ul>
-    </nav>
+    <Router>
+      <div>
+        <nav className="all-tabs">
+          <ul id="ul1">
+            {navTabs1.map(({ id, className, href, content }, index) => {
+              return (
+                <li id="li1" key={index} className={className}>
+                  <Link
+                    to={`/${href}`}
+                    onClick={(id) => {
+                      setNavActive(id);
+                    }}
+                  >
+                    {content}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
+        <Switch>
+          <Route path="/moreInfo">
+            <CandidateMoreInfo />
+          </Route>
+          <Route path="/VotingDetails">
+            <DetailsOfVoting voting={votingPer} />
+          </Route>
+
+          <Route path="/">
+            <CandidateInfo />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
