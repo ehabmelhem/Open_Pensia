@@ -55,7 +55,7 @@ export default function Body(props) {
                 setButton2(false);
                 setButton3(false);
                 status = "Top"
-                setQuestionsList(questions.filter(question=>question.status === status))
+                setQuestionsList(!!questions && questions.filter(question=>question.status === status))
                
                 break;
                 
@@ -65,7 +65,7 @@ export default function Body(props) {
                 setButton2(true);
                 setButton3(false);
                 status = "Open"  
-                setQuestionsList(questions.filter(question=>question.status === status))
+                setQuestionsList(!!questions && questions.filter(question=>question.status === status))
                 break;
 
             case 'results':
@@ -74,7 +74,7 @@ export default function Body(props) {
                 setButton3(true);
                 status= "Results";
                 
-                setQuestionsList(questions.filter(question=>question.status === status || question.status === 'Pending'))
+                setQuestionsList(!!questions && questions.filter(question=>question.status === status || question.status === 'Pending'))
                 break;
             default:
                 break;
