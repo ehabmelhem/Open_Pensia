@@ -22,7 +22,7 @@ fetch('/proxy/get-fund-info').then(r=>r.json()).then(data=>{
           <CompanyVotingStatus waitingVoting={dataFirstPage.waitingVoting} openVoting={dataFirstPage.openVoting}/>
           <GroupEffectCont groupPower={dataFirstPage.groupPower}/>
           <div id="btnbtn" style={{maxWidth:"600px",minWidth:"375px",textAlign:"center",margin:"43% auto auto",marginTop:"202px"}}>
-          <MainButton width="90%" height="54px" text="אני רוצה להצביע" />
+          <MainButton tolink="/CompaniesList" width="90%" height="54px" text="אני רוצה להצביע" />
           </div>
         </div>
     )
