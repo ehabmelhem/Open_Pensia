@@ -30,6 +30,7 @@ export default function CompaniesListSelect() {
       {!!companies && companies.map((company) => {
         return (
           <CardListItem
+          status="company"
             securityID={company.Security_ID}
             companyName={company.company_name}
             key={company.Security_ID}
@@ -37,7 +38,7 @@ export default function CompaniesListSelect() {
 
             sectorNisha={company['Sector Nisha']}
 
-            toLink={`VoteDirectors/${company.Security_ID}`}
+            toLink={`/VoteDirectors/${company.Security_ID}`}
           />
         );
       })}

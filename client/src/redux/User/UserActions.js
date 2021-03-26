@@ -16,6 +16,11 @@ import {
 export const userLoginRequest = () => ({
   type: USER_LOGIN_REQUEST,
 });
+export const sendLogOutUserAction = ()=>(
+  {
+    type:USER_LOGOUT
+  }
+)
 
 export const userLoginSuccess = (content) => ({
   type: USER_LOGIN_SUCCESS,
@@ -72,7 +77,10 @@ export function fetchUserData(content) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch(userLoginSuccess(res.data));
+        if(res.data.login === true)  
+          dispatch(userLoginSuccess(res.data));
+          else
+           dispatch(userLoginFailure("loginError"));
       })
       .catch((error) => {
         console.log(error.message);
@@ -111,4 +119,19 @@ export function sendSignUpUser(userData) {
   };
 }
 
+
+export function sendLogOutUser() {
+  return (dispatch) => {
+    axios
+      .post("/user/Logout", {
+      })
+      .then((res) => {
+        console.log(res.data);
+                dispatch(sendLogOutUserAction()); //the server team is 
+      })
+      .catch((error) => {
+        console.log(error.message);
+      }); 
+  };
+}
 
