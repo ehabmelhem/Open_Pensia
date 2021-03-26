@@ -1,25 +1,25 @@
 import "./MainNavBar.css";
 import { Link, Switch } from "react-router-dom";
-// import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-// import DetailsOfVoting from "../Components/DetailsOfVoting";
-// import CandidateMoreInfo from "../Components/CandidateMoreInfo";
-// import CandidateInfo from "./CandidateInfo";
-// import React, { useState } from "react";
-
-
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import DetailsOfVoting from "../Components/DetailsOfVoting";
+import CandidateMoreInfo from "../Components/CandidateMoreInfo";
+import CandidateInfo from "./CandidateInfo";
+import React, { useState } from "react";
 
 function MainNavBar({ navTabs }) {
-
-  // const [navTabs1, setnavTabs1] = useState(navTabs);
+  const [navTabs1, setnavTabs1] = useState(navTabs);
 
   function setNavActive(e) {
     const closestLi = !!e.target && e.target.closest("li");
     console.log(closestLi);
     var tabs = document.querySelectorAll(".all-tabs ul li");
-    !!tabs && tabs.forEach((element) => {
-      !!element.classList && element.classList.remove("active-nav");
-    });
-    !!closestLi && !!closestLi.classList && closestLi.classList.add("active-nav");
+    !!tabs &&
+      tabs.forEach((element) => {
+        !!element.classList && element.classList.remove("active-nav");
+      });
+    !!closestLi &&
+      !!closestLi.classList &&
+      closestLi.classList.add("active-nav");
   }
 
   return (
@@ -49,7 +49,7 @@ function MainNavBar({ navTabs }) {
             <CandidateMoreInfo />
           </Route>
           <Route path="/VotingDetails">
-            <DetailsOfVoting voting={votingPer} />
+            {/* <DetailsOfVoting voting={votingPer} /> */}
           </Route>
 
           <Route path="/">
