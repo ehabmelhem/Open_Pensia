@@ -14,10 +14,7 @@ function Sidebar(props){
   };
   function logout(){
     dispatch(sendLogOutUser());
-    
-    // go to login page
-
-
+    props.history.push('/Login');
   }
 useEffect(()=>{
 if(user.login === false){

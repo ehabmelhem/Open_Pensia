@@ -18,7 +18,7 @@ function Login(){
     function handleLogin(e) {
         e.preventDefault();
         dispatch(fetchUserData({userEmail,userPassword}))
-        
+        props.history.push('/AfterRegistrationVoting');
         console.log(user)
     }
     return(
