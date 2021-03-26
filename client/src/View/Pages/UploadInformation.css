@@ -39,6 +39,7 @@ opacity: 0.6;
 }
 
 .inputOfForm{
+    direction: rtl;
     width: 90%;
     height: 30px;
     border: none;
