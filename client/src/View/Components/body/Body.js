@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-import ButtonShow from './ButtonShow'
-import ListQuestions from './ListQuestions'
-import './Body.css'
+import ButtonShow from "./ButtonShow";
+import ListQuestions from "./ListQuestions";
+import "./Body.css";
 
 //redux
-import { fetchCompanyQuestions } from '../../../redux/Company/CompanyActions'
+import { fetchCompanyQuestions } from "../../../redux/Company/CompanyActions";
 
 // const questionsList = [
 //     { status: "Top", Topic: 'פרשמרקט', par: 'קמעונאות מזון' },
@@ -22,78 +22,98 @@ import { fetchCompanyQuestions } from '../../../redux/Company/CompanyActions'
 let questions = [];
 
 export default function Body(props) {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
+  const [button1, setButton1] = useState(true);
+  const [button2, setButton2] = useState(false);
+  const [button3, setButton3] = useState(false);
+  const [sort, setSort] = useState("Open");
+  const [questionsList, setQuestionsList] = useState([]);
 
-    const [button1, setButton1] = useState(true);
-    const [button2, setButton2] = useState(false);
-    const [button3, setButton3] = useState(false);
-    const [sort, setSort] = useState("Open");
-    const [questionsList, setQuestionsList] = useState([]);
+  useEffect(() => {
+    dispatch(fetchCompanyQuestions(props.security_ID));
 
-    useEffect(() => {
-        dispatch(fetchCompanyQuestions(props.security_ID))
-
-        fetch('/proxy/get-Question-by-secur-Id', {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ "Security_ID": `${props.security_ID}` })
-        }).then(r => r.json()).then(({ doc }) => {
-            console.log(doc);
-            setQuestionsList(doc);
-            questions = doc;
-            select('open')
-        });
-    }, [])
-
-
-    function select(selectedButton) {
-        let status = ''
-        switch (selectedButton) {
-            case 'top':
-                setButton1(true);
-                setButton2(false);
-                setButton3(false);
-                status = "Top"
-                setQuestionsList(questions.filter(question=>question.status === status))
-               
-                break;
-                
-
-            case 'open':
-                setButton1(false);
-                setButton2(true);
-                setButton3(false);
-                status = "Open"  
-                setQuestionsList(questions.filter(question=>question.status === status))
-                break;
-
-            case 'results':
-                setButton1(false);
-                setButton2(false);
-                setButton3(true);
-                status= "Results";
-                
-                setQuestionsList(questions.filter(question=>question.status === status || question.status === 'Pending'))
-                break;
-            default:
-                break;
+    fetch("/proxy/get-Question-by-secur-Id", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ Security_ID: `${props.security_ID}` }),
+    })
+      .then((r) => r.json())
+      .then((doc) => {
+        console.log("the secure us : " + props.security_ID);
+        if (doc.ok) {
+          setQuestionsList(doc);
+          questions = doc;
+          select("open");
+        } else {
+          console.log("there is a problem");
         }
+      });
+  }, []);
 
-        setSort(status);
-       
+  function select(selectedButton) {
+    let status = "";
+    switch (selectedButton) {
+      case "top":
+        setButton1(true);
+        setButton2(false);
+        setButton3(false);
+        status = "Top";
+        setQuestionsList(
+          questions.filter((question) => question.status === status)
+        );
+
+        break;
+
+      case "open":
+        setButton1(false);
+        setButton2(true);
+        setButton3(false);
+        status = "Open";
+        setQuestionsList(
+          questions.filter((question) => question.status === status)
+        );
+        break;
+
+      case "results":
+        setButton1(false);
+        setButton2(false);
+        setButton3(true);
+        status = "Results";
+
+        setQuestionsList(
+          questions.filter(
+            (question) =>
+              question.status === status || question.status === "Pending"
+          )
+        );
+        break;
+      default:
+        break;
     }
-    return (
-        <div>
-            <div id="buttonsBar">
-                <div id="button1" onClick={() => select('top')}> <ButtonShow text="הכי חמים" selected={button1} /> </div>
-                <div id="button2" onClick={() => select('open')}> <ButtonShow text="פתוחים" selected={button2} /></div>
-                <div id="button3" onClick={() => select('results')}>  <ButtonShow text="תוצאות" selected={button3} /></div>
-            </div>
 
-            <ListQuestions questionsList={questionsList} sort={sort} />
+    setSort(status);
+  }
+  return (
+    <div>
+      <div id="buttonsBar">
+        <div id="button1" onClick={() => select("top")}>
+          {" "}
+          <ButtonShow text="הכי חמים" selected={button1} />{" "}
         </div>
-    )
+        <div id="button2" onClick={() => select("open")}>
+          {" "}
+          <ButtonShow text="פתוחים" selected={button2} />
+        </div>
+        <div id="button3" onClick={() => select("results")}>
+          {" "}
+          <ButtonShow text="תוצאות" selected={button3} />
+        </div>
+      </div>
+
+      <ListQuestions questionsList={questionsList} sort={sort} />
+    </div>
+  );
 }
 /*
  * change the questionList props to allQuestions
