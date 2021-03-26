@@ -1,30 +1,36 @@
 import React from "react";
+import './UploadInformation.css';
 
 export default function UploadInformation() {
   return (
-    <div className="body">
-      <div className="icon"></div>
-      <a className="title">העלאת מידע</a>
+    <div id="allPage">
+         <div id="center">
+      <div id="icon"></div>
+      <div id="titleCover"> 
+      <a id="title">העלאת מידע</a>
+      </div>
+      </div>
       <div>
         <div>
-          <form>
+          <form id="registerForm">
             <label>
-              מידע עבור
-              <input type="text" name="name" />
+            <p className="titleOfForm">מידע עבור </p>
+              <input className="inputOfForm" type="text" name="name" />
             </label>
             <label>
-              כותרת
-              <input type="text" name="title" />
+            <p className="titleOfForm">  כותרת</p>
+              <input className="inputOfForm" type="text" name="title" />
             </label>
             <label>
-              תיאור
-              <input type="text" name="desc" />
+            <p className="titleOfForm">  תיאור</p>
+              <input className="inputOfForm" type="text" name="desc" />
             </label>
             <label>
-              קישור עבור המידע
-              <input type="text" name="link" />
+            <p className="titleOfForm"> קישור עבור המידע</p>
+              <input className="inputOfForm" type="text" name="link" />
             </label>
-            <input type="submit" value="שתפ/י" />
+            <br/>
+            <input id="buttonInputReg"  type="submit" value="שתפ/י" />
           </form>
         </div>
       </div>

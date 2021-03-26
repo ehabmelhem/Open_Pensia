@@ -11,68 +11,68 @@ function DirectorListItem(props) {
 
   function handelclicklike(e) {
     if (likestate == false && dislikestate == false) {
-      var btn = document.querySelectorAll(".body-like");
+      var btn = document.querySelectorAll(".body-like1");
       // console.log(btn);
-      btn[0].classList.remove("body-like");
-      btn[0].classList.add("body-likeActive");
+      btn[0].classList.remove("body-like1");
+      btn[0].classList.add("body-likeActive1");
 
       setlikestate(true);
     }
 
     if (likestate == true) {
-      var btn = document.querySelectorAll(".body-likeActive");
+      var btn = document.querySelectorAll(".body-likeActive1");
 
-      btn[0].classList.remove("body-likeActive");
-      btn[0].classList.add("body-like");
+      btn[0].classList.remove("body-likeActive1");
+      btn[0].classList.add("body-like1");
       setlikestate(false);
     }
 
     if (likestate == false && dislikestate == true) {
-      var btn = document.querySelectorAll(".body-dislikeActive");
+      var btn = document.querySelectorAll(".body-dislikeActive1");
       // console.log(btn);
-      btn[0].classList.remove("body-dislikeActive");
-      btn[0].classList.add("body-dislike");
+      btn[0].classList.remove("body-dislikeActive1");
+      btn[0].classList.add("body-dislike1");
 
       setdislikestate(false);
 
-      var btn = document.querySelectorAll(".body-like");
+      var btn = document.querySelectorAll(".body-like1");
       // console.log(btn);
-      btn[0].classList.remove("body-like");
-      btn[0].classList.add("body-likeActive");
+      btn[0].classList.remove("body-like1");
+      btn[0].classList.add("body-likeActive1");
 
       setlikestate(true);
     }
   }
   function handelclickdislike(e) {
     if (likestate == true && dislikestate == false) {
-      var btn = document.querySelectorAll(".body-dislike");
+      var btn = document.querySelectorAll(".body-dislike1");
       // console.log(btn);
-      btn[0].classList.remove("body-dislike");
-      btn[0].classList.add("body-dislikeActive");
+      btn[0].classList.remove("body-dislike1");
+      btn[0].classList.add("body-dislikeActive1");
 
-      var btn = document.querySelectorAll(".body-likeActive");
+      var btn = document.querySelectorAll(".body-likeActive1");
       // console.log(btn);
-      btn[0].classList.remove("body-likeActive");
-      btn[0].classList.add("body-like");
+      btn[0].classList.remove("body-likeActive1");
+      btn[0].classList.add("body-like1");
 
       setlikestate(false);
       setdislikestate(true);
     }
 
     if (likestate == false && dislikestate == false) {
-      var btn = document.querySelectorAll(".body-dislike");
+      var btn = document.querySelectorAll(".body-dislike1");
       // console.log(btn);
-      btn[0].classList.remove("body-dislike");
-      btn[0].classList.add("body-dislikeActive");
+      btn[0].classList.remove("body-dislike1");
+      btn[0].classList.add("body-dislikeActive1");
 
       setdislikestate(true);
     }
 
     if (likestate === false && dislikestate === true) {
-      var btn = document.querySelectorAll(".body-dislikeActive");
+      var btn = document.querySelectorAll(".body-dislikeActive1");
       // console.log(btn);
-      btn[0].classList.remove("body-dislikeActive");
-      btn[0].classList.add("body-dislike");
+      btn[0].classList.remove("body-dislikeActive1");
+      btn[0].classList.add("body-dislike1");
 
       setdislikestate(false);
     }
@@ -94,8 +94,8 @@ function DirectorListItem(props) {
         <div className="Column" id="formoreres1">
           <div id="companyname">
             <ol>
-              <p id="companyName" >
-                <AiFillLike className="body-like" onClick={handelclicklike} />
+              <p id="companyName">
+                <AiFillLike className="body-like1" onClick={handelclicklike} />
               </p>
             </ol>
           </div>
@@ -105,7 +105,7 @@ function DirectorListItem(props) {
             <ol>
               <p id="companyName">
                 <AiFillDislike
-                  className="body-dislike"
+                  className="body-dislike1"
                   onClick={handelclickdislike}
                 />
               </p>

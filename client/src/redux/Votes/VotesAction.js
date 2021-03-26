@@ -12,8 +12,10 @@ export const addVote = (content) => ({
   payload: {
     securityID: content.securityID,
     questionID: content.questionID,
-    directorID: content.directorID,
+    officerID: content.officerID,
+    userID: content.userID,
     vote: content.vote,
+
     // company_id, director_id, question_id, ?user_id
   },
 });

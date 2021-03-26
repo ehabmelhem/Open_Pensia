@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import ButtonShow from './ButtonShow'
 import PersonaiInfo from './QuestionsBeforeRegister'
-import Inputclass from '../Components/InputText'
+import InputText from '../Components/InputText'
 import './SignUp.css';
+import { useDispatch } from 'react-redux';
+
+//redux
+import { sendSignUpUser } from '../../redux/User/UserActions'
+
+
 export default function SignUp() {
+
+    const dispatch = useDispatch();
+
     const [Personal, setPersonal] = useState(true);
     const [Confirm, setConfirm] = useState(false);
     const [sort, setSort] = useState("PersonalInfo");
+    const [userInfo, setUserInfo] = useState({})
 
+    const [error,setError]=useState("")
     function select(selectedButton) {
         switch (selectedButton) {
             case 'Personal':
@@ -31,9 +42,17 @@ export default function SignUp() {
         setPersonal(false)
         setConfirm(true)
         setSort("Confirmation")
+
+        //set detials to redux
+        dispatch(sendSignUpUser({...userInfo}))
+
     }
     function confirmMe(e) {
-
+        console.log(localStorage.getItem("nameprivate"))
+        console.log(localStorage.getItem("family"))
+        console.log(localStorage.getItem("email"))
+        console.log(localStorage.getItem("password"))
+        console.log(localStorage.getItem("phone"))
     }
     return (
         <div className="body">
@@ -46,18 +65,19 @@ export default function SignUp() {
 
                 {sort === "PersonalInfo" ?
                     <div>
-                        <h3 className="info">נתוני ההצבעה שלך שמורים במערכת</h3>
+                        <h3 >נתוני ההצבעה שלך שמורים במערכת</h3>
                         <br></br>
-                        < Inputclass textenglish={"nameprivate"} texter={"שם פרטי"} ></Inputclass>
-                        < Inputclass textenglish={"family"} texter={"שם משפחה"} ></Inputclass>
+                        < InputText textenglish={"firstName"} texter={"שם פרטי"} userInfo={userInfo} setUserInfo={setUserInfo} ></InputText>
+                        < InputText textenglish={"lastName"} texter={"שם משפחה"} userInfo={userInfo} setUserInfo={setUserInfo}></InputText>
 
-                        < Inputclass textenglish={"email"} texter={"כתובת מייל"} ></Inputclass>
-                        < Inputclass textenglish={"phone"} texter={"מספר טלפון"} ></Inputclass>
+                        < InputText textenglish={"email"} texter={"כתובת מייל"} userInfo={userInfo} setUserInfo={setUserInfo}></InputText>
+                        < InputText textenglish={"phone"} texter={"מספר טלפון"} userInfo={userInfo} setUserInfo={setUserInfo}></InputText>
 
                         <br></br>
-                        <button onClick={PassToConfirm} className="but">הלאה</button>
+                        <button type="submit" onClick={PassToConfirm} className="complete">הלאה</button>
+                        <div className="error"> {error}</div>
                     </div>
-                    : <div><h3 className="info">איך תרצ/י שנאמת אותך?</h3>
+                    : <div><h3 >?איך תרצ/י שנאמת אותך</h3>
                         <div >
                             <h1>
                                 <input className="radiobutton" type="radio" value="folder" name="confirm" /> אימות על ידי מסמך מזהה
@@ -68,6 +88,7 @@ export default function SignUp() {
                       </h1>
                             <div className="line" />
                         </div>
+                        <div className="space"/>
                         <button className="button" onClick={confirmMe}>תאמתו אותי!</button></div>}
 
 

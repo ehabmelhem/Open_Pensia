@@ -19,8 +19,17 @@ direction: rtl;
 direction:  rtl;
 }
 
+.space{
+    margin-top: 27px;
+}
 
 .textinput {
-    
+    width:340px;
     border: 0px none;
+    margin-left: 60px;
+    color: #3D4257;
+}
+
+.textbox{
+    width:100px;
 }
