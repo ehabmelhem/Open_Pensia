@@ -36,26 +36,7 @@ function App() {
               Page 1
             </NavLink>
           </li>
-          <li>
-            <NavLink exact to="FirstPages_2">
-              Page 2
-            </NavLink>
-          </li>
-          <li>
-            <NavLink exact to="FirstPages_3">
-              Page 3
-            </NavLink>
-          </li>
-          <li>
-            <NavLink exact to="QuestionsBeforeRegister">
-              Page 4
-            </NavLink>
-          </li>
-          <li>
-            <NavLink exact to="VoteAccept">
-              Page 5
-            </NavLink>
-          </li>
+          
           <li>
             <NavLink exact to="CompaniesListSelect">
               Page 6

@@ -65,31 +65,41 @@ export default function Body(props) {
 
         break;
 
-      case "open":
-        setButton1(false);
-        setButton2(true);
-        setButton3(false);
-        status = "Open";
-        setQuestionsList(
-          questions.filter((question) => question.status === status)
-        );
-        break;
+    function select(selectedButton) {
+        let status = ''
+        switch (selectedButton) {
+            case 'top':
+                setButton1(true);
+                setButton2(false);
+                setButton3(false);
+                status = "Top"
+                setQuestionsList(!!questions && questions.filter(question=>question.status === status))
+               
+                break;
+                
 
-      case "results":
-        setButton1(false);
-        setButton2(false);
-        setButton3(true);
-        status = "Results";
+            case 'open':
+                setButton1(false);
+                setButton2(true);
+                setButton3(false);
+                status = "Open"  
+                setQuestionsList(!!questions && questions.filter(question=>question.status === status))
+                break;
 
-        setQuestionsList(
-          questions.filter(
-            (question) =>
-              question.status === status || question.status === "Pending"
-          )
-        );
-        break;
-      default:
-        break;
+            case 'results':
+                setButton1(false);
+                setButton2(false);
+                setButton3(true);
+                status= "Results";
+                
+                setQuestionsList(!!questions && questions.filter(question=>question.status === status || question.status === 'Pending'))
+                break;
+            default:
+                break;
+        }
+
+        setSort(status);
+       
     }
 
     setSort(status);

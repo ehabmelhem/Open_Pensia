@@ -33,6 +33,9 @@ function CardListItem(props) {
       case "results":
         setStatus("ההצבעה נסגרה")
         break;
+        case "company":
+        setStatus(props.sectorNisha)  
+        break;
 
       default:
         setStatus("UnKnown")
