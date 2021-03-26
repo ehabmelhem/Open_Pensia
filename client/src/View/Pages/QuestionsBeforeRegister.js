@@ -1,54 +1,145 @@
 
 import React, { useState, useEffect } from 'react';
-import Inputclass from '../Components/InputText'
+import { useHistory } from "react-router";
 import "./QuestionsBeforeRegister.css";
-
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import NativeSelect from '@material-ui/core/NativeSelect';
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 export default function QuestionsBeforeRegister() {
-  const [name,setname]=useState("")
-    const [user,setuser]=useState({firstName: String,
-        lastName: String,   
-        email: String,
-        phone: String,
-        password: String,
-        status: String, //{Waiting/Approved}
-        fundName: String,
-        chanel: String,
-        registerDate: String,
-        
-        
+  const [fundNames,setFundNames]=useState([])
+  const [chanellNames,setChanellNames]=useState([])
+  const [FundsData,setFundsData]=useState({})
+  const [fundNameChosen,setFundNameChosen]=useState("");
+  const [chanellNameChosen,setChanellNameChosen]=useState("")
+  const classes = useStyles();
+  const [state, setState] = React.useState({
+    age: '',
+    name: 'hai',
+  });
+  const history = useHistory();
+  function toLoginPage() {
+    history.push('Login')
+  }
+  
+async function getAllFund(e){
+  await fetch("/proxy/get-all-fund", {
+    method: "POST",
+    headers: {
+      "Accept": "application/json; odata=verbose",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(),
+  })
+    .then((r) => r.json())
+    .then((data) => {
+      let arr=[]
+      for(let key in data.data){
+        arr.push(key)
+      }
+     setFundNames(arr)
+     setFundsData(data.data)
+     console.log(arr)
+
     });
- 
-    const savePersonalInfo = (e) => {
-        e.preventDefault();
-        setuser({firstName : "kabha" , lastName : "rwed" , email : "kabha" , phone : "052658821" , password : "asdasd", status : "true", fundName : "ddd",chanel : "fsde",registerDate : "arab"})
-            fetch("http://localhost:3002/new-user/add-user", {
-              method: "POST",
-              headers: {
-                "Accept": "application/json; odata=verbose",
-                "Content-Type": "application/json",
-              },
+}
+useEffect(() => {
+    getAllFund()
+    
+}, []);
+  const handleChange = (event) => {
+    const name = event.target.name;
+    console.log(FundsData[event.target.value])
+    setFundNameChosen(event.target.value)
+    
+    setChanellNames(FundsData[event.target.value])
+    
+    setState({
+      ...state,
+      [name]: event.target.value,
+    });
+  };
 
-              body: JSON.stringify({ userinformation : user }),
+  const handleChanell = (event) => {
+    const name = event.target.name;
+    console.log(event.target.value)
+    setChanellNameChosen(event.target.value)
+    setState({
+      ...state,
+      [name]: event.target.value,
+    });
+  };
+//fundsData[fundsChoosen]=>Array
+  return (
 
-            })
-              .then((r) => r.json())
-              .then((data) => {
-               console.log("A")
-              });
-    }
-    return (
-        <div className="body">
-            <h3 className="info">נתוני ההצבעה שלך שמורים במערכת</h3>
-            <br></br>
-             < Inputclass textenglish  = {"nameprivate"}  texter = {"שם פרטי"} ></Inputclass>
-             < Inputclass textenglish  = {"family"}  texter = {"שם משפחה"} ></Inputclass>
+    <div >
+      <div className="icon"> </div>
+      <div className="space" />
+      <div className="direction">
+        <div className="titleQ">2 שאלות קצרות ואנחנו בפנים</div>
+        <div className="space" />
+        <div className="name">בחר/י גוף פנסיוני</div>
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="age-native-simple"></InputLabel>
+          <Select
+            native
+            value={state.age}
+            onChange={handleChange}
+            inputProps={{
+              name: 'age',
+              id: 'age-native-simple',
+            }}
+          >
+            <option aria-label="None" value="" />
+            {fundNames.map((index,fund)=>
+              <option key={fund} value={index}>{index}</option>
+              
+            )}
+           
+          </Select>
+        </FormControl>
+        
+        
+        
+        <div className="channelname">בחר/י אפיק חיסכון</div>
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="age-native-simple"></InputLabel>
+          <Select
+            native
+            value={state.year}
+            onChange={handleChanell}
+            inputProps={{
+              name: 'year',
+              id: 'year-native-simple',
+            }}
+          >
+            <option aria-label="None" value="" />
 
-             < Inputclass textenglish  = {"email"}  texter = {"כתובת מייל"} ></Inputclass>
-             < Inputclass textenglish  = {"phone"}  texter = {"מספר טלפון"} ></Inputclass>
+            {chanellNames.map((index2,chanell)=>
+              <option key={chanell} value={index2}>{index2}</option>
+              
+            )}
+          </Select>
+        </FormControl>
+        
+        <div />
+        
+      </div>
+    </div>
 
-         <br></br>
-<button  onClick= {savePersonalInfo} className="but">הלאה</button>
-        </div>
-    )   
-    }
+
+
+  )
+}

@@ -9,9 +9,10 @@ export default function ListQuestions({questionsList, sort}) {
         <div id="allList">
             { !!questionsList &&questionsList.map((question) => {
 
+return <CardListItem hideImg="hideImg" companyName={question.Topic} par={question.par}/>
+            //    <p>{question.Topic}</p>
 
                return <QuestionListItem key={question._id} question={question} />
-
 
             })}
         </div>

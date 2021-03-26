@@ -13,6 +13,11 @@
 .sub-title{
     color: rgb(195, 196, 197);
 }
-.title{
+.article-title{
     color: rgb(90, 104, 155);
+}
+
+.article > a{
+    text-decoration: underline;
+    color: navy;
 }

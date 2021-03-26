@@ -1,34 +1,14 @@
 import "./CandidateInfo.css";
 import MainButton from "./MainButton";
 
-function CandidateInfo(props) {
-  // const candidateInfo = props.candidateInfo;
-
+function CandidateInfo({ officer }) {
   const cand_info = [
-    {
-      title: "ניסיון תעסוקתי",
-      details: [" מנכל פוקס", "אלוף משנה 8200", "סמנכל כספים מחסני חשמל"],
-    },
-    {
-      title: "מומחיות פיננסית",
-      details: [" יש מומחיות"],
-    },
-    {
-      title: "השכלה",
-      details: [
-        "לימודי משפטים",
-        "קורס ברמנים ,בא מאסטר",
-        "לימודי דת ורוח, האונבירסיטה הפתוחה",
-      ],
-    },
-    {
-      title: "ניגוד עניינים",
-      details: ["אין"],
-    },
-    {
-      title: "קרוב משפחה של בעל שליטה",
-      details: ["בן דוד של מנכל הראל פיננסים "],
-    },
+    { title: "ניסיון תעסוקתי", details: [officer.VC] },
+    { title: "מומחיות פיננסית", details: [officer.financialExpert] },
+    { title: "השכלה", details: [officer.education] },
+    { title: "ניגוד עניינים", details: [officer.relative] },
+    { title: "עבודות אחרות", details: [officer.otherJobs] },
+    { title: "personalInterest", details: [officer.personalInterest] },
   ];
 
   return (
@@ -41,18 +21,14 @@ function CandidateInfo(props) {
               {data.details.map((d, index) => {
                 return <p className='body-h5' key={index}> {d} </p>;
               })}
-              
+
             </div>
           );
         })}
       </div>
-
-      <info_block cand_info={cand_info} />
-      <MainButton
-        myClass="add-info-btn"
-        tolink="/UploadInformation"
-        text="צפייה בנתונים בלינקדאיןן"
-      />
+      <a href='https://www.linkedin.com' target='blanck'>
+        <button className='main-btn'>"צפייה בנתונים בלינקדאיןן"</button>
+      </a>
     </div>
   );
 }

@@ -332,9 +332,8 @@ exports.getUserVotingHistory = async (req, res) => {
   try {
     let role = req.cookies.role;
     let decRole = jwt.decode(role, secret);
-
-    const userId = decRole.name;
-
+    const userId= decRole.name
+    
     const allHistory = [];
     const user = await User.findOne({ _id: userId });
     const userVotes = user.votes;

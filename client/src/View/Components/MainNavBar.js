@@ -1,35 +1,35 @@
 import "./MainNavBar.css";
 import { Link, Switch } from "react-router-dom";
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-import DetailsOfVoting from "../Components/DetailsOfVoting";
-import CandidateMoreInfo from "../Components/CandidateMoreInfo";
-import CandidateInfo from "./CandidateInfo";
-import React, { useState } from "react";
+// import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+// import DetailsOfVoting from "../Components/DetailsOfVoting";
+// import CandidateMoreInfo from "../Components/CandidateMoreInfo";
+// import CandidateInfo from "./CandidateInfo";
+// import React, { useState } from "react";
 
-let votingPer = [{ disApprovePer: "20%", ApprovePer: "80%" }];
+
 
 function MainNavBar({ navTabs }) {
 
-  const [navTabs1, setnavTabs1] = useState(navTabs);
+  // const [navTabs1, setnavTabs1] = useState(navTabs);
 
-  function setNavActive(page) {
-    const closestLi = !!page.target && page.target.closest("li");
+  function setNavActive(e) {
+    const closestLi = !!e.target && e.target.closest("li");
     console.log(closestLi);
     var tabs = document.querySelectorAll(".all-tabs ul li");
-    tabs.forEach((element) => {
-      element.classList.remove("active-nav");
+    !!tabs && tabs.forEach((element) => {
+      !!element.classList && element.classList.remove("active-nav");
     });
-    closestLi.classList.add("active-nav");
+    !!closestLi && !!closestLi.classList && closestLi.classList.add("active-nav");
   }
 
   return (
     <Router>
       <div>
         <nav className="all-tabs">
-          <ul>
+          <ul id="ul1">
             {navTabs1.map(({ id, className, href, content }, index) => {
               return (
-                <li key={index} className={className}>
+                <li id="li1" key={index} className={className}>
                   <Link
                     to={`/${href}`}
                     onClick={(id) => {
