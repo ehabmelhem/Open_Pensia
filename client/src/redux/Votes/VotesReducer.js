@@ -49,8 +49,15 @@ const VotesReducer = (state = initialState, action) => {
       // new_votes.add(action.payload);
 
       return {
-        ...state,
-        votes: new_votes,
+        votes: [
+          ...state.votes,
+          {
+            securityID: action.payload.securityID,
+            questionID: action.payload.questionID,
+            directorID: action.payload.directorID,
+            vote: action.payload.vote,
+          },
+        ],
       };
     }
 

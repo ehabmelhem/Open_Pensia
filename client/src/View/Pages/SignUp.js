@@ -18,6 +18,7 @@ export default function SignUp() {
     const [sort, setSort] = useState("PersonalInfo");
     const [userInfo, setUserInfo] = useState({})
 
+    const [error,setError]=useState("")
     function select(selectedButton) {
         switch (selectedButton) {
             case 'Personal':
@@ -47,7 +48,11 @@ export default function SignUp() {
 
     }
     function confirmMe(e) {
-
+        console.log(localStorage.getItem("nameprivate"))
+        console.log(localStorage.getItem("family"))
+        console.log(localStorage.getItem("email"))
+        console.log(localStorage.getItem("password"))
+        console.log(localStorage.getItem("phone"))
     }
     return (
         <div className="body">
@@ -60,7 +65,7 @@ export default function SignUp() {
 
                 {sort === "PersonalInfo" ?
                     <div>
-                        <h3 className="info">נתוני ההצבעה שלך שמורים במערכת</h3>
+                        <h3 >נתוני ההצבעה שלך שמורים במערכת</h3>
                         <br></br>
                         < InputText textenglish={"firstName"} texter={"שם פרטי"} userInfo={userInfo} setUserInfo={setUserInfo} ></InputText>
                         < InputText textenglish={"lastName"} texter={"שם משפחה"} userInfo={userInfo} setUserInfo={setUserInfo}></InputText>
@@ -69,9 +74,10 @@ export default function SignUp() {
                         < InputText textenglish={"phone"} texter={"מספר טלפון"} userInfo={userInfo} setUserInfo={setUserInfo}></InputText>
 
                         <br></br>
-                        <button onClick={PassToConfirm} className="but">הלאה</button>
+                        <button type="submit" onClick={PassToConfirm} className="complete">הלאה</button>
+                        <div className="error"> {error}</div>
                     </div>
-                    : <div><h3 className="info">איך תרצ/י שנאמת אותך?</h3>
+                    : <div><h3 >?איך תרצ/י שנאמת אותך</h3>
                         <div >
                             <h1>
                                 <input className="radiobutton" type="radio" value="folder" name="confirm" /> אימות על ידי מסמך מזהה
@@ -82,6 +88,7 @@ export default function SignUp() {
                       </h1>
                             <div className="line" />
                         </div>
+                        <div className="space"/>
                         <button className="button" onClick={confirmMe}>תאמתו אותי!</button></div>}
 
 

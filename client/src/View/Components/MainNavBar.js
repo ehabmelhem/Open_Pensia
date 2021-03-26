@@ -25,10 +25,10 @@ function MainNavBar({ navTabs }) {
   return (
     <nav className="all-tabs">
       <ul>
-        {navTabs.map(({ id, toLink, content }) => {
+        {navTabs.map(({ id, toLink, className, content }) => {
           return (
             <Link key={id} to={toLink} onClick={setNavActive}>
-              <li >{content}</li>
+              <li className={className}>{content}</li>
             </Link>
           );
         })}

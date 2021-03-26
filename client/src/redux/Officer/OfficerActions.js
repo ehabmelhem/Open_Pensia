@@ -51,7 +51,7 @@ export function fetchOfficerData(officerId) {
             officerId
         })
             .then(res => {
-                console.log(res.data.doc[Object.keys(res.data.doc)[0]]); 
+                console.log(res.data.doc[Object.keys(res.data.doc)[0]]);
                 let content = res.data.doc[Object.keys(res.data.doc)[0]]; // to get the first element on the object
                 dispatch(fetchOfficerDataSuccess({
                     officerName: content.Officers_Name,
@@ -129,14 +129,13 @@ export function fetchOfficerArticles(officerId) {
 
     return dispatch => {
         dispatch(fetchOfficerArticlesRequest());
-        axios.get('/officer/get-articles', {
+        // console.log(officerId)
+        axios.post('/officer/get-articles', {
             officerId
         })
             .then(res => {
                 console.log(res.data);
-                dispatch(fetchOfficerArticlesSuccess({
-                    articles: res.data
-                }));
+                dispatch(fetchOfficerArticlesSuccess(res.data.doc));
             })
             .catch(error => {
                 dispatch(fetchOfficerArticlesFailure(error.message));

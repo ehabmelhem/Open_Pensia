@@ -17,6 +17,7 @@ function InputText({ textenglish, texter,userInfo, setUserInfo }) {
 
     return (
         <div className="first">
+            
             {console.log(texter)}
             <h3 className="textdisplay">
                 {texter}
@@ -24,6 +25,7 @@ function InputText({ textenglish, texter,userInfo, setUserInfo }) {
             <br></br>
             <input type="text" onChange={handleInput} className="textinput" />
             <div className="line"></div>
+            <div className="space"/>
         </div>
 
     );
