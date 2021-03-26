@@ -9,8 +9,11 @@ export default function FirstPages() {
   const [chanel, setChanel] = useState("");
   const [fundname, setFundname] = useState("");
   const state = useSelector((state) => state);
+  const [length, setLength] = useState(0);
   const dispatch = useDispatch();
-  console.log(state);
+  useEffect(() => {
+    setLength(state.CompaniesListReducer.companies.length);
+  }, [state.CompaniesListReducer]);
   let firstPages = [
     {
       title: "למה זה חשוב",
@@ -43,10 +46,11 @@ export default function FirstPages() {
     index++;
     if (index === 4) {
       dispatch(fetchCompanies(fundname, chanel));
+      setindex(index);
     }
     if (index < 4) setindex(index);
     else {
-      history.push("CompaniesList");
+      if (index > 4) history.push("CompaniesList");
     }
   }
   function toLoginPage() {
@@ -70,8 +74,16 @@ export default function FirstPages() {
       ) : (
         <div className="body">
           <div className="icon"></div>
-          <a className="title">{firstPages[index].title}</a>
+
+          {length === 0 ? (
+            <a className="title">{firstPages[index].title}</a>
+          ) : (
+            <a className="title">
+              {"זהינו שיש לך החזקה ב" + length + " חברות בשוק"}
+            </a>
+          )}
           <p class="description">{firstPages[index].dec}</p>
+
           <button onClick={next}>{firstPages[index].buttonTitle}</button>
           <div></div>
           <a className="signin" onClick={toLoginPage}>
