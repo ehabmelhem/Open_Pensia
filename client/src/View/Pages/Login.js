@@ -8,13 +8,17 @@ function Login(){
     const dispatch = useDispatch();
     const [userEmail,setEmail]=useState("")
     const [userPassword,setPassword]=useState("")
-    //const [error,setError]=useState("")
-    let error = useSelector(state => !!state.userReducer && state.userReducer.error)
+    let error = useSelector(state => !!state.UserReducer && state.UserReducer.login);
     
+    useEffect(() => {
+        
+        
+    }, []);
     function handleLogin(e) {
         e.preventDefault();
         dispatch(fetchUserData({userEmail,userPassword}))
-    
+        
+        console.log(error)
     }
     return(
         

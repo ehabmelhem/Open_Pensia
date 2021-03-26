@@ -27,6 +27,9 @@ function CardListItem(props) {
       case "Top":
         setStatus("ממתין להצבעתך")
         break;
+        case "Pending":
+          setStatus("ההצבעה נסגרה")
+          break;
       case "results":
         setStatus("ההצבעה נסגרה")
         break;
@@ -55,7 +58,7 @@ function CardListItem(props) {
             <div id="companyname">
               <ol>
                 <p id="companyName">{props.companyName}</p>
-                <p id="companytype">{sectorNisha}</p>
+                <p id="companytype">{status}</p>
               </ol>
             </div>
           </div>
