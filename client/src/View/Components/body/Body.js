@@ -51,6 +51,20 @@ export default function Body(props) {
       });
   }, []);
 
+  //   function select(selectedButton) {
+  //     let status = "";
+  //     switch (selectedButton) {
+  //       case "top":
+  //         setButton1(true);
+  //         setButton2(false);
+  //         setButton3(false);
+  //         status = "Top";
+  //         setQuestionsList(
+  //           questions.filter((question) => question.status === status)
+  //         );
+
+  //         break;
+  //     }
   function select(selectedButton) {
     let status = "";
     switch (selectedButton) {
@@ -60,50 +74,44 @@ export default function Body(props) {
         setButton3(false);
         status = "Top";
         setQuestionsList(
-          questions.filter((question) => question.status === status)
+          !!questions &&
+            questions.filter((question) => question.status === status)
         );
 
         break;
 
-    function select(selectedButton) {
-        let status = ''
-        switch (selectedButton) {
-            case 'top':
-                setButton1(true);
-                setButton2(false);
-                setButton3(false);
-                status = "Top"
-                setQuestionsList(!!questions && questions.filter(question=>question.status === status))
-               
-                break;
-                
+      case "open":
+        setButton1(false);
+        setButton2(true);
+        setButton3(false);
+        status = "Open";
+        setQuestionsList(
+          !!questions &&
+            questions.filter((question) => question.status === status)
+        );
+        break;
 
-            case 'open':
-                setButton1(false);
-                setButton2(true);
-                setButton3(false);
-                status = "Open"  
-                setQuestionsList(!!questions && questions.filter(question=>question.status === status))
-                break;
+      case "results":
+        setButton1(false);
+        setButton2(false);
+        setButton3(true);
+        status = "Results";
 
-            case 'results':
-                setButton1(false);
-                setButton2(false);
-                setButton3(true);
-                status= "Results";
-                
-                setQuestionsList(!!questions && questions.filter(question=>question.status === status || question.status === 'Pending'))
-                break;
-            default:
-                break;
-        }
-
-        setSort(status);
-       
+        setQuestionsList(
+          !!questions &&
+            questions.filter(
+              (question) =>
+                question.status === status || question.status === "Pending"
+            )
+        );
+        break;
+      default:
+        break;
     }
 
     setSort(status);
   }
+
   return (
     <div>
       <div id="buttonsBar">
@@ -125,6 +133,3 @@ export default function Body(props) {
     </div>
   );
 }
-/*
- * change the questionList props to allQuestions
- */

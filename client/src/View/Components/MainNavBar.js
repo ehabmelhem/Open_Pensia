@@ -9,8 +9,8 @@ import React, { useState } from "react";
 function MainNavBar({ navTabs }) {
   const [navTabs1, setnavTabs1] = useState(navTabs);
 
-  const [navTabs1, setnavTabs1] = useState(navTabs);
-  let votingPer = [{ disApprovePer: "20%", ApprovePer: "80%" }];
+  // const [navTabs1, setnavTabs1] = useState(navTabs);
+  // let votingPer = [{ disApprovePer: "20%", ApprovePer: "80%" }];
 
   function setNavActive(e) {
     const closestLi = !!e.target && e.target.closest("li");
