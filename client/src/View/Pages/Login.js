@@ -8,17 +8,18 @@ function Login(){
     const dispatch = useDispatch();
     const [userEmail,setEmail]=useState("")
     const [userPassword,setPassword]=useState("")
-    let error = useSelector(state => !!state.UserReducer && state.UserReducer.login);
+    let user = useSelector(state => !!state.UserReducer && state.UserReducer);
     
-    useEffect(() => {
-        
-        
-    }, []);
+     useEffect(() => {
+        if(user.login === true){
+            console.log("worked")
+        }
+     }, [user]);
     function handleLogin(e) {
         e.preventDefault();
         dispatch(fetchUserData({userEmail,userPassword}))
-        
-        console.log(error)
+        props.history.push('/AfterRegistrationVoting');
+        console.log(user)
     }
     return(
         
@@ -37,7 +38,7 @@ function Login(){
                         }} required></input>
                     </div>
                     <button type="submit" className="login">כניסה</button>
-                    <label className="message">{error}</label>
+                    {/* <label className="message">{error}</label> */}
                 </form>
 
        

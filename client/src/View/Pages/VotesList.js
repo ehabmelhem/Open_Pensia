@@ -34,7 +34,6 @@ const questionsList = [
 
 export default function VotesList(props) {
  if(props.fetch !== null && props.fetch !== undefined){
-     console.log("joined")
         return(
               <div>
             <NavBarLists title={props.title}/>
