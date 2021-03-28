@@ -15,6 +15,12 @@ export default function CompaniesListSelect() {
   //   dispatch(fetchCompanyDefaultQuestion(securityID,'',''));
 
   // }
+
+  let isLoggedIn = useSelector(
+    (state) => !!state.UserReducer && state.UserReducer
+  );
+  console.log("a" + isLoggedIn);
+
   return (
     <div className="App1">
       <header className="App-header1">
