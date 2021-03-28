@@ -17,9 +17,9 @@ export default function CompaniesListSelect() {
   // }
 
   let isLoggedIn = useSelector(
-    (state) => !!state.UserReducer && state.UserReducer
+    (state) => !!state.UserReducer && state.UserReducer.userStatus
   );
-  console.log("a" + isLoggedIn);
+  console.log(isLoggedIn);
 
   return (
     <div className="App1">
