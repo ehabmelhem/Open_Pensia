@@ -6,6 +6,7 @@ import { addVote } from "../../redux";
 import { useDispatch, useSelector } from "react-redux";
 
 function DetailsOfVoting({ voting }) {
+  
   const [likestate, setlikestate] = useState(false);
   const [dislikestate, setdislikestate] = useState(false);
   const dispatch = useDispatch();

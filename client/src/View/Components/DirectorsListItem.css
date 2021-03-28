@@ -65,7 +65,10 @@
 }
 #companyname {
   color: black;
-  vertical-align: middle;
+  /* vertical-align: middle; */
+  display: flex;
+  justify-content: space-between;
+  width: 50px;
 }
 
 #companytype {
@@ -79,24 +82,31 @@
 }
 
 .body-like1 {
-  width: 50%;
-  height: 50px;
-  color: #324483;
+  width: 50% !important;
+  height: 50px !important;
+  color: #324483 !important;
+  cursor: pointer !important;
 }
 
 .body-dislike1 {
-  width: 50%;
-  height: 50px;
-  color: #324483;
+  width: 50% !important;
+  height: 50px !important;
+  color: #324483 !important;
+  cursor: pointer !important;
 }
 
+.flex {
+  display: flex;
+}
 .body-likeActive1 {
-  width: 50%;
-  height: 50px;
-  color: green;
+  width: 50% !important;
+  height: 50px !important;
+  color: green !important;
+  cursor: pointer !important;
 }
 .body-dislikeActive1 {
-  width: 50%;
-  height: 50px;
-  color: red;
+  width: 50% !important;
+  height: 50px !important;
+  color: red !important;
+  cursor: pointer !important;
 }
