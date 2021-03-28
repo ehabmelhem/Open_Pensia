@@ -85,7 +85,7 @@ export function fetchUserData(content) {
       .catch((error) => {
         console.log(error.message);
         dispatch(userLoginFailure(error.message));
-      });//commit 2
+      }); //commit 2
   };
 }
 
@@ -102,7 +102,7 @@ export function sendSignUpUser(userData) {
         lastName: userData.lastName,
         email: userData.userEmail,
         phone: userData.phone,
-        // password: content.userPassword, //need to be added in page 13
+        password: userData.password, //need to be added in page 13
         // fundName: userfundName, //need to be updated in the page 4
         // userchanel: userchanel, //need to be updated in the page 4
         // votes: Votes,
@@ -110,7 +110,7 @@ export function sendSignUpUser(userData) {
       })
       .then((res) => {
         console.log(res.data);
-        //dispatch(userSignupSuccess(res.data)); //the server team is 
+        //dispatch(userSignupSuccess(res.data)); //the server team is
       })
       .catch((error) => {
         console.log(error.message);

@@ -4,8 +4,7 @@ const app = express();
 const WaitingUser = require("../Schema/WaitingUser");
 const Officer = require("../Schema/Officer");
 const { v4: uuidv4 } = require("uuid");
-const bcrypt = require('bcrypt');
-
+const bcrypt = require("bcrypt");
 
 // var salt =10 //any random value
 /* 
@@ -59,6 +58,7 @@ exports.addWaitingUser = async (req, res) => {
     //middleware
     console.log("in fun addNewUser");
 
+    console.log(req.body);
     var datetime = new Date();
 
     // bcrypt.hash(password, salt, (err, encrypted) => {
@@ -66,18 +66,20 @@ exports.addWaitingUser = async (req, res) => {
     //   next()
     //   })
     console.log(password);
-    let hash_password =await  hashPassword(password);
+    let hash_password = await hashPassword(password);
     console.log(hash_password);
-    const newVotes = [];
-    votes.forEach((e) => {
-      let oneVote = {
-        proxyCode: e.proxyCode,
-        officerId: e.officerId,
-        voted: e.voted,
-        voteDate: datetime,
-      };
-      newVotes.push(oneVote);
-    });
+
+    /** */
+    // const newVotes = [];
+    // votes.forEach((e) => {
+    //   let oneVote = {
+    //     proxyCode: e.proxyCode,
+    //     officerId: e.officerId,
+    //     voted: e.voted,
+    //     voteDate: datetime,
+    //   };
+    //   newVotes.push(oneVote);
+    // });
 
     //check if user exists
     const newUser = new WaitingUser({
@@ -87,17 +89,19 @@ exports.addWaitingUser = async (req, res) => {
       phone: phone,
       password: hash_password,
       status: "Waiting", //{Waiting/Approved}
-      fundName: fundName,
-      chanel: chanel,
-      registerDate: datetime,
-      votes: newVotes,
+      /** */
+
+      // fundName: fundName,
+      // chanel: chanel,
+      // registerDate: datetime,
+      // votes: newVotes,
       article: {
-        officerId: newArticle.officerId,
-        articleId: newArticle.articleId,
-        articleTitle: newArticle.articleTitle,
-        articleText: newArticle.articleText,
-        articleUrl: newArticle.articleUrl,
-        articleStatus: "Approved", //{"Waiting","Approved","declined"}
+        //   officerId: newArticle.officerId,
+        articleId: "asdjajsdajsd12kjndjksndjkasndjkasdwq",
+        //   articleTitle: newArticle.articleTitle,
+        //   articleText: newArticle.articleText,
+        //   articleUrl: newArticle.articleUrl,
+        //   articleStatus: "Approved", //{"Waiting","Approved","declined"}
       },
     });
 
@@ -140,8 +144,8 @@ exports.addWaitingUser = async (req, res) => {
 };
 
 async function hashPassword(password) {
-  const salt = await bcrypt.genSalt(10)
-  const hash = await bcrypt.hash(password, salt)
-  console.log(hash)
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(password, salt);
+  console.log(hash);
   return hash;
 }

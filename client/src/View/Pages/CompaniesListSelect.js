@@ -6,10 +6,6 @@ import CardListItem from "../Components/CardListItem";
 import "./CompaniesListSelect.css";
 
 export default function CompaniesListSelect() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchCompanies());
-  }, []);
   let companies = useSelector(
     (state) =>
       !!state.CompaniesListReducer && state.CompaniesListReducer.companies
