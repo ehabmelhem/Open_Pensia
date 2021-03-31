@@ -8,7 +8,7 @@
   position: sticky;
 }
 
-#ul1 {
+ul {
   display: flex;
   width: 100%;
   padding: 0%;
@@ -16,7 +16,7 @@
   margin-right: auto;
   margin-left: auto;
 }
-#li1 {
+li {
   list-style-type: none;
   padding-top:10px;
   padding-bottom:10px;
@@ -32,5 +32,6 @@
 
 a {
   text-decoration: none;
+  width: 33.33%;
   color: rgb(167, 172, 188);
 }
