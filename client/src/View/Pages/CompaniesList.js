@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchCompanies, fetchCompanyQuestions } from "../../redux";
 import { useDispatch, useSelector } from "react-redux";
 import CardListItem from "../Components/CardListItem";
@@ -7,9 +7,15 @@ function CompaniesList(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-      dispatch(fetchCompanies());
-
+    fetch("/proxy/get-fund-info")
+      .then((r) => r.json())
+      .then((data) => {
+        dispatch(
+          fetchCompanies(data.firstPage.fundName, data.firstPage.chanel)
+        );
+      });
   }, []);
+
   let companies = useSelector((state) => state.CompaniesListReducer.companies);
   console.log(useSelector((state) => state));
   // function handleClick(securityID, companyName) {
