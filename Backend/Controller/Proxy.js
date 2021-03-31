@@ -110,7 +110,7 @@ exports.getQuestionBySecurId = async (req, res) => {
         console.log(data);
         res.send({ Ok: false, messege: "the Security_ID not found" });
       } else {
-        res.send({ OK: true, doc: data });
+        res.send({ OK: true, questions: data });
       }
     });
   } catch (e) {
