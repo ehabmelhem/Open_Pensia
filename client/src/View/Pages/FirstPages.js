@@ -50,7 +50,7 @@ export default function FirstPages() {
     }
     if (index < 4) setindex(index);
     else {
-      if (index > 4) history.push("CompaniesList");
+      if (index > 4) history.push("CompaniesListSelect");
     }
   }
   function toLoginPage() {

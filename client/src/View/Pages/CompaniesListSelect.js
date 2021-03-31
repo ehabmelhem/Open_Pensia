@@ -15,6 +15,12 @@ export default function CompaniesListSelect() {
   //   dispatch(fetchCompanyDefaultQuestion(securityID,'',''));
 
   // }
+
+  let isLoggedIn = useSelector(
+    (state) => !!state.UserReducer && state.UserReducer.userStatus
+  );
+  console.log(isLoggedIn);
+
   return (
     <div className="App1">
       <header className="App-header1">
@@ -33,21 +39,20 @@ export default function CompaniesListSelect() {
           <Arrow arrowToLink="/QuestionsBeforeRegister" color="#B7BCCC" />
         </div>
       </header>
-      {!!companies && companies.map((company) => {
-        return (
-          <CardListItem
-          status="company"
-            securityID={company.Security_ID}
-            companyName={company.company_name}
-            key={company.Security_ID}
-            logo='https://www.logolynx.com/images/logolynx/56/56f9957253c5718361c93a52c1ab950d.png'
-
-            sectorNisha={company['Sector Nisha']}
-
-            toLink={`/VoteDirectors/${company.Security_ID}`}
-          />
-        );
-      })}
+      {!!companies &&
+        companies.map((company) => {
+          return (
+            <CardListItem
+              status="company"
+              securityID={company.Security_ID}
+              companyName={company.company_name}
+              key={company.Security_ID}
+              logo="https://www.logolynx.com/images/logolynx/56/56f9957253c5718361c93a52c1ab950d.png"
+              sectorNisha={company["Sector Nisha"]}
+              toLink={`/VoteDirectors/${company.Security_ID}`}
+            />
+          );
+        })}
     </div>
   );
 }

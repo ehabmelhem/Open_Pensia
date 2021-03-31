@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import VotingHeader from "../Components/VotingHeader";
-import { useParams } from 'react-router'
-import { fetchOfficerData } from '../../redux'
+import { useParams } from "react-router";
+import { fetchOfficerData } from "../../redux";
 import { useSelector, useDispatch } from "react-redux";
 import DetailsOfVoting from "../Components/DetailsOfVoting";
 import CandidateMoreInfo from "../Components/CandidateMoreInfo";
@@ -9,16 +9,15 @@ import CandidateInfo from "../Components/CandidateInfo";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 export default function InfoDirector() {
-
   const dispatch = useDispatch();
-  const { id } = useParams()
+  const { id } = useParams();
 
   useEffect(() => {
     dispatch(fetchOfficerData(id));
   }, []);
 
-  let officer = useSelector(state => state.OfficerReducer)
-  let company = useSelector(state => state.CompanyReducer)
+  let officer = useSelector((state) => state.OfficerReducer);
+  let company = useSelector((state) => state.CompanyReducer);
   let votingPer = [{ disApprovePer: "20%", ApprovePer: "80%" }];
 
   return (
@@ -38,7 +37,7 @@ export default function InfoDirector() {
             <DetailsOfVoting voting={votingPer} />
           </Route>
           <Route path="/">
-            <CandidateInfo officer={officer}  />
+            <CandidateInfo officer={officer} />
           </Route>
         </Switch>
       </div>

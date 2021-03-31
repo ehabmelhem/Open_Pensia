@@ -3,6 +3,7 @@ import ButtonShow from "./ButtonShow";
 import PersonaiInfo from "./QuestionsBeforeRegister";
 import InputText from "../Components/InputText";
 import "./SignUp.css";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 //redux
@@ -136,9 +137,12 @@ export default function SignUp() {
               <div className="line" />
             </div>
             <div className="space" />
-            <button className="button" onClick={confirmMe}>
-              תאמתו אותי!
-            </button>
+
+            <Link to="/Login">
+              <button className="button" onClick={confirmMe}>
+                תאמתו אותי!
+              </button>
+            </Link>
           </div>
         )}
       </div>

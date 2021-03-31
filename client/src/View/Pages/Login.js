@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "./Login.css";
-import { useHistory } from "react-router";
 //user- "email":"new.test@gmail.com","password":"newtest"
 import { fetchUserData } from "../../redux";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 
-function Login() {
+function Login(props) {
   const dispatch = useDispatch();
   const [userEmail, setEmail] = useState("");
   const [userPassword, setPassword] = useState("");
   let user = useSelector((state) => !!state.UserReducer && state.UserReducer);
-
+  const history = useHistory();
   useEffect(() => {
     if (user.login === true) {
       console.log("worked");
     }
   }, [user]);
-  const history = useHistory();
-
   function handleLogin(e) {
     e.preventDefault();
     dispatch(fetchUserData({ userEmail, userPassword }));
