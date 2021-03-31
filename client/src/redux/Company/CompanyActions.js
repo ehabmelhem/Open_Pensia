@@ -48,6 +48,7 @@ export const fetchQuestionsFailure = (error) => ({
 export function fetchCompanyQuestions(securityID, companyName) {
   securityID =
     typeof securityID === "number" ? securityID.toString() : securityID;
+  console.log(securityID);
 
   return (dispatch) =>
     _fetchCompanyQuestions(dispatch, companyName, securityID);
