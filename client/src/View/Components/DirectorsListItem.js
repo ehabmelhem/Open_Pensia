@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./CardListItem.css";
+import "./DirectorsListItem.css";
 import { Link } from "react-router-dom";
 
 import { AiFillDislike } from "react-icons/ai";
@@ -10,72 +10,12 @@ function DirectorListItem(props) {
   const [dislikestate, setdislikestate] = useState(false);
 
   function handelclicklike(e) {
-    if (likestate == false && dislikestate == false) {
-      var btn = document.querySelectorAll(".body-like");
-      // console.log(btn);
-      btn[0].classList.remove("body-like");
-      btn[0].classList.add("body-likeActive");
-
-      setlikestate(true);
-    }
-
-    if (likestate == true) {
-      var btn = document.querySelectorAll(".body-likeActive");
-
-      btn[0].classList.remove("body-likeActive");
-      btn[0].classList.add("body-like");
-      setlikestate(false);
-    }
-
-    if (likestate == false && dislikestate == true) {
-      var btn = document.querySelectorAll(".body-dislikeActive");
-      // console.log(btn);
-      btn[0].classList.remove("body-dislikeActive");
-      btn[0].classList.add("body-dislike");
-
-      setdislikestate(false);
-
-      var btn = document.querySelectorAll(".body-like");
-      // console.log(btn);
-      btn[0].classList.remove("body-like");
-      btn[0].classList.add("body-likeActive");
-
-      setlikestate(true);
-    }
+    setlikestate(!likestate);
+    setdislikestate(false);
   }
   function handelclickdislike(e) {
-    if (likestate == true && dislikestate == false) {
-      var btn = document.querySelectorAll(".body-dislike");
-      // console.log(btn);
-      btn[0].classList.remove("body-dislike");
-      btn[0].classList.add("body-dislikeActive");
-
-      var btn = document.querySelectorAll(".body-likeActive");
-      // console.log(btn);
-      btn[0].classList.remove("body-likeActive");
-      btn[0].classList.add("body-like");
-
-      setlikestate(false);
-      setdislikestate(true);
-    }
-
-    if (likestate == false && dislikestate == false) {
-      var btn = document.querySelectorAll(".body-dislike");
-      // console.log(btn);
-      btn[0].classList.remove("body-dislike");
-      btn[0].classList.add("body-dislikeActive");
-
-      setdislikestate(true);
-    }
-
-    if (likestate === false && dislikestate === true) {
-      var btn = document.querySelectorAll(".body-dislikeActive");
-      // console.log(btn);
-      btn[0].classList.remove("body-dislikeActive");
-      btn[0].classList.add("body-dislike");
-
-      setdislikestate(false);
-    }
+    setlikestate(false);
+    setdislikestate(!dislikestate);
   }
 
   return (
@@ -94,24 +34,26 @@ function DirectorListItem(props) {
         <div className="Column" id="formoreres1">
           <div id="companyname">
             <ol>
-              <p id="companyName" >
-                <AiFillLike className="body-like" onClick={handelclicklike} />
+              <p id="companyName">
+                <AiFillLike
+                  className={likestate ? "body-likeActive1" : "body-like1"}
+                  onClick={handelclicklike}
+                />
               </p>
             </ol>
-          </div>
-        </div>
-        <div className="Column" id="formoreres1">
-          <div id="companyname">
             <ol>
               <p id="companyName">
                 <AiFillDislike
-                  className="body-dislike"
+                  className={
+                    dislikestate ? "body-dislikeActive1" : "body-dislike1"
+                  }
                   onClick={handelclickdislike}
                 />
               </p>
             </ol>
           </div>
         </div>
+
         <div className="Column" id="nexticon">
           <Link to={props.link}>
             <img

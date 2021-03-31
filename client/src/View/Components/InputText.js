@@ -1,9 +1,19 @@
 
 import './InputText.css'
-import {useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-function InputText({textenglish, texter }) {
-    let [index,setindex]=useState(0);
+                       
+function InputText({ textenglish, texter,userInfo, setUserInfo }) {
+    // let [index,setindex]=useState(0);
+
+    function handleInput(e) {
+        const text = e.target.value;
+        const tempUserInfo = {...userInfo}
+        tempUserInfo[textenglish] = text;
+        console.log(tempUserInfo)
+        setUserInfo(tempUserInfo)
+
+    }
 
     return (
         <div className="first">
@@ -11,20 +21,13 @@ function InputText({textenglish, texter }) {
             {console.log(texter)}
             <h3 className="textdisplay">
                 {texter}
-                {localStorage.setItem("firstname",texter)}
             </h3>
-          
-
-            <input  type="text" required onChange={(e) =>
-      {
-        {localStorage.setItem(textenglish,e.target.value)}
-      }} className="textinput" ></input>
-            
-          
+            <br></br>
+            <input type="text" onChange={handleInput} className="textinput" />
             <div className="line"></div>
             <div className="space"/>
         </div>
-        
+
     );
 }
 

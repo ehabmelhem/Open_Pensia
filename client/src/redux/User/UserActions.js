@@ -16,6 +16,11 @@ import {
 export const userLoginRequest = () => ({
   type: USER_LOGIN_REQUEST,
 });
+export const sendLogOutUserAction = ()=>(
+  {
+    type:USER_LOGOUT
+  }
+)
 
 export const userLoginSuccess = (content) => ({
   type: USER_LOGIN_SUCCESS,
@@ -72,43 +77,61 @@ export function fetchUserData(content) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch(userLoginSuccess(res.data));
+        if(res.data.login === true)  
+          dispatch(userLoginSuccess(res.data));
+          else
+           dispatch(userLoginFailure("loginError"));
       })
       .catch((error) => {
         console.log(error.message);
         dispatch(userLoginFailure(error.message));
-      });//commit 2
+      }); //commit 2
   };
 }
 
-// export function fetchSignUpUser(content) {
-//   let userfundName = useSelector((state) => state.UserReducer.userfundName);
-//   let userchanel = useSelector((state) => state.UserReducer.userchanel);
-//   let Votes = useSelector((state) => state.VotesReducer.votes);
-//   let Article = useSelector((state) => state.OfficerReducer.articles);
+export function sendSignUpUser(userData) {
+  // let userfundName = useSelector((state) => state.UserReducer.userfundName);
+  // let userchanel = useSelector((state) => state.UserReducer.userchanel);
+  // let Votes = useSelector((state) => state.VotesReducer.votes);
+  // let Article = useSelector((state) => state.OfficerReducer.articles);
 
-//   return (dispatch) => {
-//     axios
-//       .post("/new-user/add-user", {
-//         firstName: content.firstName,
-//         lastName: content.lastName,
-//         email: content.userEmail,
-//         phone: content.phone,
-//         password: content.userPassword, //need to be added in page 13
-//         fundName: userfundName, //need to be updated in the page 4
-//         userchanel: userchanel, //need to be updated in the page 4
-//         votes: Votes,
-//         newArticle: Article[0],
-//       })
-//       .then((res) => {
-//         console.log(res.data);
-//         //dispatch(userSignupSuccess(res.data)); //the server team is 
-//       })
-//       .catch((error) => {
-//         console.log(error.message);
-//         ///dispatch(userLoginFailure(error.message));
-//       }); //commit 2
-//   };
-// }
+  return (dispatch) => {
+    axios
+      .post("/new-user/add-user", {
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        email: userData.userEmail,
+        phone: userData.phone,
+        password: userData.password, //need to be added in page 13
+        // fundName: userfundName, //need to be updated in the page 4
+        // userchanel: userchanel, //need to be updated in the page 4
+        // votes: Votes,
+        // newArticle: Article[0],
+      })
+      .then((res) => {
+        console.log(res.data);
+        //dispatch(userSignupSuccess(res.data)); //the server team is
+      })
+      .catch((error) => {
+        console.log(error.message);
+        ///dispatch(userLoginFailure(error.message));
+      }); //commit 2
+  };
+}
 
+
+export function sendLogOutUser() {
+  return (dispatch) => {
+    axios
+      .post("/user/Logout", {
+      })
+      .then((res) => {
+        console.log(res.data);
+                dispatch(sendLogOutUserAction()); //the server team is 
+      })
+      .catch((error) => {
+        console.log(error.message);
+      }); 
+  };
+}
 

@@ -332,11 +332,10 @@ exports.getUserVotingHistory = async (req, res) => {
   try {
     let role = req.cookies.role;
     let decRole = jwt.decode(role, secret);
-
     const userId= decRole.name
     
     const allHistory = [];
-    const user = await User.findOne({ _id: userId});
+    const user = await User.findOne({ _id: userId });
     const userVotes = user.votes;
 
     const groupBy = (key) => (userVotes) =>
@@ -401,3 +400,12 @@ async function addNewArticle(article) {
     console.log("add article fun bug");
   }
 }
+
+exports.Logout = (req, res) => {
+  try {
+    res.clearCookie("role");
+    res.send({ ok: true, messege: "Logout successfully" });
+  } catch (e) {
+    res.send({ ok: false, messege: "there is problem" });
+  }
+};

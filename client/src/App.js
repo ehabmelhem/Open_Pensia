@@ -64,7 +64,7 @@ function App() {
           </li>
           <li>
             <NavLink exact to="SignUp">
-              Page 12-13
+              signup
             </NavLink>
           </li>
           <li>
@@ -186,15 +186,15 @@ function App() {
         </Route>
 
         <Route path="/VotesHistory">
-          <VotesList title="היסטורית הצבעות" sort={0} />
+          <VotesList title="היסטורית הצבעות" fetch="/user/user-voting-history"/>
         </Route>
 
         <Route path="/VoteBending">
-          <VotesList title="הצבעות ממתינות לתשובה" sort={1} />
+          <VotesList title="הצבעות ממתינות לתשובה" fetch="/proxy/waiting-questions-by-fund"/>
         </Route>
 
         <Route path="/OpenVotes">
-          <VotesList title="הצבעות פתוחות" sort={2} />
+          <VotesList title="הצבעות פתוחות" fetch="/proxy/open-questions-in-fund" />
         </Route>
 
         <Route path="/VoteDirectorsAfterLogin">
