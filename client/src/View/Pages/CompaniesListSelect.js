@@ -6,19 +6,19 @@ import CardListItem from '../Components/CardListItem';
 import "./CompaniesListSelect.css";
 
 export default function CompaniesListSelect() {
-//   const dispatch = useDispatch();
-//   useEffect(() => {
-//     dispatch(fetchCompanies())
-//   }, []);
+  //   const dispatch = useDispatch();
+  //   useEffect(() => {
+  //     dispatch(fetchCompanies())
+  //   }, []);
   let companies = useSelector(state => !!state.CompaniesListReducer && state.CompaniesListReducer.companies);
   // function handleClick(securityID) {
   //   console.log(securityID);
   //   dispatch(fetchCompanyDefaultQuestion(securityID,'',''));
 
   // }
-  
+
   let isLoggedIn = useSelector(
-    (state) => !!state.UserReducer && state.UserReducer.userStatus
+    (state) => !!state.UserReducer && state.UserReducer
   );
   console.log(isLoggedIn);
 
@@ -36,6 +36,7 @@ export default function CompaniesListSelect() {
       {!!companies && companies.map((company) => {
         return (
           <CardListItem
+            status="company"
             securityID={company.Security_ID}
             companyName={company.company_name}
             key={company.Security_ID}
