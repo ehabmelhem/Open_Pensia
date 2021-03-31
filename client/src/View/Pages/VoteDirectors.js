@@ -50,6 +50,12 @@ export default function VoteDirectors() {
                   }
                   name={officer.officerName}
                   link={`/InfoDirector/${officer.officerId}`}
+                  votingdata={{
+                    companyName,
+                    securityID,
+                    questionID: defaultQuestion.code,
+                    officerId: officer.officerId,
+                  }}
                   onCandidateSelect={() =>
                     handleCandidateSelect(officer.officerId)
                   }
