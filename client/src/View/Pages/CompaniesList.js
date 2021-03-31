@@ -7,8 +7,7 @@ function CompaniesList(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-      dispatch(fetchCompanies());
-
+    dispatch(fetchCompanies());
   }, []);
   let companies = useSelector((state) => state.CompaniesListReducer.companies);
   console.log(useSelector((state) => state));

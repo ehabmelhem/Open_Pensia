@@ -43,8 +43,8 @@ export default function Body(props) {
         console.log("the secure us : " + props.security_ID);
         console.log(doc);
         if (doc.OK) {
-          setQuestionsList(doc.doc);
-          questions = doc.doc;
+          setQuestionsList(doc.questions);
+          questions = doc.questions;
           select("open");
         } else {
           console.log("there is a problem");
