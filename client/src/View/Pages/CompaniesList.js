@@ -6,11 +6,12 @@ import CardListItem from "../Components/CardListItem";
 function CompaniesList(props) {
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //     dispatch(fetchCompanies());
+  useEffect(() => {
+      dispatch(fetchCompanies());
 
-  // }, []);
+  }, []);
   let companies = useSelector((state) => state.CompaniesListReducer.companies);
+  console.log(useSelector((state) => state));
   // function handleClick(securityID, companyName) {
   //     console.log('....', securityID, companyName)
   //     dispatch(fetchCompanyQuestions(securityID, companyName));
