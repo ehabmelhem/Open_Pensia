@@ -23,9 +23,9 @@ router
 
 router // needs checkrole
   .route("/get-selected-question")
-  .post(proxyController.getSelectedQuestion);
+  .post(checkRole, proxyController.getSelectedQuestion);
 // /proxy/get-expanded-header POST
-
+//
 
 router
   .route("/all-Questions-of-corporate")
@@ -33,7 +33,7 @@ router
 
 router // needs checkRole
   .route("/get-Question-by-secur-Id")
-  .post(proxyController.getQuestionBySecurId);
+  .post(checkRole, proxyController.getQuestionBySecurId);
 
 router.route("/get-all-fund").post(proxyController.getAllFundNames); // {FundName:[]} Set
 
@@ -47,14 +47,15 @@ router // needs checkRole
 
 router // needs checkRole
   .route("/get-expanded-header")
-  .post(proxyController.getExpandedHeader); // return
+  .post(checkRole, proxyController.getExpandedHeader); // return
 
 router // needs checkRole
   .route("/open-questions-in-fund")
-  .get(proxyController.getOpenQuestionsInFund); // return
-
+  .get(checkRole, proxyController.getOpenQuestionsInFund); // return
+//
 router // needs checkRole
   .route("/waiting-questions-by-fund")
-  .get(proxyController.getPendingQuestionsInFund);
+  .get(checkRole, proxyController.getPendingQuestionsInFund);
+//
 
 module.exports = router;

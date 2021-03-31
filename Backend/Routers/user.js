@@ -20,9 +20,10 @@ router.route("/add-approved-user").post(userController.addApprovedUser);
 router.route("/add-user").post(userController.addUser);
 
 router.route("/login").post(userController.login);
+router.route("/Logout").post(checkRole, userController.Logout);
 
 router // needs checkRole
   .route("/user-voting-history")
-  .get(userController.getUserVotingHistory);
+  .get(checkRole, userController.getUserVotingHistory);
 
 module.exports = router;

@@ -37,6 +37,7 @@ const UserReducer = (state = initialState, action) => {
         userEmail: action.payload.email,
         userPassword: action.payload.password,
         userStatus: action.payload.status,
+        login:true,
         loading: false,
         error: "",
       };
@@ -48,15 +49,18 @@ const UserReducer = (state = initialState, action) => {
         userEmail: "",
         userPassword: "",
         userStatus: "",
+        login:false,
         loading: false,
         error: action.payload.error,
       };
     case USER_LOGOUT:
+      console.log(USER_LOGOUT)
       return {
         userid:"",
         userFirstName: "",
         userlastName: "",
         userEmail: "",
+        login:false,
         userPassword: "",
         userStatus: "",
         loading: false,
