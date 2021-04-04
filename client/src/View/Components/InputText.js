@@ -5,13 +5,17 @@ import { useState, useEffect } from "react";
                        
 function InputText({ textenglish, texter,userInfo, setUserInfo }) {
     // let [index,setindex]=useState(0);
+    useEffect(() => {
 
+      });
+    
     function handleInput(e) {
         const text = e.target.value;
         const tempUserInfo = {...userInfo}
         tempUserInfo[textenglish] = text;
         console.log(tempUserInfo)
         setUserInfo(tempUserInfo)
+        localStorage.setItem(textenglish,e.target.value);
 
     }
 
@@ -22,7 +26,7 @@ function InputText({ textenglish, texter,userInfo, setUserInfo }) {
          
             <br></br>
             <input type="text" placeholder={texter} onChange={handleInput} className="textinput" />
-            <div className="line"></div>
+           <div className="line"></div>
             <div className="space"/>
         </div>
 

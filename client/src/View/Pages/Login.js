@@ -27,14 +27,19 @@ function Login(props) {
         <div class="login-page">
   <div class="form">
     
-    <form class="login-form">
+    <form class="login-form" onSubmit={handleLogin}>
       <input type="text" placeholder="דואר אלקטרוני" required onChange={(e) => {
             setEmail(e.target.value);
-          }}/>
+          }}></input>
       <input type="password" placeholder="סיסמה"  required onChange={(e) => {
             setPassword(e.target.value);
+<<<<<<< Updated upstream
           }}/>
       <button onClick={handleLogin}>כניסה</button>
+=======
+          }}></input>
+      <button >כניסה</button>
+>>>>>>> Stashed changes
       <p class="message">Not registered? <a href="#">Create an account</a></p>
     </form>
   </div>

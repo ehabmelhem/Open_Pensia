@@ -18,6 +18,9 @@ export default function SignUp() {
   const [userInfo, setUserInfo] = useState({});
 
   const [error, setError] = useState("");
+
+ 
+
   function select(selectedButton) {
     switch (selectedButton) {
       case "Personal":
@@ -38,23 +41,29 @@ export default function SignUp() {
   }
   function PassToConfirm(e) {
     
-      
-    
-    setPersonal(false);
+   
+    if(localStorage.getItem("nameprivate") != "" && localStorage.getItem("family") != "" && 
+    localStorage.getItem("email") != "" && localStorage.getItem("password") != "" && localStorage.getItem("phone") != "" ) {
+
+      setPersonal(false);
     setConfirm(true);
     setSort("Confirmation");
 
     //set detials to redux
     console.log(userInfo);
     dispatch(sendSignUpUser({ ...userInfo }));
+    {localStorage.setItem("nameprivate","")}
+    {localStorage.setItem("family","")}
+    {localStorage.setItem("email","")}
+    {localStorage.setItem("password","")}
+    {localStorage.setItem("phone","")}
+
+  }
     
+
   }
   function confirmMe(e) {
-    console.log(localStorage.getItem("nameprivate"));
-    console.log(localStorage.getItem("family"));
-    console.log(localStorage.getItem("email"));
-    console.log(localStorage.getItem("password"));
-    console.log(localStorage.getItem("phone"));
+    
     
   }
   return (
@@ -80,13 +89,13 @@ export default function SignUp() {
             <h3>נתוני ההצבעה שלך שמורים במערכת</h3>
             <br></br>
             <InputText
-              textenglish={"firstName"}
+              textenglish={"nameprivate"}
               texter={"שם פרטי"}
               userInfo={userInfo}
               setUserInfo={setUserInfo}
             ></InputText>
             <InputText
-              textenglish={"lastName"}
+              textenglish={"family"}
               texter={"שם משפחה"}
               userInfo={userInfo}
               setUserInfo={setUserInfo}
