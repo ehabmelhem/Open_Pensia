@@ -23,30 +23,30 @@ export default function InfoDirector() {
 
   console.log(match);
   return (
-    <Router>
-      <div style={{ maxWidth: "600px", margin: "auto" }}>
-        <VotingHeader
-          directorName={officer.name}
-          company={company.companyName}
-          backToLink={`/VoteDirectors/${id}`}
-          linkToOfficer={match.url}
-        />
 
-        <Switch>
-          <Route path={`${match.path}/moreInfo`}>
-            <CandidateMoreInfo />
-          </Route>
-          <Route path={`${match.path}/VotingDetails`}>
-            <DetailsOfVoting voting={votingPer} />
-          </Route>
-          <Route path={`${match.path}/about`}>
-            <CandidateInfo officer={officer} />
-          </Route>
-          <Route path={`${match.path}`}>
-            <Redirect to={`${match.path}/about`} />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <div style={{ maxWidth: "600px", margin: "auto" }}>
+      <VotingHeader
+        directorName={officer.name}
+        company={company.companyName}
+        backToLink={`/VoteDirectors/${id}`}
+        linkToOfficer={match.url}
+      />
+
+      <Switch>
+        <Route path={`${match.path}/moreInfo`}>
+          <CandidateMoreInfo />
+        </Route>
+        <Route path={`${match.path}/VotingDetails`}>
+          <DetailsOfVoting voting={votingPer} />
+        </Route>
+        <Route path={`${match.path}/about`}>
+          <CandidateInfo officer={officer} />
+        </Route>
+        <Route path={`${match.path}`}>
+          <Redirect to={`${match.path}/about`} />
+        </Route>
+      </Switch>
+    </div>
+
   );
 }
