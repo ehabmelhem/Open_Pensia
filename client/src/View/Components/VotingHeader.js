@@ -4,6 +4,11 @@ import Arrow from "./Arrow";
 import MainNavBar from "./MainNavBar";
 
 function VotingHeader({ directorName, company, backToLink }) {
+  let infoDirectorTabs = [
+    { id: 0, className: "active-nav", toLink: "/about", content: "סיכום פרטים" },
+    { id: 1, className: "", toLink: "/moreInfo", content: "עוד מידע" },
+    { id: 2, className: "", toLink: "/VotingDetails", content: "נתוני הצבעה" }
+  ];
   return (
     <header className="container1 voting-header">
       <Arrow arrowToLink={backToLink} color="#B7BCCC" />
@@ -17,23 +22,3 @@ function VotingHeader({ directorName, company, backToLink }) {
 
 export default VotingHeader;
 
-let infoDirectorTabs = [
-  {
-    id: 0,
-    className: "active-nav",
-    toLink: "/about",
-    content: "סיכום פרטים",
-  },
-  {
-    id: 1,
-    className: "",
-    toLink: "/moreInfo",
-    content: "עוד מידע",
-  },
-  {
-    id: 2,
-    className: "",
-    toLink: "/VotingDetails",
-    content: "נתוני הצבעה",
-  },
-];

@@ -6,10 +6,11 @@ import { useSelector, useDispatch } from "react-redux";
 import DetailsOfVoting from "../Components/DetailsOfVoting";
 import CandidateMoreInfo from "../Components/CandidateMoreInfo";
 import CandidateInfo from "../Components/CandidateInfo";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, useRouteMatch, Route, Switch } from "react-router-dom";
 
 export default function InfoDirector() {
   const dispatch = useDispatch();
+  const match = useRouteMatch();
   const { id } = useParams();
 
   useEffect(() => {
@@ -20,6 +21,7 @@ export default function InfoDirector() {
   let company = useSelector((state) => state.CompanyReducer);
   let votingPer = [{ disApprovePer: "20%", ApprovePer: "80%" }];
 
+  console.log(match);
   return (
     <Router>
       <div style={{ maxWidth: "600px", margin: "auto" }}>
@@ -30,13 +32,13 @@ export default function InfoDirector() {
         />
 
         <Switch>
-          <Route path="/moreInfo">
+          <Route path={`${match.path}/moreInfo`}>
             <CandidateMoreInfo />
           </Route>
-          <Route path="/VotingDetails">
+          <Route path={`${match.path}/VotingDetails`}>
             <DetailsOfVoting voting={votingPer} />
           </Route>
-          <Route path="/">
+          <Route path={`${match.path}/about`}>
             <CandidateInfo officer={officer} />
           </Route>
         </Switch>

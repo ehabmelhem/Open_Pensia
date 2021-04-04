@@ -1,5 +1,5 @@
 import "./MainNavBar.css";
-import { Link, Switch } from "react-router-dom";
+import { Link, Switch, useRouteMatch } from "react-router-dom";
 // import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 // import DetailsOfVoting from "../Components/DetailsOfVoting";
 // import CandidateMoreInfo from "../Components/CandidateMoreInfo";
@@ -11,7 +11,7 @@ import { Link, Switch } from "react-router-dom";
 function MainNavBar({ navTabs }) {
 
   // const [navTabs1, setnavTabs1] = useState(navTabs);
-
+  const match = useRouteMatch();
   function setNavActive(e) {
     const closestLi = !!e.target && e.target.closest("li");
     console.log(closestLi);
@@ -27,7 +27,7 @@ function MainNavBar({ navTabs }) {
       <ul>
         {navTabs.map(({ id, toLink, className, content }) => {
           return (
-            <Link key={id} to={toLink} onClick={setNavActive}>
+            <Link key={id} to={`${match.url}${toLink}`} onClick={setNavActive}>
               <li className={className}>{content}</li>
             </Link>
           );
