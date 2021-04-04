@@ -70,25 +70,22 @@ function DirectorListItem(props) {
           </div>
         </div>
         <div className="Column" id="formoreres1">
-          <div id="companyname">
-            <ol>
-              <p id="companyName">
+          <div className="space">
+            
+              <div className="companyName" >
                 <AiFillLike
                   className={likestate ? "body-likeActive1" : "body-like1"}
                   onClick={handelclicklike}
                 />
-              </p>
-            </ol>
-            <ol>
-              <p id="companyName">
+              </div>
+          
+              <div  className="companyName">
                 <AiFillDislike
-                  className={
-                    dislikestate ? "body-dislikeActive1" : "body-dislike1"
-                  }
+                  className={dislikestate ? "body-dislikeActive1" : "body-dislike1"}
                   onClick={handelclickdislike}
                 />
-              </p>
-            </ol>
+              </div>
+          
           </div>
         </div>
 
