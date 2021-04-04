@@ -1,26 +1,22 @@
+
 .voting-header {
-  position: sticky;
-  width: auto;
-  font-size: calc(10px + 2vmin);
-  color: black;
-  background-color: #3d4257;
-  display: block;
-  top: 0;
-  z-index: 100;
+    position:  sticky;
+    font-size: calc(10px + 2vmin);
+    color: black;
+    background-color: rgb(61, 66, 87);
+    display: block;
+    top:0;
 }
 
-.company-name {
-  color: #b7bccc;
-  font-size: 18px;
-  margin-bottom: 5%;
-  padding-top: 3%;
-  opacity: 1;
+.company-name{
+    color: rgb(167, 172, 188);
+    font-size: 20px;
+    margin-bottom: 5%;
+    padding-top:3%;
 }
-
-.candidate-name {
-  color: rgb(253, 253, 253);
-  font-size: 20px;
-  color: #ffffff;
-  padding-top: 5%;
-  padding-bottom: 5%;
+  
+.candidate-name{
+    color: rgb(253, 253, 253);
+    font-size: 24px;
+    padding: 2%;
 }

@@ -1,39 +1,38 @@
 .App1 {
-  text-align: center;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  opacity: 1;
-  max-width: 600px;
-  margin: auto;
-}
+    text-align: center;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    opacity   : 1;
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .App-header1 {
+    font-size: calc(10px + 2vmin);
+    color    : black;
+    display  : flex;
+    max-width: 600px; 
+    text-align: center; 
+  }
+  a.login-from-companies-list {
+    margin-left: 3%;
+    width          : fit-content;
+    float: left;
+    text-align     : center;
+    text-decoration: underline;
+    font           : normal normal 600 14px/16px Assistant;
+    letter-spacing : 1.25px;
+    color          : #324483;
+    text-transform : uppercase;
 
-.App-header1 {
-  font-size: calc(10px + 2vmin);
-  color: black;
-  display: flex;
-  max-width: 600px;
-  text-align: center;
-}
-
-a.login {
-  margin-left: 3%;
-  width: fit-content;
-  float: left;
-  text-align: center;
-  text-decoration: underline;
-  font: normal normal 600 14px/16px Assistant;
-  letter-spacing: 1.25px;
-  color: #324483;
-  text-transform: uppercase;
-  opacity: 1;
-}
-.question {
-  text-align: center;
-  font: normal normal 600 20px/16px Assistant;
-  letter-spacing: 0px;
-  color: #324483;
-  text-transform: uppercase;
-  opacity: 1;
-  margin: auto;
-  margin-top: 10%;
-  margin-bottom: 10%;
-}
+  }
+  .question {
+    text-align    : center;
+    font          : normal normal 600 20px/16px Assistant;
+    letter-spacing: 0px;
+    color         : #324483;
+    text-transform: uppercase;
+    opacity       : 1;
+    margin:auto;
+    margin-top:10%;
+    margin-bottom: 10%;
+  }

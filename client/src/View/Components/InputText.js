@@ -19,11 +19,9 @@ function InputText({ textenglish, texter,userInfo, setUserInfo }) {
         <div className="first">
             
             {console.log(texter)}
-            <h3 className="textdisplay">
-                {texter}
-            </h3>
+         
             <br></br>
-            <input type="text" onChange={handleInput} className="textinput" />
+            <input type="text" placeholder={texter} onChange={handleInput} className="textinput" />
             <div className="line"></div>
             <div className="space"/>
         </div>

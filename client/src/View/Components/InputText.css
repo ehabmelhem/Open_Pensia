@@ -15,6 +15,11 @@ display: inline;
 direction: rtl;
 
 }
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  
+    opacity: 0.5; /* Firefox */
+  }
+  
 .first { 
 direction:  rtl;
 }
@@ -28,6 +33,7 @@ direction:  rtl;
     border: 0px none;
     margin-left: 60px;
     color: #3D4257;
+    height: 30px;
 }
 
 .textbox{

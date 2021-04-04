@@ -1,21 +1,59 @@
 import React, { useState } from "react";
 import "./DirectorsListItem.css";
 import { Link } from "react-router-dom";
-
 import { AiFillDislike } from "react-icons/ai";
 import { AiFillLike } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { addVote } from "../../redux";
 
 function DirectorListItem(props) {
+  const dispatch = useDispatch();
+  const { companyName, securityID, questionID, officerId } = props.votingdata;
+
+  // console.log(companyName, securityID, questionID, officerId);
   const [likestate, setlikestate] = useState(false);
   const [dislikestate, setdislikestate] = useState(false);
+  const [voteState, setvoteState] = useState(0);
+
+  let companyData = useSelector(
+    (state) => !!state.CompanyReducer && state.CompanyReducer
+  );
+  console.log(companyData.securityID);
+
+  let userData = useSelector((state) => state.UserReducer);
+  console.log(userData.userid);
 
   function handelclicklike(e) {
     setlikestate(!likestate);
     setdislikestate(false);
+
+    likestate ? setvoteState(1) : setvoteState(0);
+
+    dispatch(
+      addVote({
+        securityID: companyData.securityID,
+        questionID: questionID,
+        officerID: officerId,
+        userID: userData.userid,
+        vote: voteState,
+      })
+    );
   }
   function handelclickdislike(e) {
     setlikestate(false);
     setdislikestate(!dislikestate);
+
+    dislikestate ? setvoteState(-1) : setvoteState(0);
+
+    dispatch(
+      addVote({
+        securityID: companyData.securityID,
+        questionID: questionID,
+        officerID: officerId,
+        userID: userData.userid,
+        vote: voteState,
+      })
+    );
   }
 
   return (

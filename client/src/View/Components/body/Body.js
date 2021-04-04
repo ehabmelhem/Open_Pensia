@@ -41,9 +41,10 @@ export default function Body(props) {
       .then((r) => r.json())
       .then((doc) => {
         console.log("the secure us : " + props.security_ID);
-        if (doc.ok) {
-          setQuestionsList(doc);
-          questions = doc;
+        console.log(doc);
+        if (doc.OK) {
+          setQuestionsList(doc.questions);
+          questions = doc.questions;
           select("open");
         } else {
           console.log("there is a problem");
