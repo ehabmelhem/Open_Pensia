@@ -34,7 +34,7 @@ function Login(props) {
       <input type="password" placeholder="סיסמה"  required onChange={(e) => {
             setPassword(e.target.value);
           }}/>
-      <button onClick="handleLogin">כניסה</button>
+      <button onClick={handleLogin}>כניסה</button>
       <p class="message">Not registered? <a href="#">Create an account</a></p>
     </form>
   </div>
