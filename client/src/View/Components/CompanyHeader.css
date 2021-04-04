@@ -1,25 +1,25 @@
-
 .voting-header {
-    position:  sticky;
-    font-size: calc(10px + 2vmin);
-    color: black;
-    background-color:#3D4257;
-    display: block;
-    top:0;
+  position: sticky;
+  font-size: calc(10px + 2vmin);
+  color: black;
+  background-color: #3d4257;
+  top: 0;
+  z-index: 999px;
+  width: fit-content;
 }
 
-.company-name{
-    color: #B7BCCC;
-    font-size: 18px;
-    margin-bottom: 5%;
-    padding-top:3%;
-    opacity: 1;
+.company-name {
+  color: #b7bccc;
+  font-size: 18px;
+  margin-bottom: 5%;
+  padding-top: 3%;
+  opacity: 1;
 }
-  
-.question-text{
-    color: rgb(253, 253, 253);
-    font-size: 20px;
-    color:#FFFFFF;
-    padding-top: 5%;
-    padding-bottom: 5%;
+
+.question-text {
+  color: rgb(253, 253, 253);
+  font-size: 20px;
+  color: #ffffff;
+  padding-top: 5%;
+  padding-bottom: 5%;
 }

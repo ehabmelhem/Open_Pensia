@@ -16,11 +16,9 @@ import {
 export const userLoginRequest = () => ({
   type: USER_LOGIN_REQUEST,
 });
-export const sendLogOutUserAction = ()=>(
-  {
-    type:USER_LOGOUT
-  }
-)
+export const sendLogOutUserAction = () => ({
+  type: USER_LOGOUT,
+});
 
 export const userLoginSuccess = (content) => ({
   type: USER_LOGIN_SUCCESS,
@@ -77,10 +75,8 @@ export function fetchUserData(content) {
       })
       .then((res) => {
         console.log(res.data);
-        if(res.data.login === true)  
-          dispatch(userLoginSuccess(res.data));
-          else
-           dispatch(userLoginFailure("loginError"));
+        if (res.data.login === true) dispatch(userLoginSuccess(res.data));
+        else dispatch(userLoginFailure("loginError"));
       })
       .catch((error) => {
         console.log(error.message);
@@ -100,7 +96,7 @@ export function sendSignUpUser(userData) {
       .post("/new-user/add-user", {
         firstName: userData.firstName,
         lastName: userData.lastName,
-        email: userData.userEmail,
+        email: userData.email,
         phone: userData.phone,
         password: userData.password, //need to be added in page 13
         // fundName: userfundName, //need to be updated in the page 4
@@ -119,19 +115,16 @@ export function sendSignUpUser(userData) {
   };
 }
 
-
 export function sendLogOutUser() {
   return (dispatch) => {
     axios
-      .post("/user/Logout", {
-      })
+      .post("/user/Logout", {})
       .then((res) => {
         console.log(res.data);
-                dispatch(sendLogOutUserAction()); //the server team is 
+        dispatch(sendLogOutUserAction()); //the server team is
       })
       .catch((error) => {
         console.log(error.message);
-      }); 
+      });
   };
 }
-

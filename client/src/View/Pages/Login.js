@@ -14,32 +14,42 @@ function Login(props) {
   useEffect(() => {
     if (user.login === true) {
       console.log("worked");
+      history.push("/AfterRegistrationVoting");
     }
   }, [user]);
   function handleLogin(e) {
     e.preventDefault();
     dispatch(fetchUserData({ userEmail, userPassword }));
-    history.push("/AfterRegistrationVoting");
+
     console.log(user);
   }
   return (
-   
-        <div class="login-page">
-  <div class="form">
-    
-    <form class="login-form">
-      <input type="text" placeholder="דואר אלקטרוני" required onChange={(e) => {
-            setEmail(e.target.value);
-          }}/>
-      <input type="password" placeholder="סיסמה"  required onChange={(e) => {
-            setPassword(e.target.value);
-          }}/>
-      <button onClick="handleLogin">כניסה</button>
-      <p class="message">Not registered? <a href="#">Create an account</a></p>
-    </form>
-  </div>
-</div>
-        
+    <div class="login-page">
+      <div class="form">
+        <form class="login-form">
+          <input
+            type="text"
+            placeholder="דואר אלקטרוני"
+            required
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <input
+            type="password"
+            placeholder="סיסמה"
+            required
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <button onClick={handleLogin}>כניסה</button>
+          <p class="message">
+            Not registered? <a href="#">Create an account</a>
+          </p>
+        </form>
+      </div>
+    </div>
   );
 }
 export default Login;
