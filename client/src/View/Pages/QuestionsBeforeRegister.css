@@ -61,6 +61,9 @@ opacity: 1;
     color: #717480;
     opacity: 0.6;
   }
+  .select {
+    width: 300px;
+  }
   .but{
     margin-top: 130px;
     left: 16px;
