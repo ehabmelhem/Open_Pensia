@@ -91,7 +91,7 @@ export default function QuestionsBeforeRegister({ chanelC, fundnameC }) {
         <div className="name">בחר/י גוף פנסיוני</div>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="age-native-simple"></InputLabel>
-          <Select
+          <Select className="select"
             native
             value={state.age}
             onChange={handleChange}
@@ -112,7 +112,7 @@ export default function QuestionsBeforeRegister({ chanelC, fundnameC }) {
         <div className="channelname">בחר/י אפיק חיסכון</div>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="age-native-simple"></InputLabel>
-          <Select
+          <Select className="select"
             native
             value={state.year}
             onChange={handleChanell}

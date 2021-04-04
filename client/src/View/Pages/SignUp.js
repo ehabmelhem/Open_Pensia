@@ -37,6 +37,9 @@ export default function SignUp() {
     }
   }
   function PassToConfirm(e) {
+    
+      
+    
     setPersonal(false);
     setConfirm(true);
     setSort("Confirmation");
@@ -44,6 +47,7 @@ export default function SignUp() {
     //set detials to redux
     console.log(userInfo);
     dispatch(sendSignUpUser({ ...userInfo }));
+    
   }
   function confirmMe(e) {
     console.log(localStorage.getItem("nameprivate"));
@@ -51,10 +55,12 @@ export default function SignUp() {
     console.log(localStorage.getItem("email"));
     console.log(localStorage.getItem("password"));
     console.log(localStorage.getItem("phone"));
+    
   }
   return (
     <div className="body">
       <div className="title2">
+        <br></br>
         <h8 className="title5">תהליך רישום</h8>
       </div>
       <div>
