@@ -13,13 +13,13 @@ function Login(props) {
   const history = useHistory();
   useEffect(() => {
     if (user.login === true) {
+      history.push("/AfterRegistrationVoting");
       console.log("worked");
     }
   }, [user]);
   function handleLogin(e) {
     e.preventDefault();
     dispatch(fetchUserData({ userEmail, userPassword }));
-    history.push("/AfterRegistrationVoting");
     console.log(user);
   }
   return (
