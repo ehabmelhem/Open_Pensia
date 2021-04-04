@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import DetailsOfVoting from "../Components/DetailsOfVoting";
 import CandidateMoreInfo from "../Components/CandidateMoreInfo";
 import CandidateInfo from "../Components/CandidateInfo";
-import { BrowserRouter as Router, useRouteMatch, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, useRouteMatch, Route, Switch, Redirect } from "react-router-dom";
 
 export default function InfoDirector() {
   const dispatch = useDispatch();
@@ -41,6 +41,9 @@ export default function InfoDirector() {
           </Route>
           <Route path={`${match.path}/about`}>
             <CandidateInfo officer={officer} />
+          </Route>
+          <Route path={`${match.path}`}>
+            <Redirect to={`${match.path}/about`} />
           </Route>
         </Switch>
       </div>
