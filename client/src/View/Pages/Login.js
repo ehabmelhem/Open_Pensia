@@ -13,13 +13,13 @@ function Login(props) {
   const history = useHistory();
   useEffect(() => {
     if (user.login === true) {
+      history.push("/AfterRegistrationVoting");
       console.log("worked");
     }
   }, [user]);
   function handleLogin(e) {
     e.preventDefault();
     dispatch(fetchUserData({ userEmail, userPassword }));
-    history.push("/AfterRegistrationVoting");
     console.log(user);
   }
   return (
@@ -34,7 +34,7 @@ function Login(props) {
       <input type="password" placeholder="סיסמה"  required onChange={(e) => {
             setPassword(e.target.value);
           }}/>
-      <button onClick="handleLogin">כניסה</button>
+      <button onClick={handleLogin}>כניסה</button>
       <p class="message">Not registered? <a href="#">Create an account</a></p>
     </form>
   </div>

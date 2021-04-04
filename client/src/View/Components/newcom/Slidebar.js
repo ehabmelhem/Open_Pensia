@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {useHistory} from "react-router";
 import { FaBars, FaCartPlus } from "react-icons/fa";
 import "./Slidebar.css";
 import { useDispatch, useSelector } from 'react-redux';
 import {sendLogOutUser} from '../../../redux/User/UserActions'
 function Sidebar(props){
+  const history = useHistory();
   const [sidebar, setSidebar] = useState(false);
   const dispatch = useDispatch();
   let user = useSelector(state => !!state.UserReducer && state.UserReducer);
@@ -14,7 +16,7 @@ function Sidebar(props){
   };
   function logout(){
     dispatch(sendLogOutUser());
-    props.history.push('/Login');
+    history.push('/Login');
   }
 useEffect(()=>{
 if(user.login === false){
