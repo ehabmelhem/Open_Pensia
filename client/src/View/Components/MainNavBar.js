@@ -8,10 +8,10 @@ import { Link, Switch, useRouteMatch } from "react-router-dom";
 
 
 
-function MainNavBar({ navTabs }) {
+function MainNavBar({ navTabs,linkToOfficer }) {
 
   // const [navTabs1, setnavTabs1] = useState(navTabs);
-  const match = useRouteMatch();
+  
   function setNavActive(e) {
     const closestLi = !!e.target && e.target.closest("li");
     console.log(closestLi);
@@ -26,8 +26,9 @@ function MainNavBar({ navTabs }) {
     <nav className="all-tabs">
       <ul>
         {navTabs.map(({ id, toLink, className, content }) => {
+          console.log(`${linkToOfficer}${toLink}`)
           return (
-            <Link key={id} to={`${match.url}${toLink}`} onClick={setNavActive}>
+            <Link key={id} to={`${linkToOfficer}${toLink}`} onClick={setNavActive}>
               <li className={className}>{content}</li>
             </Link>
           );

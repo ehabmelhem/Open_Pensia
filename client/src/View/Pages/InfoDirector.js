@@ -29,6 +29,7 @@ export default function InfoDirector() {
           directorName={officer.name}
           company={company.companyName}
           backToLink={`/VoteDirectors/${id}`}
+          linkToOfficer={match.url}
         />
 
         <Switch>
