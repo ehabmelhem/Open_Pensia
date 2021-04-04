@@ -13,44 +13,33 @@ function Login(props) {
   const history = useHistory();
   useEffect(() => {
     if (user.login === true) {
+      history.push("/AfterRegistrationVoting");
       console.log("worked");
     }
   }, [user]);
   function handleLogin(e) {
     e.preventDefault();
     dispatch(fetchUserData({ userEmail, userPassword }));
-    history.push("/AfterRegistrationVoting");
     console.log(user);
   }
   return (
-    <form onSubmit={handleLogin} className="loginpage">
-      <h1>כניסה</h1>
-      <div>
-        <label className="title-bold">דוא"ל:</label>
-        <input
-          type="email"
-          className="input-field"
-          onChange={(e) => {
+   
+        <div class="login-page">
+  <div class="form">
+    
+    <form class="login-form">
+      <input type="text" placeholder="דואר אלקטרוני" required onChange={(e) => {
             setEmail(e.target.value);
-          }}
-        ></input>
-      </div>
-      <div>
-        <label>סיסמא:</label>
-        <input
-          type="password"
-          className="input-field"
-          onChange={(e) => {
+          }}/>
+      <input type="password" placeholder="סיסמה"  required onChange={(e) => {
             setPassword(e.target.value);
-          }}
-          required
-        ></input>
-      </div>
-      <button type="submit" className="login">
-        כניסה
-      </button>
-      {/* <label className="message">{error}</label> */}
+          }}/>
+      <button onClick={handleLogin}>כניסה</button>
+      <p class="message">Not registered? <a href="#">Create an account</a></p>
     </form>
+  </div>
+</div>
+        
   );
 }
 export default Login;

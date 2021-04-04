@@ -64,7 +64,14 @@ export default function FirstPages() {
             chanelC={setChanel}
             fundnameC={setFundname}
           />
+          
           <div></div>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+
           <button onClick={next}>אהבתי</button>
           <div></div>
           <a className="signin" onClick={toLoginPage}>
@@ -75,6 +82,9 @@ export default function FirstPages() {
         <div className="body">
           <div className="icon"></div>
 
+   <br></br>
+   <br></br>
+
           {length === 0 ? (
             <a className="title">{firstPages[index].title}</a>
           ) : (
@@ -84,7 +94,7 @@ export default function FirstPages() {
           )}
           <p class="description">{firstPages[index].dec}</p>
 
-          <button onClick={next}>{firstPages[index].buttonTitle}</button>
+           <button onClick={next}>{firstPages[index].buttonTitle}</button>
           <div></div>
           <a className="signin" onClick={toLoginPage}>
             יש לי כבר חשבון{" "}

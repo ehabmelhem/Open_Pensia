@@ -35,6 +35,9 @@ height: 38px;
 background: #3D4257 0% 0% no-repeat padding-box;
 box-shadow: 0px 2px 1px #00000024;
 opacity: 1;
+border-radius: 4px;color: white;
+font: normal normal 600 14px/16px Assistant;
+
 }
 
 .icon{
@@ -60,6 +63,22 @@ letter-spacing: 0px;
 color: #324483;
 text-transform: uppercase;
 opacity: 1;
+
+
+}
+.titles{
+  padding-top: 264px;
+  top: 264px;
+left: 110px;
+width: 160px;
+height: 42px;
+text-align: left;
+font: normal normal 600 32px/16px Assistant;
+letter-spacing: 0px;
+color: #324483;
+text-transform: uppercase;
+opacity: 1;
+
 
 }
 .signin{
