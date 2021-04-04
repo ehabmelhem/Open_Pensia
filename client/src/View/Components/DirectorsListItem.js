@@ -58,38 +58,35 @@ function DirectorListItem(props) {
 
   return (
     <div dir="rtl" className="background">
-      <div className="companyitem">
-        <div className="Column" id={"withImg"}>
-          <img id="companyimage" src={props.logo} alt="companyimage" />
+
+      <div className="grid-container">
+
+        <div  className={"withImg"}>
+          <img className="companyimage" src={props.logo} alt="companyimage" />
         </div>
-        <div className="Column" id="formoreres1">
-          <div id="companyname">
-            <ol>
-              <p id="companyName">{props.name}</p>
-            </ol>
-          </div>
+
+        <div>
+              <p  className="companyName">{props.name}</p>    
         </div>
-        <div className="Column" id="formoreres1">
+
           <div className="space">
             
-              <div className="companyName" >
+              <div className="companylike" >
                 <AiFillLike
                   className={likestate ? "body-likeActive1" : "body-like1"}
                   onClick={handelclicklike}
                 />
               </div>
           
-              <div  className="companyName">
+              <div  className="companylike">
                 <AiFillDislike
                   className={dislikestate ? "body-dislikeActive1" : "body-dislike1"}
                   onClick={handelclickdislike}
                 />
               </div>
-          
           </div>
-        </div>
 
-        <div className="Column" id="nexticon">
+        <div  className="nexticon">
           <Link to={props.link}>
             <img
               className="img1"
@@ -100,7 +97,9 @@ function DirectorListItem(props) {
           </Link>
         </div>
       </div>
-    </div>
+      <hr></hr>
+
+      </div>
   );
 }
 export default DirectorListItem;
