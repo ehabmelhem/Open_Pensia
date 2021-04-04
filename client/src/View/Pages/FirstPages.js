@@ -64,7 +64,14 @@ export default function FirstPages() {
             chanelC={setChanel}
             fundnameC={setFundname}
           />
+          
           <div></div>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+
           <button onClick={next}>אהבתי</button>
           <div></div>
           <a className="signin" onClick={toLoginPage}>
