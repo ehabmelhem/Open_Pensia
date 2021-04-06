@@ -33,13 +33,8 @@ function Login(props) {
           }}></input>
       <input type="password" placeholder="סיסמה"  required onChange={(e) => {
             setPassword(e.target.value);
-<<<<<<< Updated upstream
           }}/>
       <button onClick={handleLogin}>כניסה</button>
-=======
-          }}></input>
-      <button >כניסה</button>
->>>>>>> Stashed changes
       <p class="message">Not registered? <a href="#">Create an account</a></p>
     </form>
   </div>
