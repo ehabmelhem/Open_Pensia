@@ -101,7 +101,7 @@ export function sendSignUpUser(userData) {
       .post("/new-user/add-user", {
         firstName: userData.firstName,
         lastName: userData.lastName,
-        email: userData.userEmail,
+        email: userData.email,
         phone: userData.phone,
         password: userData.password, //need to be added in page 13
         // fundName: userfundName, //need to be updated in the page 4
