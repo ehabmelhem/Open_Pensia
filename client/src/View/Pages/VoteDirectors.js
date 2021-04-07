@@ -17,8 +17,8 @@ export default function VoteDirectors() {
   let user = useSelector((state) => !!state.UserReducer && state.UserReducer);
   console.log(user)
   let userid = user.userid || '';
-  console.log(JSON.stringify( userid))
-userid = true  
+  
+
 
 
   console.log(useSelector((state) => state.CompanyReducer));
