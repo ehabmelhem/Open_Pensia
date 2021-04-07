@@ -16,6 +16,7 @@ function Login(props) {
     if (user.login === true) {
       history.push("/AfterRegistrationVoting");
       console.log("worked");
+      console.log(user)
     }
   }, [user]);
   function handleLogin(e) {
@@ -24,23 +25,23 @@ function Login(props) {
     console.log(user);
   }
   return (
-   
-        <div class="login-page">
-  <div class="form">
-    
-    <form class="login-form" onSubmit={handleLogin}>
-      <input type="text" placeholder="דואר אלקטרוני" required onChange={(e) => {
+
+    <div class="login-page">
+      <div class="form">
+
+        <form class="login-form" onSubmit={handleLogin}>
+          <input type="text" placeholder="דואר אלקטרוני" required onChange={(e) => {
             setEmail(e.target.value);
           }}></input>
-      <input type="password" placeholder="סיסמה"  required onChange={(e) => {
+          <input type="password" placeholder="סיסמה" required onChange={(e) => {
             setPassword(e.target.value);
-          }}/>
-      <button onClick={handleLogin}>כניסה</button>
-      <p class="message">Not registered? <Link to="/FirstPages_1">Create an account</Link></p>
-    </form>
-  </div>
-</div>
-        
+          }} />
+          <button onClick={handleLogin}>כניסה</button>
+          <p class="message">Not registered? <Link to="/FirstPages_1">Create an account</Link></p>
+        </form>
+      </div>
+    </div>
+
   );
 }
 export default Login;
