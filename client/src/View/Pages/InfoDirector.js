@@ -24,7 +24,7 @@ export default function InfoDirector() {
   console.log(match);
   return (
 
-    <div style={{ maxWidth: "600px", margin: "auto" }}>
+    <div style={{ maxWidth: "600px", margin: "auto" , minWidth:"375px" }}>
       <VotingHeader
         directorName={officer.name}
         company={company.companyName}

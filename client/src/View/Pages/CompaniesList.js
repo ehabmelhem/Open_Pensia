@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchCompanies, fetchCompanyQuestions } from "../../redux";
 import { useDispatch, useSelector } from "react-redux";
 import CardListItem from "../Components/CardListItem";
+import NavBarLists from "../Components/NavBarLists";
 
 function CompaniesList(props) {
   const dispatch = useDispatch();
@@ -24,10 +25,12 @@ function CompaniesList(props) {
   // }
   return (
     <div>
+       <NavBarLists  to="/AfterRegistrationVoting"  title={"חברות אחזקה"}/>
       {!!companies &&
         companies.map((company) => {
           console.log(company["Sector Nisha"]);
           return (
+            <div>
             <CardListItem
               securityID={company.Security_ID}
               companyName={company.company_name}
@@ -39,6 +42,7 @@ function CompaniesList(props) {
               // onClick={() => handleClick(company.Security_ID, company.company_name)}
               toLink="CompanyInfo"
             />
+            </div>
           );
         })}
     </div>

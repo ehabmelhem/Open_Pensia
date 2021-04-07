@@ -24,9 +24,9 @@ function InputText({ textenglish, texter,userInfo, setUserInfo }) {
             
             {console.log(texter)}
          
-            <br></br>
-            <input type="text" placeholder={texter} onChange={handleInput} className="textinput" />
-           <div className="line"></div>
+
+            <input type="text" placeholder={texter} onChange={handleInput} className="textinput" required/>
+            <div className="line"></div>
             <div className="space"/>
         </div>
 

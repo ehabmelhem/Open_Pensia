@@ -1,7 +1,7 @@
 .background {
   background-color: white;
   min-width: 375px;
-  max-width: 1000px;
+  max-width: 600px;
 }
 
 
@@ -27,23 +27,16 @@
   color: #324483;
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 0;
-  margin-left: 48px;
+
 }
 
 .companyName {
   color: #324483;
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 0;
-  margin-left: 120px
-
-  /* justify-content: space-between; */
-  /* width: 50px; */
 }
 
 .companyimage {
-  margin-left: 200px;
   height: 50px;
   width: 50px;
   /* padding: 10px; */
@@ -53,7 +46,6 @@
 .withImg {
   width: 50px;
   padding: 10px;
-  padding-right: 20px;
 }
 
 .hideImg {
@@ -61,18 +53,13 @@
 }
 
 .nexticon {
-  /* width: 100px;
-      height: 3px; */
-  /* vertical-align:middle; */
-  /* padding: 25px; */
-  width: 45%;
   transform: rotate(180deg);
 
 }
 
 .img1 {
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
 }
 
 
@@ -104,4 +91,20 @@
   height: 50px !important;
   color: red !important;
   cursor: pointer !important;
+}
+
+
+#thPhoto
+{
+width: 10%;
+}
+#thCompanyName
+{
+width: 40%;
+}
+#thDisLike,thLike{
+width:15%;
+}
+#thInfoDirector{
+width:20%;
 }

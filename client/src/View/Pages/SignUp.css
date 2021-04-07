@@ -1,5 +1,4 @@
 #buttonsBar {
-    width:375px;
     display: flex;
     min-width: 375px;
     flex-direction: row-reverse;
@@ -16,7 +15,6 @@
   }
 .title2{
   top: 0px;
-  width: 375px;
   height: 56px;
   opacity: 1;
   background-color: #3D4257;
@@ -25,16 +23,15 @@
   margin-left: 27px;
 }
 .complete{
-top: 605px;
-left: 16px;
-width: 343px;
-height: 38px;
-background: #3C4157 0% 0% no-repeat padding-box;
-box-shadow: 0px 2px 1px #00000024;
-opacity: 1;
+  width: 90%;
+  font-size: 17px;
+  color: white;
+  height: 38px;
+  background: #3C4157 0% 0%;
+  box-shadow: 0px 2px 1px #00000024;
+  opacity: 1;
 }
   .radiobutton{
-    
     top: 213px;
     left: 203px;
     width: 200px;
@@ -65,12 +62,18 @@ opacity: 1;
     font: normal normal 600 16px/16px Assistant;
     
   }
-
+.tittleRegister{
+  text-align: right;
+  font: normal normal normal 12px/22px Assistant;
+  letter-spacing: 0px;
+  color: #717480;
+  opacity: 0.6;
+  margin: 0;
+}
   .line {
-    width: 350px;
+    width: 100%;
     background-color: #00000024;
-    height: 1.5px;
-    margin-left: 10px;
+    height: 2.5px;
 }
 .button{
   top: 605px;
@@ -89,15 +92,21 @@ opacity: 1;
   padding-top: 50px;
   top:50px;
 }
-h3{
-  top: 144px;
-left: 16px;
-width: 343px;
-height: 26px;
-text-align: right;
-font: normal normal 600 20px/16px Assistant;
-letter-spacing: 0px;
-color: #324483;
-text-transform: uppercase;
-opacity: 1;
+#h3_1{
+  font: normal normal 600 20px/16px Assistant;
+  letter-spacing: 0px;
+  color: #324483;
+  text-transform: uppercase;
+  opacity: 1;
+}
+
+#radioButtonPlace{
+ text-align: left;
+    width: 50%; 
+}
+
+
+#TextPlace{
+  text-align: right;
+    width: 50%;
 }
