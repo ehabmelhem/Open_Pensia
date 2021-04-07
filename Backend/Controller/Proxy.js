@@ -5,8 +5,8 @@ const Proxy = require("../Schema/Proxy");
 const officerModel = require("../Schema/Officer");
 const User = require("../Schema/User");
 const { v4: uuidv4 } = require("uuid");
-const jwt =require("jwt-simple")
-const secret ="1234"
+const jwt = require("jwt-simple");
+const secret = "1234";
 /* 
 dis: get the default Questions - before SignUp
 parameters: {Security_ID:String}				
@@ -104,12 +104,13 @@ exports.getSelectedQuestion = async (req, res) => {
 exports.getQuestionBySecurId = async (req, res) => {
   try {
     const { Security_ID } = req.body;
+    console.log("sadasdasd" + Security_ID);
     await Proxy.find({ Security_ID: Security_ID }).then((data) => {
       if (data.length === 0) {
         console.log(data);
         res.send({ Ok: false, messege: "the Security_ID not found" });
       } else {
-        res.send({ OK: true, doc: data });
+        res.send({ OK: true, questions: data });
       }
     });
   } catch (e) {
@@ -238,7 +239,7 @@ exports.getFundInfo = async (req, res) => {
   } catch (e) {
     let role = req.cookies.role;
     let decRole = jwt.decode(role, secret);
-    console.log(decRole.name)
+    console.log(decRole.name);
     res.send({
       OK: false,
       messege: "could not run getFundInfo in Proxy",

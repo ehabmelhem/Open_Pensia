@@ -1,118 +1,94 @@
 import React, { useState } from "react";
-import "./CardListItem.css";
+import "./DirectorsListItem.css";
 import { Link } from "react-router-dom";
-
 import { AiFillDislike } from "react-icons/ai";
 import { AiFillLike } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { addVote } from "../../redux";
 
 function DirectorListItem(props) {
+  const dispatch = useDispatch();
+  const { companyName, securityID, questionID, officerId } = props.votingdata;
+
+  // console.log(companyName, securityID, questionID, officerId);
   const [likestate, setlikestate] = useState(false);
   const [dislikestate, setdislikestate] = useState(false);
+  const [voteState, setvoteState] = useState(0);
+
+  let companyData = useSelector(
+    (state) => !!state.CompanyReducer && state.CompanyReducer
+  );
+  console.log(companyData.securityID);
+
+  let userData = useSelector((state) => state.UserReducer);
+  console.log(userData.userid);
 
   function handelclicklike(e) {
-    if (likestate == false && dislikestate == false) {
-      var btn = document.querySelectorAll(".body-like1");
-      // console.log(btn);
-      btn[0].classList.remove("body-like1");
-      btn[0].classList.add("body-likeActive1");
+    setlikestate(!likestate);
+    setdislikestate(false);
 
-      setlikestate(true);
-    }
+    likestate ? setvoteState(1) : setvoteState(0);
 
-    if (likestate == true) {
-      var btn = document.querySelectorAll(".body-likeActive1");
-
-      btn[0].classList.remove("body-likeActive1");
-      btn[0].classList.add("body-like1");
-      setlikestate(false);
-    }
-
-    if (likestate == false && dislikestate == true) {
-      var btn = document.querySelectorAll(".body-dislikeActive1");
-      // console.log(btn);
-      btn[0].classList.remove("body-dislikeActive1");
-      btn[0].classList.add("body-dislike1");
-
-      setdislikestate(false);
-
-      var btn = document.querySelectorAll(".body-like1");
-      // console.log(btn);
-      btn[0].classList.remove("body-like1");
-      btn[0].classList.add("body-likeActive1");
-
-      setlikestate(true);
-    }
+    dispatch(
+      addVote({
+        securityID: companyData.securityID,
+        questionID: questionID,
+        officerID: officerId,
+        userID: userData.userid,
+        vote: voteState,
+      })
+    );
   }
   function handelclickdislike(e) {
-    if (likestate == true && dislikestate == false) {
-      var btn = document.querySelectorAll(".body-dislike1");
-      // console.log(btn);
-      btn[0].classList.remove("body-dislike1");
-      btn[0].classList.add("body-dislikeActive1");
+    setlikestate(false);
+    setdislikestate(!dislikestate);
 
-      var btn = document.querySelectorAll(".body-likeActive1");
-      // console.log(btn);
-      btn[0].classList.remove("body-likeActive1");
-      btn[0].classList.add("body-like1");
+    dislikestate ? setvoteState(-1) : setvoteState(0);
 
-      setlikestate(false);
-      setdislikestate(true);
-    }
-
-    if (likestate == false && dislikestate == false) {
-      var btn = document.querySelectorAll(".body-dislike1");
-      // console.log(btn);
-      btn[0].classList.remove("body-dislike1");
-      btn[0].classList.add("body-dislikeActive1");
-
-      setdislikestate(true);
-    }
-
-    if (likestate === false && dislikestate === true) {
-      var btn = document.querySelectorAll(".body-dislikeActive1");
-      // console.log(btn);
-      btn[0].classList.remove("body-dislikeActive1");
-      btn[0].classList.add("body-dislike1");
-
-      setdislikestate(false);
-    }
+    dispatch(
+      addVote({
+        securityID: companyData.securityID,
+        questionID: questionID,
+        officerID: officerId,
+        userID: userData.userid,
+        vote: voteState,
+      })
+    );
   }
 
   return (
-    <div dir="rtl" className="background">
-      <div className="companyitem">
-        <div className="Column" id={"withImg"}>
-          <img id="companyimage" src={props.logo} alt="companyimage" />
+    <div dir="rtl" /*className="background"*/>
+<table id="tableDirPhot">
+  <tr id="allTR">
+<th id="thPhoto">
+        <div  className={"withImg"}>
+          <img className="companyimage" src={props.logo} alt="companyimage" />
         </div>
-        <div className="Column" id="formoreres1">
-          <div id="companyname">
-            <ol>
-              <p id="companyName">{props.name}</p>
-            </ol>
-          </div>
+        </th>
+        <th id="thCompanyName">
+        <div>
+              <p  className="companyName">{props.name}</p>    
         </div>
-        <div className="Column" id="formoreres1">
-          <div id="companyname">
-            <ol>
-              <p id="companyName">
-                <AiFillLike className="body-like1" onClick={handelclicklike} />
-              </p>
-            </ol>
-          </div>
-        </div>
-        <div className="Column" id="formoreres1">
-          <div id="companyname">
-            <ol>
-              <p id="companyName">
+        </th>
+            <th id="thLike">
+              <div className="companylike" >
+                <AiFillLike
+                  className={likestate ? "body-likeActive1" : "body-like1"}
+                  onClick={handelclicklike}
+                />
+              </div>
+              </th>
+              <th id="thDisLike">
+              <div  className="companylike">
                 <AiFillDislike
-                  className="body-dislike1"
+                  className={dislikestate ? "body-dislikeActive1" : "body-dislike1"}
                   onClick={handelclickdislike}
                 />
-              </p>
-            </ol>
-          </div>
-        </div>
-        <div className="Column" id="nexticon">
+              </div>
+              </th>
+
+<th id="thInfoDirector">
+        <div  className="nexticon">
           <Link to={props.link}>
             <img
               className="img1"
@@ -122,8 +98,10 @@ function DirectorListItem(props) {
             />
           </Link>
         </div>
+        </th>
+      </tr>
+      </table>
       </div>
-    </div>
   );
 }
 export default DirectorListItem;

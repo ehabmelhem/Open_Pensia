@@ -82,8 +82,8 @@ export default function QuestionsBeforeRegister({ chanelC, fundnameC }) {
   };
   //fundsData[fundsChoosen]=>Array
   return (
-    <div>
-      <div className="icon"> </div>
+    <div id="allPageQuestionsBeforeRegister">
+     <div id="divOnCircle"> <div className="icon"> </div></div>
       <div className="space" />
       <div className="direction">
         <div className="titleQ">2 שאלות קצרות ואנחנו בפנים</div>
@@ -91,7 +91,7 @@ export default function QuestionsBeforeRegister({ chanelC, fundnameC }) {
         <div className="name">בחר/י גוף פנסיוני</div>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="age-native-simple"></InputLabel>
-          <Select
+          <Select className="select"
             native
             value={state.age}
             onChange={handleChange}
@@ -109,10 +109,10 @@ export default function QuestionsBeforeRegister({ chanelC, fundnameC }) {
           </Select>
         </FormControl>
 
-        <div className="channelname">בחר/י אפיק חיסכון</div>
-        <FormControl className={classes.formControl}>
+        <div className="name">בחר/י אפיק חיסכון</div>
+        <FormControl className={classes}>
           <InputLabel htmlFor="age-native-simple"></InputLabel>
-          <Select
+          <Select className="select"
             native
             value={state.year}
             onChange={handleChanell}

@@ -14,7 +14,7 @@ console.log(questionsList)
         <div id="allList">
             {questionsList !== undefined && questionsList.filter(e=>e!==null).map((question) => {
                 console.log('joined')
-return <CardListItem status={question.status} hideImg="hideImg" companyName={question.Topic} par={question.par}/>
+return <CardListItem toLink={`/VoteDirectors/${question.Security_ID}`} status={question.status} hideImg="hideImg" companyName={question.Topic} par={question.par}/>
             })}
         </div>
     )

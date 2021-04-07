@@ -16,11 +16,17 @@ import {
 export const userLoginRequest = () => ({
   type: USER_LOGIN_REQUEST,
 });
+export const sendLogOutUserAction = ()=>(
+  {
+    type:USER_LOGOUT
+  }
+)
 
 export const userLoginSuccess = (content) => ({
   type: USER_LOGIN_SUCCESS,
   payload: {
     _id: content._id,
+    userid:content._id,
     firstName: content.firstName,
     lastName: content.lastName,
     email: content.email,
@@ -72,12 +78,15 @@ export function fetchUserData(content) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch(userLoginSuccess(res.data));
+        if(res.data.login === true)  
+          dispatch(userLoginSuccess(res.data.doc));
+          else
+           dispatch(userLoginFailure("loginError"));
       })
       .catch((error) => {
         console.log(error.message);
         dispatch(userLoginFailure(error.message));
-      });//commit 2
+      }); //commit 2
   };
 }
 
@@ -94,7 +103,7 @@ export function sendSignUpUser(userData) {
         lastName: userData.lastName,
         email: userData.userEmail,
         phone: userData.phone,
-        // password: content.userPassword, //need to be added in page 13
+        password: userData.password, //need to be added in page 13
         // fundName: userfundName, //need to be updated in the page 4
         // userchanel: userchanel, //need to be updated in the page 4
         // votes: Votes,
@@ -102,7 +111,7 @@ export function sendSignUpUser(userData) {
       })
       .then((res) => {
         console.log(res.data);
-        //dispatch(userSignupSuccess(res.data)); //the server team is 
+        //dispatch(userSignupSuccess(res.data)); //the server team is
       })
       .catch((error) => {
         console.log(error.message);
@@ -111,4 +120,19 @@ export function sendSignUpUser(userData) {
   };
 }
 
+
+export function sendLogOutUser() {
+  return (dispatch) => {
+    axios
+      .post("/user/Logout", {
+      })
+      .then((res) => {
+        console.log(res.data);
+                dispatch(sendLogOutUserAction()); //the server team is 
+      })
+      .catch((error) => {
+        console.log(error.message);
+      }); 
+  };
+}
 

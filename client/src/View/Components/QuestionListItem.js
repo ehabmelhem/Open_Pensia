@@ -17,9 +17,7 @@ function QuestionListItem({question}) {
 
 
   useEffect(() => {
-
-
- 
+    console.log(question.status)
     switch (question.status) {
       case "Open":
         setStatus("ממתין להצבעתך")
@@ -27,9 +25,12 @@ function QuestionListItem({question}) {
       case "Top":
         setStatus("ממתין להצבעתך")
         break;
-      case "results":
+      case "Results":
         setStatus("ההצבעה נסגרה")
         break;
+        case "Pending":
+          setStatus("ההצבעה נסגרה")
+          break;
 
       default:
         setStatus("UnKnown")
@@ -53,7 +54,7 @@ function QuestionListItem({question}) {
             <div id="companyname">
               <ol>
                 <p id="companyName">{question.Topic}</p>
-                <p>{question.status}</p>
+                <p>{status}</p>
               </ol>
             </div>
           </div>

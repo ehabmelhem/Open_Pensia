@@ -12,8 +12,14 @@
    
   }
 
+#allPageQuestionsBeforeRegister{
+  max-width: 600px;
+  min-width: 375px;
+  margin: auto;
+}
+
 .direction{
-  
+  text-align : center;
  direction: rtl;
 }
 .icon2{
@@ -24,12 +30,8 @@ height: 146px;
 background: #EAEAEA 0% 0% no-repeat padding-box;
 opacity: 1;
 }
+
   .titleQ{
-    top: 270px;
-    padding-right: 78px;
-    width: 219px;
-    height: 26px;
-    text-align: center;
     font: normal normal 600 20px/16px Assistant;
     letter-spacing: 0px;
     color: #324483;
@@ -37,18 +39,14 @@ opacity: 1;
     opacity: 1;
   }
 
-  .name{
-    top: 293px;
-    left: 264px;
-    width: 74px;
-    height: 15px;
+  .name {
     text-align: right;
+    margin-right: 60px;
+    margin-bottom: 0;
     font: normal normal normal 12px/22px Assistant;
-    letter-spacing: 0px;
     color: #717480;
     opacity: 0.6;
-    direction: rtl;
-  }
+}
 
   .channelname{
     top: 375px;
@@ -60,6 +58,11 @@ opacity: 1;
     letter-spacing: 0px;
     color: #717480;
     opacity: 0.6;
+  }
+  .select {
+    width: 90vw;
+    max-width: 600px;
+    min-width:375px;
   }
   .but{
     margin-top: 130px;

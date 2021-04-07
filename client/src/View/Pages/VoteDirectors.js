@@ -1,30 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import Header2 from "../Components/CompanyHeader";
 import MainButton from "../Components/MainButton";
 import DirectorListItem from "../Components/DirectorsListItem";
-import { fetchCompanyDefaultQuestion } from '../../redux';
-import { fetchOfficerData } from '../../redux';
-import { useDispatch, useSelector } from 'react-redux';
+import { fetchCompanyDefaultQuestion } from "../../redux";
+import { fetchOfficerData } from "../../redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // import Arrow from "../Components/Arrow";
 
 export default function VoteDirectors() {
-
   const dispatch = useDispatch();
 
-  const { companyName, securityID, defaultQuestion } = useSelector(state => state.CompanyReducer)
+  const { companyName, securityID, defaultQuestion } = useSelector(
+    (state) => state.CompanyReducer
+  );
+  let user = useSelector((state) => !!state.UserReducer && state.UserReducer);
+  console.log(user)
+  let userid = user.userid || '';
+  
 
-  console.log(useSelector(state => state.CompanyReducer))
-  console.log(!!defaultQuestion && defaultQuestion.officers)
-  console.log(defaultQuestion)
+
+
+  console.log(useSelector((state) => state.CompanyReducer));
+  console.log(!!defaultQuestion && defaultQuestion.officers);
+  console.log(defaultQuestion);
 
   useEffect(() => {
-    dispatch(fetchCompanyDefaultQuestion(securityID, '', ''));
+    dispatch(fetchCompanyDefaultQuestion(securityID, "", ""));
   }, []);
-  // function handleCandidateSelect(id) {
-  //   console.log(id);
-  //   dispatch(fetchOfficerData(id));
-  // }
+  function handleCandidateSelect(id) {
+    console.log(id);
+    dispatch(fetchOfficerData(id));
+  }
   let officers = !!defaultQuestion && defaultQuestion.officers;
   return (
     <div>
@@ -36,26 +43,34 @@ export default function VoteDirectors() {
         />
 
         <div>
-          <p>מי היית רוצה שיכהן כדירקטור?</p>
-
-          {
-            officers && officers.map((officer) => {
+          <div  style={{color:"#324483",fontSize:"16px",marginRight:"5px",textAlign:"right"}}>
+            <p>תבחר/י מי יהיו הדרקטורים</p>
+          </div>
+          {officers &&
+            officers.map((officer) => {
               console.log(officer);
               return (
-
                 <DirectorListItem
                   key={officer.officerId}
-                  logo={"https://www.lego.com/cdn/cs/set/assets/blt0bf03ae97678db52/Batman2_App_Sidekick-Tall1.jpg?fit=crop&format=jpg&quality=80&width=800&height=600&dpr=1"}
+                  logo={
+                    "https://www.lego.com/cdn/cs/set/assets/blt0bf03ae97678db52/Batman2_App_Sidekick-Tall1.jpg?fit=crop&format=jpg&quality=80&width=800&height=600&dpr=1"
+                  }
                   name={officer.officerName}
                   link={`/InfoDirector/${officer.officerId}`}
-                  // onCandidateSelect={() => handleCandidateSelect(officer.officerId)}
+                  votingdata={{
+                    companyName,
+                    securityID,
+                    questionID: defaultQuestion.code,
+                    officerId: officer.officerId,
+                  }}
+                  onCandidateSelect={() =>
+                    handleCandidateSelect(officer.officerId)
+                  }
                 />
-
               );
             })}
-
         </div>
-        <MainButton text="שלח/י את ההצבעה שלי" tolink={"/SignUpRequest"} />
+        <MainButton text="שלח/י את ההצבעה שלי" tolink={userid.length === 0?"/SignUpRequest": '/AfterRegistrationVoting'} />
       </div>
     </div>
   );

@@ -29,33 +29,14 @@ function App() {
 
   return (
     <div>
-      <nav className="navBar">
+      {/* <nav className="navBar">
         <ul>
           <li>
             <NavLink exact to="FirstPages_1">
               Page 1
             </NavLink>
           </li>
-          <li>
-            <NavLink exact to="FirstPages_2">
-              Page 2
-            </NavLink>
-          </li>
-          <li>
-            <NavLink exact to="FirstPages_3">
-              Page 3
-            </NavLink>
-          </li>
-          <li>
-            <NavLink exact to="QuestionsBeforeRegister">
-              Page 4
-            </NavLink>
-          </li>
-          <li>
-            <NavLink exact to="VoteAccept">
-              Page 5
-            </NavLink>
-          </li>
+          
           <li>
             <NavLink exact to="CompaniesListSelect">
               Page 6
@@ -132,7 +113,7 @@ function App() {
             </NavLink>
           </li>
         </ul>
-      </nav>
+      </nav> */}
       <Switch>
         <Route path="/TestDashBoardIbraheem">
           <Header company="בנק הפועלים" perception="18.3" />
@@ -146,9 +127,7 @@ function App() {
           <Body />
           <NavBarLists />
         </Route>
-        <Route path="/FirstPages_1">
-          <FirstPages />
-        </Route>
+        
 
         <Route path="/FirstPages_2">
           <FirstPages />
@@ -184,7 +163,6 @@ function App() {
         </Route>
 
         <Route path="/SignUpRequest">
-          {/* <VoteAccept /> */}
           <SignUpRequest />
         </Route>
 
@@ -225,6 +203,11 @@ function App() {
         </Route>
         <Route path="/Login">
           <Login />
+        </Route>
+        <Route path="/">
+
+          <FirstPages />
+
         </Route>
       </Switch>
     </div>

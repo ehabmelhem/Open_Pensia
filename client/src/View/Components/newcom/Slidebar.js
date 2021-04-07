@@ -1,15 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {useHistory} from "react-router";
 import { FaBars, FaCartPlus } from "react-icons/fa";
 import "./Slidebar.css";
-
+import { useDispatch, useSelector } from 'react-redux';
+import {sendLogOutUser} from '../../../redux/User/UserActions'
 function Sidebar(props){
+  const history = useHistory();
   const [sidebar, setSidebar] = useState(false);
+  const dispatch = useDispatch();
+  let user = useSelector(state => !!state.UserReducer && state.UserReducer);
 
   const showSidebar = () => {
     setSidebar(!sidebar);
   };
-
+  function logout(){
+    dispatch(sendLogOutUser());
+    history.push('/Login');
+  }
+useEffect(()=>{
+if(user.login === false){
+  console.log('log out')
+}
+},[user])
   return (
     <>
       {/* <IconContext.Provider value={{ color: "#fff" }}> */}
@@ -40,22 +53,20 @@ function Sidebar(props){
               </Link>
             </li>
             {/* 5 */}
-            <li className="nav-text">
+            {/* <li className="nav-text">
               <Link to="/null" className="menu-bars">
                 <span>שתף לחברים</span>
               </Link>
             </li>
-            {/* 6 */}
+            {/* 6 }
             <li className="nav-text">
               <Link to="/null" className="menu-bars">
                 <span>תרומה לעמותה</span>
               </Link>
-            </li>
+            </li> */}
             {/* 7 */}
             <li className="nav-text">
-              <Link to="/null" className="menu-bars">
-                <span>התנתק/י</span>
-              </Link>
+                <span onClick={logout} className="menu-bars">התנתק/י</span>
             </li>
           </ul>
         </nav>

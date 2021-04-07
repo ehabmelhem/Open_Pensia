@@ -3,23 +3,20 @@
     position:  sticky;
     font-size: calc(10px + 2vmin);
     color: black;
-    background-color:#3D4257;
+    background-color: rgb(61, 66, 87);
     display: block;
     top:0;
 }
 
 .company-name{
-    color: #B7BCCC;
-    font-size: 18px;
+    color: rgb(167, 172, 188);
+    font-size: 20px;
     margin-bottom: 5%;
     padding-top:3%;
-    opacity: 1;
 }
   
 .candidate-name{
     color: rgb(253, 253, 253);
-    font-size: 20px;
-    color:#FFFFFF;
-    padding-top: 5%;
-    padding-bottom: 5%;
+    font-size: 24px;
+    padding: 2%;
 }

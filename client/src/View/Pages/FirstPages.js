@@ -4,6 +4,7 @@ import QuestionsBeforeRegister from "./QuestionsBeforeRegister";
 import "./FirstPages.css";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCompanies } from "../../redux/CompaniesList/CompaniesListActions";
+import { Animated } from "react-animated-css";
 export default function FirstPages() {
   const history = useHistory();
   const [chanel, setChanel] = useState("");
@@ -43,20 +44,29 @@ export default function FirstPages() {
   let [index, setindex] = useState(0);
 
   function next() {
+    console.log(index)
     index++;
     if (index === 4) {
       dispatch(fetchCompanies(fundname, chanel));
       setindex(index);
+      history.push("/CompaniesListSelect")
     }
     if (index < 4) setindex(index);
     else {
-      if (index > 4) history.push("CompaniesList");
+      if (index > 4) history.push("/CompaniesListSelect");
     }
   }
   function toLoginPage() {
     history.push("Login");
   }
   return (
+    <Animated
+    animationIn="zoomInDown"
+    animationOut="flipOutX"
+    animationInDuration={1000}
+    animationOutDuration={1000}
+    isVisible={true}
+  >
     <div>
       {index === 3 ? (
         <div className="body">
@@ -65,15 +75,25 @@ export default function FirstPages() {
             fundnameC={setFundname}
           />
           <div></div>
-          <button onClick={next}>אהבתי</button>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+
+          <button id="buttonOrg" onClick={next}>אהבתי</button>
           <div></div>
           <a className="signin" onClick={toLoginPage}>
             יש לי כבר חשבון{" "}
           </a>
         </div>
+        
       ) : (
         <div className="body">
-          <div className="icon"></div>
+        <div id="divOnCircle"> <div className="icon1"></div></div>
+
+   <br></br>
+   <br></br>
 
           {length === 0 ? (
             <a className="title">{firstPages[index].title}</a>
@@ -82,15 +102,16 @@ export default function FirstPages() {
               {"זהינו שיש לך החזקה ב" + length + " חברות בשוק"}
             </a>
           )}
-          <p class="description">{firstPages[index].dec}</p>
+          <p className="description">{firstPages[index].dec}</p>
 
-          <button onClick={next}>{firstPages[index].buttonTitle}</button>
+           <button id="button11" onClick={next}>{firstPages[index].buttonTitle}</button>
           <div></div>
           <a className="signin" onClick={toLoginPage}>
-            יש לי כבר חשבון{" "}
+            יש לי כבר חשבון
           </a>
         </div>
       )}
     </div>
+    </Animated>
   );
 }
