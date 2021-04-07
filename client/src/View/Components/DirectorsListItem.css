@@ -1,95 +1,77 @@
 .background {
   background-color: white;
   min-width: 375px;
-  max-width: 1000px;
+  max-width: 600px;
 }
 
-.companyitem {
-  display: table;
-  width: 92%;
-  table-layout: fixed;
-  border-bottom: 2px solid lightgray;
-  max-width: 600px;
-  margin-left: 5%;
-  margin-right: 5%;
+
+.grid-container {
+  display              : grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap             : 3px;
+  width                : 100%;
+  margin               : auto;
+  opacity: 1;
+  margin-bottom: 0;
+
+
+
 }
-#companyName {
+.space{
+  display: flex;
+  text-align: center;
+  
+
+}
+.companylike {
   color: #324483;
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 0;
+
 }
 
-.Column {
-  display: table-cell;
-  vertical-align: top;
-  vertical-align: middle;
-  text-align: right;
-  min-width: 375px;
-  /* background-color: blueviolet; */
+.companyName {
+  color: #324483;
+  font-size: 16px;
+  font-weight: bold;
 }
 
-#companyimage {
-  margin-right: 5px;
+.companyimage {
   height: 50px;
   width: 50px;
-  padding: 10px;
+  /* padding: 10px; */
   border-radius: 40px;
 }
 
-#withImg {
+.withImg {
   width: 50px;
   padding: 10px;
-  padding-right: 20px;
 }
 
-#hideImg {
+.hideImg {
   display: none;
 }
 
-#nexticon {
-  /* width: 100px;
-      height: 3px; */
-  /* vertical-align:middle; */
-  /* padding: 25px; */
-  width: 45%;
+.nexticon {
   transform: rotate(180deg);
+
 }
 
-.ol {
-  padding: 2px;
-}
 .img1 {
-  width: 15px;
-  height: 15px;
-}
-#companyname {
-  color: black;
-  /* vertical-align: middle; */
-  display: flex;
-  justify-content: space-between;
-  width: 50px;
+  width: 20px;
+  height: 20px;
 }
 
-#companytype {
-  margin-top: 0;
-  font-size: 12px;
-  font-weight: bold;
-  opacity: 60%;
-}
-#formoreres1 {
-  width: 45%;
-}
 
 .body-like1 {
-  width: 50% !important;
+  width: 2rem !important;
   height: 50px !important;
   color: #324483 !important;
   cursor: pointer !important;
 }
 
 .body-dislike1 {
-  width: 50% !important;
+  width: 2rem !important;
   height: 50px !important;
   color: #324483 !important;
   cursor: pointer !important;
@@ -99,14 +81,30 @@
   display: flex;
 }
 .body-likeActive1 {
-  width: 50% !important;
+  width: 2rem !important;
   height: 50px !important;
   color: green !important;
   cursor: pointer !important;
 }
 .body-dislikeActive1 {
-  width: 50% !important;
+  width:  2rem  !important;
   height: 50px !important;
   color: red !important;
   cursor: pointer !important;
+}
+
+
+#thPhoto
+{
+width: 10%;
+}
+#thCompanyName
+{
+width: 40%;
+}
+#thDisLike,thLike{
+width:15%;
+}
+#thInfoDirector{
+width:20%;
 }

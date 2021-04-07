@@ -12,7 +12,7 @@ export default function NavBarLists(props) {
           <p>{props.title}</p>
         </th>
         <th id="thArrow">
-          <Arrow arrowToLink="/AfterRegistrationVoting" color="#B7BCCC" />
+          <Arrow arrowToLink={props.to} color="#B7BCCC" />
         </th>
       </tr>
     </table>

@@ -57,42 +57,38 @@ function DirectorListItem(props) {
   }
 
   return (
-    <div dir="rtl" className="background">
-      <div className="companyitem">
-        <div className="Column" id={"withImg"}>
-          <img id="companyimage" src={props.logo} alt="companyimage" />
+    <div dir="rtl" /*className="background"*/>
+<table id="tableDirPhot">
+  <tr id="allTR">
+<th id="thPhoto">
+        <div  className={"withImg"}>
+          <img className="companyimage" src={props.logo} alt="companyimage" />
         </div>
-        <div className="Column" id="formoreres1">
-          <div id="companyname">
-            <ol>
-              <p id="companyName">{props.name}</p>
-            </ol>
-          </div>
+        </th>
+        <th id="thCompanyName">
+        <div>
+              <p  className="companyName">{props.name}</p>    
         </div>
-        <div className="Column" id="formoreres1">
-          <div id="companyname">
-            <ol>
-              <p id="companyName">
+        </th>
+            <th id="thLike">
+              <div className="companylike" >
                 <AiFillLike
                   className={likestate ? "body-likeActive1" : "body-like1"}
                   onClick={handelclicklike}
                 />
-              </p>
-            </ol>
-            <ol>
-              <p id="companyName">
+              </div>
+              </th>
+              <th id="thDisLike">
+              <div  className="companylike">
                 <AiFillDislike
-                  className={
-                    dislikestate ? "body-dislikeActive1" : "body-dislike1"
-                  }
+                  className={dislikestate ? "body-dislikeActive1" : "body-dislike1"}
                   onClick={handelclickdislike}
                 />
-              </p>
-            </ol>
-          </div>
-        </div>
+              </div>
+              </th>
 
-        <div className="Column" id="nexticon">
+<th id="thInfoDirector">
+        <div  className="nexticon">
           <Link to={props.link}>
             <img
               className="img1"
@@ -102,8 +98,10 @@ function DirectorListItem(props) {
             />
           </Link>
         </div>
+        </th>
+      </tr>
+      </table>
       </div>
-    </div>
   );
 }
 export default DirectorListItem;

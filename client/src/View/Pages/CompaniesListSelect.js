@@ -4,6 +4,7 @@ import { fetchCompanies } from '../../redux';
 import { useDispatch, useSelector } from 'react-redux';
 import CardListItem from '../Components/CardListItem';
 import "./CompaniesListSelect.css";
+import { Link } from "react-router-dom";
 
 export default function CompaniesListSelect() {
   //   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ export default function CompaniesListSelect() {
     <div className="App1">
       <header className="App-header1">
         <div>
-          <a className="login-from-companies-list" href="/Login" target="_blank"> כניסה </a>
+          <Link className="login-from-companies-list" to="/Login" target="_blank"> כניסה </Link>
         </div>
         <div className="question">?על איזו חברה תרצה/י להשפיע</div>
         <div>

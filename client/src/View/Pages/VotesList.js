@@ -36,7 +36,7 @@ export default function VotesList(props) {
  if(props.fetch !== null && props.fetch !== undefined){
         return(
               <div>
-            <NavBarLists title={props.title}/>
+            <NavBarLists to="/AfterRegistrationVoting" title={props.title}/>
             <ListQuestionsByFetch  fetch={props.fetch}/>
         </div>
         )
@@ -44,7 +44,7 @@ export default function VotesList(props) {
     else
     return (
         <div>
-            <NavBarLists title={props.title}/>
+            <NavBarLists  to="/AfterRegistrationVoting"  title={props.title}/>
             <ListQuestions fetch={props.fetch} questionsList={questionsList} sort={props.status}/>
         </div>
     )

@@ -37,8 +37,9 @@ export default function VoteDirectors() {
         />
 
         <div>
-          <p>מי היית רוצה שיכהן כדירקטור?</p>
-
+          <div  style={{color:"#324483",fontSize:"16px",marginRight:"5px",textAlign:"right"}}>
+            <p>תבחר/י מי יהיו הדרקטורים</p>
+          </div>
           {officers &&
             officers.map((officer) => {
               console.log(officer);
