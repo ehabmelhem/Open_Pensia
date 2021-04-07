@@ -7,7 +7,6 @@
 }
 
 .menu-bars {
-
 }
 
 .nav-menu {
@@ -59,5 +58,11 @@
 }
 
 span {
-  margin-left: 1.6rem;
+  /* margin-left: 1.6rem; */
+}
+
+.nav-menu-items{
+  margin-right: 5%;
+  display: flex;
+  flex-direction: column;
 }

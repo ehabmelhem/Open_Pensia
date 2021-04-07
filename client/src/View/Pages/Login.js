@@ -4,6 +4,7 @@ import "./Login.css";
 import { fetchUserData } from "../../redux";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 function Login(props) {
   const dispatch = useDispatch();
@@ -13,43 +14,34 @@ function Login(props) {
   const history = useHistory();
   useEffect(() => {
     if (user.login === true) {
-      console.log("worked");
       history.push("/AfterRegistrationVoting");
+      console.log("worked");
+      console.log(user)
     }
   }, [user]);
   function handleLogin(e) {
     e.preventDefault();
     dispatch(fetchUserData({ userEmail, userPassword }));
-
     console.log(user);
   }
   return (
+
     <div class="login-page">
       <div class="form">
-        <form class="login-form">
-          <input
-            type="text"
-            placeholder="דואר אלקטרוני"
-            required
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <input
-            type="password"
-            placeholder="סיסמה"
-            required
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
+
+        <form class="login-form" onSubmit={handleLogin}>
+          <input type="text" placeholder="דואר אלקטרוני" required onChange={(e) => {
+            setEmail(e.target.value);
+          }}></input>
+          <input type="password" placeholder="סיסמה" required onChange={(e) => {
+            setPassword(e.target.value);
+          }} />
           <button onClick={handleLogin}>כניסה</button>
-          <p class="message">
-            Not registered? <a href="#">Create an account</a>
-          </p>
+          <p class="message">Not registered? <Link to="/FirstPages_1">Create an account</Link></p>
         </form>
       </div>
     </div>
+
   );
 }
 export default Login;

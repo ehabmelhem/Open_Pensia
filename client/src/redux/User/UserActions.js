@@ -24,6 +24,7 @@ export const userLoginSuccess = (content) => ({
   type: USER_LOGIN_SUCCESS,
   payload: {
     _id: content._id,
+    userid:content._id,
     firstName: content.firstName,
     lastName: content.lastName,
     email: content.email,
@@ -75,8 +76,10 @@ export function fetchUserData(content) {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.data.login === true) dispatch(userLoginSuccess(res.data));
-        else dispatch(userLoginFailure("loginError"));
+        if(res.data.login === true)  
+          dispatch(userLoginSuccess(res.data.doc));
+          else
+           dispatch(userLoginFailure("loginError"));
       })
       .catch((error) => {
         console.log(error.message);

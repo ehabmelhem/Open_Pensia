@@ -14,6 +14,12 @@ export default function VoteDirectors() {
   const { companyName, securityID, defaultQuestion } = useSelector(
     (state) => state.CompanyReducer
   );
+  let user = useSelector((state) => !!state.UserReducer && state.UserReducer);
+  console.log(user)
+  let userid = user.userid || '';
+  
+
+
 
   console.log(useSelector((state) => state.CompanyReducer));
   console.log(!!defaultQuestion && defaultQuestion.officers);
@@ -37,8 +43,9 @@ export default function VoteDirectors() {
         />
 
         <div>
-          <p>מי היית רוצה שיכהן כדירקטור?</p>
-
+          <div  style={{color:"#324483",fontSize:"16px",marginRight:"5px",textAlign:"right"}}>
+            <p>תבחר/י מי יהיו הדרקטורים</p>
+          </div>
           {officers &&
             officers.map((officer) => {
               console.log(officer);
@@ -63,7 +70,7 @@ export default function VoteDirectors() {
               );
             })}
         </div>
-        <MainButton text="שלח/י את ההצבעה שלי" tolink={"/SignUpRequest"} />
+        <MainButton text="שלח/י את ההצבעה שלי" tolink={userid.length === 0?"/SignUpRequest": '/AfterRegistrationVoting'} />
       </div>
     </div>
   );

@@ -18,6 +18,9 @@ export default function SignUp() {
   const [userInfo, setUserInfo] = useState({});
 
   const [error, setError] = useState("");
+
+ 
+
   function select(selectedButton) {
     switch (selectedButton) {
       case "Personal":
@@ -38,23 +41,29 @@ export default function SignUp() {
   }
   function PassToConfirm(e) {
     
-      
-    
-    setPersonal(false);
+   
+    if(localStorage.getItem("nameprivate") != "" && localStorage.getItem("family") != "" && 
+    localStorage.getItem("email") != "" && localStorage.getItem("password") != "" && localStorage.getItem("phone") != "" ) {
+
+      setPersonal(false);
     setConfirm(true);
     setSort("Confirmation");
 
     //set detials to redux
     console.log(userInfo);
     dispatch(sendSignUpUser({ ...userInfo }));
+    {localStorage.setItem("nameprivate","")}
+    {localStorage.setItem("family","")}
+    {localStorage.setItem("email","")}
+    {localStorage.setItem("password","")}
+    {localStorage.setItem("phone","")}
+
+  }
     
+
   }
   function confirmMe(e) {
-    console.log(localStorage.getItem("nameprivate"));
-    console.log(localStorage.getItem("family"));
-    console.log(localStorage.getItem("email"));
-    console.log(localStorage.getItem("password"));
-    console.log(localStorage.getItem("phone"));
+    
     
   }
   return (
@@ -77,36 +86,40 @@ export default function SignUp() {
 
         {sort === "PersonalInfo" ? (
           <div>
-            <h3>נתוני ההצבעה שלך שמורים במערכת</h3>
+            <h3 id="h3_1">נתוני ההצבעה שלך שמורים במערכת</h3>
             <br></br>
+            <p className="tittleRegister">שם פרטי</p>
             <InputText
-              textenglish={"firstName"}
-              texter={"שם פרטי"}
+              textenglish={"nameprivate"}
+              // texter={"שם פרטי"}
               userInfo={userInfo}
               setUserInfo={setUserInfo}
             ></InputText>
+            <p className="tittleRegister">שם משפחה</p>
             <InputText
-              textenglish={"lastName"}
-              texter={"שם משפחה"}
+              textenglish={"family"}
+              // texter={"שם משפחה"}
               userInfo={userInfo}
               setUserInfo={setUserInfo}
             ></InputText>
-
+            <p className="tittleRegister">כתובת מייל</p>
             <InputText
               textenglish={"email"}
-              texter={"כתובת מייל"}
+              // texter={"כתובת מייל"}
               userInfo={userInfo}
               setUserInfo={setUserInfo}
             ></InputText>
+            <p className="tittleRegister">מספר טלפון</p>
             <InputText
               textenglish={"phone"}
-              texter={"מספר טלפון"}
+              // texter={"מספר טלפון"}
               userInfo={userInfo}
               setUserInfo={setUserInfo}
             ></InputText>
+            <p className="tittleRegister">סיסמה</p>
             <InputText
               textenglish={"password"}
-              texter={"סיסמה"}
+              // texter={"סיסמה"}
               userInfo={userInfo}
               setUserInfo={setUserInfo}
             ></InputText>
@@ -121,25 +134,39 @@ export default function SignUp() {
           <div>
             <h3>?איך תרצ/י שנאמת אותך</h3>
             <div>
-              <h1>
+
+            <table style={{width:"100%"}}> 
+                <tr style={{width:"100%"}}>
+                <th id="radioButtonPlace">
                 <input
                   className="radiobutton"
                   type="radio"
                   value="folder"
                   name="confirm"
-                />{" "}
-                אימות על ידי מסמך מזהה
-              </h1>
-              <div className="line" />
-              <h1>
-                <input
-                  className="radiobutton2"
-                  type="radio"
-                  value="folder"
-                  name="confirm"
                 />
-                אימות על ידי מסלקה פנסיונית
-              </h1>
+                </th>
+                <th id="TextPlace">
+              <h1>  אימות על ידי מסמך מזהה</h1>
+              </th>
+                </tr>
+              </table>
+              <div className="line" />
+            <table style={{width:"100%"}}> 
+                <tr style={{width:"100%"}}>
+                <th id="radioButtonPlace">
+                <input
+                    className="radiobutton2"
+                    type="radio"
+                    value="folder"
+                    name="confirm"
+                  />
+                </th>
+                  <th id="TextPlace">
+                    <h1> אימות על ידי מסלקה פנסיונית</h1>
+                  </th>
+                </tr>
+              </table>
+
               <div className="line" />
             </div>
             <div className="space" />
