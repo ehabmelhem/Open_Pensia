@@ -97,7 +97,7 @@ exports.addWaitingUser = async (req, res) => {
       // votes: newVotes,
       article: {
         //   officerId: newArticle.officerId,
-        articleId: "asdjajsdajsd12kjndjksndjkasndjkasdwq",
+        articleId: uuidv4(),
         //   articleTitle: newArticle.articleTitle,
         //   articleText: newArticle.articleText,
         //   articleUrl: newArticle.articleUrl,
