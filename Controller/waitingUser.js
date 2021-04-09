@@ -111,6 +111,7 @@ exports.addWaitingUser = async (req, res) => {
       console.log("user with such user name already exists");
       res.send({
         Ok: false,
+        newUser,
         message: "user with such user name already exists",
       });
     } else {
