@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function QuestionsBeforeRegister({ chanelC, fundnameC},props) {
+  const dispatch = useDispatch();
   const [fundNames, setFundNames] = useState([]);
   const [chanellNames, setChanellNames] = useState([]);
   const [FundsData, setFundsData] = useState({});
