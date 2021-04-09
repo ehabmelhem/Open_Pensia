@@ -20,3 +20,8 @@
     max-width: 600px;
     margin: auto;
 }
+
+.buttonsNav{
+  user-select: none;
+  cursor: pointer;
+}
