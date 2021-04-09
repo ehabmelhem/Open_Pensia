@@ -31,15 +31,13 @@ margin-top: 50px;
 
   .login-page {
     max-width: 600px;
-    margin: 14px;
     min-width: 350px;
     max-height: 667px;
 }
 .form {
   background: #FFFFFF;
-  padding: 77px 45px 45px 45px;
+  padding: 48px 45px 0px 45px;
   text-align: center;
-  box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 5px 5px 0 rgb(0 0 0 / 24%);
   height: 590px;
 }
 
