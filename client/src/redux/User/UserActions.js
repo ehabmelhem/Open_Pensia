@@ -18,11 +18,9 @@ import {
 export const userLoginRequest = () => ({
   type: USER_LOGIN_REQUEST,
 });
-export const sendLogOutUserAction = ()=>(
-  {
-    type:USER_LOGOUT
-  }
-)
+export const sendLogOutUserAction = () => ({
+  type: USER_LOGOUT,
+});
 
 export const userLoginSuccess = (content) => ({
   type: USER_LOGIN_SUCCESS,
@@ -122,19 +120,17 @@ export function sendSignUpUser(userData, votes,fundName, chanel) {
   };
 }
 
-
 export function sendLogOutUser() {
   return (dispatch) => {
     axios
-      .post("/user/Logout", {
-      })
+      .post("/user/Logout", {})
       .then((res) => {
         console.log(res.data);
-                dispatch(sendLogOutUserAction()); //the server team is 
+        dispatch(sendLogOutUserAction()); //the server team is
       })
       .catch((error) => {
         console.log(error.message);
-      }); 
+      });
   };
 }
 

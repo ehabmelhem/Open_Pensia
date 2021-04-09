@@ -35,7 +35,7 @@ export default function VoteDirectors() {
   let officers = !!defaultQuestion && defaultQuestion.officers;
   return (
     <div>
-      <div style={{ maxWidth: "600px", margin: "auto" }}>
+      <div style={{ maxWidth: "600px", margin: "0 auto" }}>
         <Header2
           percent={!!defaultQuestion && defaultQuestion.ave}
           question={!!defaultQuestion && defaultQuestion.topic}

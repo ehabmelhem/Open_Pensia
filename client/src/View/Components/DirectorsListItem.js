@@ -5,6 +5,9 @@ import { AiFillDislike } from "react-icons/ai";
 import { AiFillLike } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { addVote } from "../../redux";
+import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
+import ThumbDownIcon from "@material-ui/icons/ThumbDown";
+import IconButton from "@material-ui/core/IconButton";
 
 function DirectorListItem(props) {
   const dispatch = useDispatch();

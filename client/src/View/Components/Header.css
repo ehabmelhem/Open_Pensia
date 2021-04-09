@@ -25,7 +25,7 @@
 .page_above > h1 {
   font-size: large;
 }
-#ChevronRightIcon {
+.ChevronRightIcon {
   cursor: pointer;
 }
 
@@ -43,5 +43,4 @@
   margin: auto;
   min-width: 375px;
   margin-top: 10%;
-  
 }
