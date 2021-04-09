@@ -92,7 +92,7 @@ exports.addWaitingUser = async (req, res) => {
       fundName: fundName,
       chanel: chanel,
       // registerDate: datetime,
-      // votes: newVotes,
+      votes,
       article: {
         //   officerId: newArticle.officerId,
         articleId: uuidv4(),
@@ -112,8 +112,9 @@ exports.addWaitingUser = async (req, res) => {
         message: "user with such user name already exists",
       });
     } else {
-      await newUser.save().then(() => {
+      await newUser.save().then(doc => {
         console.log("user saved");
+        console.log(doc)
       });
       // res.send({ ok: true });
 

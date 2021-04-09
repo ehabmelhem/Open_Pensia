@@ -90,15 +90,13 @@ export function fetchUserData(content) {
   };
 }
 
-export function sendSignUpUser(userData) {
-  // let userfundName = useSelector((state) => state.UserReducer.userfundName);
-  // let userchanel = useSelector((state) => state.UserReducer.userchanel);
-  // let Votes = useSelector((state) => state.VotesReducer.votes);
-  // let Article = useSelector((state) => state.OfficerReducer.articles);
+export function sendSignUpUser(userData, votes) {
+
 
   return (dispatch) => {
     axios
       .post("/new-user/add-user", {
+        votes,
         firstName: userData.firstName,
         lastName: userData.lastName,
         email: userData.email,
