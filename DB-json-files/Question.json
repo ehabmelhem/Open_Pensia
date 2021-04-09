@@ -1,0 +1,32 @@
+{
+    "ProxySchema": {
+      "Proxy_Code":"String" ,
+      "Security_ID":"String" ,
+      "Topic": "String",
+      "creationDate": "Date",
+      "expiredDate":"Date",
+      "officers":[{"officerId":"String","officerName":"String","officerImg":"String"}],
+      "votes":[{"userId":"String","officerId":"String","voted":"{-1/0/1}"}],
+      "status": "{Open/Pending/Results}"
+
+    },
+
+    "Proxy MockData": {
+     "Proxy_Code":"520040700/1" ,
+      "Security_ID":"520040700" ,
+      "Topic": "מינוי דירקטורים (שאינם דצ חים)",
+      "Date": "20/12/2020",
+      "source": "https://maya.tase.co.il/reports/details/1332098/2/0",
+      "status": "Open",
+      "expiredDate":"03/03/2021",
+      "officers":[{"officerId":"64516271"}],
+      "votes":[{"userId":"123456789","officerId":"987654321","voted":"1"}]
+
+      }
+
+
+
+
+
+  }
+
