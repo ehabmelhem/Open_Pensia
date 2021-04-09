@@ -9,6 +9,8 @@ import {
   USER_SIGNUP_REQUEST,
   USER_SIGNUP_SUCCESS,
   USER_SIGNUP_FAILURE,
+  SET_FUND_NAME,
+  SET_CHANNEL_NAME
 } from "../actionTypes";
 
 //USER Actions
@@ -90,13 +92,15 @@ export function fetchUserData(content) {
   };
 }
 
-export function sendSignUpUser(userData, votes) {
+export function sendSignUpUser(userData, votes,fundName, chanel) {
 
 
   return (dispatch) => {
     axios
       .post("/new-user/add-user", {
         votes,
+        fundName, 
+        chanel,
         firstName: userData.firstName,
         lastName: userData.lastName,
         email: userData.email,
@@ -134,3 +138,15 @@ export function sendLogOutUser() {
   };
 }
 
+
+ 
+export const setFundName = (fundName)=>({
+  type:SET_FUND_NAME,
+  payload:{fundName}
+})
+
+export const setChannelName = (channelName)=>({
+  type: SET_CHANNEL_NAME,
+  payload:{channelName}
+
+})

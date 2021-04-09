@@ -13,6 +13,7 @@ export default function SignUp() {
   const dispatch = useDispatch();
 
   const votes = useSelector(state => state.VotesReducer.votes)
+  const {fundName, chanel} = useSelector(state=>state.UserReducer)
 
   const [Personal, setPersonal] = useState(true);
   const [Confirm, setConfirm] = useState(false);
@@ -53,7 +54,7 @@ export default function SignUp() {
 
     //set detials to redux
     console.log(userInfo);
-    dispatch(sendSignUpUser({ ...userInfo }, votes));
+    dispatch(sendSignUpUser({ ...userInfo }, votes, fundName, chanel));
     localStorage.setItem("nameprivate","")
     localStorage.setItem("family","")
     localStorage.setItem("email","")
