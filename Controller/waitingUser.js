@@ -88,10 +88,8 @@ exports.addWaitingUser = async (req, res) => {
       phone: phone,
       password: hash_password,
       status: "Waiting", //{Waiting/Approved}
-      /** */
-
-      // fundName: fundName,
-      // chanel: chanel,
+      fundName: fundName,
+      chanel: chanel,
       // registerDate: datetime,
       // votes: votes || [],
       article: {
