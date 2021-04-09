@@ -41,7 +41,7 @@ opacity: 1;
 
   .name {
     text-align: right;
-    margin-right: 60px;
+    margin-right: 25px;
     margin-bottom: 0;
     font: normal normal normal 12px/22px Assistant;
     color: #717480;
@@ -77,4 +77,14 @@ opacity: 1;
   a,
 a label {
     cursor: pointer;
+}
+
+#inputQuestion1,#inputQuestion{
+  border: none;
+  height: 30px;
+  border-bottom: 1px solid;
+  width: 89%;
+}
+.test1111{
+  width: 90vw;
 }

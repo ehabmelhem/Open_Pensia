@@ -7,6 +7,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
+import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function QuestionsBeforeRegister({ chanelC, fundnameC }) {
+export default function QuestionsBeforeRegister({ chanelC, fundnameC},props) {
   const [fundNames, setFundNames] = useState([]);
   const [chanellNames, setChanellNames] = useState([]);
   const [FundsData, setFundsData] = useState({});
@@ -28,6 +29,11 @@ export default function QuestionsBeforeRegister({ chanelC, fundnameC }) {
     age: "",
     name: "hai",
   });
+
+  function next(){
+    props.next()
+  }
+
   const history = useHistory();
   function toLoginPage() {
     history.push("Login");
@@ -88,8 +94,7 @@ export default function QuestionsBeforeRegister({ chanelC, fundnameC }) {
       <div className="direction">
         <div className="titleQ">2 שאלות קצרות ואנחנו בפנים</div>
         <div className="space" />
-        <div className="name">בחר/י גוף פנסיוני</div>
-        <FormControl className={classes.formControl}>
+        {/* <FormControl className={classes.formControl}>
           <InputLabel htmlFor="age-native-simple"></InputLabel>
           <Select className="select"
             native
@@ -107,10 +112,24 @@ export default function QuestionsBeforeRegister({ chanelC, fundnameC }) {
               </option>
             ))}
           </Select>
-        </FormControl>
+        </FormControl> */}
+        {/* <input 
+         value={state.age}
+         onChange={handleChange}
+         type="select"
+         /> */}
+                 <div for="gof_pensia" className="name">בחר/י גוף פנסיוני</div>
+         <select onChange={handleChange} name="gof_pensia" id="inputQuestion" required>
+         <option id="Option" value="none" selected disabled hidden>בחר/י</option>
+         {fundNames.map((index, fund) => (
+              <option id="Option" key={fund} value={index}>
+                {index}
+              </option>
+            ))}
+</select>
 
-        <div className="name">בחר/י אפיק חיסכון</div>
-        <FormControl className={classes}>
+
+        {/* <FormControl className={classes}>
           <InputLabel htmlFor="age-native-simple"></InputLabel>
           <Select className="select"
             native
@@ -123,16 +142,25 @@ export default function QuestionsBeforeRegister({ chanelC, fundnameC }) {
           >
             <option aria-label="None" value="" />
 
-            {chanellNames.map((index2, chanell) => (
-              <option key={chanell} value={index2}>
+           
+          </Select>
+        </FormControl> */}
+                <div for="hesakhon" className="name">בחר/י אפיק חיסכון</div>
+                 <select value={state.year} onChange={handleChanell} name="hesakhon"  id="inputQuestion1" required>
+                 <option  value="none" selected disabled hidden>בחר/י</option>
+              {chanellNames.map((index2, chanell) => (
+              <option  key={chanell} value={index2}>
                 {index2}
               </option>
             ))}
-          </Select>
-        </FormControl>
-
+            </select>
         <div />
       </div>
+      <button id="buttonOrg" onClick={props.next}>אהבתי</button>
+          <div></div>
+          <Link className="signin" onClick={props.toLoginPage}>
+            יש לי כבר חשבון{" "}
+          </Link>
     </div>
   );
 }
