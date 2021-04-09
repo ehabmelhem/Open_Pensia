@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 var cors = require("cors");
-
 var cookieParser = require("cookie-parser");
 
 const officer = require("./Routers/officer");
@@ -12,6 +11,7 @@ const waitingUser = require("./Routers/waitingUser");
 const officerSchema = require("./Schema/Officer");
 
 const app = express();
+app.use(express.static("../client/build"));
 
 app.use(cors());
 app.use(cookieParser());
@@ -35,8 +35,6 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
   console.log("we are connected to DB");
 });
-
-
 
 const port = process.env.PORT || 3002;
 
