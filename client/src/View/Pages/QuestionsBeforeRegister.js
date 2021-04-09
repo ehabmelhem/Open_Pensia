@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {useDispatch} from 'react-redux';
 import { useHistory } from "react-router";
 import "./QuestionsBeforeRegister.css";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,6 +8,9 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
+import {setFundName, setChannelName} from '../../redux/User/UserActions'
+import {Link} from 'react-router-dom'
+
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -17,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function QuestionsBeforeRegister({ chanelC, fundnameC }) {
+export default function QuestionsBeforeRegister({ chanelC, fundnameC, next}) {
+  const dispatch = useDispatch();
   const [fundNames, setFundNames] = useState([]);
   const [chanellNames, setChanellNames] = useState([]);
   const [FundsData, setFundsData] = useState({});
@@ -60,6 +65,7 @@ export default function QuestionsBeforeRegister({ chanelC, fundnameC }) {
     const name = event.target.name;
     console.log(event.target.value);
     setFundNameChosen(event.target.value);
+    dispatch(setFundName(event.target.value))
 
     setChanellNames(FundsData[event.target.value]);
 
@@ -75,6 +81,7 @@ export default function QuestionsBeforeRegister({ chanelC, fundnameC }) {
     console.log(event.target.value);
     setChanellNameChosen(event.target.value);
     chanelC(event.target.value);
+    dispatch(setChannelName(event.target.value))
     setState({
       ...state,
       [name]: event.target.value,
@@ -133,6 +140,11 @@ export default function QuestionsBeforeRegister({ chanelC, fundnameC }) {
 
         <div />
       </div>
+      <button id="buttonOrg" onClick={next}>אהבתי</button>
+          <div></div>
+          <Link className="signin" to={'/Login'}>
+            יש לי כבר חשבון{" "}
+          </Link>
     </div>
   );
 }

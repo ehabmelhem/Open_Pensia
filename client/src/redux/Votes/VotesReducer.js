@@ -53,8 +53,8 @@ const VotesReducer = (state = initialState, action) => {
           ...state.votes,
           {
             securityID: action.payload.securityID,
-            questionID: action.payload.questionID,
-            directorID: action.payload.directorID,
+            proxyCode: action.payload.questionID,
+            officerID: action.payload.officerID,
             vote: action.payload.vote,
           },
         ],
