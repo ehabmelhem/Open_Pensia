@@ -13,11 +13,14 @@ const officerSchema = require("./Schema/Officer");
 
 const app = express();
 
+app.use(express.static('./client/build'))
+
 app.use(cors());
 app.use(cookieParser());
 
 const mongoose = require("mongoose");
 const userModel = require("./Schema/User");
+const { use } = require("./Routers/officer");
 app.use(bodyParser.json());
 
 app.use("/officer", officer);

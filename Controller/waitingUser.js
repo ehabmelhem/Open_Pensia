@@ -97,7 +97,7 @@ exports.addWaitingUser = async (req, res) => {
       // votes: newVotes,
       article: {
         //   officerId: newArticle.officerId,
-        articleId: "asdjajsdajsd12kjndjksndjkasndjkasdwq",
+        articleId: uuidv4(),
         //   articleTitle: newArticle.articleTitle,
         //   articleText: newArticle.articleText,
         //   articleUrl: newArticle.articleUrl,
@@ -111,6 +111,7 @@ exports.addWaitingUser = async (req, res) => {
       console.log("user with such user name already exists");
       res.send({
         Ok: false,
+        newUser,
         message: "user with such user name already exists",
       });
     } else {
