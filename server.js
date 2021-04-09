@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 var cors = require("cors");
 var cookieParser = require("cookie-parser");
-
+const app = express();
+app.use(express.static("client/build"));
 const officer = require("./Routers/officer");
 const proxy = require("./Routers/Proxy");
 const user = require("./Routers/user");
@@ -10,16 +11,11 @@ const waitingUser = require("./Routers/waitingUser");
 
 const officerSchema = require("./Schema/Officer");
 
-const app = express();
-
-app.use(express.static("./client/build"));
-
 app.use(cors());
 app.use(cookieParser());
 
 const mongoose = require("mongoose");
 const userModel = require("./Schema/User");
-const { use } = require("./Routers/officer");
 app.use(bodyParser.json());
 
 app.use("/officer", officer);
