@@ -4,13 +4,16 @@ import PersonaiInfo from "./QuestionsBeforeRegister";
 import InputText from "../Components/InputText";
 import "./SignUp.css";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 //redux
 import { sendSignUpUser } from "../../redux/User/UserActions";
 
 export default function SignUp() {
   const dispatch = useDispatch();
+
+  const votes = useSelector(state => state.VotesReducer.votes)
+  const {fundName, chanel} = useSelector(state=>state.UserReducer)
 
   const [Personal, setPersonal] = useState(true);
   const [Confirm, setConfirm] = useState(false);
@@ -42,8 +45,8 @@ export default function SignUp() {
   function PassToConfirm(e) {
     
    
-    if(localStorage.getItem("nameprivate") != "" && localStorage.getItem("family") != "" && 
-    localStorage.getItem("email") != "" && localStorage.getItem("password") != "" && localStorage.getItem("phone") != "" ) {
+    if(localStorage.getItem("nameprivate") !== "" && localStorage.getItem("family") !== "" && 
+    localStorage.getItem("email") !== "" && localStorage.getItem("password") !== "" && localStorage.getItem("phone") !== "" ) {
 
       setPersonal(false);
     setConfirm(true);
@@ -51,12 +54,13 @@ export default function SignUp() {
 
     //set detials to redux
     console.log(userInfo);
-    dispatch(sendSignUpUser({ ...userInfo }));
-    {localStorage.setItem("nameprivate","")}
-    {localStorage.setItem("family","")}
-    {localStorage.setItem("email","")}
-    {localStorage.setItem("password","")}
-    {localStorage.setItem("phone","")}
+    dispatch(sendSignUpUser({ ...userInfo }, votes, fundName, chanel));
+    localStorage.setItem("nameprivate","")
+    localStorage.setItem("family","")
+    localStorage.setItem("email","")
+    localStorage.setItem("password","")
+    localStorage.setItem("phone","")
+  
 
   }
     

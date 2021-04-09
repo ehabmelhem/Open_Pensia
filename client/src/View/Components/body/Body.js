@@ -118,13 +118,13 @@ export default function Body(props) {
       <div id="buttonsBar">
         <div id="button1" onClick={() => select("top")}>
           {" "}
-          <ButtonShow text="הכי חמים" selected={button1} />{" "}
+          <ButtonShow text="הכי חמים" className='buttonsNav' selected={button1} />{" "}
         </div>
         <div id="button2" onClick={() => select("open")}>
           {" "}
-          <ButtonShow text="פתוחים" selected={button2} />
+          <ButtonShow text="פתוחים" className='buttonsNav' selected={button2} />
         </div>
-        <div id="button3" onClick={() => select("results")}>
+        <div id="button3"  className='buttonsNav' onClick={() => select("results")}>
           {" "}
           <ButtonShow text="תוצאות" selected={button3} />
         </div>

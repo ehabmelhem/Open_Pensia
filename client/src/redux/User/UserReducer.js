@@ -6,6 +6,8 @@ import {
   USER_SIGNUP_REQUEST,
   USER_SIGNUP_SUCCESS,
   USER_SIGNUP_FAILURE,
+  SET_FUND_NAME,
+  SET_CHANNEL_NAME
 } from "../actionTypes";
 
 const initialState = {
@@ -37,30 +39,30 @@ const UserReducer = (state = initialState, action) => {
         userEmail: action.payload.email,
         userPassword: action.payload.password,
         userStatus: action.payload.status,
-        login:true,
+        login: true,
         loading: false,
         error: "",
       };
     case USER_LOGIN_FAILURE:
       return {
-        userid:"",
+        userid: "",
         userFirstName: "",
         userlastName: "",
         userEmail: "",
         userPassword: "",
         userStatus: "",
-        login:false,
+        login: false,
         loading: false,
         error: action.payload.error,
       };
     case USER_LOGOUT:
       console.log(USER_LOGOUT)
       return {
-        userid:"",
+        userid: "",
         userFirstName: "",
         userlastName: "",
         userEmail: "",
-        login:false,
+        login: false,
         userPassword: "",
         userStatus: "",
         loading: false,
@@ -92,6 +94,16 @@ const UserReducer = (state = initialState, action) => {
         userStatus: "",
         loading: false,
         error: action.payload.error,
+      }
+    case SET_CHANNEL_NAME:
+      return {
+        ...state,
+        chanel: action.payload.channelName
+      };
+    case SET_FUND_NAME:
+      return {
+        ...state,
+        fundName: action.payload.fundName
       };
     default:
       return state;
