@@ -26,10 +26,10 @@ function Login(props) {
   }
   return (
 
-    <div class="login-page">
-      <div class="form">
+    <div className="login-page">
+      <div className="form">
 
-        <form class="login-form" onSubmit={handleLogin}>
+        <form className="login-form" onSubmit={handleLogin}>
           <input type="text" placeholder="דואר אלקטרוני" required onChange={(e) => {
             setEmail(e.target.value);
           }}></input>
@@ -37,7 +37,7 @@ function Login(props) {
             setPassword(e.target.value);
           }} />
           <button onClick={handleLogin}>כניסה</button>
-          <p class="message">Not registered? <Link to="/FirstPages_1">Create an account</Link></p>
+          <p className="message">Not registered? <Link to="/FirstPages_1">Create an account</Link></p>
         </form>
       </div>
     </div>

@@ -20,3 +20,11 @@
     font-size: 24px;
     padding: 2%;
 }
+.container-voting-header{
+    background-color: #3d4257;
+    color: white;
+    direction: rtl;
+    align-items: center;
+    text-align: center;
+    object-fit:contain;
+  }

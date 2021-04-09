@@ -60,32 +60,20 @@ export default function FirstPages() {
     history.push("Login");
   }
   return (
-    <Animated
-    animationIn="zoomInDown"
-    animationOut="flipOutX"
-    animationInDuration={1000}
-    animationOutDuration={1000}
-    isVisible={true}
-  >
+   
     <div>
       {index === 3 ? (
         <div className="body">
           <QuestionsBeforeRegister
             chanelC={setChanel}
             fundnameC={setFundname}
+            next={next}
+            toLoginPage={toLoginPage}
           />
-          <div></div>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
+          
+        
 
-          <button id="buttonOrg" onClick={next}>אהבתי</button>
-          <div></div>
-          <a className="signin" onClick={toLoginPage}>
-            יש לי כבר חשבון{" "}
-          </a>
+          
         </div>
         
       ) : (
@@ -112,6 +100,6 @@ export default function FirstPages() {
         </div>
       )}
     </div>
-    </Animated>
+   
   );
 }

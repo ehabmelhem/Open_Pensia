@@ -24,22 +24,28 @@ function DirectorListItem(props) {
   console.log(userData.userid);
 
   function handelclicklike(e) {
+    let vote = 0;
+    if(likestate === false) vote = 1;
+
     setlikestate(!likestate);
     setdislikestate(false);
 
     likestate ? setvoteState(1) : setvoteState(0);
-
+    
     dispatch(
       addVote({
         securityID: companyData.securityID,
         questionID: questionID,
         officerID: officerId,
         userID: userData.userid,
-        vote: voteState,
+        vote,
       })
     );
   }
   function handelclickdislike(e) {
+    let vote = 0;
+    if(likestate === false) vote = -1;
+
     setlikestate(false);
     setdislikestate(!dislikestate);
 
@@ -51,7 +57,7 @@ function DirectorListItem(props) {
         questionID: questionID,
         officerID: officerId,
         userID: userData.userid,
-        vote: voteState,
+        vote,
       })
     );
   }
