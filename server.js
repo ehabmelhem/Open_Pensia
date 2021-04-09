@@ -11,9 +11,8 @@ const waitingUser = require("./Routers/waitingUser");
 const officerSchema = require("./Schema/Officer");
 
 const app = express();
-app.use(express.static("../client/build"));
 
-app.use(express.static('./client/build'))
+app.use(express.static("./client/build"));
 
 app.use(cors());
 app.use(cookieParser());
