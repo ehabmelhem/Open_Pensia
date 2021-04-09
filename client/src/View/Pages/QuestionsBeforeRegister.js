@@ -9,6 +9,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import {setFundName, setChannelName} from '../../redux/User/UserActions'
+import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function QuestionsBeforeRegister({ chanelC, fundnameC }) {
+export default function QuestionsBeforeRegister({ chanelC, fundnameC, next}) {
   const dispatch = useDispatch();
   const [fundNames, setFundNames] = useState([]);
   const [chanellNames, setChanellNames] = useState([]);
@@ -139,6 +140,11 @@ export default function QuestionsBeforeRegister({ chanelC, fundnameC }) {
 
         <div />
       </div>
+      <button id="buttonOrg" onClick={next}>אהבתי</button>
+          <div></div>
+          <Link className="signin" to={'/Login'}>
+            יש לי כבר חשבון{" "}
+          </Link>
     </div>
   );
 }
