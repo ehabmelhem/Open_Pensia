@@ -81,7 +81,6 @@ exports.addWaitingUser = async (req, res) => {
     //   newVotes.push(oneVote);
     // });
 
-    //check if user exists
     const newUser = new WaitingUser({
       firstName: firstName,
       lastName: lastName,
@@ -94,17 +93,18 @@ exports.addWaitingUser = async (req, res) => {
       // fundName: fundName,
       // chanel: chanel,
       // registerDate: datetime,
-      // votes: newVotes,
+      // votes: votes || [],
       article: {
-        //   officerId: newArticle.officerId,
+        // officerId: newArticle.officerId || "",
         articleId: uuidv4(),
-        //   articleTitle: newArticle.articleTitle,
-        //   articleText: newArticle.articleText,
-        //   articleUrl: newArticle.articleUrl,
-        //   articleStatus: "Approved", //{"Waiting","Approved","declined"}
+        // articleTitle: newArticle.articleTitle || "",
+        // articleText: newArticle.articleText || "",
+        // articleUrl: newArticle.articleUrl || "",
+        // articleStatus: "Approved", //{"Waiting","Approved","declined"}
       },
     });
-    console.log(email);
+
+    console.log("hhhhhhhh" + newUser);
     const user = await WaitingUser.findOne({ email: newUser.email });
 
     if (user !== null) {
