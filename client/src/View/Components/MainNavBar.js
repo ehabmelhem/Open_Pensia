@@ -24,12 +24,12 @@ function MainNavBar({ navTabs,linkToOfficer }) {
 
   return (
     <nav className="all-tabs">
-      <ul id="ul1">
+      <ul className='nav-ul'>
         {navTabs.map(({ id, toLink, className, content }) => {
           console.log(`${linkToOfficer}${toLink}`)
           return (
-            <Link key={id} to={toLink} onClick={setNavActive}>
-              <li id="li1" className={className}>{content}</li>
+            <Link key={id} to={`${linkToOfficer}${toLink}`} onClick={setNavActive}>
+              <li className={`nav-li ${className}`}>{content}</li>
             </Link>
           );
         })}
