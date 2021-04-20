@@ -12,7 +12,7 @@ export default function FirstPages() {
   const state = useSelector((state) => state);
   const [length, setLength] = useState(0);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     setLength(state.CompaniesListReducer.companies.length);
   }, [state.CompaniesListReducer]);
@@ -61,7 +61,7 @@ export default function FirstPages() {
     history.push("Login");
   }
   return (
-   
+
     <div>
       {index === 3 ? (
         <div className="body">
@@ -71,18 +71,12 @@ export default function FirstPages() {
             next={next}
             toLoginPage={toLoginPage}
           />
-          
-        
 
-          
         </div>
-        
+
       ) : (
         <div className="body">
-        <div id="divOnCircle"> <div className="icon1" ></div></div>
-
-   <br></br>
-   <br></br>
+          <div id="divOnCircle"> <div className="icon1" ></div></div>
 
           {length === 0 ? (
             <a className="title">{firstPages[index].title}</a>
@@ -92,15 +86,16 @@ export default function FirstPages() {
             </a>
           )}
           <p className="description_firstPages">{firstPages[index].dec}</p>
+          <div className='footer'>
+            <button id="button11" onClick={next}>{firstPages[index].buttonTitle}</button>
 
-           <button id="button11" onClick={next}>{firstPages[index].buttonTitle}</button>
-          <div></div>
-          <a className="signin" onClick={toLoginPage}>
-            יש לי כבר חשבון
+            <a className="signin" onClick={toLoginPage}>
+              יש לי כבר חשבון
           </a>
+          </div>
         </div>
       )}
     </div>
-   
+
   );
 }
