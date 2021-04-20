@@ -58,7 +58,7 @@ function QuestionListItem({question}) {
               </ol>
             </div>
           </div>
-          <div className="Column" id="nexticon">
+          <div className="Column nexticon" id="nexticon">
 
             <img
               className="img1"
