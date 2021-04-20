@@ -74,9 +74,9 @@ function DirectorListItem(props) {
           <img className="companyimage" src={props.logo} alt="companyimage" />
         </div>
         </th>
-        <th id="thCompanyName">
+        <th id="thDirectorName">
         <div>
-              <p  className="companyName">{props.name}</p>    
+              <p  className="DirectorName">{props.name}</p>    
         </div>
         </th>
             <th id="thLike">
