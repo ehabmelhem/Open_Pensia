@@ -10,14 +10,17 @@
   display: flex;
   margin: auto;
   justify-content: center;
-  margin: 20px;
+  
+
 }
 
-.description {
+.description_firstPages {
   font: normal normal normal 18px/22px Assistant;
   letter-spacing: 0px;
   color: #343434;
   opacity: 0.6;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 #buttonOrg {
@@ -41,9 +44,11 @@
 .icon1 {
   margin-top: 100px;
   width: 180px;
-  height: 180px;
-  background: #EAEAEA 0% 0% no-repeat padding-box;
+  height: 150px;
+  background-image: url('../../imgs/logo.PNG');
   border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
   
 .title{
