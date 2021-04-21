@@ -14,13 +14,14 @@
 
 #allPageQuestionsBeforeRegister{
   max-width: 600px;
-  min-width: 375px;
+  min-width: 350px;
   margin: auto;
 }
 
 .direction{
   text-align : center;
  direction: rtl;
+ height: 240px;
 }
 /* .icon2{
   margin-top: 100px;
@@ -88,3 +89,4 @@ a label {
 .link-footer{
   text-align: center;
 }
+

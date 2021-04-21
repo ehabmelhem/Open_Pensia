@@ -11,7 +11,6 @@
   margin: auto;
   justify-content: center;
   height: 40vh;
-  margin-bottom: 5vh;
 }
 
 .description_firstPages {
@@ -21,6 +20,7 @@
   opacity: 0.6;
   padding: 20px;
   margin: auto;
+  height: 180px;
 }
 
 #buttonOrg {
@@ -102,7 +102,5 @@ opacity: 1;
 }
 .footer{
   bottom: 25px;
-  position: absolute;
   width: 100%;
-
 }

@@ -9,13 +9,14 @@ export default function MainCard(props) {
 
     return (
 
-        <div className='main'>
+        <div className='body'>
 
-            <img className='round-image' src='https://convertingcolors.com/plain-EAEAEA.svg' />
+            <div id="divOnCircle"> <div className="icon1" ></div></div>
             <h2 className='title'>{props.title}</h2>
-            <p className='description'>{props.desc}</p>
-            <MainButton  text={props.text} tolink={props.tolink} />
-            
+            <p className='description_firstPages'>{props.desc}</p>
+            <div className='footer'>
+                <MainButton myClass='button' text={props.text} tolink={props.tolink} />
+            </div>
         </div>
     )
 }
