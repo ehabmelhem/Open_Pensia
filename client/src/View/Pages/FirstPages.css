@@ -1,6 +1,6 @@
 .body {
   max-width: 600px;
-  min-width: 375px;
+  min-width: 350px;
   text-align: center;
   margin: auto;
 
@@ -10,14 +10,17 @@
   display: flex;
   margin: auto;
   justify-content: center;
-  margin: 20px;
+  height: 40vh;
+  margin-bottom: 5vh;
 }
 
-.description {
+.description_firstPages {
   font: normal normal normal 18px/22px Assistant;
   letter-spacing: 0px;
   color: #343434;
   opacity: 0.6;
+  padding: 20px;
+  margin: auto;
 }
 
 #buttonOrg {
@@ -41,9 +44,11 @@
 .icon1 {
   margin-top: 100px;
   width: 180px;
-  height: 180px;
-  background: #EAEAEA 0% 0% no-repeat padding-box;
+  height: 150px;
+  background-image: url('../../imgs/logo.PNG');
   border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
   
 .title{
@@ -52,7 +57,6 @@
   color: #324483;
   text-transform: uppercase;
   opacity: 1;
-
 
 }
 .titles{
@@ -82,14 +86,23 @@ opacity: 1;
 
 
 #button11{
-  width: 343px;
-  height: 38px;
-  background: #3D4257 0% 0% no-repeat padding-box;
-  box-shadow: 0px 2px 1px #00000024;
-  opacity: 1;
-  border-radius: 4px;
+  position: relative;
+  background-color:rgb(61, 66, 87);
   color: white;
-  font: normal normal 600 14px/16px Assistant;
-  margin-top: 80px;
-}
+  width: 90%;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 3%;
+  border: none !important;
+  outline:none !important;
+  
 
+}
+.footer{
+  bottom: 25px;
+  position: absolute;
+  width: 100%;
+
+}

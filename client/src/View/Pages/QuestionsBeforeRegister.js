@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router";
 import "./QuestionsBeforeRegister.css";
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,8 +8,8 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
-import {setFundName, setChannelName} from '../../redux/User/UserActions'
-import {Link} from 'react-router-dom'
+import { setFundName, setChannelName } from '../../redux/User/UserActions'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function QuestionsBeforeRegister({ chanelC, fundnameC, next}) {
+export default function QuestionsBeforeRegister({ chanelC, fundnameC, next }) {
   const dispatch = useDispatch();
   const [fundNames, setFundNames] = useState([]);
   const [chanellNames, setChanellNames] = useState([]);
@@ -90,15 +90,16 @@ export default function QuestionsBeforeRegister({ chanelC, fundnameC, next}) {
   //fundsData[fundsChoosen]=>Array
   return (
     <div id="allPageQuestionsBeforeRegister">
-     <div id="divOnCircle"> <div className="icon"> </div></div>
-      <div className="space" />
+      <div id="divOnCircle"> <div className="icon1"> </div></div>
+
       <div className="direction">
         <div className="titleQ">2 שאלות קצרות ואנחנו בפנים</div>
-        <div className="space" />
         <div className="name">בחר/י גוף פנסיוני</div>
-        <FormControl className={classes.formControl}>
+
+        <FormControl className={classes.formControl} style={{ width: '80%'}}>
           <InputLabel htmlFor="age-native-simple"></InputLabel>
-          <Select className="select"
+
+          <Select style={{  margin:'0' }}
             native
             value={state.age}
             onChange={handleChange}
@@ -107,6 +108,7 @@ export default function QuestionsBeforeRegister({ chanelC, fundnameC, next}) {
               id: "age-native-simple",
             }}
           >
+
             <option aria-label="None" value="" />
             {fundNames.map((index, fund) => (
               <option key={fund} value={index}>
@@ -114,12 +116,13 @@ export default function QuestionsBeforeRegister({ chanelC, fundnameC, next}) {
               </option>
             ))}
           </Select>
+
         </FormControl>
 
         <div className="name">בחר/י אפיק חיסכון</div>
-        <FormControl className={classes}>
+        <FormControl className={classes} style={{ width: '80%'  }}>
           <InputLabel htmlFor="age-native-simple"></InputLabel>
-          <Select className="select"
+          <Select style={{  margin:'0' }}
             native
             value={state.year}
             onChange={handleChanell}
@@ -138,13 +141,16 @@ export default function QuestionsBeforeRegister({ chanelC, fundnameC, next}) {
           </Select>
         </FormControl>
 
-        <div />
+
       </div>
-      <button id="buttonOrg" onClick={next}>אהבתי</button>
-          <div></div>
-          <Link className="signin" to={'/Login'}>
-            יש לי כבר חשבון{" "}
-          </Link>
+      <div className='footer'>
+        <div>
+        <button id="button11" onClick={next}>אהבתי</button>
+</div><div className="link-footer">
+        <Link className="signin" to={'/Login'}>
+          יש לי כבר חשבון{" "}
+        </Link></div>
+      </div>
     </div>
   );
 }

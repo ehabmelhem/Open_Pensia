@@ -14,7 +14,8 @@
     text-align: center; 
   }
   a.login-from-companies-list {
-    margin-left: 3%;
+    margin-left: 10px;
+    margin-top: 10px;
     width          : fit-content;
     float: left;
     text-align     : center;

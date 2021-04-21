@@ -53,12 +53,12 @@ function QuestionListItem({question}) {
           <div className="Column" id="formoreres1">
             <div id="companyname">
               <ol>
-                <p id="companyName">{question.Topic}</p>
+                <p id="companyName" className="companyName">{question.Topic}</p>
                 <p>{status}</p>
               </ol>
             </div>
           </div>
-          <div className="Column" id="nexticon">
+          <div className="Column nexticon" id="nexticon">
 
             <img
               className="img1"

@@ -43,7 +43,7 @@ export default function VoteDirectors() {
         />
 
         <div>
-          <div  style={{color:"#324483",fontSize:"16px",marginRight:"5px",textAlign:"right"}}>
+          <div  style={{color:"#324483",fontSize:"16px",marginRight:"10px",textAlign:"right"}}>
             <p>תבחר/י מי יהיו הדרקטורים</p>
           </div>
           {officers &&

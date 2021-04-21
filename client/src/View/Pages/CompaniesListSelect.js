@@ -30,7 +30,7 @@ export default function CompaniesListSelect() {
     <div className="App1">
       <header className="App-header1">
         <div>
-          <Link className="login-from-companies-list" to="/Login" target="_blank"> כניסה </Link>
+          <Link className="login-from-companies-list" to="/Login" > כניסה </Link>
         </div>
         <div className="question">?על איזו חברה תרצה/י להשפיע</div>
         <div>

@@ -12,29 +12,30 @@ export default function FirstPages() {
   const state = useSelector((state) => state);
   const [length, setLength] = useState(0);
   const dispatch = useDispatch();
+
   useEffect(() => {
     setLength(state.CompaniesListReducer.companies.length);
   }, [state.CompaniesListReducer]);
   let firstPages = [
     {
       title: "למה זה חשוב",
-      dec:
-        "ורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית מוסן מנת. להאמית קרהשק סכעיט דז מא, מנכם למטכין נשואי מנורך. סחטיר בלובק. תצטנפל בלינדו למרקל אס לכימפו, דול, צוט ומעיוט - לפתיעם ברשג - ולתיעם גדדיש. קוויז דומור ליאמום בלינך רוגצה. לפמעט ",
+      dec: 'הפנסיה של כולנו שווה היום  2 טרליון שקל\
+          אלה מנוהלים ע"י קומץ מצומצם של גופים ובהם קומץ מצומצם של עובדים שאחראים על הכסף הזה\
+          האם אנחנו יודעים לטובת מי הם מנהלים את כספי הפנסיה שלנו?',
       buttonTitle: "אהבתי ",
     },
     {
       title: "למה זה טוב לך",
-      dec:
-        "ורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית מוסן מנת. להאמית קרהשק סכעיט דז מא, מנכם למטכין נשואי מנורך. סחטיר בלובק. תצטנפל בלינדו למרקל אס לכימפו, דול, צוט ומעיוט - לפתיעם ",
+      dec: '  שקיפות ומעורבות: היום אנחנו לא יכולים לדעת איפה מושקע הכסף שלנו. אנחנו יודעים בגדול שהוא במניות או במוצרים פיננסיים אחרים, אבל איזה מניות ובכמה אחוזים אנחנו לא יודעים!\
+       כבעלי מניות בחברה מסוימת, אנחנו גם בעלי עניין ולכן אנחנו יכולים להצביע בהחלטות דירקטריון',
       buttonTitle: "מעולה ",
     },
     {
       title: "איך זה משרת אותך",
       dec:
-        "ורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית מוסן מנת. להאמית קרהשק סכעיט דז מא, מנכם למטכין נשואי מנורך. סחטיר בלובק. תצטנפל בלינדו למרקל אס לכימפו, דול, צוט ומעיוט - לפתיעם",
+        "הפלטפורמה תאפשר לך זיהוי הגוף המנהל ומסלולי החיסכון הפנסיוני של העמית, קבלת רשימת החברות הציבוריות בהם העמית הינו מושקע כבעל מניות (באמצעות קרנות החיסכון הפנסיוני), אפשרות לקביעת עמדה באשר לאופן ההצבעה, והעברת העמדה הקולקטיבית לגוף המנהל המממש את זכות ההצבעה",
       buttonTitle: "אני רוצה להתחיל ",
     },
-    { title: "" },
     {
       title: "זהינו שיש לך החזקה ב10 חברות בשוק",
       dec: "והאם תרצה להשפיע",
@@ -60,7 +61,7 @@ export default function FirstPages() {
     history.push("Login");
   }
   return (
-   
+
     <div>
       {index === 3 ? (
         <div className="body">
@@ -70,18 +71,12 @@ export default function FirstPages() {
             next={next}
             toLoginPage={toLoginPage}
           />
-          
-        
 
-          
         </div>
-        
+
       ) : (
         <div className="body">
-        <div id="divOnCircle"> <div className="icon1"></div></div>
-
-   <br></br>
-   <br></br>
+          <div id="divOnCircle"> <div className="icon1" ></div></div>
 
           {length === 0 ? (
             <a className="title">{firstPages[index].title}</a>
@@ -90,16 +85,18 @@ export default function FirstPages() {
               {"זהינו שיש לך החזקה ב" + length + " חברות בשוק"}
             </a>
           )}
-          <p className="description">{firstPages[index].dec}</p>
-
-           <button id="button11" onClick={next}>{firstPages[index].buttonTitle}</button>
-          <div></div>
-          <a className="signin" onClick={toLoginPage}>
-            יש לי כבר חשבון
-          </a>
+          <p className="description_firstPages">{firstPages[index].dec}</p>
+          <div className='footer'>
+           <div> <button id="button11" onClick={next}>{firstPages[index].buttonTitle}</button>
+           </div>
+           <div>
+            <a className="signin" onClick={toLoginPage}>
+              יש לי כבר חשבון
+          </a></div>
+          </div>
         </div>
       )}
     </div>
-   
+
   );
 }
