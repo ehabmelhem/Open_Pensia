@@ -15,7 +15,7 @@ export default function MainCard(props) {
             <h2 className='title'>{props.title}</h2>
             <p className='description_firstPages'>{props.desc}</p>
             <div className='footer'>
-                <MainButton myClass='button' text={props.text} tolink={props.tolink} />
+                <MainButton myClass='add-info-btn' text={props.text} tolink={props.tolink} />
             </div>
         </div>
     )

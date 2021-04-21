@@ -28,8 +28,8 @@ function Login(props) {
 
     <div className="login-page">
       <div className="form">
-
         <form className="login-form" onSubmit={handleLogin}>
+        <div id="divOnCircle"><div className="icon1" /></div>
           <input type="text" placeholder="דואר אלקטרוני" required onChange={(e) => {
             setEmail(e.target.value);
           }}></input>

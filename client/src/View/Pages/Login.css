@@ -121,3 +121,19 @@ font-family: "Roboto", sans-serif;
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;      
 }
+
+.icon {
+  width: 180px;
+  height: 180px;
+  background: #EAEAEA 0% 0% no-repeat padding-box;
+  border-radius: 50%;
+}
+.icon1 {
+  margin-top: 100px;
+  width: 180px;
+  height: 150px;
+  background-image: url('../../imgs/logo.PNG');
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

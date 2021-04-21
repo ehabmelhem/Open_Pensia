@@ -89,11 +89,12 @@ export default function SignUp() {
         </div>
 
         {sort === "PersonalInfo" ? (
-          <div>
+          <div id="formRegister">
             <h3 id="h3_1">נתוני ההצבעה שלך שמורים במערכת</h3>
             <br></br>
             <p className="tittleRegister">שם פרטי</p>
             <InputText
+            type="text"
               textenglish={"nameprivate"}
               // texter={"שם פרטי"}
               userInfo={userInfo}
@@ -101,6 +102,7 @@ export default function SignUp() {
             ></InputText>
             <p className="tittleRegister">שם משפחה</p>
             <InputText
+             type="text"
               textenglish={"family"}
               // texter={"שם משפחה"}
               userInfo={userInfo}
@@ -109,12 +111,14 @@ export default function SignUp() {
             <p className="tittleRegister">כתובת מייל</p>
             <InputText
               textenglish={"email"}
+              type="email"
               // texter={"כתובת מייל"}
               userInfo={userInfo}
               setUserInfo={setUserInfo}
             ></InputText>
             <p className="tittleRegister">מספר טלפון</p>
             <InputText
+             type="number"
               textenglish={"phone"}
               // texter={"מספר טלפון"}
               userInfo={userInfo}
@@ -122,6 +126,7 @@ export default function SignUp() {
             ></InputText>
             <p className="tittleRegister">סיסמה</p>
             <InputText
+             type="password"
               textenglish={"password"}
               // texter={"סיסמה"}
               userInfo={userInfo}
@@ -129,13 +134,13 @@ export default function SignUp() {
             ></InputText>
 
             <br></br>
-            <button type="submit" onClick={PassToConfirm} className="complete">
+            <button type="submit" onClick={PassToConfirm} className="add-info-btn">
               הלאה
             </button>
             <div className="error"> {error}</div>
           </div>
         ) : (
-          <div>
+          <div style={{width: '90%',margin: 'auto'}}>
             <h3>?איך תרצ/י שנאמת אותך</h3>
             <div>
 
@@ -143,7 +148,7 @@ export default function SignUp() {
                 <tr style={{width:"100%"}}>
                 <th id="radioButtonPlace">
                 <input
-                  className="radiobutton"
+                  className="radiobutton2"
                   type="radio"
                   value="folder"
                   name="confirm"
@@ -176,7 +181,7 @@ export default function SignUp() {
             <div className="space" />
 
             <Link to="/Login">
-              <button className="button" onClick={confirmMe}>
+              <button className="add-info-btn" onClick={confirmMe}>
                 תאמתו אותי!
               </button>
             </Link>

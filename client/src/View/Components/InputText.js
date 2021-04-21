@@ -3,7 +3,7 @@ import './InputText.css'
 import { useState, useEffect } from "react";
 
                        
-function InputText({ textenglish, texter,userInfo, setUserInfo }) {
+function InputText({ textenglish, texter,userInfo, setUserInfo ,type }) {
     // let [index,setindex]=useState(0);
     useEffect(() => {
 
@@ -25,7 +25,7 @@ function InputText({ textenglish, texter,userInfo, setUserInfo }) {
             {console.log(texter)}
          
 
-            <input type="text" placeholder={texter} onChange={handleInput} className="textinput" required/>
+            <input type={type} placeholder={texter} onChange={handleInput} className="textinput" required/>
             <div className="line"></div>
             <div className="space"/>
         </div>
