@@ -29,11 +29,12 @@ direction:  rtl;
 }
 
 .textinput {
-    width:340px;
+    width:100%;
     border: 0px none;
     margin-left: 60px;
     color: #3D4257;
     height: 30px;
+    outline:none !important;
 }
 
 .textbox{

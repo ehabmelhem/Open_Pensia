@@ -134,13 +134,13 @@ export default function SignUp() {
             ></InputText>
 
             <br></br>
-            <button type="submit" onClick={PassToConfirm} className="complete">
+            <button type="submit" onClick={PassToConfirm} className="add-info-btn">
               הלאה
             </button>
             <div className="error"> {error}</div>
           </div>
         ) : (
-          <div>
+          <div style={{width: '90%',margin: 'auto'}}>
             <h3>?איך תרצ/י שנאמת אותך</h3>
             <div>
 
@@ -148,7 +148,7 @@ export default function SignUp() {
                 <tr style={{width:"100%"}}>
                 <th id="radioButtonPlace">
                 <input
-                  className="radiobutton"
+                  className="radiobutton2"
                   type="radio"
                   value="folder"
                   name="confirm"
@@ -181,7 +181,7 @@ export default function SignUp() {
             <div className="space" />
 
             <Link to="/Login">
-              <button className="button" onClick={confirmMe}>
+              <button className="add-info-btn" onClick={confirmMe}>
                 תאמתו אותי!
               </button>
             </Link>

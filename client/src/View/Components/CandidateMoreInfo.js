@@ -10,7 +10,7 @@ function CandidateMoreInfo() {
   const officer = useSelector((state) => state.OfficerReducer);
 
   return (
-    <div>
+    <div style={{marginTop:'30px'}}>
       <MainButton
         myClass="add-info-btn"
         tolink="/UploadInformation"

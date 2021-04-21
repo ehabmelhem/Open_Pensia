@@ -6,7 +6,7 @@ import { addVote } from "../../redux";
 import { useDispatch, useSelector } from "react-redux";
 
 function DetailsOfVoting({ voting }) {
-  
+
   const [likestate, setlikestate] = useState(false);
   const [dislikestate, setdislikestate] = useState(false);
   const dispatch = useDispatch();
@@ -150,8 +150,8 @@ function DetailsOfVoting({ voting }) {
     }
   }
   return (
-    <div className="mainDiv">
-      <div className="grid-container">
+    <div className="mainDiv-voting">
+      <div className="grid-container-voting-details">
         <div className="percent-div">
           {voting.map(({ disApprovePer }, index) => {
             return <h1 key={index}> {disApprovePer} </h1>;
@@ -181,9 +181,9 @@ function DetailsOfVoting({ voting }) {
       {/* end question */}
 
       {/* icons view */}
-      <div className="grid-container">
+      <div className="grid-container-voting-details like-dislike-grid">
         <div className="body-div">
-          <AiFillDislike
+          <AiFillDislike style={{ height: '50px', paddingTop: '10px' }}
             className="body-dislike"
             onClick={handelclickdislike}
           />
@@ -191,7 +191,8 @@ function DetailsOfVoting({ voting }) {
         </div>{" "}
         <div> </div>
         <div className="body-div">
-          <AiFillLike className="body-like" onClick={handelclicklike} />
+          <AiFillLike style={{ height: '50px', paddingTop: '10px' }}
+            className="body-like" onClick={handelclicklike} />
           <p> אני בעד </p>
         </div>
       </div>
