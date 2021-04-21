@@ -28,3 +28,10 @@
     text-align: center;
     object-fit:contain;
   }
+
+  .sub-header-container-voting{
+      display: flex;
+      padding-top: 5px;
+      padding-right: 5px;
+      width:100%;
+  }
