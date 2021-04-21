@@ -16,9 +16,9 @@ function Sidebar(props){
   };
 
   function logout() {
-    console.log('log out done!!!!!')
+    // history.push('/Login');
     dispatch(sendLogOutUser());
-    history.push('/Login');
+    setTimeout(()=>{history.push('/Login');},1000)
   }
   useEffect(() => {
     if (user.login === false) {
