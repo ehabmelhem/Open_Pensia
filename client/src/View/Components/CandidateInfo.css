@@ -28,3 +28,20 @@ background: #3D4257 0% 0% no-repeat padding-box;
 border-radius: 8px;
 opacity: 1;
 }
+.go-to-linkedin-btn{
+  position: relative;
+  background-color:rgb(61, 66, 87);
+  color: white;
+  width: 90%;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 3%;
+  border: none !important;
+  outline:none !important;
+}
+.footer2{
+  width: 95%;
+  margin: auto;
+}

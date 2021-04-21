@@ -6,7 +6,7 @@ import { fetchOfficerData } from "../../redux";
 import { useDispatch, useSelector } from "react-redux";
 
 function CandidateInfo() {
-  
+
   const officer = useSelector((state) => state.OfficerReducer);
 
   const cand_info = [
@@ -37,9 +37,11 @@ function CandidateInfo() {
           );
         })}
       </div>
-      <a href="https://www.linkedin.com" target="blanck">
-        <button className="main-btn">"צפייה בנתונים בלינקדאיןן"</button>
-      </a>
+      <div className='footer2'>
+        <a href="https://www.linkedin.com" target="blanck" >
+          <button className="go-to-linkedin-btn">"צפייה בנתונים בלינקדאיןן"</button>
+        </a>
+      </div>
     </div>
   );
 }
