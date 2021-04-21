@@ -10,7 +10,11 @@
     border  :solid #3244831c;
 
 }
-
+#mainInMainCard{
+    width: 92%;
+    text-align: center;
+    margin: auto;
+}
 .round-image {
     margin-top: 3%;
     top: 80px;
@@ -53,3 +57,18 @@
     opacity   : 1;
 }
 
+.icon {
+    width: 180px;
+    height: 180px;
+    background: #EAEAEA 0% 0% no-repeat padding-box;
+    border-radius: 50%;
+  }
+  .icon1 {
+    margin-top: 100px;
+    width: 180px;
+    height: 150px;
+    background-image: url('../../imgs/logo.PNG');
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
