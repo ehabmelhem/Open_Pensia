@@ -87,11 +87,12 @@ export default function FirstPages() {
           )}
           <p className="description_firstPages">{firstPages[index].dec}</p>
           <div className='footer'>
-            <button id="button11" onClick={next}>{firstPages[index].buttonTitle}</button>
-
+           <div> <button id="button11" onClick={next}>{firstPages[index].buttonTitle}</button>
+           </div>
+           <div>
             <a className="signin" onClick={toLoginPage}>
               יש לי כבר חשבון
-          </a>
+          </a></div>
           </div>
         </div>
       )}

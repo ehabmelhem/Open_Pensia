@@ -16,6 +16,7 @@ function Sidebar(props){
   };
 
   function logout() {
+    console.log('log out done!!!!!')
     dispatch(sendLogOutUser());
     history.push('/Login');
   }
@@ -71,9 +72,13 @@ function Sidebar(props){
             </li> */}
           {/* 7 */}
           <li className="nav-text">
-            <span onClick={logout} className="menu-bars">
+          {/* <Link to="/Login" className="menu-bars">
+              <span>התנתק/י</span>
+            </Link> */}
+            <div onClick={logout}>
+            <span  className="menu-bars">
               התנתק/י
-            </span>
+            </span></div>
           </li>
         </ul>
       </nav>

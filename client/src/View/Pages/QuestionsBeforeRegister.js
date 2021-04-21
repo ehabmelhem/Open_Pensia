@@ -144,11 +144,12 @@ export default function QuestionsBeforeRegister({ chanelC, fundnameC, next }) {
 
       </div>
       <div className='footer'>
+        <div>
         <button id="button11" onClick={next}>אהבתי</button>
-
+</div><div className="link-footer">
         <Link className="signin" to={'/Login'}>
           יש לי כבר חשבון{" "}
-        </Link>
+        </Link></div>
       </div>
     </div>
   );
