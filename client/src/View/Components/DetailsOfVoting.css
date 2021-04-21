@@ -1,15 +1,14 @@
-.mainDiv {
+.mainDiv-voting {
   text-align: center;
   direction: rtl;
   font-family: Arial, Arial, Helvetica, sans-serif;
   background-color: #ffffff;
   max-width: 600px;
   margin: auto;
-  margin-top: 4%;
-  margin-bottom: 4%;
+
 }
 
-.grid-container {
+.grid-container-voting-details {
   direction: rtl;
   display: grid;
   grid-template-columns: auto auto auto;
@@ -17,9 +16,15 @@
   width: 80%;
   margin: auto;
   opacity: 1;
+  margin-top: 30px;
+}
+.like-dislike-grid{
+  grid-template-columns: 49%  0% 49%;
+  margin: auto;
+  margin-top: 5%;
 }
 
-.grid-container > div {
+.grid-container-voting-details > div {
   text-align: center;
 }
 
@@ -42,6 +47,9 @@
   letter-spacing: 0.14px;
   color: #3d4257;
   opacity: 1;
+}
+.percent-div > h1{
+  font-size: 40px;
 }
 
 .bold-font {
